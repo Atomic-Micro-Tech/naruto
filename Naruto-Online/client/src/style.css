@@ -511,7 +511,7 @@ input::placeholder {
 }
 #board canvas {
   display: block;
-  touch-action: manipulation;
+  touch-action: none;
 }
 .board-label {
   position: absolute;

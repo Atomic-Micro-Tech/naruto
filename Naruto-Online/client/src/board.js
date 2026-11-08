@@ -17,7 +17,7 @@ import {
   rouletteStopFrame,
 } from "./presentation";
 
-export async function createBoard(parent, onTile) {
+export async function createBoard(parent, onTile, onCameraMode = () => {}) {
   const response = await fetch(
     "/assets/sprite/board-characters/characters.json",
   );
@@ -35,7 +35,10 @@ export async function createBoard(parent, onTile) {
   let receivedAt = 0,
     animatingUntil = 0,
     previousTurn = null,
-    overview = false;
+    overview = false,
+    manualCamera = false,
+    gesture = null;
+  const pointers = new Set();
   let hud = [],
     wheelTexture,
     wheelImage,
@@ -55,6 +58,32 @@ export async function createBoard(parent, onTile) {
     actors = [],
     overlays = [],
     marks = [];
+  function cancelGesture() {
+    gesture = null;
+    pointers.clear();
+  }
+  function canPan() {
+    const now = performance.now();
+    return !state?.roulette && now >= wheelUntil && now >= animatingUntil;
+  }
+  function moveGesture(pointer) {
+    if (!gesture || pointer.id !== gesture.id || !pointer.isDown) return;
+    const dx = pointer.x - gesture.x, dy = pointer.y - gesture.y;
+    if (Math.hypot(dx, dy) > 4) gesture.dragged = true;
+    if (!gesture.dragged || !gesture.pan || !canPan()) return;
+    if (!manualCamera) {
+      manualCamera = true;
+      onCameraMode("manual");
+    }
+    // Pointer coordinates already account for Phaser's mobile/fullscreen scale.
+    // Clamp the 320x240 viewport within the arena; HUD remains on its UI camera.
+    camera = {
+      ...camera,
+      x16: Math.max(0, Math.min(camera.width - 320, gesture.camera.x - dx)) * 65536,
+      y16: Math.max(0, Math.min(camera.height - 240, gesture.camera.y - dy)) * 65536,
+      pan: null,
+    };
+  }
   class Arena extends Phaser.Scene {
     preload() {
       this.load.on("loaderror", (file) =>
@@ -148,15 +177,57 @@ export async function createBoard(parent, onTile) {
         new Phaser.Geom.Ellipse(40, 124, 216, 192),
         Phaser.Geom.Ellipse.Contains,
       );
-      wheelImage.on("pointerdown", () => {
-        const canStop =
-          state?.status === "playing" &&
-          state?.roulette &&
-          state.allowedActions.some((a) =>
-            a.options.some((o) => o.id === "stop" && o.enabled),
-          );
-        if (canStop && performance.now() - wheelEnteredAt >= 240)
-          onTile("stop");
+      wheelImage.setData("boardAction", "stop");
+      // Handle taps on release so dragging from an arrow never selects a route.
+      this.input.addPointer(1);
+      this.input.on("pointerdown", (pointer, objects) => {
+        if (!pointer.wasTouch && pointer.button !== 0) return;
+        pointers.add(pointer.id);
+        if (pointers.size > 1) {
+          gesture = null;
+          return;
+        }
+        gesture = {
+          id: pointer.id,
+          x: pointer.x,
+          y: pointer.y,
+          camera: cameraPixels(camera),
+          action: objects.find(o => o.getData("boardAction"))?.getData("boardAction"),
+          version: state?.stateVersion,
+          matchId: state?.id,
+          dragged: false,
+          pan: !overview && canPan(),
+        };
+      });
+      this.input.on("pointermove", moveGesture);
+      this.input.on("pointerup", pointer => {
+        if (gesture?.id === pointer.id &&
+            Math.hypot(pointer.x - gesture.x, pointer.y - gesture.y) > 4)
+          gesture.dragged = true;
+        pointers.delete(pointer.id);
+        const tap = gesture;
+        if (tap?.id !== pointer.id) return;
+        gesture = null;
+        if (
+          tap.dragged || !tap.action ||
+          tap.matchId !== state?.id || tap.version !== state?.stateVersion ||
+          performance.now() < animatingUntil
+        ) return;
+        const enabled = state?.allowedActions.some(a =>
+          a.options.some(o => o.id === tap.action && o.enabled));
+        if (!enabled) return;
+        if (tap.action === "stop" &&
+            (!state.roulette || performance.now() - wheelEnteredAt < 240)) return;
+        onTile(tap.action);
+      });
+      this.input.on("pointerupoutside", cancelGesture);
+      this.input.on("gameout", cancelGesture);
+      window.addEventListener("blur", cancelGesture);
+      document.addEventListener("visibilitychange", cancelGesture);
+      this.events.once("shutdown", () => {
+        window.removeEventListener("blur", cancelGesture);
+        document.removeEventListener("visibilitychange", cancelGesture);
+        cancelGesture();
       });
       draw();
       readyResolve();
@@ -376,13 +447,10 @@ export async function createBoard(parent, onTile) {
         });
         marks.push(arrow);
         if (choices.length === 1) {
-          const select = () => {
-            if (performance.now() >= animatingUntil) onTile(choices[0].id);
-          };
           circle.setInteractive({ useHandCursor: true });
-          circle.on("pointerdown", select);
+          circle.setData("boardAction", choices[0].id);
           arrow.setInteractive({ useHandCursor: true });
-          arrow.on("pointerdown", select);
+          arrow.setData("boardAction", choices[0].id);
         }
         marks.push(circle);
 
@@ -409,7 +477,7 @@ export async function createBoard(parent, onTile) {
           (a) => a.seat === active.seat && a.tile === active.position,
         )
       ) {
-        camera = beginCameraPan(camera, tile);
+        if (!manualCamera) camera = beginCameraPan(camera, tile);
         if (previousTurn !== key)
           animatingUntil = Math.max(animatingUntil, performance.now() + 450);
       }
@@ -585,6 +653,11 @@ export async function createBoard(parent, onTile) {
         wheelUntil = 0;
         animatingUntil = 0;
         previousTurn = null;
+        manualCamera = false;
+        overview = false;
+        scene.cameras.main.setZoom(1);
+        cancelGesture();
+        onCameraMode("follow");
         updateRouletteAudio(null);
       }
       receivedAt = performance.now();
@@ -596,12 +669,23 @@ export async function createBoard(parent, onTile) {
       return performance.now() < animatingUntil;
     },
     toggleOverview() {
-      overview = !overview;
-      scene.cameras.main.setZoom(overview ? 0.5 : 1);
-      if (overview) scene.cameras.main.setScroll(160, 120);
+      cancelGesture();
+      if (overview || manualCamera) {
+        overview = false;
+        manualCamera = false;
+        scene.cameras.main.setZoom(1);
+        const active = state?.players.find(p => p.seat === state.presentation?.actorSeat);
+        if (active) camera = beginCameraPan(camera, state.tiles[active.position]);
+        onCameraMode("follow");
+      } else {
+        overview = true;
+        scene.cameras.main.setZoom(0.5).setScroll(160, 120);
+        onCameraMode("overview");
+      }
       return overview;
     },
     resize() {
+      cancelGesture();
       game.scale.refresh();
     },
     destroy() {

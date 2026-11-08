@@ -17,7 +17,8 @@ Referensi lokal: `../../naruto_basic.mp4`, durasi 36,67 detik, 854×480/30 fps. 
 - Sentuh/klik langsung roda roulette untuk menghentikannya saat giliranmu; tombol Stop dan keyboard tetap tersedia. Roda lawan/CPU tidak menerima input.
 - Sentuh/klik tombol di dalam layar. Pada percabangan, gunakan panah pada petak atau tombol arah.
 - Keyboard: tombol arah untuk rute; Space/Enter untuk putar/stop/lanjut. Saat memilih kartu, kiri/kanan mengganti sorotan dan Enter mengonfirmasi. Input chat tidak mengambil shortcut game.
-- **Lihat peta** membuka tampilan seluruh arena; **Ikuti karakter** mengembalikan kamera.
+- Geser satu jari pada papan (atau drag dengan mouse) untuk menggeser kamera. Kamera dibatasi tepi arena dan tetap pada posisi manual sampai **Ikuti karakter** disentuh. HUD tetap diam. Tap memilih petak/rolet setelah jari dilepas; gerakan geser tidak memilih aksi.
+- **Lihat peta** membuka tampilan seluruh arena; **Ikuti karakter** mengembalikan kamera. Kamera tidak digeser selama rolet/animasi gerak berlangsung; tampilan seluruh arena sudah memperlihatkan semua petak.
 - **Layar penuh** memperbesar game. Tombol menu di sudut layar membuka kontrol atau keluar dari fullscreen. Pada ponsel landscape, papan mendapat prioritas layar.
 - Gerak otomatis hanya berlaku pada satu pilihan langkah legal dan akhir giliran. Pembelian, kartu, teknik, menyerah, dan percabangan tidak dipilih otomatis.
 

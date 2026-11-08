@@ -222,7 +222,9 @@ async function enter(data) {
   if (!board) {
     try {
       const { createBoard } = await import("./board.js");
-      board = await createBoard("board", (id) => choose(id));
+      board = await createBoard("board", (id) => choose(id), (mode) => {
+        $("map-view").textContent = mode === "follow" ? "Lihat peta" : "Ikuti karakter";
+      });
       assetsReady = true;
       if (match) board.setState(match);
       if (room) renderRoom();

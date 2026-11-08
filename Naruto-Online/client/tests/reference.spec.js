@@ -193,6 +193,22 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
     )
     .toBe(2);
 
+  const touchClient = await page.context().newCDPSession(page);
+  const swipe = async (x0, y0, x1, y1) => {
+    const box = await page.locator("#board canvas").boundingBox();
+    const point = (x, y) => ({ x: box.x + box.width * x / 320, y: box.y + box.height * y / 240, id: 1 });
+    await touchClient.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point(x0, y0)] });
+    for (let i = 1; i <= 8; i++) {
+      await touchClient.send("Input.dispatchTouchEvent", { type: "touchMove", touchPoints: [point(x0 + (x1 - x0) * i / 8, y0 + (y1 - y0) * i / 8)] });
+      await page.waitForTimeout(20);
+    }
+    await touchClient.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+    await page.waitForTimeout(50);
+  };
+  const sampleCanvas = async (x, y, width, height) => {
+    const box = await page.locator("#board canvas").boundingBox();
+    return page.screenshot({ clip: { x: box.x + box.width * x / 320, y: box.y + box.height * y / 240, width: box.width * width / 320, height: box.height * height / 240 } });
+  };
   const touchWheel = async (x = 90, y = 124) => {
     const box = await page.locator("#board canvas").boundingBox();
     await page.touchscreen.tap(box.x + box.width * x / 320, box.y + box.height * y / 240);
@@ -203,6 +219,9 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
   await touchWheel(250, 90);
   await page.waitForTimeout(100);
   expect(commands).toHaveLength(beforeTouch);
+  await swipe(90, 124, 125, 180);
+  expect(commands).toHaveLength(beforeTouch);
+  await expect(page.locator("#map-view")).toHaveText("Lihat peta");
   await touchWheel();
   await expect.poll(() => commands.length).toBe(beforeTouch + 1);
   expect(commands.at(-1).payload.action.payload.optionId).toBe("stop");
@@ -246,6 +265,33 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
   await page
     .locator(".board-frame")
     .screenshot({ path: "test-results/reference-direction.png" });
+  // Actual touch drag, starting on a route arrow, must move only the map.
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.waitForTimeout(150);
+  const hudBefore = await sampleCanvas(96, 24, 16, 16);
+  const terrainBefore = await sampleCanvas(20, 65, 35, 40);
+  await swipe(200, 99, 120, 139);
+  expect(commands).toHaveLength(branchCount);
+  await expect(page.locator("#map-view")).toHaveText("Ikuti karakter");
+  expect((await sampleCanvas(20, 65, 35, 40)).equals(terrainBefore)).toBe(false);
+  expect((await sampleCanvas(96, 24, 16, 16)).equals(hudBefore)).toBe(true);
+  // Repeated drags at the same map edge must clamp to identical terrain.
+  await swipe(260, 90, 60, 190);
+  await swipe(260, 90, 60, 190);
+  const edge = await sampleCanvas(20, 65, 35, 40);
+  await swipe(260, 90, 60, 190);
+  expect((await sampleCanvas(20, 65, 35, 40)).equals(edge)).toBe(true);
+  expect(commands).toHaveLength(branchCount);
+  await page.locator(".board-frame").screenshot({ path: "test-results/reference-camera-drag.png" });
+  // A fresh snapshot does not pull the camera away from the user's manual view.
+  await send(movement);
+  await page.waitForTimeout(100);
+  expect((await sampleCanvas(20, 65, 35, 40)).equals(edge)).toBe(true);
+  await page.locator("#map-view").click();
+  await expect(page.locator("#map-view")).toHaveText("Lihat peta");
+  await page.waitForTimeout(1000);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  await page.waitForTimeout(150);
   // Touch the direction marker itself, above the destination tile.
   await touchWheel(200, 99);
   await expect.poll(() => commands.length).toBe(branchCount + 1);
