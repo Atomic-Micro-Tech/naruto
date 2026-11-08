@@ -6,12 +6,13 @@ import {
   beginCameraPan,
   stepCameraPan,
   cameraPixels,
-  boardWalkPlan,
   boardHudPositions,
 } from "./native-camera";
 import { createRouletteRenderer } from "./roulette";
 import { updateRouletteAudio, sound } from "./audio";
 import { purchasedTiles, sealFrame } from "./seal";
+import { createActorMotion, setActorDestination, remainingWalkMS,
+  stepActorMotion, advanceSpriteSequence } from "./actor-motion";
 import { SHURIKEN_ATLAS, shurikenFrames } from "./roulette-shuriken";
 import {
   directionIndicator,
@@ -343,28 +344,41 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
             : uiCamera.id;
 
       for (const actor of actors) {
+        const walking = actor.motion.segments.length > 0;
+        const walkPose = stepActorMotion(actor.motion, delta);
+        actor.x = actor.motion.x;
+        actor.y = actor.motion.y;
+        const player = state?.players.find(p => p.seat === actor.seat);
+        const canContinue = state?.presentation?.phase === "move" &&
+          state.presentation.actorSeat === actor.seat && state.presentation.remaining > 0 &&
+          (player?.controller.controllerKind === "cpu" ||
+            state.allowedActions.flatMap(a => a.options).filter(o => o.enabled && o.id.startsWith("move:")).length === 1);
         const sealing = [...seals.values()].some(s => s.seat === actor.seat && s.tile === actor.tile);
-        if ((sealing && actor.animation === 22) || (!sealing && actor.animation === 7)) {
-          actor.animation = sealing ? 7 : 22;
+        const desired = walking ? walkPose : sealing ? 7 :
+          canContinue && [9, 10, 11, 12].includes(actor.animation) ? actor.animation : 22;
+        if (actor.animation !== desired) {
+          actor.animation = desired;
           actor.frame = 0;
           actor.counter = 0;
+          actor.animationClock = 0;
           actor.sprite.setTexture(`actor-${actor.character}-${actor.animation}`);
         }
         const c = metadata.characters.find((c) => c.id === actor.character),
           anim = c.animations.find((a) => a.id === actor.animation);
         const sequence = anim.sequence;
-        actor.counter += ((Math.min(delta, 100) * 60) / 1000) * 16;
-        const duration = Math.max(1, sequence[actor.frame].duration * 8);
-        if (actor.counter > duration) {
-          actor.counter %= duration;
-          actor.frame = (actor.frame + 1) % sequence.length;
-        }
+        // Hold the last foot pose during the short network gap between steps.
+        if (walking || ![9, 10, 11, 12].includes(actor.animation))
+          advanceSpriteSequence(actor, sequence, delta);
+        const blend = Math.min(1, delta / 100);
+        actor.offsetX += (actor.targetOffsetX - actor.offsetX) * blend;
+        actor.offsetY += (actor.targetOffsetY - actor.offsetY) * blend;
         const frame = sequence[actor.frame];
         actor.sprite.setFrame(frame.frame);
         actor.sprite.setPosition(
-          actor.x - anim.anchorX + (frame.offsetX ?? 0),
-          actor.y - anim.anchorY + (frame.offsetY ?? 0),
+          actor.x + actor.offsetX - anim.anchorX + (frame.offsetX ?? 0),
+          actor.y + actor.offsetY - anim.anchorY + (frame.offsetY ?? 0),
         );
+        actor.sprite.setDepth(actor.y + 30 + actor.seat);
       }
     }
   }
@@ -617,8 +631,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
           same.length > 1
             ? offsets[same.findIndex((q) => q.seat === p.seat)]
             : [0, 0];
-      const x = tile.x + offset[0],
-        y = tile.y + offset[1];
+      const x = tile.x, y = tile.y;
       let actor = actors.find((a) => a.seat === p.seat);
       if (!actor) {
         const sprite = scene.add
@@ -633,54 +646,29 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
           counter: 0,
           frame: 0,
           animation: 22,
+          motion: createActorMotion(tile),
+          offsetX: offset[0], offsetY: offset[1],
         };
         actors.push(actor);
       }
       actor.sprite
-        .setDepth(tile.y + 30 + p.seat)
         .setAlpha(p.eliminated ? 0.4 : 1);
+      actor.targetOffsetX = offset[0];
+      actor.targetOffsetY = offset[1];
       if (actor.character !== p.characterId) {
         actor.character = p.characterId;
         actor.animation = 22;
         actor.frame = 0;
+        actor.counter = 0;
+        actor.animationClock = 0;
+        actor.motion = createActorMotion(tile);
         actor.sprite.setTexture(`actor-${p.characterId}-22`);
       }
-      if (actor.targetX !== x || actor.targetY !== y) {
-        const dx = x - actor.x,
-          dy = y - actor.y;
-        actor.targetX = x;
-        actor.targetY = y;
-        if (Math.abs(dx) + Math.abs(dy) > 1) {
-          scene.tweens.killTweensOf(actor);
-          actor.animation =
-            Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 12 : 11) : dy > 0 ? 10 : 9;
-          actor.frame = 0;
-          actor.counter = 0;
-          actor.sprite.setTexture(`actor-${p.characterId}-${actor.animation}`);
-          const plan = boardWalkPlan(
-            { x: actor.x, y: actor.y },
-            { x, y },
-            { actorFlags: p.controller.controllerKind === "cpu" ? 256 : 0 },
-          );
-          const duration = Math.max(100, (plan.frames * 1000) / 60);
-          animatingUntil = Math.max(
-            animatingUntil,
-            performance.now() + duration + 80,
-          );
-          scene.tweens.add({
-            targets: actor,
-            x,
-            y,
-            duration,
-            onComplete: () => {
-              actor.animation = 22;
-              actor.frame = 0;
-              actor.counter = 0;
-              actor.sprite.setTexture(`actor-${p.characterId}-22`);
-            },
-          });
-        }
-      }
+      const character = metadata.characters.find(c => c.id === p.characterId);
+      setActorDestination(actor.motion, tile, state.tiles, character.directions,
+        p.controller.controllerKind === "cpu");
+      const remaining = remainingWalkMS(actor.motion);
+      if (remaining > 0) animatingUntil = Math.max(animatingUntil, performance.now() + remaining);
       actor.tile = p.position;
       if (p.seat === state.presentation?.actorSeat)
         marks.push(
@@ -726,6 +714,8 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         animatingUntil = Math.max(animatingUntil, wheelUntil);
       }
       if (!value || value.id !== state?.id) {
+        for (const actor of actors) actor.sprite.destroy();
+        actors = [];
         for (const seal of seals.values()) {
           seal.images.forEach(image => image.destroy());
         }
@@ -756,7 +746,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
       game.scale.refresh();
     },
     isAnimating() {
-      return performance.now() < animatingUntil;
+      return performance.now() < animatingUntil || actors.some(a => a.motion.segments.length > 0);
     },
     toggleOverview() {
       cancelGesture();

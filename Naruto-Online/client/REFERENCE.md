@@ -48,6 +48,19 @@ Checkpoint memakai dua sprite asli dari `FUN_800f6988`: `crystal_N.png` untuk al
 
 ## Verifikasi
 
+Animasi berjalan menggunakan PNG yang sudah terdaftar di `assets/sprite/board-characters/` dan `characters.json`, tanpa salinan baru. `FUN_800bee54` memetakan arah sebagai berikut (NN adalah ID karakter dua digit):
+
+| Arah tujuan | Aset asli |
+|---|---|
+| Atas | `character_NN_animation_09.png` |
+| Bawah | `character_NN_animation_10.png` |
+| Kiri | `character_NN_animation_11.png` |
+| Kanan | `character_NN_animation_12.png` |
+
+`src/actor-motion.js` memakai koordinat pusat petak untuk arah, termasuk prioritas horizontal pada diagonal seimbang dari `FUN_800c0a00`. Jarak dan durasi memakai `boardWalkPlan`; frame mengikuti counter asli `FUN_80022aa8` pada pembaruan tetap 60 Hz, terpisah dari FPS render. Snapshot langkah bersebelahan diantrikan agar CPU tidak memotong tikungan ketika beberapa langkah datang cepat. Snapshot ulang tidak mengulang gait; jeda jaringan pendek pada perjalanan satu arah mempertahankan pose kaki, lalu meneruskan urutannya. Karakter kembali ke idle saat berhenti/memilih cabang. Pergeseran kosmetik ketika beberapa karakter berbagi petak tidak memicu animasi berjalan. Snapshot pertama, pertandingan baru, dan perpindahan non-tetangga langsung memakai posisi otoritatif tanpa mengarang rute.
+
+`tests/actor-motion.test.mjs` memeriksa PNG empat karakter, arah, antrean langkah CPU, snapshot berulang, perpindahan non-tetangga, dan kesetaraan cadence pada 15/30/60/120 FPS. `tests/walking.spec.js` menjalankan Phaser dengan aset asli, memeriksa pergantian frame empat arah serta anchor kaki tepat pada petak tujuan.
+
 `tests/seal.test.mjs` memeriksa pemicu transaksi dan batas waktu cursor asli. Skenario pembelian di `tests/reference.spec.js` memeriksa segel saat bermain, tidak ada akhir giliran selama efek, snapshot kepemilikan berulang, dan kelanjutan giliran sesudah efek. Screenshot `reference-seal.png` dan `reference-seal-reveal.png` dipakai untuk inspeksi visual terhadap cuplikan video.
 
 `tests/reference.spec.js` memakai transport sintetis untuk memeriksa sentuhan roda pada viewport ponsel, penolakan input roda lawan, geser kamera melalui touch event asli di viewport ponsel, batas arena, HUD tetap diam, kembali mengikuti karakter, pembatalan/multitouch tanpa aksi, tiga suara benturan dan tampilan shuriken, roulette, percabangan yang harus menunggu, langkah tunggal otomatis, pilihan tiga kartu, pembelian yang tidak otomatis, serta layout portrait/landscape. `tests/gameplay.spec.js` tetap menguji browser dengan backend Go/PostgreSQL nyata. `tests/roulette-render.spec.js` memeriksa piksel atlas asli selama fade: sektor terpilih tidak berubah, angka lain memudar, dan tidak ada pop saat roda berhenti. `tests/presentation.test.mjs` mengunci batas aksi otomatis agar perubahan tampilan tidak mengambil keputusan pemain.
