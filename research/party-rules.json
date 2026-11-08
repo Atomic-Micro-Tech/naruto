@@ -1,0 +1,1120 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "file": "extracted/disc/SLPS_035.53",
+    "sha256": "a97b3ebea329b267c186ae52fd21edb1891d66377d475cef32db5f133c296569"
+  },
+  "evidence": {
+    "presetLoader": "80012780",
+    "playerInitializer": "80012c70",
+    "presetTable": "0x80064918",
+    "presetStride": 48,
+    "partyMenu": "MENU 800b944c/800b99a4",
+    "loadoutTable": "0x800648e4",
+    "unlockCharacters": "0x8006d6a0",
+    "unlockJutsu": "0x8006d6a8"
+  },
+  "presets": [
+    {
+      "presetId": 0,
+      "sourceAddress": "0x80064918",
+      "selectableInPartyMenu": true,
+      "mapId": 0,
+      "musicBank": 10,
+      "deckId": 0,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        2,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4,
+        5,
+        5,
+        6
+      ],
+      "rawHex": "000a0000dc050000b80b0000900100000304000000000000000000000000000000000102020303030404040505060000"
+    },
+    {
+      "presetId": 1,
+      "sourceAddress": "0x80064948",
+      "selectableInPartyMenu": true,
+      "mapId": 1,
+      "musicBank": 11,
+      "deckId": 1,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8
+      ],
+      "rawHex": "010b0100dc050000b80b0000900100000304000000000000000000000000000000000102030304040505060607080000"
+    },
+    {
+      "presetId": 2,
+      "sourceAddress": "0x80064978",
+      "selectableInPartyMenu": true,
+      "mapId": 2,
+      "musicBank": 12,
+      "deckId": 2,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8
+      ],
+      "rawHex": "020c0200dc050000b80b0000900100000304000000000000000000000000000000000102030304040505060607080000"
+    },
+    {
+      "presetId": 3,
+      "sourceAddress": "0x800649a8",
+      "selectableInPartyMenu": true,
+      "mapId": 3,
+      "musicBank": 20,
+      "deckId": 3,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8
+      ],
+      "rawHex": "03140300dc050000b80b0000900100000304000000000000000000000000000000000102030304040505060607080000"
+    },
+    {
+      "presetId": 4,
+      "sourceAddress": "0x800649d8",
+      "selectableInPartyMenu": true,
+      "mapId": 4,
+      "musicBank": 14,
+      "deckId": 4,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "040e0400dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 5,
+      "sourceAddress": "0x80064a08",
+      "selectableInPartyMenu": true,
+      "mapId": 5,
+      "musicBank": 15,
+      "deckId": 5,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "050f0500dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 6,
+      "sourceAddress": "0x80064a38",
+      "selectableInPartyMenu": true,
+      "mapId": 6,
+      "musicBank": 16,
+      "deckId": 6,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "06100600dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 7,
+      "sourceAddress": "0x80064a68",
+      "selectableInPartyMenu": true,
+      "mapId": 7,
+      "musicBank": 17,
+      "deckId": 7,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "07110700dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 8,
+      "sourceAddress": "0x80064a98",
+      "selectableInPartyMenu": true,
+      "mapId": 8,
+      "musicBank": 10,
+      "deckId": 4,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8
+      ],
+      "rawHex": "080a0400dc050000b80b0000900100000304000000000000000000000000000000000102030304040505060607080000"
+    },
+    {
+      "presetId": 9,
+      "sourceAddress": "0x80064ac8",
+      "selectableInPartyMenu": false,
+      "mapId": 9,
+      "musicBank": 5,
+      "deckId": 4,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "09050400dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 10,
+      "sourceAddress": "0x80064af8",
+      "selectableInPartyMenu": false,
+      "mapId": 10,
+      "musicBank": 10,
+      "deckId": 4,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "0a0a0400dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 11,
+      "sourceAddress": "0x80064b28",
+      "selectableInPartyMenu": false,
+      "mapId": 11,
+      "musicBank": 10,
+      "deckId": 4,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "0b0a0400dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 12,
+      "sourceAddress": "0x80064b58",
+      "selectableInPartyMenu": false,
+      "mapId": 12,
+      "musicBank": 10,
+      "deckId": 4,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "0c0a0400dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 13,
+      "sourceAddress": "0x80064b88",
+      "selectableInPartyMenu": false,
+      "mapId": 13,
+      "musicBank": 10,
+      "deckId": 4,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "0d0a0400dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 14,
+      "sourceAddress": "0x80064bb8",
+      "selectableInPartyMenu": false,
+      "mapId": 14,
+      "musicBank": 10,
+      "deckId": 4,
+      "initialChakra": 1500,
+      "defaultTargetChakra": 3000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "0e0a0400dc050000b80b0000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 15,
+      "sourceAddress": "0x80064be8",
+      "selectableInPartyMenu": false,
+      "mapId": 15,
+      "musicBank": 15,
+      "deckId": 5,
+      "initialChakra": 2500,
+      "defaultTargetChakra": 5000,
+      "baseBonus": 400,
+      "initialSkillPoints": 3,
+      "skillAwardPerBonus": 4,
+      "modeFlags": 0,
+      "ruleRecords": [
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        2,
+        3,
+        4,
+        4,
+        5,
+        5,
+        6,
+        6,
+        7,
+        8,
+        9
+      ],
+      "rawHex": "0f0f0500c409000088130000900100000304000000000000000000000000000000000102030404050506060708090000"
+    },
+    {
+      "presetId": 16,
+      "sourceAddress": "0x80064c18",
+      "selectableInPartyMenu": false,
+      "mapId": 16,
+      "musicBank": 18,
+      "deckId": 8,
+      "initialChakra": 600,
+      "defaultTargetChakra": 0,
+      "baseBonus": 0,
+      "initialSkillPoints": 0,
+      "skillAwardPerBonus": 0,
+      "modeFlags": 24576,
+      "ruleRecords": [
+        {
+          "mask": 8192,
+          "storedValue": 0
+        },
+        {
+          "mask": 16384,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4
+      ],
+      "rawHex": "101208005802000000000000000000000000002000000040000000000000000000000101010202020303030404040000"
+    },
+    {
+      "presetId": 17,
+      "sourceAddress": "0x80064c48",
+      "selectableInPartyMenu": false,
+      "mapId": 17,
+      "musicBank": 18,
+      "deckId": 8,
+      "initialChakra": 600,
+      "defaultTargetChakra": 0,
+      "baseBonus": 0,
+      "initialSkillPoints": 0,
+      "skillAwardPerBonus": 0,
+      "modeFlags": 24576,
+      "ruleRecords": [
+        {
+          "mask": 8192,
+          "storedValue": 0
+        },
+        {
+          "mask": 16384,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        },
+        {
+          "mask": 0,
+          "storedValue": 0
+        }
+      ],
+      "roulette": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4
+      ],
+      "rawHex": "111208005802000000000000000000000000002000000040000000000000000000000101010202020303030404040000"
+    }
+  ],
+  "defaultRuleParameters": [
+    0,
+    5,
+    5,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "partyRuleParameterRequired": [
+    0,
+    1,
+    1,
+    0
+  ],
+  "boardJutsuLoadouts": [
+    {
+      "characterId": 0,
+      "rawJutsuIds": [
+        10,
+        1,
+        8,
+        5
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        10,
+        1,
+        14,
+        14
+      ]
+    },
+    {
+      "characterId": 1,
+      "rawJutsuIds": [
+        10,
+        12,
+        3,
+        14
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        10,
+        12,
+        14,
+        14
+      ]
+    },
+    {
+      "characterId": 2,
+      "rawJutsuIds": [
+        0,
+        1,
+        2,
+        7
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        0,
+        1,
+        2,
+        14
+      ]
+    },
+    {
+      "characterId": 3,
+      "rawJutsuIds": [
+        10,
+        1,
+        5,
+        14
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        10,
+        1,
+        14,
+        14
+      ]
+    },
+    {
+      "characterId": 4,
+      "rawJutsuIds": [
+        10,
+        1,
+        2,
+        3
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        10,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "characterId": 5,
+      "rawJutsuIds": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "characterId": 6,
+      "rawJutsuIds": [
+        0,
+        1,
+        2,
+        14
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        0,
+        1,
+        2,
+        14
+      ]
+    },
+    {
+      "characterId": 7,
+      "rawJutsuIds": [
+        2,
+        3,
+        14,
+        14
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        2,
+        3,
+        14,
+        14
+      ]
+    },
+    {
+      "characterId": 8,
+      "rawJutsuIds": [
+        0,
+        2,
+        9,
+        14
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        0,
+        2,
+        9,
+        14
+      ]
+    },
+    {
+      "characterId": 9,
+      "rawJutsuIds": [
+        11,
+        1,
+        3,
+        4
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        11,
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "characterId": 10,
+      "rawJutsuIds": [
+        10,
+        13,
+        2,
+        14
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        10,
+        13,
+        2,
+        14
+      ]
+    },
+    {
+      "characterId": 11,
+      "rawJutsuIds": [
+        4,
+        7,
+        8,
+        9
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        4,
+        7,
+        8,
+        9
+      ]
+    },
+    {
+      "characterId": 12,
+      "rawJutsuIds": [
+        10,
+        1,
+        14,
+        14
+      ],
+      "jutsuIdsWithoutUnlockFlags": [
+        10,
+        1,
+        14,
+        14
+      ]
+    }
+  ],
+  "jutsuUnlockGates": [
+    {
+      "characterId": 0,
+      "jutsuId": 8,
+      "unlockFlag": 87
+    },
+    {
+      "characterId": 2,
+      "jutsuId": 7,
+      "unlockFlag": 88
+    },
+    {
+      "characterId": 3,
+      "jutsuId": 5,
+      "unlockFlag": 89
+    },
+    {
+      "characterId": 0,
+      "jutsuId": 5,
+      "unlockFlag": 90
+    },
+    {
+      "characterId": 1,
+      "jutsuId": 3,
+      "unlockFlag": 91
+    }
+  ],
+  "notes": [
+    "Only preset slots 0..8 are exposed by the ordinary Party board selector.",
+    "80012780 loads rule parameters from 80064c78, not the storedValue fields of presets.",
+    "14 is the empty board-jutsu sentinel. ID6 is separately rejected by BOARD eligibility.",
+    "Unlock-free loadouts do not mean every character is selectable on a fresh save.",
+    "This is static executable evidence, not an original-console input trace."
+  ]
+}

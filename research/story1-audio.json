@@ -1,0 +1,1271 @@
+{
+  "scope": "Naruto first campaign stage; proven native calls only",
+  "sources": [
+    {
+      "path": "decompiled/STORY1_AUDIO.c",
+      "sha256": "e9a96b70ad5722cbb3eac2ef5a6874233ccfbf0081b7f124c4257274ac3049a6"
+    },
+    {
+      "path": "decompiled/BOARD.c",
+      "sha256": "0b9aa3a5ef18a92cc72f1e4967a9f939ea2dc51398833c07604ff7031a23445c"
+    },
+    {
+      "path": "decompiled/BOARD_EFFECTS.c",
+      "sha256": "f1d724df7dc326f17ef94dc8109edbd4bd60980b65bf1c7e0b6a95f4684cb76b"
+    },
+    {
+      "path": "decompiled/STORY_ENGINE.c",
+      "sha256": "d899c1fa08fb54ca2f5b9c092d402ee8cdb94971df53e73cc7075a21ce712507"
+    },
+    {
+      "path": "decompiled/STORY.c",
+      "sha256": "fb9631422be86073692bb747f9b261371fd20db428257f2c0c57dddbec8c57a5"
+    },
+    {
+      "path": "decompiled/ROULETTE_MAIN.c",
+      "sha256": "8166e0bb903380af6039c879dc3f0a42f1a04082103227ce02b6c4e3de9baa99"
+    },
+    {
+      "path": "decompiled/ROULETTE_BOARD.c",
+      "sha256": "1cda752a0823878c40d818095496b3adc43970ef1ed2702721c6900735f00a23"
+    }
+  ],
+  "defaultSound": {
+    "volumeByte": 180,
+    "pan": 0,
+    "loop": false
+  },
+  "events": [
+    {
+      "event": "board-music",
+      "source": "BOARD.c:800b1e88; STORY1_AUDIO.c:80012eac,80013464,80013488,800182a8,8001811c",
+      "music": 10,
+      "resource": 1252,
+      "volumeByte": 180,
+      "sequenceVolume": 90,
+      "loop": true
+    },
+    {
+      "event": "menu-cursor",
+      "source": "BOARD.c:80101fe8",
+      "bank": "menu",
+      "sequence": 2,
+      "channel": 0
+    },
+    {
+      "event": "menu-confirm",
+      "source": "BOARD.c:80101fe8",
+      "bank": "menu",
+      "sequence": 0,
+      "channel": 1
+    },
+    {
+      "event": "menu-cancel",
+      "source": "BOARD.c:80101fe8",
+      "bank": "menu",
+      "sequence": 1,
+      "channel": 1,
+      "condition": "menu id >=2 and !=7"
+    },
+    {
+      "event": "menu-disabled",
+      "source": "BOARD.c:80101fe8",
+      "bank": "menu",
+      "sequence": 10,
+      "channel": 1
+    },
+    {
+      "event": "menu-open",
+      "source": "BOARD.c:80102738",
+      "bank": "board",
+      "sequence": 2,
+      "channel": 3
+    },
+    {
+      "event": "roll",
+      "source": "ROULETTE_MAIN.c:80020bf4",
+      "bank": "menu",
+      "sequence": 3,
+      "channel": 0,
+      "loop": true
+    },
+    {
+      "event": "stop",
+      "source": "BOARD.c:8010b084",
+      "bank": "menu",
+      "sequence": 4,
+      "channel": 1,
+      "pan": "side0:64; side1:-64",
+      "phase": "hammer request, not freeze"
+    },
+    {
+      "event": "roll-freeze",
+      "source": "ROULETTE_MAIN.c:80020c90",
+      "stopChannel": 0
+    },
+    {
+      "event": "roll-impact",
+      "source": "ROULETTE_BOARD.c:8010bfa8",
+      "bank": "menu",
+      "sequence": 5,
+      "channel": 0,
+      "pan": "trunc((hammerX-160)/2)",
+      "phase": "three hammer impacts"
+    },
+    {
+      "event": "walk",
+      "source": "BOARD.c:800c0a00",
+      "bank": "board",
+      "channel": 2,
+      "sequences": {
+        "humanNormal": 8,
+        "cpuOrPossessedOrFast": 10,
+        "sharedSourceDestinationTileFlags": 12
+      },
+      "condition": "normal sounds suppressed in alternate presentation unless board+0x537==0"
+    },
+    {
+      "event": "walk-land",
+      "source": "BOARD.c:800c0a00",
+      "bank": "board",
+      "sequence": 13,
+      "channel": 5,
+      "condition": "shared tile flags / jump branch only"
+    },
+    {
+      "event": "claim",
+      "source": "BOARD.c:800f0c10",
+      "phases": {
+        "prompt": {
+          "bank": "board",
+          "sequence": 24,
+          "channel": 1
+        },
+        "confirm": {
+          "bank": "menu",
+          "sequence": 0,
+          "channel": 1
+        }
+      },
+      "unresolved": "No distinct ownership-commit sound proven"
+    },
+    {
+      "event": "upgrade",
+      "source": "BOARD.c:800e3e74,80101fe8",
+      "phases": {
+        "confirm": {
+          "bank": "menu",
+          "sequence": 0,
+          "channel": 1
+        }
+      },
+      "unresolved": "Dedicated upgrade effect 0x25c audio not traced"
+    },
+    {
+      "event": "pay",
+      "source": "BOARD_EFFECTS.c:800c5978 case3; BOARD.c:800bee54",
+      "phases": {
+        "negative-amount-display": {
+          "bank": "board",
+          "sequence": 21,
+          "channel": 1
+        },
+        "reaction": {
+          "bank": "board",
+          "sequence": 22,
+          "channel": 4
+        }
+      },
+      "condition": "Effect dispatch and actor animation are distinct phases; do not play immediately on any debit"
+    },
+    {
+      "event": "bonus-tick",
+      "source": "BOARD.c:80109fec states3..10",
+      "bank": "board",
+      "sequence": 5,
+      "channel": 2,
+      "condition": "global frame counter even"
+    },
+    {
+      "event": "turn",
+      "source": "BOARD.c:800cee18 case2",
+      "bank": "board",
+      "channel": 2,
+      "sequences": {
+        "normal": 7,
+        "readyToWin": 47
+      },
+      "condition": "skip when board+0x92b script voice flag active; readyToWin checks chakra+bonus, crystals and scroll"
+    },
+    {
+      "event": "battle-start",
+      "source": "BOARD.c:8011c028,8011ce2c case0x15,8011d994",
+      "phases": {
+        "transition": {
+          "bank": "board",
+          "sequence": 78,
+          "channel": 2,
+          "fadeMusicTicks": 20
+        },
+        "combat-music": {
+          "music": 22,
+          "sequenceVolume": 100,
+          "loop": true
+        }
+      },
+      "condition": "transition sound only when previous main state 3 or4"
+    },
+    {
+      "event": "battle-result",
+      "source": "BOARD.c:8012c934 case10,20;8011d994; table800b0d94",
+      "phases": {
+        "fade": {
+          "fadeMusicTicks": 20
+        },
+        "music": {
+          "defenderHpZero": 24,
+          "defenderHpNotZero": 25,
+          "sequenceVolume": 100,
+          "loop": false
+        }
+      }
+    },
+    {
+      "event": "character-voice",
+      "source": "STORY1_AUDIO.c:800188f0,80018968; table80065408",
+      "resourceBases": {
+        "12": 1287,
+        "10": 1407
+      },
+      "slots": 12,
+      "sequence": 0,
+      "volumeByte": 255,
+      "note": "18968 initially sets220 then final19b9c applies255 with signed pan"
+    }
+  ],
+  "story": {
+    "bank": "story0",
+    "resource": 1454,
+    "source": "STORY_ENGINE.c:800279c4; STORY1_AUDIO.c:800190fc; EXE table80065480",
+    "ringChannels": [
+      5,
+      6,
+      7
+    ],
+    "allBusy": "wait and retry same event",
+    "kind6": "controller rumble, not sound; 80027c80 ->8001f4b8/1f568 ->1fbd8 ->2e8a4 ->PadSetAct",
+    "scenes": [
+      {
+        "scene": 175,
+        "kindCounts": {
+          "3": 60,
+          "4": 8,
+          "5": 82,
+          "6": 0
+        },
+        "sounds": [
+          {
+            "sequenceIndex": 1,
+            "eventId": 21,
+            "kind": 5,
+            "frame": 183,
+            "localFrame": 58,
+            "value": 16,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 1,
+            "eventId": 22,
+            "kind": 5,
+            "frame": 210,
+            "localFrame": 85,
+            "value": 22,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 1,
+            "eventId": 20,
+            "kind": 5,
+            "frame": 245,
+            "localFrame": 120,
+            "value": 15,
+            "argument": 0,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 1,
+            "eventId": 23,
+            "kind": 5,
+            "frame": 245,
+            "localFrame": 120,
+            "value": 12,
+            "argument": 0,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 1,
+            "eventId": 24,
+            "kind": 5,
+            "frame": 310,
+            "localFrame": 185,
+            "value": 6,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 1,
+            "eventId": 25,
+            "kind": 5,
+            "frame": 315,
+            "localFrame": 190,
+            "value": 6,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 1,
+            "eventId": 26,
+            "kind": 5,
+            "frame": 320,
+            "localFrame": 195,
+            "value": 6,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 1,
+            "eventId": 27,
+            "kind": 5,
+            "frame": 402,
+            "localFrame": 277,
+            "value": 6,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 1,
+            "eventId": 28,
+            "kind": 5,
+            "frame": 407,
+            "localFrame": 282,
+            "value": 6,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 1,
+            "eventId": 29,
+            "kind": 5,
+            "frame": 412,
+            "localFrame": 287,
+            "value": 6,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 156,
+            "kind": 5,
+            "frame": 536,
+            "localFrame": 26,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 157,
+            "kind": 5,
+            "frame": 543,
+            "localFrame": 33,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 144,
+            "kind": 5,
+            "frame": 552,
+            "localFrame": 42,
+            "value": 0,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 145,
+            "kind": 5,
+            "frame": 562,
+            "localFrame": 52,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 146,
+            "kind": 5,
+            "frame": 566,
+            "localFrame": 56,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 147,
+            "kind": 5,
+            "frame": 570,
+            "localFrame": 60,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 148,
+            "kind": 5,
+            "frame": 620,
+            "localFrame": 110,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 149,
+            "kind": 5,
+            "frame": 624,
+            "localFrame": 114,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 150,
+            "kind": 5,
+            "frame": 628,
+            "localFrame": 118,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 151,
+            "kind": 5,
+            "frame": 632,
+            "localFrame": 122,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 152,
+            "kind": 5,
+            "frame": 757,
+            "localFrame": 247,
+            "value": 31,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 153,
+            "kind": 5,
+            "frame": 761,
+            "localFrame": 251,
+            "value": 31,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 154,
+            "kind": 5,
+            "frame": 765,
+            "localFrame": 255,
+            "value": 31,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 158,
+            "kind": 5,
+            "frame": 818,
+            "localFrame": 308,
+            "value": 2,
+            "argument": -18,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 2,
+            "eventId": 155,
+            "kind": 5,
+            "frame": 830,
+            "localFrame": 320,
+            "value": 2,
+            "argument": 0,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 286,
+            "kind": 5,
+            "frame": 910,
+            "localFrame": 58,
+            "value": 2,
+            "argument": 20,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 237,
+            "kind": 5,
+            "frame": 920,
+            "localFrame": 68,
+            "value": 31,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 238,
+            "kind": 5,
+            "frame": 925,
+            "localFrame": 73,
+            "value": 31,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 274,
+            "kind": 5,
+            "frame": 930,
+            "localFrame": 78,
+            "value": 0,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 239,
+            "kind": 5,
+            "frame": 930,
+            "localFrame": 78,
+            "value": 31,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 240,
+            "kind": 5,
+            "frame": 953,
+            "localFrame": 101,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 241,
+            "kind": 5,
+            "frame": 958,
+            "localFrame": 106,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 242,
+            "kind": 5,
+            "frame": 963,
+            "localFrame": 111,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 243,
+            "kind": 5,
+            "frame": 987,
+            "localFrame": 135,
+            "value": 6,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 244,
+            "kind": 5,
+            "frame": 992,
+            "localFrame": 140,
+            "value": 6,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 245,
+            "kind": 5,
+            "frame": 997,
+            "localFrame": 145,
+            "value": 6,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 246,
+            "kind": 5,
+            "frame": 1228,
+            "localFrame": 376,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 247,
+            "kind": 5,
+            "frame": 1232,
+            "localFrame": 380,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 248,
+            "kind": 5,
+            "frame": 1236,
+            "localFrame": 384,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 287,
+            "kind": 5,
+            "frame": 1301,
+            "localFrame": 449,
+            "value": 0,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 249,
+            "kind": 5,
+            "frame": 1332,
+            "localFrame": 480,
+            "value": 9,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 288,
+            "kind": 5,
+            "frame": 1334,
+            "localFrame": 482,
+            "value": 1,
+            "argument": 8,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 275,
+            "kind": 5,
+            "frame": 1337,
+            "localFrame": 485,
+            "value": 1,
+            "argument": 0,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 289,
+            "kind": 5,
+            "frame": 1359,
+            "localFrame": 507,
+            "value": 3,
+            "argument": -8,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 276,
+            "kind": 5,
+            "frame": 1364,
+            "localFrame": 512,
+            "value": 3,
+            "argument": -10,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 250,
+            "kind": 5,
+            "frame": 1368,
+            "localFrame": 516,
+            "value": 3,
+            "argument": -6,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 290,
+            "kind": 5,
+            "frame": 1405,
+            "localFrame": 553,
+            "value": 2,
+            "argument": 20,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 277,
+            "kind": 5,
+            "frame": 1406,
+            "localFrame": 554,
+            "value": 25,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 278,
+            "kind": 5,
+            "frame": 1443,
+            "localFrame": 591,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 279,
+            "kind": 5,
+            "frame": 1451,
+            "localFrame": 599,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 280,
+            "kind": 5,
+            "frame": 1459,
+            "localFrame": 607,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 281,
+            "kind": 5,
+            "frame": 1464,
+            "localFrame": 612,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 251,
+            "kind": 5,
+            "frame": 1518,
+            "localFrame": 666,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 252,
+            "kind": 5,
+            "frame": 1523,
+            "localFrame": 671,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 253,
+            "kind": 5,
+            "frame": 1528,
+            "localFrame": 676,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 254,
+            "kind": 5,
+            "frame": 1555,
+            "localFrame": 703,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 255,
+            "kind": 5,
+            "frame": 1560,
+            "localFrame": 708,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 256,
+            "kind": 5,
+            "frame": 1565,
+            "localFrame": 713,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 257,
+            "kind": 5,
+            "frame": 1656,
+            "localFrame": 804,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 258,
+            "kind": 5,
+            "frame": 1661,
+            "localFrame": 809,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 259,
+            "kind": 5,
+            "frame": 1864,
+            "localFrame": 1012,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 260,
+            "kind": 5,
+            "frame": 1869,
+            "localFrame": 1017,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 261,
+            "kind": 5,
+            "frame": 1947,
+            "localFrame": 1095,
+            "value": 6,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 262,
+            "kind": 5,
+            "frame": 1953,
+            "localFrame": 1101,
+            "value": 6,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 263,
+            "kind": 5,
+            "frame": 1958,
+            "localFrame": 1106,
+            "value": 6,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 264,
+            "kind": 5,
+            "frame": 2028,
+            "localFrame": 1176,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 265,
+            "kind": 5,
+            "frame": 2033,
+            "localFrame": 1181,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 266,
+            "kind": 5,
+            "frame": 2038,
+            "localFrame": 1186,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 291,
+            "kind": 5,
+            "frame": 2062,
+            "localFrame": 1210,
+            "value": 17,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 267,
+            "kind": 5,
+            "frame": 2113,
+            "localFrame": 1261,
+            "value": 6,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 268,
+            "kind": 5,
+            "frame": 2118,
+            "localFrame": 1266,
+            "value": 6,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 282,
+            "kind": 5,
+            "frame": 2144,
+            "localFrame": 1292,
+            "value": 1,
+            "argument": 16,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 292,
+            "kind": 5,
+            "frame": 2146,
+            "localFrame": 1294,
+            "value": 13,
+            "argument": 0,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 283,
+            "kind": 5,
+            "frame": 2179,
+            "localFrame": 1327,
+            "value": 14,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 269,
+            "kind": 5,
+            "frame": 2223,
+            "localFrame": 1371,
+            "value": 18,
+            "argument": 0,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 270,
+            "kind": 5,
+            "frame": 2464,
+            "localFrame": 1612,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 271,
+            "kind": 5,
+            "frame": 2477,
+            "localFrame": 1625,
+            "value": 31,
+            "argument": -16,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 272,
+            "kind": 5,
+            "frame": 2486,
+            "localFrame": 1634,
+            "value": 2,
+            "argument": -18,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 293,
+            "kind": 5,
+            "frame": 2520,
+            "localFrame": 1668,
+            "value": 2,
+            "argument": 14,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 284,
+            "kind": 5,
+            "frame": 2556,
+            "localFrame": 1704,
+            "value": 2,
+            "argument": -18,
+            "bank": "story0",
+            "channel": 6,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 273,
+            "kind": 5,
+            "frame": 2572,
+            "localFrame": 1720,
+            "value": 5,
+            "argument": 0,
+            "bank": "story0",
+            "channel": 7,
+            "volumeByte": 185
+          },
+          {
+            "sequenceIndex": 3,
+            "eventId": 285,
+            "kind": 5,
+            "frame": 2577,
+            "localFrame": 1725,
+            "value": 5,
+            "argument": 0,
+            "bank": "story0",
+            "channel": 5,
+            "volumeByte": 185
+          }
+        ]
+      },
+      {
+        "scene": 166,
+        "kindCounts": {
+          "3": 4,
+          "4": 2,
+          "5": 0,
+          "6": 0
+        },
+        "sounds": []
+      }
+    ]
+  },
+  "unresolved": [
+    "Dedicated upgrade-effect sound beyond generic menu confirm",
+    "Full stage victory and ending music timing",
+    "General combat choreography SEQ triggers",
+    "Mapping all twelve character voice slots to semantic actions"
+  ]
+}

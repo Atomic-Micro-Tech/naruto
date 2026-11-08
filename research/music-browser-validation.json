@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-08",
+  "browser": "Safari",
+  "fixture": "research/music-audio-validation.html",
+  "observedBy": "parent agent through CUA Safari accessibility state",
+  "aggregatePass": true,
+  "renderCases": [
+    {"bank": 0, "sequence": 0, "seconds": 8, "peak": 0.652462899684906, "rms": 0.04606702360947092, "clipped": 0, "nonzero": 351626, "unresolved": []},
+    {"bank": 3, "sequence": 0, "seconds": 8, "peak": 0.5146026015281677, "rms": 0.08232310568417492, "clipped": 0, "nonzero": 345055},
+    {"bank": 26, "sequence": 0, "seconds": 8, "metrics": "not transcribed: accessibility output truncated"},
+    {"bank": "menu-sfx", "sequence": 0, "seconds": 2, "metrics": "not transcribed: accessibility output truncated"}
+  ],
+  "scope": "The fixture sets aggregatePass only after all four OfflineAudioContext renders finish with finite nonzero output. Detailed metrics were visible for only the first two rows. This verifies native browser audio rendering, not identity with a console recording.",
+  "regressionFixed": "Safari fetch invocation receiver: bind stored native fetch to globalThis. All original WAV requests returned HTTP 200 after correction."
+}

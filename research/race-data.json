@@ -1,0 +1,2971 @@
+{
+  "maps": [
+    {
+      "id": 16,
+      "resourceId": 646,
+      "backgroundResourceId": 360,
+      "dataOffset": 24205312,
+      "byteLength": 1081,
+      "tiles": [
+        {
+          "id": 0,
+          "type": "unknown",
+          "typeCode": 22,
+          "neighbors": [
+            1,
+            1
+          ],
+          "neighborSlots": [
+            1,
+            1,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 663,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 1,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            2,
+            0
+          ],
+          "neighborSlots": [
+            2,
+            0,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 630,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 2,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            3,
+            1
+          ],
+          "neighborSlots": [
+            3,
+            1,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 599,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 3,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            4,
+            2
+          ],
+          "neighborSlots": [
+            4,
+            2,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 567,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 4,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            5,
+            3
+          ],
+          "neighborSlots": [
+            5,
+            3,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 535,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 5,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            6,
+            4
+          ],
+          "neighborSlots": [
+            6,
+            4,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 503,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 6,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            7,
+            5
+          ],
+          "neighborSlots": [
+            7,
+            5,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 471,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 7,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            8,
+            6
+          ],
+          "neighborSlots": [
+            8,
+            6,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 439,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 8,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            9,
+            7
+          ],
+          "neighborSlots": [
+            9,
+            7,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 407,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 9,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            10,
+            8
+          ],
+          "neighborSlots": [
+            10,
+            8,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 375,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 10,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            11,
+            9
+          ],
+          "neighborSlots": [
+            11,
+            9,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 343,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 11,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            12,
+            10
+          ],
+          "neighborSlots": [
+            12,
+            10,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 311,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 12,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            13,
+            11
+          ],
+          "neighborSlots": [
+            13,
+            11,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 279,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 13,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            14,
+            12
+          ],
+          "neighborSlots": [
+            14,
+            12,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 247,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 14,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            15,
+            13
+          ],
+          "neighborSlots": [
+            15,
+            13,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 215,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 15,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            16,
+            14
+          ],
+          "neighborSlots": [
+            16,
+            14,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 183,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 16,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            17,
+            15
+          ],
+          "neighborSlots": [
+            17,
+            15,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 151,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 17,
+          "type": "source",
+          "typeCode": 0,
+          "neighbors": [
+            16,
+            16
+          ],
+          "neighborSlots": [
+            16,
+            16,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 119,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 18,
+          "type": "unknown",
+          "typeCode": 22,
+          "neighbors": [
+            19,
+            19
+          ],
+          "neighborSlots": [
+            19,
+            19,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 663,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 19,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            20,
+            18
+          ],
+          "neighborSlots": [
+            20,
+            18,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 630,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 20,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            21,
+            19
+          ],
+          "neighborSlots": [
+            21,
+            19,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 599,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 21,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            22,
+            20
+          ],
+          "neighborSlots": [
+            22,
+            20,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 567,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 22,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            23,
+            21
+          ],
+          "neighborSlots": [
+            23,
+            21,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 535,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 23,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            24,
+            22
+          ],
+          "neighborSlots": [
+            24,
+            22,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 503,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 24,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            25,
+            23
+          ],
+          "neighborSlots": [
+            25,
+            23,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 471,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 25,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            26,
+            24
+          ],
+          "neighborSlots": [
+            26,
+            24,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 439,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 26,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            27,
+            25
+          ],
+          "neighborSlots": [
+            27,
+            25,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 407,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 27,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            28,
+            26
+          ],
+          "neighborSlots": [
+            28,
+            26,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 375,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 28,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            29,
+            27
+          ],
+          "neighborSlots": [
+            29,
+            27,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 343,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 29,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            30,
+            28
+          ],
+          "neighborSlots": [
+            30,
+            28,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 311,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 30,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            31,
+            29
+          ],
+          "neighborSlots": [
+            31,
+            29,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 279,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 31,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            32,
+            30
+          ],
+          "neighborSlots": [
+            32,
+            30,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 247,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 32,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            33,
+            31
+          ],
+          "neighborSlots": [
+            33,
+            31,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 215,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 33,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            34,
+            32
+          ],
+          "neighborSlots": [
+            34,
+            32,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 183,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 34,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            35,
+            33
+          ],
+          "neighborSlots": [
+            35,
+            33,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 151,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 35,
+          "type": "source",
+          "typeCode": 0,
+          "neighbors": [
+            34,
+            34
+          ],
+          "neighborSlots": [
+            34,
+            34,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 119,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        }
+      ]
+    },
+    {
+      "id": 17,
+      "resourceId": 647,
+      "backgroundResourceId": 361,
+      "dataOffset": 24545280,
+      "byteLength": 1201,
+      "tiles": [
+        {
+          "id": 0,
+          "type": "unknown",
+          "typeCode": 22,
+          "neighbors": [
+            1,
+            1
+          ],
+          "neighborSlots": [
+            1,
+            1,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 695,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 1,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            2,
+            0
+          ],
+          "neighborSlots": [
+            2,
+            0,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 663,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 2,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            3,
+            1
+          ],
+          "neighborSlots": [
+            3,
+            1,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 630,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 3,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            4,
+            2
+          ],
+          "neighborSlots": [
+            4,
+            2,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 599,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 4,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            5,
+            3
+          ],
+          "neighborSlots": [
+            5,
+            3,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 567,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 5,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            6,
+            4
+          ],
+          "neighborSlots": [
+            6,
+            4,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 535,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 6,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            7,
+            5
+          ],
+          "neighborSlots": [
+            7,
+            5,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 503,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 7,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            8,
+            6
+          ],
+          "neighborSlots": [
+            8,
+            6,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 471,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 8,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            9,
+            7
+          ],
+          "neighborSlots": [
+            9,
+            7,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 439,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 9,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            10,
+            8
+          ],
+          "neighborSlots": [
+            10,
+            8,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 407,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 10,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            11,
+            9
+          ],
+          "neighborSlots": [
+            11,
+            9,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 375,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 11,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            12,
+            10
+          ],
+          "neighborSlots": [
+            12,
+            10,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 343,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 12,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            13,
+            11
+          ],
+          "neighborSlots": [
+            13,
+            11,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 311,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 13,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            14,
+            12
+          ],
+          "neighborSlots": [
+            14,
+            12,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 279,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 14,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            15,
+            13
+          ],
+          "neighborSlots": [
+            15,
+            13,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 247,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 15,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            16,
+            14
+          ],
+          "neighborSlots": [
+            16,
+            14,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 215,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 16,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            17,
+            15
+          ],
+          "neighborSlots": [
+            17,
+            15,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 183,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 17,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            18,
+            16
+          ],
+          "neighborSlots": [
+            18,
+            16,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 151,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 18,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            19,
+            17
+          ],
+          "neighborSlots": [
+            19,
+            17,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 119,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 19,
+          "type": "source",
+          "typeCode": 0,
+          "neighbors": [
+            18,
+            18
+          ],
+          "neighborSlots": [
+            18,
+            18,
+            255,
+            255
+          ],
+          "x": 223,
+          "y": 81,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 20,
+          "type": "unknown",
+          "typeCode": 22,
+          "neighbors": [
+            21,
+            21
+          ],
+          "neighborSlots": [
+            21,
+            21,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 695,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 21,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            22,
+            20
+          ],
+          "neighborSlots": [
+            22,
+            20,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 663,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 22,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            23,
+            21
+          ],
+          "neighborSlots": [
+            23,
+            21,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 630,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 23,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            24,
+            22
+          ],
+          "neighborSlots": [
+            24,
+            22,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 599,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 24,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            25,
+            23
+          ],
+          "neighborSlots": [
+            25,
+            23,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 567,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 25,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            26,
+            24
+          ],
+          "neighborSlots": [
+            26,
+            24,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 535,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 26,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            27,
+            25
+          ],
+          "neighborSlots": [
+            27,
+            25,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 503,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 27,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            28,
+            26
+          ],
+          "neighborSlots": [
+            28,
+            26,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 471,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 28,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            29,
+            27
+          ],
+          "neighborSlots": [
+            29,
+            27,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 439,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 29,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            30,
+            28
+          ],
+          "neighborSlots": [
+            30,
+            28,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 407,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 30,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            31,
+            29
+          ],
+          "neighborSlots": [
+            31,
+            29,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 375,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 31,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            32,
+            30
+          ],
+          "neighborSlots": [
+            32,
+            30,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 343,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 32,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            33,
+            31
+          ],
+          "neighborSlots": [
+            33,
+            31,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 311,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 33,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            34,
+            32
+          ],
+          "neighborSlots": [
+            34,
+            32,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 279,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 34,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            35,
+            33
+          ],
+          "neighborSlots": [
+            35,
+            33,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 247,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 35,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            36,
+            34
+          ],
+          "neighborSlots": [
+            36,
+            34,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 215,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 36,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            37,
+            35
+          ],
+          "neighborSlots": [
+            37,
+            35,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 183,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 37,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            38,
+            36
+          ],
+          "neighborSlots": [
+            38,
+            36,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 151,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 38,
+          "type": "unknown",
+          "typeCode": 21,
+          "neighbors": [
+            39,
+            37
+          ],
+          "neighborSlots": [
+            39,
+            37,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 119,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        },
+        {
+          "id": 39,
+          "type": "source",
+          "typeCode": 0,
+          "neighbors": [
+            38,
+            38
+          ],
+          "neighborSlots": [
+            38,
+            38,
+            255,
+            255
+          ],
+          "x": 160,
+          "y": 81,
+          "buyCost": 0,
+          "rents": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "upgradeCost": 0,
+          "unknownValues": [
+            0,
+            0
+          ],
+          "unknownBytes": [
+            255,
+            0
+          ],
+          "eventId": 255
+        }
+      ]
+    }
+  ],
+  "scenarios": [
+    {
+      "id": 3,
+      "mapId": 16,
+      "stageSetting": 18,
+      "deckId": 8,
+      "initialChakra": 600,
+      "targetChakra": 0,
+      "baseBonus": 0,
+      "initialSkillPoints": 0,
+      "unknownSetting17": 0,
+      "modeFlags": 24576,
+      "ruleRecords": [
+        {
+          "mask": 8192,
+          "value": 0
+        },
+        {
+          "mask": 16384,
+          "value": 0
+        },
+        {
+          "mask": 0,
+          "value": 0
+        },
+        {
+          "mask": 0,
+          "value": 0
+        }
+      ],
+      "ruleParameters": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "roulette": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4
+      ],
+      "players": [
+        {
+          "characterId": 0,
+          "techniqueIds": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "unknownControlBytes": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "characterId": 1,
+          "techniqueIds": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "unknownControlBytes": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "reservedNoRoster": false,
+      "rawHex": "10120800580200000000000000000000000000200000004000000000000000000000010101020202030303040404000e0e0e0e010e0e0e0eff0e0e0e0eff0e0e0e0e000000000000000000000000000000000000"
+    },
+    {
+      "id": 6,
+      "mapId": 17,
+      "stageSetting": 18,
+      "deckId": 8,
+      "initialChakra": 600,
+      "targetChakra": 0,
+      "baseBonus": 0,
+      "initialSkillPoints": 0,
+      "unknownSetting17": 0,
+      "modeFlags": 24576,
+      "ruleRecords": [
+        {
+          "mask": 8192,
+          "value": 0
+        },
+        {
+          "mask": 16384,
+          "value": 0
+        },
+        {
+          "mask": 0,
+          "value": 0
+        },
+        {
+          "mask": 0,
+          "value": 0
+        }
+      ],
+      "ruleParameters": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "roulette": [
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        4,
+        4,
+        4
+      ],
+      "players": [
+        {
+          "characterId": 1,
+          "techniqueIds": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "unknownControlBytes": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "characterId": 0,
+          "techniqueIds": [
+            14,
+            14,
+            14,
+            14
+          ],
+          "unknownControlBytes": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "reservedNoRoster": false,
+      "rawHex": "11120800580200000000000000000000000000200000004000000000000000000000010101020202030303040404010e0e0e0e000e0e0e0eff0e0e0e0eff0e0e0e0e000000000000000000000000000000000000"
+    }
+  ],
+  "deck": {
+    "id": 8,
+    "pools": [
+      [
+        45,
+        46,
+        46,
+        46,
+        47,
+        47,
+        47,
+        48,
+        48,
+        49,
+        50
+      ],
+      [
+        45,
+        46,
+        46,
+        46,
+        47,
+        47,
+        47,
+        48,
+        48,
+        49,
+        50
+      ]
+    ],
+    "zeroFilledReserved": false
+  },
+  "cards": [
+    {
+      "id": 45,
+      "type": 5,
+      "useFlag": 2,
+      "value": 1,
+      "messageId": 284,
+      "immediate": false
+    },
+    {
+      "id": 46,
+      "type": 5,
+      "useFlag": 2,
+      "value": 2,
+      "messageId": 285,
+      "immediate": false
+    },
+    {
+      "id": 47,
+      "type": 5,
+      "useFlag": 2,
+      "value": 3,
+      "messageId": 286,
+      "immediate": false
+    },
+    {
+      "id": 48,
+      "type": 5,
+      "useFlag": 2,
+      "value": 4,
+      "messageId": 287,
+      "immediate": false
+    },
+    {
+      "id": 49,
+      "type": 5,
+      "useFlag": 2,
+      "value": 5,
+      "messageId": 288,
+      "immediate": false
+    },
+    {
+      "id": 50,
+      "type": 5,
+      "useFlag": 2,
+      "value": 6,
+      "messageId": 289,
+      "immediate": false
+    },
+    {
+      "id": 51,
+      "type": 5,
+      "useFlag": 2,
+      "value": 7,
+      "messageId": 290,
+      "immediate": false
+    }
+  ],
+  "sources": {
+    "starts": "FUN_800b63f4 reverse tile scan type22",
+    "effects": "FUN_800e9220 and FUN_800e87c0",
+    "rules": "FUN_800df698"
+  }
+}

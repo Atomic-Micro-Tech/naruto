@@ -1,0 +1,26 @@
+# Native scroll powers
+
+story1-scroll.mjs is the logical commit port for BOARD menu0/action4 and menu2/actions0..3. Original glyph evidence for names and descriptions is research/scroll-text-audit.png (messages0x325..0x33c from resource775). Neither generated art nor inferred combat formulas are used.
+
+Player fields correspond to native bytes:scrollBonusCount=+1d,scrollNegativeBonusCount=+1e,scrollRollCount=+27. Initialize them0. On acquisition/transfer800e70c8 resets all three; callresetScrollCounters for the recipient. On successful source-bonus processing800edd68 case1, callrecordScrollSourceBonus BEFORE chakra increases; only scroll holders incrementbonusCount, andnegativeBonusCount only when current chakra<0. Normal movement roulette resolution800f3658 incrementsrollCount only while flags&0x200. Forced-movement action1 bypasses that increment. All three counters wrap as bytes.
+
+`scrollPowerOptions(state,actor)` returns4items `{id,name,messageId,enabled,targets}` in native order. The state shape is board-effects.mjs (tiles use original orderedneighbors,level1..5,hp,effect,owner). All options require scrollflag0x200. Power0 requiresnegativeBonusCount>=2;power1 requiresbonusCount!=0;power2 requires an enemy ordinary barrier;power3 requiresrollCount>=8. Team barriers are excluded for power2.
+
+`consumeScrollPower(state,actor,power)` clearsflag0x200, resets thetwo bonus counters, preservesrollCount andskillPoints, emits the original800150cc counter event, and stores`scrollAction:{actor,power}`. The source consumes before further target/roulette interaction; there is no cancellation refund. `resolveScrollPower(consumedState,options)` applies the effect, clears that pending action, and returns`scrollOutcome.endTurn=true`. Integrate original end-turn bookkeeping once afterward; do not roll movement too.
+
+|Power|Original result behavior|Resolution arguments|
+|---|---|---|
+|0 大革命の術|Every player's chakra becomesmax(-9999,-chakra), direct assignment from800f9520, including eliminated players.|none|
+|1 天変地異の術|Wheel0..11;>=6 succeeds. Everytype5 barrier's humanlevel becomes6-oldlevel andHP=newlevel+1. Owner,effect,repairCounter remain.800db29c case1d.|`{value}`|
+|2 結界ブン取りの術|Select enemy barrier; defender rolls0..11 first.11 automatically defeats the attempt without an attacker roll. Otherwise attacker must roll strictly greater. Capture changesowner, resetsrepairCounter, preserveslevel/HP/effect. Onfailure caster alone loses ordinary rent: no owner credit, no doubled/consumed effect5.|`{target,defenderRoll,attackerRoll}`; omitattackerRoll when defender11|
+|3 究極チャクラ大吸収の術|Each noneliminated opponent stops the normal movement wheel. They lose500×value; caster gains thetotal. Native signed16 queue conversion then chakra clamp applies.|`{rolls:[{actor,value},...]}` in cyclic opponent order|
+
+`scrollPowerRouletteFaces(power,scenarioRoulette)` returns0..11for1/2,originalscenariofacesfor3,emptyfor0. Reuse the source roulette runtime to stop the wheel; supplying the resulting numeric value to this module does not itself reproduce stop timing. Power2 uses the same0..11faces forbothplayers. Power3's source does not reset faces, so the caller must supply the actual current normal wheel if altered elsewhere. Team absorption's target-state semantics remain outside the story1 module and throw explicitly.
+
+Power2 failure debit is source800f3658 →582=2or4 →800dc2e0case0 (`4f4=-800b770c(target)`) →case16 (queue onlycurrentactor). It does not pass through ordinary tollcase2 that credits theowner. Capture owner commit is800db29c effect1e at animationframe39..41. Power1 commit happens at effect-script completion. Sign inversion is triggered by resource script opcodef0f5 calling800f9520. Power3 keeps signed queued deltas in80139ecc then800db29c effect1b transfers them to the payment queue.
+
+The module returns logical final values and nativecounter events. It does not schedule animation frames, voices, presentation dialogs, payment sounds, or invoke progression itself. The caller must update80014818 for successful capture and800150cc forusage exactly once using emitted events. CPU preference is supplied separately by800c88f0 arbitration rather than guessed here.
+
+Eight tests cover gating, bytewrap, consumption,sign clamp,exact6threshold,HP/effect preservation,defender11,strict tie loss,no owner credit and500×absorption. `node --test research/story1-scroll.test.mjs`.
+
+CPU target API: `cpuScrollRouletteTarget(faces, rngState, {previousTarget})`, also exported as `selectScrollCpuTarget`, implements800bd82c/8010be90. It examines slots0..10 for min/max and consumes one native RNG draw. A requested numeric value absent from all12 slots leaves the previous target unchanged; callers must supply that previous target when needed. Call this **before** `startBoardRoulette`, passing its returned RNG state and target to widget startup. 800e4c38 and800e5954 callbd82c beforeae10's64 swaps. Power1/2 freshly set0..11 first; power3 reads the actual persistent wheel slot order, which can already be shuffled. Power2 attacker rolls retain the defender's shuffled0..11slots. Once power1/2 finish,800f3658 restores all12 original scenario slots using80012bd4→8010be24, including defender11 early failure. Power3 retains its final shuffled movement slots.

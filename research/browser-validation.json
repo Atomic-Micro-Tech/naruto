@@ -1,0 +1,65 @@
+{
+  "date": "2026-11-08",
+  "chrome": {
+    "originalStoryDialogueVisual": true,
+    "audioPlayingIndicator": true,
+    "firstChapterObserved": {
+      "scenario": 0,
+      "round": 2,
+      "characters": [
+        12,
+        10
+      ],
+      "chakra": [
+        1380,
+        1300
+      ],
+      "crystals": [
+        1,
+        1
+      ],
+      "enemyBarrierActionsVisible": true,
+      "boardAudioPlaying": true
+    }
+  },
+  "safari": {
+    "storyMenu": true,
+    "raceMenuAndSaveEntry": true,
+    "backgroundAnimationPausedByVisibility": true,
+    "offlineAudioFixturePass": true,
+    "visibleAudioRows": [
+      {
+        "bank": 0,
+        "peak": 0.652462899684906,
+        "rms": 0.04606702360947092,
+        "clipped": 0,
+        "unresolved": []
+      },
+      {
+        "bank": 3,
+        "peak": 0.5146026015281677,
+        "rms": 0.08232310568417492,
+        "clipped": 0
+      }
+    ]
+  },
+  "notClaimed": [
+    "Full browser manual race",
+    "Full original hardware audiovisual parity",
+    "All campaign stages manually completed",
+    "Full manual first-chapter playthrough",
+    "New scroll and forced-sale interfaces manually verified",
+    "Native console input-trace equivalence"
+  ],
+  "automatedFirstChapter": {
+    "seeds": 30,
+    "completed": 30,
+    "phaseBoundarySaveValidation": true,
+    "fallbackSeeds": [
+      29
+    ],
+    "combinedTests": 198,
+    "passed": 198,
+    "failed": 0
+  }
+}

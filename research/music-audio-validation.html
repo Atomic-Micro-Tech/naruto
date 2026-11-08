@@ -1,0 +1,24 @@
+<!doctype html><meta charset="utf-8"><title>Original SEQ audio validation</title><pre id="result">Rendering original music samples…</pre><script type="module">
+import {MusicPlayer,SequenceClock} from './music-player.mjs?v=fetch-bind-2';
+const rows=[];
+try{
+ const index=await fetch('../extracted/music/index.json').then(r=>r.json());
+ for(const [id,sequence,seconds] of [[0,0,8],[3,0,8],[26,0,8],['menu-sfx',0,2]]){
+  const context=new OfflineAudioContext(2,44100*seconds,44100),player=new MusicPlayer(context,{index,baseURL:'../extracted/music/'});
+  await player.play(id,{sequence,loop:false});clearInterval(player.timer);player.timer=null;
+  // Schedule score ahead for OfflineAudioContext; each native SEQ frame still dispatches unchanged.
+  while(!player.clock.done&&player.startTime+player.clock.frame/60<seconds){
+   const frame=player.clock.nextFrame();
+   for(const item of frame)player._event(item.event,player.startTime+item.time,item);
+   const t=Math.min(seconds,player.startTime+player.clock.frame/60);
+   for(const voice of player.voices)player._envelopeUntil(voice,t);
+  }
+  const buffer=await context.startRendering();let peak=0,sum=0,clipped=0,nonzero=0,stereoDifference=0;
+  const l=buffer.getChannelData(0),r=buffer.getChannelData(1);
+  for(let i=0;i<l.length;i++){peak=Math.max(peak,Math.abs(l[i]),Math.abs(r[i]));sum+=l[i]*l[i]+r[i]*r[i];clipped+=Math.abs(l[i])>1||Math.abs(r[i])>1;nonzero+=!!(l[i]||r[i]);stereoDifference+=Math.abs(l[i]-r[i]);}
+  if(!Number.isFinite(peak)||peak===0)throw Error('Silent/non-finite render '+id);
+  rows.push({id,sequence,seconds,peak,rms:Math.sqrt(sum/(l.length*2)),clipped,nonzero,stereoDifference,unresolved:player.unresolved});player.dispose();
+ }
+ document.querySelector('#result').textContent=JSON.stringify({pass:true,rows},null,2);
+}catch(e){document.querySelector('#result').textContent=JSON.stringify({pass:false,error:e.stack,rows},null,2);}
+</script>

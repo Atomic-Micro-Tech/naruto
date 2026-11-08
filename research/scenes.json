@@ -1,0 +1,684 @@
+{
+  "scenes": [
+    {
+      "id": 0,
+      "name": "TITLE",
+      "overlay": 0,
+      "init": "0x800ad748",
+      "update": "0x800ad9a4",
+      "exit": "0x800ad91c"
+    },
+    {
+      "id": 1,
+      "name": "LOGO",
+      "overlay": 5,
+      "init": "0x800ad4e0",
+      "update": "0x800ad5f0",
+      "exit": "0x800ad5a8"
+    },
+    {
+      "id": 2,
+      "name": "MENU",
+      "overlay": 0,
+      "init": "0x800af640",
+      "update": "0x800af748",
+      "exit": "0x800af724"
+    },
+    {
+      "id": 3,
+      "name": "BOARD",
+      "overlay": 1,
+      "init": "0x800b1e88",
+      "update": "0x800b50ac",
+      "exit": "0x800b5020"
+    },
+    {
+      "id": 4,
+      "name": "BOARDRET",
+      "overlay": 1,
+      "init": "0x800b2a58",
+      "update": "0x800b50ac",
+      "exit": "0x800b5020"
+    },
+    {
+      "id": 5,
+      "name": "BAT_INI",
+      "overlay": 1,
+      "init": "0x8011c028",
+      "update": "0x8011ce2c",
+      "exit": "0x8011cddc"
+    },
+    {
+      "id": 6,
+      "name": "BAT_VIEW",
+      "overlay": 1,
+      "init": "0x8011c028",
+      "update": "0x8011ce2c",
+      "exit": "0x8011cddc"
+    },
+    {
+      "id": 7,
+      "name": "PRESTG",
+      "overlay": 2,
+      "init": "0x800adc74",
+      "update": "0x800adf3c",
+      "exit": "0x800adeec"
+    },
+    {
+      "id": 8,
+      "name": "AFTSTG",
+      "overlay": 2,
+      "init": "0x800adc74",
+      "update": "0x800adf3c",
+      "exit": "0x800adeec"
+    },
+    {
+      "id": 9,
+      "name": "ENDING",
+      "overlay": 2,
+      "init": "0x800af3b0",
+      "update": "0x800af9d4",
+      "exit": "0x800af8c8"
+    },
+    {
+      "id": 10,
+      "name": "MC_CHK",
+      "overlay": 0,
+      "init": "0x80033b48",
+      "update": "0x80033b90",
+      "exit": "0x80033b70"
+    },
+    {
+      "id": 11,
+      "name": "MC_LOAD",
+      "overlay": 0,
+      "init": "0x80033bb0",
+      "update": "0x80033c40",
+      "exit": "0x80033c04"
+    },
+    {
+      "id": 12,
+      "name": "MC_SAVER",
+      "overlay": 0,
+      "init": "0x800352ec",
+      "update": "0x80035360",
+      "exit": "0x80035340"
+    },
+    {
+      "id": 13,
+      "name": "MC_SAVEC",
+      "overlay": 0,
+      "init": "0x800344f4",
+      "update": "0x8003460c",
+      "exit": "0x800345d0"
+    },
+    {
+      "id": 14,
+      "name": "MC_SAVEG",
+      "overlay": 0,
+      "init": "0x80035380",
+      "update": "0x800353f8",
+      "exit": "0x800353d8"
+    },
+    {
+      "id": 15,
+      "name": "BINGO",
+      "overlay": 0,
+      "init": "0x800c41ac",
+      "update": "0x800c43b8",
+      "exit": "0x800c435c"
+    },
+    {
+      "id": 16,
+      "name": "CONCNOTI",
+      "overlay": 0,
+      "init": "0x800c1d9c",
+      "update": "0x800c2014",
+      "exit": "0x800c1fd4"
+    },
+    {
+      "id": 17,
+      "name": "PRIZE",
+      "overlay": 0,
+      "init": "0x800c6054",
+      "update": "0x800c6294",
+      "exit": "0x800c6238"
+    },
+    {
+      "id": 18,
+      "name": "MOVIE",
+      "overlay": 5,
+      "init": "0x800adc78",
+      "update": "0x800ae36c",
+      "exit": "0x800add24"
+    },
+    {
+      "id": 19,
+      "name": "DBGMENU",
+      "overlay": 3,
+      "init": "0x800ad684",
+      "update": "0x800ad694",
+      "exit": "0x800ad68c"
+    },
+    {
+      "id": 20,
+      "name": "STGSEL",
+      "overlay": 0,
+      "init": "0x800c6738",
+      "update": "0x800c6774",
+      "exit": "0x800c6740"
+    },
+    {
+      "id": 21,
+      "name": "TEST",
+      "overlay": 4,
+      "init": "0x800ad6a8",
+      "update": "0x800ad798",
+      "exit": "0x800ad758"
+    },
+    {
+      "id": 22,
+      "name": "TESTPAD",
+      "overlay": 4,
+      "init": "0x800ad7d0",
+      "update": "0x800ad7e0",
+      "exit": "0x800ad7d8"
+    },
+    {
+      "id": 23,
+      "name": "TESTFONT",
+      "overlay": 4,
+      "init": "0x800ad7e8",
+      "update": "0x800ad7f8",
+      "exit": "0x800ad7f0"
+    },
+    {
+      "id": 24,
+      "name": "TESEMENU",
+      "overlay": 1,
+      "init": "0x80139654",
+      "update": "0x80139664",
+      "exit": "0x8013965c"
+    },
+    {
+      "id": 25,
+      "name": "FACWIN",
+      "overlay": 1,
+      "init": "0x801396b4",
+      "update": "0x801396bc",
+      "exit": "0x801396dc"
+    },
+    {
+      "id": 26,
+      "name": "TESTCDEF",
+      "overlay": 1,
+      "init": "0x8013966c",
+      "update": "0x80139674",
+      "exit": "0x80139694"
+    },
+    {
+      "id": 27,
+      "name": "TESTEVP",
+      "overlay": 1,
+      "init": "0x801396fc",
+      "update": "0x80139704",
+      "exit": "0x80139724"
+    },
+    {
+      "id": 28,
+      "name": "TESTSND",
+      "overlay": 4,
+      "init": "0x800ad800",
+      "update": "0x800ad810",
+      "exit": "0x800ad808"
+    },
+    {
+      "id": 29,
+      "name": "TESSNDXA",
+      "overlay": 4,
+      "init": "0x800ad818",
+      "update": "0x800ad828",
+      "exit": "0x800ad820"
+    },
+    {
+      "id": 30,
+      "name": "TESTACT",
+      "overlay": 4,
+      "init": "0x800ad860",
+      "update": "0x800ad948",
+      "exit": "0x800ad940"
+    },
+    {
+      "id": 31,
+      "name": "TESTSPR",
+      "overlay": 4,
+      "init": "0x800ad830",
+      "update": "0x800ad840",
+      "exit": "0x800ad808"
+    },
+    {
+      "id": 32,
+      "name": "TESTBGAN",
+      "overlay": 1,
+      "init": "0x801397bc",
+      "update": "0x801397cc",
+      "exit": "0x800ad808"
+    },
+    {
+      "id": 33,
+      "name": "TESTCHR",
+      "overlay": 1,
+      "init": "0x8013978c",
+      "update": "0x8013979c",
+      "exit": "0x80139794"
+    },
+    {
+      "id": 34,
+      "name": "TESTEFF",
+      "overlay": 1,
+      "init": "0x801397a4",
+      "update": "0x801397b4",
+      "exit": "0x801397ac"
+    },
+    {
+      "id": 35,
+      "name": "TESTPICT",
+      "overlay": 4,
+      "init": "0x800ad848",
+      "update": "0x800ad858",
+      "exit": "0x800ad850"
+    },
+    {
+      "id": 36,
+      "name": "TESTMC",
+      "overlay": 4,
+      "init": "0x800adee4",
+      "update": "0x800adef4",
+      "exit": "0x800adeec"
+    },
+    {
+      "id": 37,
+      "name": "TESTSCR",
+      "overlay": 1,
+      "init": "0x80139744",
+      "update": "0x8013974c",
+      "exit": "0x8013976c"
+    },
+    {
+      "id": 38,
+      "name": "RESUL_DM",
+      "overlay": 4,
+      "init": "0x800ad6a8",
+      "update": "0x800ad798",
+      "exit": "0x800ad758"
+    }
+  ],
+  "overlays": [
+    {
+      "id": 0,
+      "offset": 391168,
+      "size": 110536,
+      "loadAddress": "0x800ad450",
+      "sha256": "56ee7d3b195b0708bd5f9163d354f0173a828430c9467d410e822b1793d316d4",
+      "scenes": [
+        {
+          "id": 0,
+          "name": "TITLE",
+          "overlay": 0,
+          "init": "0x800ad748",
+          "update": "0x800ad9a4",
+          "exit": "0x800ad91c"
+        },
+        {
+          "id": 2,
+          "name": "MENU",
+          "overlay": 0,
+          "init": "0x800af640",
+          "update": "0x800af748",
+          "exit": "0x800af724"
+        },
+        {
+          "id": 10,
+          "name": "MC_CHK",
+          "overlay": 0,
+          "init": "0x80033b48",
+          "update": "0x80033b90",
+          "exit": "0x80033b70"
+        },
+        {
+          "id": 11,
+          "name": "MC_LOAD",
+          "overlay": 0,
+          "init": "0x80033bb0",
+          "update": "0x80033c40",
+          "exit": "0x80033c04"
+        },
+        {
+          "id": 12,
+          "name": "MC_SAVER",
+          "overlay": 0,
+          "init": "0x800352ec",
+          "update": "0x80035360",
+          "exit": "0x80035340"
+        },
+        {
+          "id": 13,
+          "name": "MC_SAVEC",
+          "overlay": 0,
+          "init": "0x800344f4",
+          "update": "0x8003460c",
+          "exit": "0x800345d0"
+        },
+        {
+          "id": 14,
+          "name": "MC_SAVEG",
+          "overlay": 0,
+          "init": "0x80035380",
+          "update": "0x800353f8",
+          "exit": "0x800353d8"
+        },
+        {
+          "id": 15,
+          "name": "BINGO",
+          "overlay": 0,
+          "init": "0x800c41ac",
+          "update": "0x800c43b8",
+          "exit": "0x800c435c"
+        },
+        {
+          "id": 16,
+          "name": "CONCNOTI",
+          "overlay": 0,
+          "init": "0x800c1d9c",
+          "update": "0x800c2014",
+          "exit": "0x800c1fd4"
+        },
+        {
+          "id": 17,
+          "name": "PRIZE",
+          "overlay": 0,
+          "init": "0x800c6054",
+          "update": "0x800c6294",
+          "exit": "0x800c6238"
+        },
+        {
+          "id": 20,
+          "name": "STGSEL",
+          "overlay": 0,
+          "init": "0x800c6738",
+          "update": "0x800c6774",
+          "exit": "0x800c6740"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "offset": 17543168,
+      "size": 596412,
+      "loadAddress": "0x800ad450",
+      "sha256": "9c531036e66c88849bc8fd16ee1717f10b1a7e42132f2a616635c122c809c60a",
+      "scenes": [
+        {
+          "id": 3,
+          "name": "BOARD",
+          "overlay": 1,
+          "init": "0x800b1e88",
+          "update": "0x800b50ac",
+          "exit": "0x800b5020"
+        },
+        {
+          "id": 4,
+          "name": "BOARDRET",
+          "overlay": 1,
+          "init": "0x800b2a58",
+          "update": "0x800b50ac",
+          "exit": "0x800b5020"
+        },
+        {
+          "id": 5,
+          "name": "BAT_INI",
+          "overlay": 1,
+          "init": "0x8011c028",
+          "update": "0x8011ce2c",
+          "exit": "0x8011cddc"
+        },
+        {
+          "id": 6,
+          "name": "BAT_VIEW",
+          "overlay": 1,
+          "init": "0x8011c028",
+          "update": "0x8011ce2c",
+          "exit": "0x8011cddc"
+        },
+        {
+          "id": 24,
+          "name": "TESEMENU",
+          "overlay": 1,
+          "init": "0x80139654",
+          "update": "0x80139664",
+          "exit": "0x8013965c"
+        },
+        {
+          "id": 25,
+          "name": "FACWIN",
+          "overlay": 1,
+          "init": "0x801396b4",
+          "update": "0x801396bc",
+          "exit": "0x801396dc"
+        },
+        {
+          "id": 26,
+          "name": "TESTCDEF",
+          "overlay": 1,
+          "init": "0x8013966c",
+          "update": "0x80139674",
+          "exit": "0x80139694"
+        },
+        {
+          "id": 27,
+          "name": "TESTEVP",
+          "overlay": 1,
+          "init": "0x801396fc",
+          "update": "0x80139704",
+          "exit": "0x80139724"
+        },
+        {
+          "id": 32,
+          "name": "TESTBGAN",
+          "overlay": 1,
+          "init": "0x801397bc",
+          "update": "0x801397cc",
+          "exit": "0x800ad808"
+        },
+        {
+          "id": 33,
+          "name": "TESTCHR",
+          "overlay": 1,
+          "init": "0x8013978c",
+          "update": "0x8013979c",
+          "exit": "0x80139794"
+        },
+        {
+          "id": 34,
+          "name": "TESTEFF",
+          "overlay": 1,
+          "init": "0x801397a4",
+          "update": "0x801397b4",
+          "exit": "0x801397ac"
+        },
+        {
+          "id": 37,
+          "name": "TESTSCR",
+          "overlay": 1,
+          "init": "0x80139744",
+          "update": "0x8013974c",
+          "exit": "0x8013976c"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "offset": 9302016,
+      "size": 20184,
+      "loadAddress": "0x800ad450",
+      "sha256": "52eca4bb7f924badb7b04b10d3289b959fa5334484abe74bb2cbdeb753b6eb58",
+      "scenes": [
+        {
+          "id": 7,
+          "name": "PRESTG",
+          "overlay": 2,
+          "init": "0x800adc74",
+          "update": "0x800adf3c",
+          "exit": "0x800adeec"
+        },
+        {
+          "id": 8,
+          "name": "AFTSTG",
+          "overlay": 2,
+          "init": "0x800adc74",
+          "update": "0x800adf3c",
+          "exit": "0x800adeec"
+        },
+        {
+          "id": 9,
+          "name": "ENDING",
+          "overlay": 2,
+          "init": "0x800af3b0",
+          "update": "0x800af9d4",
+          "exit": "0x800af8c8"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "offset": 65878016,
+      "size": 4308,
+      "loadAddress": "0x800ad450",
+      "sha256": "5e0be52120d7b45e707fbf87563db8a697ac610a29e7600bd355e71ea87a07a4",
+      "scenes": [
+        {
+          "id": 19,
+          "name": "DBGMENU",
+          "overlay": 3,
+          "init": "0x800ad684",
+          "update": "0x800ad694",
+          "exit": "0x800ad68c"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "offset": 65884160,
+      "size": 2872,
+      "loadAddress": "0x800ad450",
+      "sha256": "c385966fb83f4bf583af37d9040128d49552a8ab51f7d766c1f46b07c5f7a015",
+      "scenes": [
+        {
+          "id": 21,
+          "name": "TEST",
+          "overlay": 4,
+          "init": "0x800ad6a8",
+          "update": "0x800ad798",
+          "exit": "0x800ad758"
+        },
+        {
+          "id": 22,
+          "name": "TESTPAD",
+          "overlay": 4,
+          "init": "0x800ad7d0",
+          "update": "0x800ad7e0",
+          "exit": "0x800ad7d8"
+        },
+        {
+          "id": 23,
+          "name": "TESTFONT",
+          "overlay": 4,
+          "init": "0x800ad7e8",
+          "update": "0x800ad7f8",
+          "exit": "0x800ad7f0"
+        },
+        {
+          "id": 28,
+          "name": "TESTSND",
+          "overlay": 4,
+          "init": "0x800ad800",
+          "update": "0x800ad810",
+          "exit": "0x800ad808"
+        },
+        {
+          "id": 29,
+          "name": "TESSNDXA",
+          "overlay": 4,
+          "init": "0x800ad818",
+          "update": "0x800ad828",
+          "exit": "0x800ad820"
+        },
+        {
+          "id": 30,
+          "name": "TESTACT",
+          "overlay": 4,
+          "init": "0x800ad860",
+          "update": "0x800ad948",
+          "exit": "0x800ad940"
+        },
+        {
+          "id": 31,
+          "name": "TESTSPR",
+          "overlay": 4,
+          "init": "0x800ad830",
+          "update": "0x800ad840",
+          "exit": "0x800ad808"
+        },
+        {
+          "id": 35,
+          "name": "TESTPICT",
+          "overlay": 4,
+          "init": "0x800ad848",
+          "update": "0x800ad858",
+          "exit": "0x800ad850"
+        },
+        {
+          "id": 36,
+          "name": "TESTMC",
+          "overlay": 4,
+          "init": "0x800adee4",
+          "update": "0x800adef4",
+          "exit": "0x800adeec"
+        },
+        {
+          "id": 38,
+          "name": "RESUL_DM",
+          "overlay": 4,
+          "init": "0x800ad6a8",
+          "update": "0x800ad798",
+          "exit": "0x800ad758"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "offset": 376832,
+      "size": 12996,
+      "loadAddress": "0x800ad450",
+      "sha256": "19e98b30c0a890e44114578f79cd0a893f5550f371b183e3e8adac136821f4b7",
+      "scenes": [
+        {
+          "id": 1,
+          "name": "LOGO",
+          "overlay": 5,
+          "init": "0x800ad4e0",
+          "update": "0x800ad5f0",
+          "exit": "0x800ad5a8"
+        },
+        {
+          "id": 18,
+          "name": "MOVIE",
+          "overlay": 5,
+          "init": "0x800adc78",
+          "update": "0x800ae36c",
+          "exit": "0x800add24"
+        }
+      ]
+    }
+  ]
+}

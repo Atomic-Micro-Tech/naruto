@@ -1,0 +1,1933 @@
+[
+  {
+    "characterId": 0,
+    "attacks": [
+      {
+        "id": 0,
+        "tableSlot": 0,
+        "animationId": 0,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 300,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 1,
+        "tableSlot": 1,
+        "animationId": 1,
+        "cost": 150,
+        "power": 3,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 3,
+        "tableSlot": 2,
+        "animationId": 2,
+        "cost": 50,
+        "power": 4,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 2,
+        "tableSlot": 3,
+        "animationId": 3,
+        "cost": 100,
+        "power": 5,
+        "alternateCost": 150,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 4,
+        "tableSlot": 4,
+        "animationId": 5,
+        "cost": 100,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 5,
+        "tableSlot": 5,
+        "animationId": 6,
+        "cost": 250,
+        "power": 3,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 6,
+        "tableSlot": 6,
+        "animationId": 7,
+        "cost": 150,
+        "power": 1,
+        "alternateCost": 70,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          18,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 7,
+        "tableSlot": 7,
+        "animationId": 8,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 1,
+    "attacks": [
+      {
+        "id": 8,
+        "tableSlot": 0,
+        "animationId": 10,
+        "cost": 80,
+        "power": 2,
+        "alternateCost": 300,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 9,
+        "tableSlot": 1,
+        "animationId": 11,
+        "cost": 170,
+        "power": 3,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 10,
+        "tableSlot": 2,
+        "animationId": 12,
+        "cost": 450,
+        "power": 4,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 11,
+        "tableSlot": 3,
+        "animationId": 13,
+        "cost": 150,
+        "power": 5,
+        "alternateCost": 0,
+        "alternatePower": 6,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 8,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 12,
+        "tableSlot": 4,
+        "animationId": 15,
+        "cost": 150,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 13,
+        "tableSlot": 5,
+        "animationId": 16,
+        "cost": 200,
+        "power": 2,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 14,
+        "tableSlot": 6,
+        "animationId": 17,
+        "cost": 180,
+        "power": 1,
+        "alternateCost": 120,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 15,
+        "tableSlot": 7,
+        "animationId": 18,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 2,
+    "attacks": [
+      {
+        "id": 16,
+        "tableSlot": 0,
+        "animationId": 20,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 250,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 17,
+        "tableSlot": 1,
+        "animationId": 21,
+        "cost": 20,
+        "power": 2,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 18,
+        "tableSlot": 2,
+        "animationId": 22,
+        "cost": 150,
+        "power": 3,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 19,
+        "tableSlot": 3,
+        "animationId": 23,
+        "cost": 30,
+        "power": 3,
+        "alternateCost": 170,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 20,
+        "tableSlot": 4,
+        "animationId": 25,
+        "cost": 100,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 21,
+        "tableSlot": 5,
+        "animationId": 26,
+        "cost": 160,
+        "power": 3,
+        "alternateCost": 70,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          43,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 22,
+        "tableSlot": 6,
+        "animationId": 27,
+        "cost": 250,
+        "power": 3,
+        "alternateCost": 70,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 23,
+        "tableSlot": 7,
+        "animationId": 28,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 3,
+    "attacks": [
+      {
+        "id": 24,
+        "tableSlot": 0,
+        "animationId": 30,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 300,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 25,
+        "tableSlot": 1,
+        "animationId": 31,
+        "cost": 150,
+        "power": 3,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 26,
+        "tableSlot": 2,
+        "animationId": 32,
+        "cost": 50,
+        "power": 4,
+        "alternateCost": 80,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 27,
+        "tableSlot": 3,
+        "animationId": 33,
+        "cost": 600,
+        "power": 6,
+        "alternateCost": 400,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 30,
+        "tableSlot": 4,
+        "animationId": 35,
+        "cost": 100,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 0,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 28,
+        "tableSlot": 5,
+        "animationId": 36,
+        "cost": 220,
+        "power": 3,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          40,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 29,
+        "tableSlot": 6,
+        "animationId": 37,
+        "cost": 120,
+        "power": 1,
+        "alternateCost": 70,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          10,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 31,
+        "tableSlot": 7,
+        "animationId": 38,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 4,
+    "attacks": [
+      {
+        "id": 32,
+        "tableSlot": 0,
+        "animationId": 40,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 33,
+        "tableSlot": 1,
+        "animationId": 41,
+        "cost": 150,
+        "power": 3,
+        "alternateCost": 500,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 34,
+        "tableSlot": 2,
+        "animationId": 42,
+        "cost": 500,
+        "power": 5,
+        "alternateCost": 900,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 35,
+        "tableSlot": 3,
+        "animationId": 43,
+        "cost": 100,
+        "power": 5,
+        "alternateCost": 70,
+        "alternatePower": 6,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 36,
+        "tableSlot": 4,
+        "animationId": 45,
+        "cost": 100,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 37,
+        "tableSlot": 5,
+        "animationId": 46,
+        "cost": 250,
+        "power": 3,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          70,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 38,
+        "tableSlot": 6,
+        "animationId": 47,
+        "cost": 120,
+        "power": 1,
+        "alternateCost": 70,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          84,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 39,
+        "tableSlot": 7,
+        "animationId": 48,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 5,
+    "attacks": [
+      {
+        "id": 40,
+        "tableSlot": 0,
+        "animationId": 50,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 41,
+        "tableSlot": 1,
+        "animationId": 51,
+        "cost": 150,
+        "power": 3,
+        "alternateCost": 500,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 42,
+        "tableSlot": 2,
+        "animationId": 52,
+        "cost": 20,
+        "power": 3,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 43,
+        "tableSlot": 3,
+        "animationId": 53,
+        "cost": 50,
+        "power": 4,
+        "alternateCost": 200,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 44,
+        "tableSlot": 4,
+        "animationId": 55,
+        "cost": 100,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 45,
+        "tableSlot": 5,
+        "animationId": 56,
+        "cost": 220,
+        "power": 3,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          18,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 46,
+        "tableSlot": 6,
+        "animationId": 57,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 6,
+    "attacks": [
+      {
+        "id": 47,
+        "tableSlot": 0,
+        "animationId": 60,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 48,
+        "tableSlot": 1,
+        "animationId": 61,
+        "cost": 400,
+        "power": 5,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 49,
+        "tableSlot": 2,
+        "animationId": 62,
+        "cost": 100,
+        "power": 5,
+        "alternateCost": 200,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 50,
+        "tableSlot": 3,
+        "animationId": 65,
+        "cost": 100,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          25,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 51,
+        "tableSlot": 4,
+        "animationId": 66,
+        "cost": 230,
+        "power": 2,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          20,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 52,
+        "tableSlot": 5,
+        "animationId": 67,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 7,
+    "attacks": [
+      {
+        "id": 53,
+        "tableSlot": 0,
+        "animationId": 70,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 54,
+        "tableSlot": 1,
+        "animationId": 71,
+        "cost": 170,
+        "power": 3,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 55,
+        "tableSlot": 2,
+        "animationId": 72,
+        "cost": 50,
+        "power": 4,
+        "alternateCost": 200,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 56,
+        "tableSlot": 3,
+        "animationId": 75,
+        "cost": 200,
+        "power": 2,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          12,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 57,
+        "tableSlot": 4,
+        "animationId": 76,
+        "cost": 260,
+        "power": 2,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 58,
+        "tableSlot": 5,
+        "animationId": 77,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 8,
+    "attacks": [
+      {
+        "id": 59,
+        "tableSlot": 0,
+        "animationId": 80,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 300,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 60,
+        "tableSlot": 1,
+        "animationId": 81,
+        "cost": 150,
+        "power": 3,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 61,
+        "tableSlot": 2,
+        "animationId": 82,
+        "cost": 100,
+        "power": 5,
+        "alternateCost": 70,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 62,
+        "tableSlot": 3,
+        "animationId": 85,
+        "cost": 100,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 63,
+        "tableSlot": 4,
+        "animationId": 86,
+        "cost": 150,
+        "power": 2,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 64,
+        "tableSlot": 5,
+        "animationId": 87,
+        "cost": 150,
+        "power": 1,
+        "alternateCost": 70,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 65,
+        "tableSlot": 6,
+        "animationId": 88,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 9,
+    "attacks": [
+      {
+        "id": 66,
+        "tableSlot": 0,
+        "animationId": 90,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 67,
+        "tableSlot": 1,
+        "animationId": 91,
+        "cost": 170,
+        "power": 3,
+        "alternateCost": 300,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 68,
+        "tableSlot": 2,
+        "animationId": 92,
+        "cost": 150,
+        "power": 6,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 69,
+        "tableSlot": 3,
+        "animationId": 95,
+        "cost": 260,
+        "power": 3,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          16,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 70,
+        "tableSlot": 4,
+        "animationId": 96,
+        "cost": 150,
+        "power": 1,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          12,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 71,
+        "tableSlot": 5,
+        "animationId": 97,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 10,
+    "attacks": [
+      {
+        "id": 72,
+        "tableSlot": 0,
+        "animationId": 100,
+        "cost": 100,
+        "power": 2,
+        "alternateCost": 300,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 73,
+        "tableSlot": 1,
+        "animationId": 101,
+        "cost": 450,
+        "power": 4,
+        "alternateCost": 800,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 74,
+        "tableSlot": 2,
+        "animationId": 102,
+        "cost": 150,
+        "power": 4,
+        "alternateCost": 500,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 75,
+        "tableSlot": 3,
+        "animationId": 105,
+        "cost": 150,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 76,
+        "tableSlot": 4,
+        "animationId": 106,
+        "cost": 200,
+        "power": 1,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 77,
+        "tableSlot": 5,
+        "animationId": 107,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 11,
+    "attacks": [
+      {
+        "id": 80,
+        "tableSlot": 0,
+        "animationId": 110,
+        "cost": 150,
+        "power": 3,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 79,
+        "tableSlot": 1,
+        "animationId": 111,
+        "cost": 400,
+        "power": 4,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 78,
+        "tableSlot": 2,
+        "animationId": 112,
+        "cost": 150,
+        "power": 6,
+        "alternateCost": 950,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 81,
+        "tableSlot": 3,
+        "animationId": 115,
+        "cost": 150,
+        "power": 2,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 82,
+        "tableSlot": 4,
+        "animationId": 116,
+        "cost": 200,
+        "power": 2,
+        "alternateCost": 50,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 83,
+        "tableSlot": 5,
+        "animationId": 117,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  {
+    "characterId": 12,
+    "attacks": [
+      {
+        "id": 84,
+        "tableSlot": 0,
+        "animationId": 120,
+        "cost": 50,
+        "power": 2,
+        "alternateCost": 300,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 85,
+        "tableSlot": 1,
+        "animationId": 121,
+        "cost": 150,
+        "power": 3,
+        "alternateCost": 30,
+        "alternatePower": 0,
+        "flags": 1,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 87,
+        "tableSlot": 2,
+        "animationId": 122,
+        "cost": 50,
+        "power": 4,
+        "alternateCost": 0,
+        "alternatePower": 6,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 86,
+        "tableSlot": 3,
+        "animationId": 123,
+        "cost": 150,
+        "power": 6,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 5,
+        "specialty": true,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "defenses": [
+      {
+        "id": 88,
+        "tableSlot": 4,
+        "animationId": 125,
+        "cost": 100,
+        "power": 1,
+        "alternateCost": 10,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 89,
+        "tableSlot": 5,
+        "animationId": 126,
+        "cost": 150,
+        "power": 2,
+        "alternateCost": 100,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 90,
+        "tableSlot": 6,
+        "animationId": 127,
+        "cost": 120,
+        "power": 1,
+        "alternateCost": 70,
+        "alternatePower": 0,
+        "flags": 14,
+        "specialty": true,
+        "countersSpecialty": true,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          18,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "id": 91,
+        "tableSlot": 7,
+        "animationId": 128,
+        "cost": 0,
+        "power": 0,
+        "alternateCost": 0,
+        "alternatePower": 0,
+        "flags": 2,
+        "specialty": false,
+        "countersSpecialty": false,
+        "countersNonSpecialty": false,
+        "unknownHalfword": 1,
+        "unknownTail": [
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+]

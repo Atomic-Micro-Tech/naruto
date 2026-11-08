@@ -1,0 +1,28 @@
+{
+  "project_id": "appgprj_6af024af83a081919cb66ecd760f4670",
+  "version_id": "appgprj_6af024af83a081919cb66ecd760f4670~appgver_780bc1f88bec819193a9f7fbc5aa85ac",
+  "deployment_id": "appgdep_6af05c6d54048191b7dda4c178c6e445",
+  "commit_sha": "d92fd9d64b8b4815bb4d2f85890981df3ab4e156",
+  "url": "https://shinobi-jintori-browser.workspace-141735.chatgpt.site",
+  "status": "succeeded",
+  "audience": "owner-private",
+  "fidelity": "Native JavaScript first-chapter gameplay expanded; not complete 1:1 parity",
+  "tests": {
+    "combinedNativeAndBrowser": 198,
+    "passed": 198,
+    "failed": 0,
+    "automatedFirstChapterMatches": 30,
+    "completedMatches": 30,
+    "unknownRamFallbackSeeds": [
+      29
+    ]
+  },
+  "remaining": [
+    "Original battle choreography and menus",
+    "Opening board tour and event camera presentation",
+    "Reactive CPU technique selection",
+    "Original out-of-bounds CPU route RAM dependency",
+    "Full console input-trace and manual browser verification"
+  ],
+  "updated_at": "2026-11-08T11:27:08.055119+00:00"
+}
