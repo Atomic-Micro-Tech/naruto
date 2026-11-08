@@ -29,6 +29,8 @@ Buka **http://127.0.0.1:8080**. Mode ini menyesuaikan URL email verifikasi/reset
 
 ## Akun dev
 
+Untuk room **test** melawan CPU Sasuke, jalankan `python3 dev.py --build --cpu-room`, buka port 8080, login dengan akun pemain, lalu gabung room **test** dan tekan **Saya siap**. Pertandingan dimulai otomatis. Pendamping lobby memakai browser headless untuk menyiapkan kursi; saat pertandingan dimulai, koneksinya ditutup dan worker CPU Go mengambil alih. Sesudah pertandingan, pendamping kembali menyiapkan lobby. Ini fasilitas pengujian lokal; jalankan satu pendamping saja. Jika Chromium belum tersedia, jalankan `npx playwright install chromium` dari folder `client`. Kredensial peserta otomatis disimpan di `.local/cpu-room.json` dengan izin 0600 dan tidak ditampilkan.
+
 | Email | Password awal | Room awal |
 |---|---|---|
 | `naruto@example.test` | `NarutoDev!2026` | Host DEV Arena 1 - A |

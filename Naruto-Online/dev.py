@@ -39,6 +39,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--setup', action='store_true', help='Start Compose dependencies, install packages, migrate, and seed synthetic dev accounts.')
     parser.add_argument('--build', action='store_true', help='Serve the built frontend from Go on port 8080 instead of Vite 5173.')
+    parser.add_argument('--cpu-room', action='store_true', help='Keep room test ready for one player against the Go CPU.')
     args = parser.parse_args()
     for executable in ('go', 'npm'):
         if not shutil.which(executable):
@@ -87,6 +88,8 @@ def main():
         processes.append(subprocess.Popen([str(binary)], cwd=ROOT / 'server', env=env, start_new_session=os.name == 'posix'))
         if not args.build:
             processes.append(subprocess.Popen(['npm', 'run', 'dev'], cwd=ROOT / 'client', env=env, start_new_session=os.name == 'posix'))
+        if args.cpu_room:
+            processes.append(subprocess.Popen(['node', 'scripts/cpu-room.mjs', f'http://127.0.0.1:{8080 if args.build else 5173}'], cwd=ROOT / 'client', env=env, start_new_session=os.name == 'posix'))
         print(f"\nNaruto Online: http://127.0.0.1:{8080 if args.build else 5173}", flush=True)
         print('Email inbox: http://127.0.0.1:8025 · Ctrl+C stops API/frontend; Compose data is retained.', flush=True)
         while not stopping and all(process.poll() is None for process in processes):
