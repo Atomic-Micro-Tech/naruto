@@ -219,6 +219,15 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
   await touchWheel(250, 90);
   await page.waitForTimeout(100);
   expect(commands).toHaveLength(beforeTouch);
+  // Canceled and multi-touch gestures must never stop the wheel.
+  const wheelBox = await page.locator("#board canvas").boundingBox();
+  const touchPoint = (x, y, id) => ({ x: wheelBox.x + wheelBox.width * x / 320, y: wheelBox.y + wheelBox.height * y / 240, id });
+  await touchClient.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [touchPoint(90, 124, 1)] });
+  await touchClient.send("Input.dispatchTouchEvent", { type: "touchCancel", touchPoints: [] });
+  await touchClient.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [touchPoint(90, 124, 1), touchPoint(200, 100, 2)] });
+  await touchClient.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await page.waitForTimeout(50);
+  expect(commands).toHaveLength(beforeTouch);
   await swipe(90, 124, 125, 180);
   expect(commands).toHaveLength(beforeTouch);
   await expect(page.locator("#map-view")).toHaveText("Lihat peta");

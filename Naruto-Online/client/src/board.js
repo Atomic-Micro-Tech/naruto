@@ -209,7 +209,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         if (tap?.id !== pointer.id) return;
         gesture = null;
         if (
-          tap.dragged || !tap.action ||
+          pointer.wasCanceled || tap.dragged || !tap.action ||
           tap.matchId !== state?.id || tap.version !== state?.stateVersion ||
           performance.now() < animatingUntil
         ) return;
