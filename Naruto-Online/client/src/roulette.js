@@ -1,16 +1,7 @@
 // Render the extracted PS1 textured quads into a Phaser canvas texture.
 // Geometry/UV provenance: assets/sprite/common/assets.json, FUN_8001fd0c.
-export function drawRoulette(
-  ctx,
-  image,
-  geometry,
-  angle,
-  faces,
-  result = null,
-) {
-  ctx.clearRect(0, 0, 320, 240);
-  ctx.imageSmoothingEnabled = false;
-  const center = [40, 124];
+export function createRouletteRenderer(image, geometry) {
+  const center = [128, 128];
   const vertices = (array) =>
     Array.from({ length: array.length / 2 }, (_, i) => [
       array[i * 2],
@@ -21,10 +12,19 @@ export function drawRoulette(
       c = Math.cos(a),
       s = Math.sin(a);
     return points.map(([x, y]) => [
-      center[0] + ((x * c - y * s) * 575) / 512,
+      center[0] + x * c - y * s,
       center[1] + x * s + y * c,
     ]);
   };
+  let ctx;
+  function layer(draw) {
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 256;
+    ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
+    draw();
+    return canvas;
+  }
   function quad(key, points) {
     const texture = image(key),
       w = texture.width,
@@ -69,51 +69,94 @@ export function drawRoulette(
       ctx.restore();
     }
   }
-  const outer = [
-    ...rotate(vertices(geometry.outerVertices), angle + 511),
-    center,
-  ];
-  for (let j = 3; j >= 0; j--)
-    quad(
-      `roulette_quadrant_${j}`,
-      geometry.outerQuads[j].map((i) => outer[i]),
-    );
-  for (let j = 11; j >= 0; j--)
-    quad(
-      "roulette_rim",
-      rotate(vertices(geometry.rimVertices), angle + 341 + j * 341),
-    );
-  for (let j = 11; j >= 0; j--)
-    quad(
-      "roulette_spoke",
-      rotate(
-        vertices(geometry.spokeVertices).slice(0, 4),
-        angle + 511 + j * 341,
-      ),
-    );
-  for (let j = 11; j >= 0; j--) {
-    const value = faces[11 - j];
-    if (result === null || value === result)
+  const base = layer(() => {
+    const outer = [...rotate(vertices(geometry.outerVertices), 511), center];
+    for (let j = 3; j >= 0; j--)
       quad(
-        `roulette_number_${value}`,
-        rotate(
-          vertices(geometry.numberVertices).slice(0, 4),
-          angle + 341 + j * 341,
-        ),
+        `roulette_quadrant_${j}`,
+        geometry.outerQuads[j].map((i) => outer[i]),
       );
-  }
-  quad("roulette_center_shadow", rotate(vertices(geometry.centerVertices), 0));
-  quad(
-    "roulette_center",
-    rotate(vertices(geometry.centerVertices), (angle + 341) * 2),
+    for (let j = 11; j >= 0; j--)
+      quad(
+        "roulette_rim",
+        rotate(vertices(geometry.rimVertices), 341 + j * 341),
+      );
+    for (let j = 11; j >= 0; j--)
+      quad(
+        "roulette_spoke",
+        rotate(vertices(geometry.spokeVertices).slice(0, 4), 511 + j * 341),
+      );
+    quad(
+      "roulette_center_shadow",
+      rotate(vertices(geometry.centerVertices), 0),
+    );
+  });
+  const hub = layer(() =>
+    quad("roulette_center", rotate(vertices(geometry.centerVertices), 682)),
   );
-  ctx.drawImage(image("roulette_pointer"), 108, 116);
-  if (result !== null) {
-    ctx.fillStyle = "#122922";
-    ctx.fillRect(111, 108, 39, 33);
-    ctx.strokeStyle = "#ddb447";
-    ctx.lineWidth = 2;
-    ctx.strokeRect(111, 108, 39, 33);
-    ctx.drawImage(image(`roulette_number_${result}`), 118, 108);
+  const numbers = new Map();
+  function numberLayer(faces, selected) {
+    const key = faces.join(",") + ":" + selected;
+    if (!numbers.has(key)) {
+      if (numbers.size > 24) numbers.clear();
+      numbers.set(
+        key,
+        layer(() => {
+          for (let j = 11; j >= 0; j--)
+            if (selected === null || 11 - j === selected)
+              quad(
+                `roulette_number_${faces[11 - j]}`,
+                rotate(
+                  vertices(geometry.numberVertices).slice(0, 4),
+                  341 + j * 341,
+                ),
+              );
+        }),
+      );
+    }
+    return numbers.get(key);
   }
+  return (
+    output,
+    angle,
+    faces,
+    { result = null, index = null, jolt = 0, flash = 0 } = {},
+  ) => {
+    output.clearRect(0, 0, 320, 240);
+    output.imageSmoothingEnabled = false;
+    function paint(texture, rotation) {
+      output.save();
+      output.translate(40 + jolt, 124);
+      output.scale(575 / 512, 1);
+      output.rotate((rotation * Math.PI * 2) / 4096);
+      output.drawImage(texture, -128, -128);
+      output.restore();
+    }
+    paint(base, angle);
+    paint(numberLayer(faces, result === null ? null : index), angle);
+    paint(hub, angle * 2);
+    output.drawImage(image("roulette_pointer"), 108 + jolt / 2, 116);
+    if (flash > 0) {
+      output.save();
+      output.globalAlpha = flash * 0.65;
+      output.strokeStyle = "#fff3a0";
+      output.lineWidth = 2;
+      for (let i = 0; i < 7; i++) {
+        const a = (i * Math.PI * 2) / 7;
+        output.beginPath();
+        output.moveTo(137 + Math.cos(a) * 8, 124 + Math.sin(a) * 8);
+        output.lineTo(137 + Math.cos(a) * 23, 124 + Math.sin(a) * 23);
+        output.stroke();
+      }
+      output.restore();
+    }
+    if (result !== null) {
+      output.fillStyle = "#122922";
+      output.fillRect(111, 108, 39, 33);
+      output.strokeStyle = "#ddb447";
+      output.lineWidth = 2;
+      output.strokeRect(111, 108, 39, 33);
+      output.drawImage(image(`roulette_number_${result}`), 118, 108);
+    }
+  };
 }

@@ -2,7 +2,13 @@ import "./style.css";
 import { automaticAction, directionLabel } from "./presentation";
 import { api, setSession, Connection } from "./api";
 import { joinVoice, leaveVoice, muteVoice } from "./voice";
-import { toggleAudio, updateAudio, sound } from "./audio";
+import {
+  toggleAudio,
+  updateAudio,
+  sound,
+  stopGameAudio,
+  isAudioEnabled,
+} from "./audio";
 
 const $ = (id) => document.getElementById(id),
   names = ["Naruto", "Sasuke", "Sakura", "Kakashi"];
@@ -48,7 +54,7 @@ $("app").innerHTML = `
  <main>
  <section id="auth" class="auth-layout"><div class="intro"><p class="eyebrow">DESA KONOHA · PARTY MODE</p><h1>Satu papan.<br>Empat jalan<br><em>menjadi juara.</em></h1><p>Kumpulkan kristal, bangun penghalang, dan tantang temanmu dalam perebutan chakra.</p><div class="intro-characters">${names.map((n, i) => `<img src="${face(i)}" alt="${n}">`).join("")}</div><span class="small">2–4 pemain · sentuh untuk bermain · arena 1</span></div><div class="auth-card panel"><p class="eyebrow">SELAMAT DATANG, SHINOBI</p><h2 id="auth-title">Masuk ke desa</h2><form id="auth-form"><label id="name-label" hidden>Nama pemain<input name="displayName" maxlength="32" autocomplete="nickname"></label><label>Email<input name="email" type="email" required autocomplete="email" placeholder="nama@email.com"></label><label>Kata sandi<input name="password" type="password" minlength="12" maxlength="128" required autocomplete="current-password" placeholder="Minimal 12 karakter"></label><button class="primary" id="auth-submit">Masuk & bermain <span>→</span></button></form><button id="auth-toggle" class="text-button">Belum punya akun? Daftar</button><button id="forgot" class="text-button">Lupa kata sandi</button><p class="fine">Pengujian lokal. Akun dan pertandingan tersimpan di server.</p></div></section>
  <section id="lobby" hidden><div class="section-heading"><div><p class="eyebrow">TEMPAT BERKUMPUL</p><h1>Pilih perjalananmu.</h1></div><button id="refresh-rooms" class="quiet">↻ Muat ulang</button></div><div class="lobby-grid"><div><div class="list-heading"><h2>Room tersedia</h2><span class="pill">ARENA 1</span></div><div id="rooms" class="room-list"></div><form id="join-code" class="code-form panel"><label>Punya undangan?<input name="code" required maxlength="16" placeholder="Kode room privat"></label><button>Gabung</button></form></div><aside class="panel create-room"><img class="arena-preview" src="/assets/image/arena1/map_00.png" alt="Papan arena 1"><div class="create-content"><p class="eyebrow">MULAI BERSAMA TEMAN</p><h2>Buat room</h2><form id="create-room"><label>Nama room<input name="name" required maxlength="60" placeholder="Tim Konoha"></label><div class="form-row"><label>Arena<select name="arena" id="arena-list"></select></label><label>Pemain<select name="capacity"><option value="4">4 pemain</option><option value="3">3 pemain</option><option value="2">2 pemain</option></select></label></div><div class="form-row"><label>Target chakra<input name="target" type="number" min="0" max="99999" value="3000" required></label><label>Visibilitas<select name="visibility"><option value="public">Publik</option><option value="private">Privat</option></select></label></div><label class="check"><input name="voice" type="checkbox"> Aktifkan voice room</label><button class="primary">Buat room <span>+</span></button></form></div></aside></div></section>
- <section id="play" hidden><div class="game-heading"><div><p class="eyebrow" id="room-caption">ARENA 1</p><h1 id="room-name"></h1></div><div class="toolbar"><button id="music" class="quiet" aria-pressed="false">♫ Musik</button><button id="map-view" class="quiet">Lihat peta</button><button id="fullscreen" class="quiet">Layar penuh</button><button id="sync" class="quiet">↻ Sinkronkan</button><button id="leave" class="quiet">Keluar room</button></div></div><div class="game-layout"><div class="game-main"><div id="players" class="players"></div><div class="board-frame"><div id="board"></div><button id="stage-menu" class="quiet" aria-label="Pilihan layar game">☰</button><div class="board-label"><span>ARENA 01</span><span id="round">DESA KONOHA</span></div><div id="controls" class="panel controls"></div></div><details class="panel history"><summary>Catatan pertandingan</summary><ol id="game-log"></ol></details></div><aside class="social"><section id="waiting" class="panel"><p class="eyebrow">PERSIAPAN</p><h2>Pilih karaktermu</h2><div id="characters" class="characters">${names.map((n, i) => `<button data-character="${i}" aria-label="Pilih ${n}"><img src="${face(i)}" alt=""><span>${n}</span></button>`).join("")}</div><div id="invite"></div><button id="ready" class="primary" disabled>Memuat aset…</button><button id="start" class="primary" hidden>Mulai pertandingan →</button><p class="fine">Semua pemain harus terhubung dan siap. Minimal 2 pemain.</p></section><section class="panel chat-panel"><div class="list-heading"><h2>Obrolan room</h2><span class="live-dot"></span></div><div id="messages" class="messages" role="log" aria-live="polite"></div><form id="chat-form"><input name="text" aria-label="Pesan chat" maxlength="300" placeholder="Kirim pesan…" required autocomplete="off"><button aria-label="Kirim pesan">↑</button></form><div class="voice-controls"><button id="voice" class="quiet">♬ Gabung voice</button><button id="mute" class="quiet" hidden>Bisukan mic</button></div><p id="voice-note" class="fine">Mikrofon hanya aktif setelah kamu bergabung.</p></section><section class="panel guide"><p class="eyebrow">CARA BERMAIN</p><p>Putar roulette lalu pilih jalur. Ambil semua kristal dan kembali ke gerbang untuk bonus chakra.</p><p>Beli dan tingkatkan penghalang. Di wilayah lawan, bayar atau bertarung. Capai target saat kembali ke gerbang untuk menang.</p><span class="fine">CPU akan mengambil alih jika koneksi terputus atau giliran dibiarkan selama 2 menit.</span></section></aside></div></section>
+ <section id="play" hidden><div class="game-heading"><div><p class="eyebrow" id="room-caption">ARENA 1</p><h1 id="room-name"></h1></div><div class="toolbar"><button id="music" class="quiet" aria-pressed="true">♫ Suara aktif</button><button id="map-view" class="quiet">Lihat peta</button><button id="fullscreen" class="quiet">Layar penuh</button><button id="sync" class="quiet">↻ Sinkronkan</button><button id="leave" class="quiet">Keluar room</button></div></div><div class="game-layout"><div class="game-main"><div id="players" class="players"></div><div class="board-frame"><div id="board"></div><button id="stage-menu" class="quiet" aria-label="Pilihan layar game">☰</button><div class="board-label"><span>ARENA 01</span><span id="round">DESA KONOHA</span></div><div id="controls" class="panel controls"></div></div><details class="panel history"><summary>Catatan pertandingan</summary><ol id="game-log"></ol></details></div><aside class="social"><section id="waiting" class="panel"><p class="eyebrow">PERSIAPAN</p><h2>Pilih karaktermu</h2><div id="characters" class="characters">${names.map((n, i) => `<button data-character="${i}" aria-label="Pilih ${n}"><img src="${face(i)}" alt=""><span>${n}</span></button>`).join("")}</div><div id="invite"></div><button id="ready" class="primary" disabled>Memuat aset…</button><button id="start" class="primary" hidden>Mulai pertandingan →</button><p class="fine">Semua pemain harus terhubung dan siap. Minimal 2 pemain.</p></section><section class="panel chat-panel"><div class="list-heading"><h2>Obrolan room</h2><span class="live-dot"></span></div><div id="messages" class="messages" role="log" aria-live="polite"></div><form id="chat-form"><input name="text" aria-label="Pesan chat" maxlength="300" placeholder="Kirim pesan…" required autocomplete="off"><button aria-label="Kirim pesan">↑</button></form><div class="voice-controls"><button id="voice" class="quiet">♬ Gabung voice</button><button id="mute" class="quiet" hidden>Bisukan mic</button></div><p id="voice-note" class="fine">Mikrofon hanya aktif setelah kamu bergabung.</p></section><section class="panel guide"><p class="eyebrow">CARA BERMAIN</p><p>Putar roulette lalu pilih jalur. Ambil semua kristal dan kembali ke gerbang untuk bonus chakra.</p><p>Beli dan tingkatkan penghalang. Di wilayah lawan, bayar atau bertarung. Capai target saat kembali ke gerbang untuk menang.</p><span class="fine">CPU akan mengambil alih jika koneksi terputus atau giliran dibiarkan selama 2 menit.</span></section></aside></div></section>
  </main><footer>LOCAL PLAYTEST <span>·</span> PHASER 3 <span>·</span> ARENA 1</footer>`;
 
 let authMode = "login";
@@ -72,6 +78,10 @@ async function attempt(fn) {
   }
 }
 function view(id) {
+  if (id !== "play") {
+    board?.setState(null);
+    stopGameAudio();
+  }
   document.body.classList.toggle("in-game", id === "play" && !!match);
   for (const key of ["auth", "lobby", "play"]) $(key).hidden = key !== id;
   requestAnimationFrame(() => board?.resize());
@@ -508,6 +518,7 @@ function renderMatch() {
       lastMatchID = match.id;
       match = null;
       board?.setState(null);
+      stopGameAudio();
       renderRoom();
     };
     return;
@@ -562,6 +573,7 @@ function renderMatch() {
     .forEach(
       (b) =>
         (b.onclick = () => {
+          sound("cursor");
           selectedChance = +b.dataset.cardChoice;
           renderMatch();
         }),
@@ -675,9 +687,17 @@ $("mute").onclick = () =>
     muted = !muted;
     renderVoice();
   });
+function renderAudioButton() {
+  const enabled = isAudioEnabled();
+  $("music").setAttribute("aria-pressed", String(enabled));
+  $("music").textContent = enabled ? "♫ Suara aktif" : "♫ Suara mati";
+}
+document.addEventListener("game-audio-change", renderAudioButton);
+renderAudioButton();
 $("music").onclick = () =>
   attempt(async () => {
-    $("music").setAttribute("aria-pressed", String(await toggleAudio(match)));
+    await toggleAudio(match);
+    renderAudioButton();
   });
 
 async function boot() {

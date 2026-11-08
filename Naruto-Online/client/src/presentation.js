@@ -42,6 +42,63 @@ export function wheelAngle(snapshot, elapsedMS) {
   const wheel = snapshot.roulette;
   const ticks =
     Math.max(0, snapshot.serverTick - wheel.startedAtTick) +
-    Math.floor((Math.max(0, elapsedMS) * 60) / 1000);
-  return (wheel.angle + ticks * 180) & 4095;
+    (Math.max(0, elapsedMS) * 60) / 1000;
+  return (wheel.angle + ticks * 180) % 4096;
+}
+
+// Presentation interpolation only: the server supplies the result. Match the
+// incoming angular velocity, decelerate to zero, then preserve the native
+// three-impact spacing, one-second result hold and eight-frame exit.
+export function rouletteStopPlan(angle, faces, result) {
+  const speed = (180 * 60) / 1000,
+    preferredDistance = (speed * 280) / 2;
+  const candidates = [];
+  faces.forEach((face, index) => {
+    if (result !== null && face !== result) return;
+    const target = index * 341 + 4;
+    const forward = (((target - angle) % 4096) + 4096) % 4096;
+    for (const distance of [forward, forward + 4096])
+      if (distance >= (speed * 90) / 2)
+        candidates.push({ target: angle + distance, distance, index });
+  });
+  if (!candidates.length)
+    throw new Error("Roulette result is not present on this wheel");
+  candidates.sort(
+    (a, b) =>
+      Math.abs(a.distance - preferredDistance) -
+      Math.abs(b.distance - preferredDistance),
+  );
+  const chosen = candidates[0],
+    duration = (2 * chosen.distance) / speed;
+  return {
+    angle,
+    ...chosen,
+    duration,
+    impacts: [duration - 1000 / 30, duration, duration + 1000 / 30],
+    exitAt: duration + 1000 / 30 + 1000,
+    endAt: duration + 1000 / 30 + 1000 + 8000 / 60,
+  };
+}
+
+export function rouletteStopFrame(plan, elapsed) {
+  const t = Math.max(0, Math.min(1, elapsed / plan.duration));
+  let jolt = 0,
+    flash = 0;
+  for (const impact of plan.impacts) {
+    const age = elapsed - impact;
+    if (age >= 0 && age < 140) {
+      jolt += Math.sin(age / 14) * Math.exp(-age / 38) * 2;
+      flash = Math.max(flash, 1 - age / 90);
+    }
+  }
+  return {
+    angle: plan.angle + plan.distance * (2 * t - t * t),
+    frozen: t === 1,
+    jolt,
+    flash: Math.max(0, flash),
+    exit: Math.max(
+      0,
+      Math.min(1, (elapsed - plan.exitAt) / (plan.endAt - plan.exitAt)),
+    ),
+  };
 }

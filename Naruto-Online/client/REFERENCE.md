@@ -22,6 +22,10 @@ Referensi lokal: `../../naruto_basic.mp4`, durasi 36,67 detik, 854×480/30 fps. 
 
 ## Batas bukti
 
+Roulette memakai interpolasi waktu kontinu, cache lapisan tekstur, dan pengereman yang mempertahankan kecepatan awal lalu melambat tanpa melewati hasil server. Efek WAV asli: menu SEQ3 berulang (periode 0,1 detik dari render-report), SEQ4 untuk stop, SEQ5 untuk tiga benturan berjarak 2/60 detik. Benturan kedua selaras dengan roda berhenti; hasil ditahan satu detik setelah benturan ketiga. Durasi pengereman adalah adaptasi presentasi untuk menyelaraskan hasil server, bukan replay timing PS1 yang identik. Tidak ditambahkan jingle hasil yang tidak terbukti dari sumber. Musik dikecilkan selama roulette agar efek terdengar.
+
+Suara aktif setelah interaksi pengguna pertama sesuai kebijakan browser. Tombol **Suara aktif/mati** mengatur musik dan efek sekaligus serta menyimpan preferensi lokal. Loop/efek terjadwal dibatalkan saat mute, tab tersembunyi, logout, atau keluar room. Efek roulette juga mengikuti giliran CPU/lawan; jeda/timing jaringan dan pemrosesan audio browser tetap berbeda dari perangkat PS1.
+
 Ini penyesuaian presentasi terhadap adegan yang terlihat, bukan klaim replika frame-per-frame. Dialog/portrait cerita, panel misi, efek segel pembelian, transisi kartu tertutup, audio per-frame dan semua animasi battle belum direplikasi dari cuplikan ini. Video tidak memperlihatkan battle, hasil akhir, atau seluruh aturan Party. Konfigurasi room dan aturan Go tetap menjadi sumber kebenaran; posisi atau hasil dari video tidak di-hardcode.
 
 `src/native-camera.js` disalin dari `research/board-camera.mjs` beserta sumber fungsi di komentarnya. Geometri roulette berasal dari `assets/sprite/common/assets.json`; semua PNG/WAV tetap dimuat dari library aset yang sama. Tidak ada library aset duplikat.

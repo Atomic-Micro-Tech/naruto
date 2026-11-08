@@ -5,6 +5,32 @@ import { execute } from "../../server/internal/game/source/online.js";
 test("reference presentation: roulette, direction, three cards, purchase and mobile landscape", async ({
   page,
 }) => {
+  await page.addInitScript(() => {
+    window.__rouletteAudio = [];
+    const start = AudioBufferSourceNode.prototype.start,
+      stop = AudioBufferSourceNode.prototype.stop;
+    let next = 0;
+    AudioBufferSourceNode.prototype.start = function (when = 0, ...args) {
+      this.testID = ++next;
+      const samples = this.buffer?.getChannelData(0) ?? [];
+      let peak = 0;
+      for (const v of samples) peak = Math.max(peak, Math.abs(v));
+      window.__rouletteAudio.push({
+        kind: "start",
+        id: this.testID,
+        loop: this.loop,
+        loopEnd: this.loopEnd,
+        duration: this.buffer?.duration,
+        when,
+        peak,
+      });
+      return start.call(this, when, ...args);
+    };
+    AudioBufferSourceNode.prototype.stop = function (when = 0) {
+      window.__rouletteAudio.push({ kind: "stop", id: this.testID, when });
+      return stop.call(this, when);
+    };
+  });
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   page.on("response", (r) => {
@@ -125,6 +151,9 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
   await page
     .locator(".board-frame")
     .screenshot({ path: "test-results/reference-board.png" });
+  // A normal game gesture unlocks the original WAV effects without a separate music click.
+  await page.locator("#map-view").click();
+  await page.locator("#map-view").click();
   engine = execute({
     mode: "command",
     state: engine.engine,
@@ -139,6 +168,29 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
     .locator(".board-frame")
     .screenshot({ path: "test-results/reference-roulette.png" });
   await expect(page.locator('[data-option="stop"]')).toBeEnabled();
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          window.__rouletteAudio.filter((e) => e.kind === "start" && e.loop)
+            .length,
+      ),
+    )
+    .toBe(1);
+  await page.locator("#music").click();
+  await expect(page.locator("#music")).toHaveAttribute("aria-pressed", "false");
+  await page.locator("#music").click();
+  await expect(page.locator("#music")).toHaveAttribute("aria-pressed", "true");
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          window.__rouletteAudio.filter((e) => e.kind === "start" && e.loop)
+            .length,
+      ),
+    )
+    .toBe(2);
+
   await page.locator('[data-option="stop"]').click();
   expect(commands.at(-1).payload.action.payload.optionId).toBe("stop");
   // A branch must wait for the player, a single direction must advance on its own.
@@ -161,7 +213,17 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
     },
   ];
   await send(movement);
-  await page.waitForTimeout(1100);
+  await expect(page.locator("#play")).not.toHaveClass(/presenting/);
+  const audioEvents = await page.evaluate(() => window.__rouletteAudio);
+  const hits = audioEvents.filter(
+    (e) => e.kind === "start" && Math.abs(e.duration - 0.27743764) < 0.001,
+  );
+  expect(hits).toHaveLength(3);
+  expect(hits[1].when - hits[0].when).toBeCloseTo(1 / 30, 4);
+  expect(hits[2].when - hits[1].when).toBeCloseTo(1 / 30, 4);
+  expect(
+    audioEvents.filter((e) => e.kind === "start").every((e) => e.peak > 0.01),
+  ).toBe(true);
   const branchCount = commands.length;
   await page.waitForTimeout(250);
   expect(commands).toHaveLength(branchCount);
@@ -237,5 +299,42 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
       () => document.documentElement.scrollWidth > innerWidth,
     ),
   ).toBe(false);
+  await page.setViewportSize({ width: 1280, height: 900 });
+  // Spectators also hear the CPU/opponent wheel; leaving must cancel its loop.
+  const opponent = structuredClone(engine);
+  opponent.public.roulette.actorSeat = 1;
+  opponent.public.presentation.actorSeat = 1;
+  opponent.allowedBySeat[0] = [];
+  const beforeLoop = await page.evaluate(
+    () =>
+      window.__rouletteAudio.filter((e) => e.kind === "start" && e.loop).length,
+  );
+  await send(opponent);
+  await expect
+    .poll(() =>
+      page.evaluate(
+        () =>
+          window.__rouletteAudio.filter((e) => e.kind === "start" && e.loop)
+            .length,
+      ),
+    )
+    .toBe(beforeLoop + 1);
+  const loopID = await page.evaluate(
+    () =>
+      window.__rouletteAudio.filter((e) => e.kind === "start" && e.loop).at(-1)
+        .id,
+  );
+  await page.locator("#logout").click();
+  await expect(page.locator("#auth")).toBeVisible();
+  expect(
+    await page.evaluate(
+      (id) =>
+        window.__rouletteAudio.some((e) => e.kind === "stop" && e.id === id),
+      loopID,
+    ),
+  ).toBe(true);
+  const count = await page.evaluate(() => window.__rouletteAudio.length);
+  await page.waitForTimeout(150);
+  expect(await page.evaluate(() => window.__rouletteAudio.length)).toBe(count);
   expect(errors).toEqual([]);
 });

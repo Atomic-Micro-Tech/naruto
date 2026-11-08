@@ -7,8 +7,13 @@ import {
   boardWalkPlan,
   boardHudPositions,
 } from "./native-camera";
-import { drawRoulette } from "./roulette";
-import { wheelAngle } from "./presentation";
+import { createRouletteRenderer } from "./roulette";
+import { updateRouletteAudio } from "./audio";
+import {
+  wheelAngle,
+  rouletteStopPlan,
+  rouletteStopFrame,
+} from "./presentation";
 
 export async function createBoard(parent, onTile) {
   const response = await fetch(
@@ -36,7 +41,10 @@ export async function createBoard(parent, onTile) {
     heldWheel = null,
     wheelUntil = 0,
     wheelEnteredAt = 0,
-    uiCamera;
+    uiCamera,
+    renderWheel,
+    displayedAngle = 0,
+    angleCorrection = 0;
   const ready = new Promise((resolve, reject) => {
     readyResolve = resolve;
     readyReject = reject;
@@ -119,6 +127,10 @@ export async function createBoard(parent, onTile) {
         .setDepth(2000)
         .setVisible(false);
       wheelTexture = this.textures.createCanvas("wheel-live", 320, 240);
+      renderWheel = createRouletteRenderer(
+        (key) => this.textures.get(key).getSourceImage(),
+        common.rouletteGeometry,
+      );
       wheelImage = this.add
         .image(0, 0, "wheel-live")
         .setOrigin(0)
@@ -144,26 +156,34 @@ export async function createBoard(parent, onTile) {
       wheelImage.setVisible(!!wheel);
       if (wheel) {
         const settling = !state?.roulette;
-        const progress = settling
-          ? Math.min(1, (now - heldWheel.stoppedAt) / 500)
-          : 0;
+        const frame = settling
+          ? rouletteStopFrame(heldWheel.plan, now - heldWheel.stoppedAt)
+          : null;
         const angle = settling
-          ? heldWheel.displayAngle +
-            heldWheel.travel * (1 - (1 - progress) ** 3)
-          : wheelAngle(state, now - receivedAt);
-        const entry = Math.min(1, (now - wheelEnteredAt) / 180);
-        const exit = settling ? Math.max(0, 1 - (wheelUntil - now) / 180) : 0;
-        wheelImage.setX(-180 * ((1 - entry) ** 2 + exit ** 2));
-        drawRoulette(
-          wheelTexture.context,
-          (key) => this.textures.get(key).getSourceImage(),
-          common.rouletteGeometry,
-          angle,
-          wheel.faces,
-          settling && progress === 1 ? heldWheel.result : null,
+          ? frame.angle
+          : wheelAngle(state, now - receivedAt) +
+            angleCorrection * Math.exp(-(now - receivedAt) / 120);
+        displayedAngle = ((angle % 4096) + 4096) % 4096;
+        const entry = Math.min(1, (now - wheelEnteredAt) / 240);
+        wheelImage.setX(-180 * ((1 - entry) ** 3 + (frame?.exit ?? 0) ** 2));
+        renderWheel(wheelTexture.context, angle, wheel.faces, {
+          result: frame?.frozen ? heldWheel.result : null,
+          index: heldWheel?.plan?.index ?? null,
+          jolt: frame?.jolt ?? 0,
+          flash: frame?.flash ?? 0,
+        });
+        updateRouletteAudio(
+          settling
+            ? {
+                key: heldWheel.audioKey,
+                stoppingAt: heldWheel.stoppedAt,
+                impacts: heldWheel.plan.impacts,
+              }
+            : { key: `${state.id}:${state.roulette.id}` },
         );
         wheelTexture.refresh();
       }
+      if (!wheel) updateRouletteAudio(null);
       for (const item of hud)
         item.setVisible(
           !wheel && !["chance", "discard"].includes(state?.presentation?.phase),
@@ -501,24 +521,36 @@ export async function createBoard(parent, onTile) {
   await ready;
   return {
     setState(value) {
-      if (value?.roulette?.id !== state?.roulette?.id && value?.roulette)
-        wheelEnteredAt = performance.now();
+      const now = performance.now();
+      if (value?.roulette) {
+        if (value.roulette.id !== state?.roulette?.id) {
+          wheelEnteredAt = now;
+          angleCorrection = 0;
+        } else {
+          const next = wheelAngle(value, 0);
+          angleCorrection = ((displayedAngle - next + 6144) % 4096) - 2048;
+        }
+      }
       if (state?.roulette && !value?.roulette && value?.id === state.id) {
+        const result =
+          state.roulette.kind === "movement" &&
+          value.presentation?.phase === "move" &&
+          state.roulette.faces.includes(value.presentation.lastRoll)
+            ? value.presentation.lastRoll
+            : null;
+        const plan = rouletteStopPlan(
+          displayedAngle,
+          state.roulette.faces,
+          result,
+        );
         heldWheel = {
           ...state.roulette,
-          displayAngle: wheelAngle(state, performance.now() - receivedAt),
-          result:
-            state.roulette.kind === "movement"
-              ? value.presentation?.lastRoll
-              : null,
-          stoppedAt: performance.now(),
+          audioKey: `${state.id}:${state.roulette.id}`,
+          result,
+          stoppedAt: now,
+          plan,
         };
-        const faceIndex = heldWheel.faces.indexOf(heldWheel.result);
-        const target =
-          faceIndex < 0 ? heldWheel.displayAngle : faceIndex * 341 + 4;
-        heldWheel.travel =
-          ((target - heldWheel.displayAngle + 4096) & 4095) + 4096;
-        wheelUntil = performance.now() + 1100;
+        wheelUntil = now + plan.endAt;
         animatingUntil = Math.max(animatingUntil, wheelUntil);
       }
       if (!value || value.id !== state?.id) {
@@ -526,6 +558,7 @@ export async function createBoard(parent, onTile) {
         wheelUntil = 0;
         animatingUntil = 0;
         previousTurn = null;
+        updateRouletteAudio(null);
       }
       receivedAt = performance.now();
       state = value;
@@ -545,6 +578,7 @@ export async function createBoard(parent, onTile) {
       game.scale.refresh();
     },
     destroy() {
+      updateRouletteAudio(null);
       game.destroy(true);
     },
   };
