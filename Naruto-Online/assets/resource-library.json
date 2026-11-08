@@ -4,9 +4,9 @@
   "identity": "SHA-256 of exported bytes + file extension; resource ID alone is not an asset identity",
   "resourceIdsMeaning": "Original resource dependencies/references; does not imply entire resource was exported",
   "arenaIdsMeaning": "Arena export packages referencing this file, not proof of runtime use in every match",
-  "fileCount": 1557,
-  "assetCount": 1319,
-  "resourceCount": 249,
+  "fileCount": 1559,
+  "assetCount": 1321,
+  "resourceCount": 250,
   "duplicateFileCount": 238,
   "files": {
     "audio/music/music-10_seq_000.wav": {
@@ -16410,6 +16410,18 @@
         1
       ]
     },
+    "sprite/effects/seal.json": {
+      "path": "sprite/effects/seal.json",
+      "source": "extracted/disc/DATA.BIN#resource=649",
+      "bytes": 139651,
+      "sha256": "d4e7b2a44c1eeb02bbb73281bf4655143a10735ffbf824e3e8cccc94b1578afe",
+      "resourceIds": [
+        649
+      ],
+      "arenaIds": [
+        1
+      ]
+    },
     "sprite/hud/chakra_change_glow_0.png": {
       "path": "sprite/hud/chakra_change_glow_0.png",
       "source": "extracted/original-ui/hud/chakra_change_glow_0.png",
@@ -16621,6 +16633,18 @@
       "sha256": "be10f3a51c1b4a4c8eb22cf639c89d293e5c0094d178a29eee3dbe77e5ae3ab4",
       "resourceIds": [
         38
+      ],
+      "arenaIds": [
+        1
+      ]
+    },
+    "texture/effects/seal.png": {
+      "path": "texture/effects/seal.png",
+      "source": "extracted/disc/DATA.BIN#resource=649",
+      "bytes": 9458,
+      "sha256": "954c992c1b3060aa5329570aff19b23672c33a178bff6b3c5dd6ce8842dcf590",
+      "resourceIds": [
+        649
       ],
       "arenaIds": [
         1
@@ -20654,6 +20678,20 @@
         769,
         770,
         771
+      ],
+      "arenaIds": [
+        1
+      ]
+    },
+    "path:sprite/effects/seal.json": {
+      "canonicalPath": "sprite/effects/seal.json",
+      "existingPaths": [
+        "sprite/effects/seal.json"
+      ],
+      "reusable": false,
+      "sha256": "d4e7b2a44c1eeb02bbb73281bf4655143a10735ffbf824e3e8cccc94b1578afe",
+      "resourceIds": [
+        649
       ],
       "arenaIds": [
         1
@@ -31580,6 +31618,20 @@
         1
       ]
     },
+    "sha256:954c992c1b3060aa5329570aff19b23672c33a178bff6b3c5dd6ce8842dcf590:png": {
+      "canonicalPath": "texture/effects/seal.png",
+      "existingPaths": [
+        "texture/effects/seal.png"
+      ],
+      "reusable": true,
+      "sha256": "954c992c1b3060aa5329570aff19b23672c33a178bff6b3c5dd6ce8842dcf590",
+      "resourceIds": [
+        649
+      ],
+      "arenaIds": [
+        1
+      ]
+    },
     "sha256:95956903a099ff10ba26402aa746adbc6b7c062117ea7acb82bd1eff1d158254:png": {
       "canonicalPath": "sprite/common/roulette_number_12.png",
       "existingPaths": [
@@ -40708,6 +40760,17 @@
       "container": "extracted/disc/DATA.BIN",
       "paths": [
         "image/arena1/map_00.json"
+      ]
+    },
+    "649": {
+      "id": 649,
+      "lba": 13765,
+      "offset": 27756544,
+      "size": 45328,
+      "magic": "504b30320200000042494e30",
+      "paths": [
+        "sprite/effects/seal.json",
+        "texture/effects/seal.png"
       ]
     },
     "681": {

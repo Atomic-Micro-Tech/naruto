@@ -10,7 +10,7 @@ Referensi lokal: `../../naruto_basic.mp4`, durasi 36,67 detik, 854×480/30 fps. 
 | 00:14–00:16 | Pilihan arah, jalan beberapa petak | Panah dan tombol arah; jalur tunggal berjalan otomatis melalui command server per petak |
 | 00:16–00:20 | Tiga kartu, sorotan pilihan, deskripsi, konfirmasi | Artwork PNG tiga kartu, pilih lalu konfirmasi; ID kartu hanya dikirim kepada peserta yang berhak memilih |
 | 00:21–00:30 | Giliran berikutnya, roulette, pilihan arah | Akhir giliran otomatis setelah jeda; roulette dan rute tetap dipilih manusia |
-| 00:31–00:36 | Biaya petak, pilihan pembelian, penghalang muncul | Harga pada papan, konfirmasi pembelian dan sprite penghalang dari hasil transaksi server |
+| 00:31–00:36 | Biaya petak, segel, penghalang muncul | Konfirmasi server, pose segel, aksara dan lingkaran asli, penghalang muncul pada langkah animasi 39 |
 
 ## Kontrol
 
@@ -32,7 +32,11 @@ Tiga shuriken terbang dari kanan dan menancap bergantian, memakai jadwal bentura
 
 Suara aktif setelah interaksi pengguna pertama sesuai kebijakan browser. Tombol **Suara aktif/mati** mengatur musik dan efek sekaligus serta menyimpan preferensi lokal. Loop/efek terjadwal dibatalkan saat mute, tab tersembunyi, logout, atau keluar room. Efek roulette juga mengikuti giliran CPU/lawan; jeda/timing jaringan dan pemrosesan audio browser tetap berbeda dari perangkat PS1.
 
-Ini penyesuaian presentasi terhadap adegan yang terlihat, bukan klaim replika frame-per-frame. Dialog/portrait cerita, panel misi, efek segel pembelian, transisi kartu tertutup, audio per-frame dan semua animasi battle belum direplikasi dari cuplikan ini. Video tidak memperlihatkan battle, hasil akhir, atau seluruh aturan Party. Konfigurasi room dan aturan Go tetap menjadi sumber kebenaran; posisi atau hasil dari video tidak di-hardcode.
+Segel pembelian memakai resource 649 (`648 + effectId 1`, `FUN_80116ae8`), 65 komposisi sprite dalam 51 langkah, beserta pose karakter animasi 7 dan WAV `board_seq_037` (`FUN_800c5978`, case 1). `scripts/extract_board_seal.py` mengekspor satu atlas PNG dan metadata transformasi, mencatat hash/resource dalam manifest dan library untuk digunakan kembali oleh arena lain. Sprite memakai posisi, rotasi dan skala bertanda asli dengan pusat transformasi dari `FUN_800227f0`. Penghalang ditampilkan pada cursor urutan 39, sesuai `80022464` (membaca offset `+0x2e`) dan pemeriksaan `0x27..0x29` di BOARD. Kecepatan presentasi 30 langkah/detik mengikuti video: muncul pada 1,3 detik, selesai pada 1,7 detik. Blending Phaser mendekati mode tambah/¼ tambah PS1; bukan emulasi framebuffer 15-bit.
+
+Segel hanya dipicu oleh perubahan kepemilikan petak kosong pada snapshot server yang lebih baru dalam pertandingan yang sama. Snapshot awal, pembelian ditolak, snapshot berulang, dan upgrade tidak memicu ulang segel pembelian. Efek mengikuti koordinat dunia/kamera; akhir giliran otomatis menunggu animasi selesai. Keluar pertandingan membersihkan efek.
+
+Ini penyesuaian presentasi terhadap adegan yang terlihat, bukan klaim replika frame-per-frame. Dialog/portrait cerita, panel misi, transisi kartu tertutup, audio per-frame dan semua animasi battle belum direplikasi dari cuplikan ini. Video tidak memperlihatkan battle, hasil akhir, atau seluruh aturan Party. Konfigurasi room dan aturan Go tetap menjadi sumber kebenaran; posisi atau hasil dari video tidak di-hardcode.
 
 `src/native-camera.js` disalin dari `research/board-camera.mjs` beserta sumber fungsi di komentarnya. Geometri roulette berasal dari `assets/sprite/common/assets.json`; semua PNG/WAV tetap dimuat dari library aset yang sama. Tidak ada library aset duplikat.
 
@@ -43,5 +47,7 @@ Sprite arah biru asli: `FUN_800bb5d8`, UV (80,176)/(104,176), 24×24, CLUT (112,
 Checkpoint memakai dua sprite asli dari `FUN_800f6988`: `crystal_N.png` untuk alas dan `crystal_N_overlay.png` untuk bola, keduanya 32×32 dengan anchor (16,16) pada posisi petak. Arena 1 memakai checkpoint merah pada petak 11 dan biru pada petak 17 (ID internal); PNG dimuat dari library yang sudah ada tanpa salinan baru.
 
 ## Verifikasi
+
+`tests/seal.test.mjs` memeriksa pemicu transaksi dan batas waktu cursor asli. Skenario pembelian di `tests/reference.spec.js` memeriksa segel saat bermain, tidak ada akhir giliran selama efek, snapshot kepemilikan berulang, dan kelanjutan giliran sesudah efek. Screenshot `reference-seal.png` dan `reference-seal-reveal.png` dipakai untuk inspeksi visual terhadap cuplikan video.
 
 `tests/reference.spec.js` memakai transport sintetis untuk memeriksa sentuhan roda pada viewport ponsel, penolakan input roda lawan, geser kamera melalui touch event asli di viewport ponsel, batas arena, HUD tetap diam, kembali mengikuti karakter, pembatalan/multitouch tanpa aksi, tiga suara benturan dan tampilan shuriken, roulette, percabangan yang harus menunggu, langkah tunggal otomatis, pilihan tiga kartu, pembelian yang tidak otomatis, serta layout portrait/landscape. `tests/gameplay.spec.js` tetap menguji browser dengan backend Go/PostgreSQL nyata. `tests/roulette-render.spec.js` memeriksa piksel atlas asli selama fade: sektor terpilih tidak berubah, angka lain memudar, dan tidak ada pop saat roda berhenti. `tests/presentation.test.mjs` mengunci batas aksi otomatis agar perubahan tampilan tidak mengambil keputusan pemain.

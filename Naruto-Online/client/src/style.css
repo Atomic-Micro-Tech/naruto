@@ -1153,7 +1153,8 @@ body:not(.in-game) .board-frame > .controls {
 .in-game [data-phase="move"] .controls .eyebrow {
   display: none;
 }
-.in-game [data-phase="move"].presenting .controls {
+.in-game [data-phase="move"].presenting .controls,
+.in-game [data-phase="end"].presenting .controls {
   opacity: 0;
   pointer-events: none;
 }

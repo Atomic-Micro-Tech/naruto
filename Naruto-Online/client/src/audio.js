@@ -135,7 +135,9 @@ export function sound(name) {
   // Stop/impacts follow the actual presentation, also for CPU/opponent turns.
   if (name === "stop") return;
   const path =
-    name === "step"
+    name === "seal"
+      ? "board_seq_037"
+      : name === "step"
       ? "board_seq_008"
       : name === "cursor"
         ? "menu_seq_002"

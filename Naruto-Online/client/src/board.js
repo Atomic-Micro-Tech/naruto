@@ -10,7 +10,8 @@ import {
   boardHudPositions,
 } from "./native-camera";
 import { createRouletteRenderer } from "./roulette";
-import { updateRouletteAudio } from "./audio";
+import { updateRouletteAudio, sound } from "./audio";
+import { purchasedTiles, sealFrame } from "./seal";
 import { SHURIKEN_ATLAS, shurikenFrames } from "./roulette-shuriken";
 import {
   directionIndicator,
@@ -31,6 +32,10 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
   const commonResponse = await fetch("/assets/sprite/common/assets.json");
   if (!commonResponse.ok) throw new Error("Metadata UI tidak tersedia.");
   const common = await commonResponse.json();
+  const sealResponse = await fetch("/assets/sprite/effects/seal.json");
+  if (!sealResponse.ok) throw new Error("Animasi segel tidak tersedia.");
+  const sealData = await sealResponse.json();
+  const seals = new Map();
   let scene, readyResolve, readyReject;
   let camera = createBoardCamera({ width: 640, height: 480 }),
     cameraClock = 0;
@@ -92,6 +97,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         readyReject(new Error(`Aset gagal dimuat: ${file.key}`)),
       );
       this.load.image("movement-atlas", MOVEMENT_ATLAS);
+      this.load.image("seal-atlas", sealData.atlas);
       this.load.image("arena", "/assets/image/arena1/map_00.png");
       this.load.image("roulette-shuriken-atlas", SHURIKEN_ATLAS);
       for (const a of common.assets.filter(
@@ -145,7 +151,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
           );
       for (const character of metadata.characters.filter((c) => c.id < 4)) {
         for (const anim of character.animations.filter((a) =>
-          [9, 10, 11, 12, 22].includes(a.id),
+          [7, 9, 10, 11, 12, 22].includes(a.id),
         ))
           this.load.spritesheet(
             `actor-${character.id}-${anim.id}`,
@@ -156,6 +162,11 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
     }
     create() {
       scene = this;
+      const sealAtlas = this.textures.get("seal-atlas");
+      for (const frame of sealData.frames) for (const s of frame) {
+        const key = `${s.u}:${s.v}:${s.width}:${s.height}`;
+        if (!sealAtlas.has(key)) sealAtlas.add(key, 0, s.u, s.v, s.width, s.height);
+      }
       for (const [key, canvas] of Object.entries(createMovementSprites(this.textures.get("movement-atlas").getSourceImage())))
         this.textures.addCanvas(key, canvas);
       this.add.image(320, 240, "arena");
@@ -239,6 +250,30 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
     }
     update(_, delta) {
       const now = performance.now();
+      let redraw = false;
+      for (const [id, seal] of seals) {
+        const frame = sealFrame(sealData, now - seal.startedAt);
+        const sprites = [...sealData.frames[frame.frame]].reverse();
+        for (const [i, image] of seal.images.entries()) {
+          const s = sprites[i];
+          image.setVisible(!frame.done && !!s);
+          if (!s) continue;
+          image.setTexture("seal-atlas", `${s.u}:${s.v}:${s.width}:${s.height}`)
+            .setPosition(seal.x + frame.offsetX + s.x + s.width / 2,
+              seal.y + frame.offsetY + s.y + s.height / 2)
+            .setScale(s.scaleX / 4096, s.scaleY / 4096)
+            .setRotation(s.rotation * Math.PI * 2 / 4096)
+            .setBlendMode(s.translucent ? Phaser.BlendModes.ADD : Phaser.BlendModes.NORMAL)
+            .setAlpha(s.translucent && s.blend === 3 ? 0.25 : 1);
+        }
+        if (seal.revealed !== frame.revealed) { seal.revealed = frame.revealed; redraw = true; }
+        if (frame.done) {
+          seal.images.forEach(image => image.destroy());
+          seals.delete(id);
+          redraw = true;
+        }
+      }
+      if (redraw) draw();
       cameraClock += Math.min(delta, 100);
       while (cameraClock >= 1000 / 60) {
         camera = stepCameraPan(camera);
@@ -308,6 +343,13 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
             : uiCamera.id;
 
       for (const actor of actors) {
+        const sealing = [...seals.values()].some(s => s.seat === actor.seat && s.tile === actor.tile);
+        if ((sealing && actor.animation === 22) || (!sealing && actor.animation === 7)) {
+          actor.animation = sealing ? 7 : 22;
+          actor.frame = 0;
+          actor.counter = 0;
+          actor.sprite.setTexture(`actor-${actor.character}-${actor.animation}`);
+        }
         const c = metadata.characters.find((c) => c.id === actor.character),
           anim = c.animations.find((a) => a.id === actor.animation);
         const sequence = anim.sequence;
@@ -381,6 +423,8 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
     const routes = movementPreview(state);
     const destinations = new Set(routes.flatMap(r => r.destinations));
     for (const tile of tiles) {
+      const pendingSeal = seals.has(tile.id) && !seals.get(tile.id).revealed;
+      if (pendingSeal) continue;
       if (tile.ownerSeat !== null)
         art(
           `barrier-${tile.ownerSeat}-${tile.level}`,
@@ -405,7 +449,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         art("vacant", tile.x, tile.y, 16, 16, tile.y);
       if (tile.ownerSeat !== null && tile.hp < tile.level + 1)
         art("damaged", tile.x, tile.y, 16, 16, tile.y + 1);
-      if (tile.typeCode === 4) {
+      if ((tile.typeCode === 4 || tile.ownerSeat !== null) && !pendingSeal) {
         overlays.push(
           scene.add
             .text(
@@ -682,6 +726,10 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         animatingUntil = Math.max(animatingUntil, wheelUntil);
       }
       if (!value || value.id !== state?.id) {
+        for (const seal of seals.values()) {
+          seal.images.forEach(image => image.destroy());
+        }
+        seals.clear();
         heldWheel = null;
         wheelUntil = 0;
         animatingUntil = 0;
@@ -692,6 +740,15 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         cancelGesture();
         onCameraMode("follow");
         updateRouletteAudio(null);
+      }
+      for (const tile of purchasedTiles(state, value)) {
+        if (seals.has(tile.id)) continue;
+        const images = Array.from({ length: Math.max(...sealData.frames.map(f => f.length)) },
+          (_, i) => scene.add.image(0, 0, "seal-atlas").setVisible(false).setDepth(tile.y + 40 + i / 100));
+        seals.set(tile.id, { images, x: tile.x - 1, y: tile.y + 2, tile: tile.id, seat: tile.ownerSeat,
+          startedAt: now, revealed: false });
+        animatingUntil = Math.max(animatingUntil, now + sealData.sequence.length * 1000 / sealData.fps);
+        sound("seal");
       }
       receivedAt = performance.now();
       state = value;

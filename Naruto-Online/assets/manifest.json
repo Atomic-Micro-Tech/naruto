@@ -8,8 +8,8 @@
     "audio": 583,
     "image": 116,
     "metadata": 4,
-    "sprite": 593,
-    "texture": 261
+    "sprite": 594,
+    "texture": 262
   },
   "files": [
     {
@@ -14920,6 +14920,20 @@
       ]
     },
     {
+      "path": "sprite/effects/seal.json",
+      "source": "extracted/disc/DATA.BIN#resource=649",
+      "bytes": 139651,
+      "sha256": "d4e7b2a44c1eeb02bbb73281bf4655143a10735ffbf824e3e8cccc94b1578afe",
+      "resourceIds": [
+        649
+      ],
+      "arenaIds": [
+        1
+      ],
+      "category": "sprite",
+      "derived": true
+    },
+    {
       "path": "sprite/hud/chakra_change_glow_0.png",
       "source": "extracted/original-ui/hud/chakra_change_glow_0.png",
       "category": "sprite",
@@ -15113,6 +15127,22 @@
         32,
         16
       ]
+    },
+    {
+      "path": "texture/effects/seal.png",
+      "source": "extracted/disc/DATA.BIN#resource=649",
+      "bytes": 9458,
+      "sha256": "954c992c1b3060aa5329570aff19b23672c33a178bff6b3c5dd6ce8842dcf590",
+      "resourceIds": [
+        649
+      ],
+      "arenaIds": [
+        1
+      ],
+      "category": "texture",
+      "derived": true,
+      "width": 256,
+      "height": 256
     },
     {
       "path": "texture/font/font.json",

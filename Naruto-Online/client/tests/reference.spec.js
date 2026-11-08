@@ -335,6 +335,7 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
   await page.locator('[data-option="chance:1"]').click();
   expect(commands.at(-1).payload.action.payload.optionId).toBe("chance:1");
   const land = structuredClone(movement);
+  land.public.players[0].position = 20;
   land.public.presentation = {
     ...land.public.presentation,
     phase: "land",
@@ -376,6 +377,27 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
     ),
   ).toBe(false);
   await page.setViewportSize({ width: 1280, height: 900 });
+  await expect(page.locator('[data-option="act:claim"]')).toBeEnabled();
+  await page.locator('[data-option="act:claim"]').click();
+  expect(commands.at(-1).payload.action.payload.optionId).toBe("act:claim");
+  const claimed = structuredClone(land);
+  Object.assign(claimed.public.tiles[20], { typeCode: 5, ownerSeat: 0, level: 1, hp: 2 });
+  claimed.public.players[0].chakra -= 120;
+  claimed.public.presentation.phase = "end";
+  claimed.allowedBySeat[0] = [{ type: "choice.select", choiceId: "end",
+    options: [{ id: "end", label: "Selesai", enabled: true }] }];
+  const beforeSeal = commands.length;
+  await send(claimed);
+  await expect(page.locator("#play")).toHaveClass(/presenting/);
+  await page.waitForTimeout(700);
+  await page.locator(".board-frame").screenshot({ path: "test-results/reference-seal.png" });
+  expect(commands).toHaveLength(beforeSeal);
+  // A newer snapshot with the same owner must not restart the animation.
+  await send(claimed);
+  await page.waitForTimeout(620);
+  await page.locator(".board-frame").screenshot({ path: "test-results/reference-seal-reveal.png" });
+  await expect.poll(() => commands.length, { timeout: 1800 }).toBeGreaterThan(beforeSeal);
+  expect(commands.at(-1).payload.action.payload.optionId).toBe("end");
   // Focus near the blue checkpoint, keeping the character off the orb.
   const checkpoint = structuredClone(land);
   checkpoint.public.players[0].position = 18;
