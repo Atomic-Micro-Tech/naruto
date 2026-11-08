@@ -172,6 +172,7 @@ func Start(t *testing.T) *Mailbox {
 	cfg.Mail.Address = listener.Addr().String()
 
 	cfg.PostgreSQL.URLEnvironmentVariable = "NARUTO_TEST_DATABASE_URL"
+	cfg.PostgreSQL.URL = ""
 	cfg.Auth.KeyEnvironmentVariable = "NARUTO_TEST_APP_KEY"
 	cfg.Voice.KeyEnvironmentVariable = "NARUTO_TEST_VOICE_KEY"
 	cfg.Voice.SecretEnvironmentVariable = "NARUTO_TEST_VOICE_SECRET"

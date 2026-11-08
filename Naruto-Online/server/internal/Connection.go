@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"errors"
-	"os"
 	"sync"
 	"time"
 
@@ -26,11 +25,11 @@ func OpenConnections(ctx context.Context) error {
 		return err
 	}
 
-	dsn := os.Getenv(cfg.PostgreSQL.URLEnvironmentVariable)
+	dsn, err := cfg.PostgreSQL.ConnectionURL()
 
-	if dsn == "" {
+	if err != nil {
 
-		return errors.New("database URL environment variable is empty")
+		return err
 	}
 
 	db, err := sql.Open("pgx", dsn)

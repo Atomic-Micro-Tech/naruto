@@ -7,6 +7,7 @@
     "idle_timeout_seconds": 60
   },
   "postgresql": {
+    "url": "postgres://myuser:mypassword@127.0.0.1:5432/mydb?sslmode=disable",
     "url_environment_variable": "NARUTO_DATABASE_URL",
     "connect_timeout_seconds": 5
   },

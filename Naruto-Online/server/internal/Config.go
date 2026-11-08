@@ -57,7 +57,7 @@ func LoadConfig(path string) (Config, error) {
 
 	if cfg.HTTP.ListenAddress == "" || cfg.HTTP.ReadHeaderTimeoutSeconds <= 0 ||
 		cfg.HTTP.ReadTimeoutSeconds <= 0 || cfg.HTTP.WriteTimeoutSeconds <= 0 ||
-		cfg.HTTP.IdleTimeoutSeconds <= 0 || cfg.PostgreSQL.URLEnvironmentVariable == "" ||
+		cfg.HTTP.IdleTimeoutSeconds <= 0 || (cfg.PostgreSQL.URL == "" && cfg.PostgreSQL.URLEnvironmentVariable == "") ||
 		cfg.PostgreSQL.ConnectTimeoutSeconds <= 0 || cfg.Auth.KeyEnvironmentVariable == "" || cfg.Auth.SessionHours < 1 || cfg.Auth.SessionHours > 720 || len(cfg.Auth.AllowedOrigins) == 0 || cfg.Mail.Address == "" || cfg.Mail.From == "" || strings.ContainsAny(cfg.Mail.From, "\r\n") {
 
 		return Config{}, errors.New("configuration contains missing or invalid values")
