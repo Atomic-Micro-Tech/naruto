@@ -1,6 +1,7 @@
 package models
 
 import (
+	"database/sql"
 	"encoding/json"
 	"github.com/google/uuid"
 	"time"
@@ -25,6 +26,7 @@ type RequestReceipt struct {
 type RequestReceiptRepo interface {
 	GetByKey(userID uuid.UUID, transport string, operation string, requestID uuid.UUID) (*RequestReceipt, error)
 	Create(value *RequestReceipt) error
+	Execute(userID uuid.UUID, transport, operation string, key uuid.UUID, requestHash string, fn func(*sql.Tx) ([]byte, error)) ([]byte, bool, error)
 }
 
 // NewRequestReceipt constructs a row value for scanning or persistence.

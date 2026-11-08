@@ -3,8 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"narutoserver/internal/auth"
+	"narutoserver/realtime"
+	"narutoserver/usecase"
+	"narutoserver/worker"
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 	"time"
 
@@ -35,6 +40,13 @@ func run() error {
 		return err
 	}
 
+	_, err = auth.Key()
+
+	if err != nil {
+
+		return err
+	}
+
 	startupCtx, cancelStartup := context.WithTimeout(context.Background(), 15*time.Second)
 
 	defer cancelStartup()
@@ -47,6 +59,21 @@ func run() error {
 	}
 
 	defer internal.CloseConnections()
+
+	health, err := usecase.NewSystemUseCase(startupCtx)
+
+	if err != nil {
+
+		return err
+	}
+
+	_, err = health.GetReadiness(internal.ParamGetReadiness{})
+
+	if err != nil {
+
+		return err
+	}
+
 	stopTelemetry := telemetry.Setup()
 
 	defer stopTelemetry(context.Background())
@@ -64,15 +91,65 @@ func run() error {
 
 	defer stopSignal()
 
+	workerCtx, stopWorkers := context.WithCancel(signalCtx)
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+
+	go func() {
+
+		defer wg.Done()
+
+		worker.Run(workerCtx, realtime.Dispatch)
+	}()
+
+	go func() {
+
+		defer wg.Done()
+
+		realtime.Maintain(workerCtx)
+	}()
+
+	defer func() {
+
+		stopWorkers()
+
+		realtime.Close()
+
+		wg.Wait()
+	}()
+
+	shutdownDone := make(chan error, 1)
+
 	go func() {
 
 		<-signalCtx.Done()
+
+		realtime.Close()
+
 		shutdownCtx, cancelShutdown := context.WithTimeout(context.Background(), 10*time.Second)
 
 		defer cancelShutdown()
 
-		httpServer.Shutdown(shutdownCtx)
+		shutdownErr := httpServer.Shutdown(shutdownCtx)
+
+		wsErr := realtime.Wait(shutdownCtx)
+
+		if shutdownErr != nil {
+
+			shutdownDone <- shutdownErr
+			return
+		}
+
+		shutdownDone <- wsErr
 	}()
 
-	return httpServer.Start()
+	err = httpServer.Start()
+
+	if err != nil {
+
+		return err
+	}
+
+	return <-shutdownDone
 }

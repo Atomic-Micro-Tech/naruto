@@ -24,6 +24,8 @@ type ChatMessageRepo interface {
 	GetByID(id uuid.UUID) (*ChatMessage, error)
 	Create(value *ChatMessage) error
 	Update(value *ChatMessage) error
+	Page(roomID, userID uuid.UUID, limit int, at *time.Time, id *uuid.UUID) ([]*ChatMessage, error)
+	Send(roomID, userID, clientID uuid.UUID, text, hash string) (*ChatMessage, bool, error)
 }
 
 // NewChatMessage constructs a row value for scanning or persistence.

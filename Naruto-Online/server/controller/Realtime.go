@@ -1,15 +1,55 @@
 package controller
 
-import "net/http"
+import (
+	"narutoserver/internal"
+	"narutoserver/telemetry"
+	"narutoserver/usecase"
+	"narutoserver/view"
+	"net/http"
+)
 
-// HandleCreateWebSocketTicket reserves the POST /v1/ws-ticket route until its use case is implemented.
 func HandleCreateWebSocketTicket(writer http.ResponseWriter, request *http.Request) {
 
-	unavailable(writer, request, "controller/Realtime.HandleCreateWebSocketTicket")
-}
+	ctx, span := telemetry.Tracer.Start(request.Context(), "controller/Realtime.CreateWebSocketTicket")
 
-// HandleUpgradeWebSocket reserves the GET /v1/ws route until its use case is implemented.
-func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
+	defer span.End()
 
-	unavailable(writer, request, "controller/Realtime.HandleUpgradeWebSocket")
+	request = request.WithContext(ctx)
+
+	var req internal.RequestCreateWebSocketTicket
+	var param internal.ParamCreateWebSocketTicket
+	var err error
+	valid := false
+	req.Origin = request.Header.Get("Origin")
+
+	valid = req.Origin != "" && noBody(request)
+
+	if !valid {
+
+		view.Error(writer, 400, "INVALID_INPUT", "invalid input")
+
+		return
+	}
+
+	param.Origin = req.Origin
+
+	service, err := usecase.NewRealtimeUseCase(request.Context())
+
+	if err != nil {
+
+		view.Error(writer, 400, "INVALID_INPUT", "invalid context")
+
+		return
+	}
+
+	data, err := service.CreateWebSocketTicket(param)
+
+	if err != nil {
+
+		view.BusinessError(writer, err)
+
+		return
+	}
+
+	view.Json(writer, 201, data)
 }

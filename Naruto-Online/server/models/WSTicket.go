@@ -18,9 +18,11 @@ type WSTicket struct {
 
 // WSTicketRepo is the data-access contract for naruto.ws_tickets.
 type WSTicketRepo interface {
+	Issue(sessionID uuid.UUID, hash []byte, origin string) (*WSTicket, error)
 	GetByID(id uuid.UUID) (*WSTicket, error)
 	Create(value *WSTicket) error
 	Update(value *WSTicket) error
+	Consume(hash []byte, origin string) (*WSTicket, error)
 }
 
 // NewWSTicket constructs a row value for scanning or persistence.

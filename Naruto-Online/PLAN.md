@@ -261,7 +261,7 @@ Naruto-Online/
   deploy/                      # Compose lokal, LAN HTTPS, mail inbox, staging/prod
 ```
 
-Struktur folder `server/` sudah disiapkan mengikuti skill `api-creator`, beserta server HTTP dan route untuk seluruh operasi OpenAPI. Endpoint bisnis dan WebSocket game masih menunggu use case/repository. Rincian peran folder dan cara menjalankan server ada di `server/README.md`. Path lainnya tetap rencana. Pertahankan `GAME_RULE.md` dan `AI_RULE.md` di root repositori sebagai sumber aturan permainan/CPU dan referensikan dari proyek.
+Backend `server/` kini mengimplementasikan autentikasi email/sesi, repository PostgreSQL, room arena 1, WebSocket lobby/chat, moderasi, token voice, dan proyeksi snapshot pertandingan. Mesin gameplay, start match, command/reclaim dan CPU takeover masih belum diterapkan; status ini belum memenuhi acceptance MVP game. Pengujian voice dengan SFU dan mikrofon nyata juga masih diperlukan. Rincian implementasi, batas satu proses API, serta cara menjalankan dan menguji ada di `server/README.md`. Path lainnya tetap rencana. Pertahankan `GAME_RULE.md` dan `AI_RULE.md` di root repositori sebagai sumber aturan permainan/CPU.
 
 ## 13. Urutan pengerjaan dan acceptance
 

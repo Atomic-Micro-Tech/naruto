@@ -9,5 +9,24 @@
   "postgresql": {
     "url_environment_variable": "NARUTO_DATABASE_URL",
     "connect_timeout_seconds": 5
+  },
+  "auth": {
+    "allowed_origins": [
+      "http://localhost:5173",
+      "http://127.0.0.1:5173"
+    ],
+    "key_environment_variable": "NARUTO_APP_KEY",
+    "cookie_secure": false,
+    "session_hours": 168
+  },
+  "mail": {
+    "address": "127.0.0.1:1025",
+    "from": "noreply@naruto.local",
+    "public_url": "http://localhost:5173"
+  },
+  "voice": {
+    "url": "ws://localhost:7880",
+    "key_environment_variable": "LIVEKIT_API_KEY",
+    "secret_environment_variable": "LIVEKIT_API_SECRET"
   }
 }

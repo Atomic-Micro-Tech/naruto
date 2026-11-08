@@ -34,7 +34,7 @@ func TestConfigLoadIsStrictAndGetterReturnsCopy(t *testing.T) {
 		t.Fatal("unknown configuration field accepted")
 	}
 
-	valid := []byte(`{"http":{"listen_address":"127.0.0.1:8080","read_header_timeout_seconds":5,"read_timeout_seconds":15,"write_timeout_seconds":15,"idle_timeout_seconds":60},"postgresql":{"url_environment_variable":"NARUTO_DATABASE_URL","connect_timeout_seconds":5}}`)
+	valid := []byte(`{"http":{"listen_address":"127.0.0.1:8080","read_header_timeout_seconds":5,"read_timeout_seconds":15,"write_timeout_seconds":15,"idle_timeout_seconds":60},"postgresql":{"url_environment_variable":"NARUTO_DATABASE_URL","connect_timeout_seconds":5},"auth":{"allowed_origins":["http://localhost:5173"],"key_environment_variable":"NARUTO_APP_KEY","session_hours":24},"mail":{"address":"127.0.0.1:1025","from":"noreply@naruto.local","public_url":"http://localhost:5173"}}`)
 
 	err = os.WriteFile(path, valid, 0o600)
 
@@ -51,6 +51,7 @@ func TestConfigLoadIsStrictAndGetterReturnsCopy(t *testing.T) {
 	}
 
 	cfg.HTTP.ListenAddress = "modified"
+	cfg.Auth.AllowedOrigins[0] = "http://evil.test"
 	loaded, err := GetConfig()
 
 	if err != nil {
@@ -58,7 +59,7 @@ func TestConfigLoadIsStrictAndGetterReturnsCopy(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if loaded.HTTP.ListenAddress != "127.0.0.1:8080" {
+	if loaded.HTTP.ListenAddress != "127.0.0.1:8080" || loaded.Auth.AllowedOrigins[0] != "http://localhost:5173" {
 
 		t.Fatalf("getter exposed mutable config: %q", loaded.HTTP.ListenAddress)
 	}

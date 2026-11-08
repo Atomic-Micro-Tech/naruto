@@ -27,6 +27,10 @@ type RoomMemberRepo interface {
 	Create(value *RoomMember) error
 	Update(value *RoomMember) error
 	DeleteByKey(roomID uuid.UUID, userID uuid.UUID) error
+	List(roomID uuid.UUID) ([]*RoomMember, error)
+	Current(userID uuid.UUID) (*RoomMember, error)
+	Add(roomID, userID uuid.UUID, capacity, seat int16) error
+	ResetReady(id uuid.UUID) error
 }
 
 // NewRoomMember constructs a row value for scanning or persistence.

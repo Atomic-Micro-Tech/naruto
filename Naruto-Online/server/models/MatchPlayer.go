@@ -31,6 +31,8 @@ type MatchPlayerRepo interface {
 	GetByKey(matchID uuid.UUID, seat int16) (*MatchPlayer, error)
 	Create(value *MatchPlayer) error
 	Update(value *MatchPlayer) error
+	ByUser(matchID, userID uuid.UUID) (*MatchPlayer, error)
+	List(matchID uuid.UUID) ([]*MatchPlayer, error)
 }
 
 // NewMatchPlayer constructs a row value for scanning or persistence.

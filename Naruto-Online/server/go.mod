@@ -3,12 +3,15 @@ module narutoserver
 go 1.25.0
 
 require (
+	github.com/coder/websocket v1.8.14
+	github.com/golang-jwt/jwt/v5 v5.3.1
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.12.0
 	github.com/shopspring/decimal v1.6.0
 	go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp v0.71.0
 	go.opentelemetry.io/otel v1.46.0
 	go.opentelemetry.io/otel/sdk v1.46.0
+	golang.org/x/crypto v0.51.0
 )
 
 require (

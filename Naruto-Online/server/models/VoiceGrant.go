@@ -25,6 +25,8 @@ type VoiceGrantRepo interface {
 	GetByID(id uuid.UUID) (*VoiceGrant, error)
 	Create(value *VoiceGrant) error
 	Update(value *VoiceGrant) error
+	Grant(value *VoiceGrant) error
+	RevokeRoom(id uuid.UUID) error
 }
 
 // NewVoiceGrant constructs a row value for scanning or persistence.

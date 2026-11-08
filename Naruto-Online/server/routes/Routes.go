@@ -20,21 +20,21 @@ func NewRoutes() http.Handler {
 	mux.HandleFunc("GET /readyz", controller.HandleGetReadiness)
 
 	// Auth
-	mux.HandleFunc("POST /v1/auth/register", controller.HandleRegisterEmail)
+	mux.HandleFunc("POST /v1/auth/register", middleware.PublicMutation(controller.HandleRegisterEmail))
 
-	mux.HandleFunc("POST /v1/auth/login", controller.HandleLoginEmail)
+	mux.HandleFunc("POST /v1/auth/login", middleware.PublicMutation(controller.HandleLoginEmail))
 
 	mux.HandleFunc("GET /v1/auth/me", middleware.RequireSession(controller.HandleGetCurrentSession))
 
 	mux.HandleFunc("POST /v1/auth/logout", middleware.RequireSession(controller.HandleLogout))
 
-	mux.HandleFunc("POST /v1/auth/verify-email", controller.HandleVerifyEmail)
+	mux.HandleFunc("POST /v1/auth/verify-email", middleware.PublicMutation(controller.HandleVerifyEmail))
 
 	mux.HandleFunc("POST /v1/auth/resend-verification", middleware.RequireSession(controller.HandleResendVerification))
 
-	mux.HandleFunc("POST /v1/auth/forgot-password", controller.HandleForgotPassword)
+	mux.HandleFunc("POST /v1/auth/forgot-password", middleware.PublicMutation(controller.HandleForgotPassword))
 
-	mux.HandleFunc("POST /v1/auth/reset-password", controller.HandleResetPassword)
+	mux.HandleFunc("POST /v1/auth/reset-password", middleware.PublicMutation(controller.HandleResetPassword))
 
 	mux.HandleFunc("POST /v1/session/refresh", middleware.RequireSession(controller.HandleRefreshSession))
 
@@ -75,5 +75,5 @@ func NewRoutes() http.Handler {
 
 	mux.HandleFunc("GET /v1/ws", middleware.RequireWSTicket(controller.HandleUpgradeWebSocket))
 
-	return otelhttp.NewHandler(mux, "/")
+	return otelhttp.NewHandler(middleware.CORS(mux), "/", otelhttp.WithFilter(middleware.TraceHTTP))
 }

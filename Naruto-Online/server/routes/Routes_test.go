@@ -24,14 +24,14 @@ func TestAllOpenAPIRoutesAreRegisteredAndFailClosed(t *testing.T) {
 	}{
 		{http.MethodGet, "/healthz", http.StatusOK},
 		{http.MethodGet, "/readyz", http.StatusServiceUnavailable},
-		{http.MethodPost, "/v1/auth/register", http.StatusServiceUnavailable},
-		{http.MethodPost, "/v1/auth/login", http.StatusServiceUnavailable},
+		{http.MethodPost, "/v1/auth/register", http.StatusForbidden},
+		{http.MethodPost, "/v1/auth/login", http.StatusForbidden},
 		{http.MethodGet, "/v1/auth/me", http.StatusUnauthorized},
 		{http.MethodPost, "/v1/auth/logout", http.StatusUnauthorized},
-		{http.MethodPost, "/v1/auth/verify-email", http.StatusServiceUnavailable},
+		{http.MethodPost, "/v1/auth/verify-email", http.StatusForbidden},
 		{http.MethodPost, "/v1/auth/resend-verification", http.StatusUnauthorized},
-		{http.MethodPost, "/v1/auth/forgot-password", http.StatusServiceUnavailable},
-		{http.MethodPost, "/v1/auth/reset-password", http.StatusServiceUnavailable},
+		{http.MethodPost, "/v1/auth/forgot-password", http.StatusForbidden},
+		{http.MethodPost, "/v1/auth/reset-password", http.StatusForbidden},
 		{http.MethodPost, "/v1/session/refresh", http.StatusUnauthorized},
 		{http.MethodPost, "/v1/ws-ticket", http.StatusUnauthorized},
 		{http.MethodGet, "/v1/arenas", http.StatusUnauthorized},
@@ -47,7 +47,7 @@ func TestAllOpenAPIRoutesAreRegisteredAndFailClosed(t *testing.T) {
 		{http.MethodPut, "/v1/blocks/" + userID, http.StatusUnauthorized},
 		{http.MethodDelete, "/v1/blocks/" + userID, http.StatusUnauthorized},
 		{http.MethodGet, "/v1/blocks", http.StatusUnauthorized},
-		{http.MethodGet, "/v1/ws", http.StatusUnauthorized},
+		{http.MethodGet, "/v1/ws", http.StatusForbidden},
 	}
 
 	if len(cases) != 26 {

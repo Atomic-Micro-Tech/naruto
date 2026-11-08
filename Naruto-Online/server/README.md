@@ -1,58 +1,87 @@
 # Server Naruto Online
 
-Ini adalah struktur awal modul Go untuk backend lokal. Kontrak HTTP dan WebSocket ada di [`../api/naruto.yaml`](../api/naruto.yaml), skema PostgreSQL di [`../scheme/database-naruto.sql`](../scheme/database-naruto.sql), dan alur MVP di [`../PLAN.md`](../PLAN.md). Aturan game dan CPU ada di `../../GAME_RULE.md` serta `../../AI_RULE.md`.
+Backend lokal Go dengan PostgreSQL, mengikuti [OpenAPI](../api/naruto.yaml), [skema database](../scheme/database-naruto.sql), dan [rencana MVP](../PLAN.md). Modul: `narutoserver`.
 
-Struktur mengikuti `.agents/skills/api-creator/SKILL.md`. Folder `backendexample/` yang disebut skill belum tersedia di repositori ini, sehingga pembagian tanggung jawab di bawah mengikuti instruksi tertulis skill. Direktori yang masih kosong dilacak dengan `.gitkeep`.
+## Implementasi saat ini
 
-```text
-server/
-├── go.mod                 # akar modul Go
-├── cmd/api/               # entry point API
-├── configs/               # config.json saat bagian yang diperlukan sudah ditetapkan
-├── controller/            # decoding/validasi request dan pemilihan respons HTTP
-├── internal/              # interface use case, request/param/data, config, koneksi, error
-│   ├── auth/              # primitive hash password/token/sesi
-│   ├── game/              # state machine, aturan dan RNG deterministik
-│   ├── cpu/               # kebijakan AI dan konteks takeover/reclaim
-│   └── voice/             # adapter layanan suara
-├── middleware/            # autentikasi, otorisasi, CSRF, Origin, pembatasan akses
-├── models/                # model tabel dan interface repo per model
-├── repo/                  # implementasi query PostgreSQL
-├── routes/                # registrasi seluruh route HTTP per tag
-├── server/                # lifecycle server HTTP/WS
-├── telemetry/             # setup dan lifecycle OpenTelemetry
-├── usecase/               # implementasi bisnis per tag OpenAPI
-├── view/                  # serialisasi respons HTTP
-├── worker/                # pekerjaan CPU, outbox, cleanup
-├── testcase/              # test langsung pada use case saja
-└── integration/           # test lintas paket dan database sementara
-```
+- Register/login email, Argon2id, verifikasi email, reset password, cookie sesi HttpOnly, CSRF, refresh dan pencabutan sesi.
+- Daftar arena 1; daftar room publik, room privat dengan kode undangan, create/join atomik, pembatasan kapasitas, pagination dan idempotensi persisten.
+- WebSocket dengan tiket sekali pakai selama maksimal 30 detik, Origin allowlist, satu koneksi pengendali per akun, heartbeat dan pengecekan pencabutan sesi.
+- Lobby: settings, ready/karakter/hash aset, rotasi undangan, kick, leave, migrasi host menurut join order, dan penutupan room kosong. Perubahan settings membatalkan ready. Penyusutan kapasitas merapikan seat selama jumlah anggota masih muat.
+- Chat teks, deduplikasi pesan, batas 5 pesan/10 detik, riwayat yang menyaring akun diblokir, block/unblock dan laporan dengan konteks room.
+- Penerbitan JWT LiveKit khusus mikrofon, maksimal lima menit, dengan pemeriksaan membership. Pencabutan sesi/leave/kick/voice-disabled menjadwalkan penghapusan peserta SFU melalui outbox.
+- Proyeksi snapshot pertandingan untuk peserta yang berhak; kartu sendiri dipisahkan dari kartu lawan, RNG dan state AI.
+- Worker outbox untuk email/event/voice serta pembersihan anggota lobby yang melewati tenggat reconnect.
 
-Alur HTTP: `routes → middleware → controller → usecase → models/repo`; hasil diserialisasi oleh `view`. Route harus mengikuti `operationId` dan tag pada OpenAPI. File tag yang akan dibutuhkan saat implementasi meliputi `internal/Auth.go` dan `usecase/AuthCase.go`, `internal/Room.go` dan `usecase/RoomCase.go`, serta pasangan serupa untuk `System`, `Arena`, `Match`, `Chat`, `Voice`, `Moderation`, dan `Realtime`. `usecase/MockData.go` dibuat sebelum implementasi use case, memakai data sintetis untuk pengujian.
+**Mesin gameplay dan CPU belum diimplementasikan.** `room.start` memeriksa host/roster/ready, lalu menolak dengan `CPU_CONTEXT_UNRESOLVED`. `match.command` dan `match.reclaim` juga belum mengeksekusi permainan. Disconnect saat pertandingan belum menjalankan CPU, dan leave saat playing belum didukung. Tidak ada match contoh yang dipakai sebagai data produksi. Ini belum merupakan MVP game yang selesai atau replika 1:1.
 
-Kode Go baru memakai nama file CamelCase seperti `routes/Routes.go`, `server/HttpServer.go`, `middleware/Middleware.go`, `internal/Connection.go`, dan `view/Json.go`. Model SQL berada di `models/`, dan semua query berada di `repo/`. Proses startup kelak memuat konfigurasi, membuka koneksi database, menginisialisasi telemetry, memasang routes, lalu menyalakan server. Worker dan koneksi ditutup dengan urutan aman ketika proses berhenti.
+`GET /v1/matches/{matchId}` dan `match.resume` membaca checkpoint tersimpan dengan format proyeksi:
+`public`, `privateBySeat`, dan `allowedBySeat`. Field DTO yang diizinkan didefinisikan di `internal/MatchProjection.go`. Checkpoint yang belum cocok ditolak; endpoint tidak mengirim JSON state database mentah. Integrasi engine perlu menulis format ini secara atomik bersama roster, versi dan event.
 
-`configs/config.json` kini mengatur alamat HTTP dan nama variabel lingkungan untuk URL PostgreSQL. Kredensial database, kunci sesi, kunci enkripsi, dan secret layanan suara diberikan dari lingkungan lokal, tanpa menyimpannya di Git.
+## Menjalankan lokal
 
-## Server HTTP dan route
-
-Butuh Go 1.25+ dan PostgreSQL 15+ yang berjalan. Dari folder `Naruto-Online/server`:
+Gunakan Go 1.25+ dan PostgreSQL 15+. Dari direktori ini, arahkan URL ke database pengembangan milik Anda:
 
 ```sh
 export NARUTO_DATABASE_URL='postgres://USER:PASSWORD@127.0.0.1:5432/DB?sslmode=disable'
+```
+
+Untuk database kosong, terapkan skema satu kali:
+
+```sh
+psql "$NARUTO_DATABASE_URL" -v ON_ERROR_STOP=1 -f ../scheme/database-naruto.sql
+```
+
+Buat kunci aplikasi satu kali dengan `openssl rand -base64 32`, simpan secara lokal, lalu export nilai yang sama setiap restart:
+
+```sh
+export NARUTO_APP_KEY='KUNCI_BASE64_32_BYTE_YANG_DISIMPAN_LOKAL'
 go run ./cmd/api
 ```
 
-Server mendengarkan `127.0.0.1:8080` dan berhenti dengan SIGINT/SIGTERM. Seluruh 26 method/path HTTP di `api/naruto.yaml` sudah didaftarkan di `routes/Routes.go`, dikelompokkan menurut tag. `/healthz` aktif dan mengembalikan `{"status":"ok"}`. `/readyz` memeriksa PostgreSQL, tetapi tetap mengembalikan 503 selama API bisnis belum diterapkan; ini mencegah health check menyatakan layanan siap terlalu dini.
+Server membaca `configs/config.json` dan environment proses; file `.env` tidak dimuat otomatis. Kunci dipakai untuk CSRF, kode undangan, cursor, email outbox dan receipt terenkripsi. Menggantinya sembarangan membuat data terenkripsi lama tidak dapat dibaca.
 
-Handler bisnis saat ini mengembalikan 503 dalam bentuk `components.schemas.Error`. Route privat menolak permintaan tanpa cookie dengan 401 dan tetap menolak cookie yang belum dapat divalidasi dengan 503. Upgrade `/v1/ws` belum aktif; tiket satu kali pakai dan transport WebSocket harus diterapkan sebelum respons 101 dapat diberikan. Tidak ada operasi yang mengembalikan data demo sebagai data produksi.
+Konfigurasi bawaan:
 
-Kode mengikuti bentuk respons `naruto.yaml` secara langsung, termasuk `{"status":"ok"}` dan `{"error":...}`. Kontrak umum `ResponseAPI` pada skill `api-creator` berbeda dari bentuk respons spesifikasi proyek ini; untuk route ini bentuk OpenAPI dipertahankan. OpenTelemetry telah dipasang pada HTTP dan tracer, tetapi exporter belum dikonfigurasi. Jalankan `go test ./...` untuk memeriksa registrasi route dan perilaku dasar.
+| Komponen | Alamat |
+|---|---|
+| HTTP | `127.0.0.1:8080` |
+| Origin web | `http://localhost:5173`, `http://127.0.0.1:5173` |
+| SMTP lokal | `127.0.0.1:1025` |
+| LiveKit | `ws://localhost:7880` |
 
-## Model PostgreSQL
+Jalankan penerima SMTP lokal, misalnya Mailpit, pada alamat tersebut. Pengiriman gagal disimpan untuk retry; register mengembalikan `verificationEmailSent=false` bila email belum terkirim. Token verifikasi/reset dapat diambil dari inbox lokal dan dikirim ke endpoint terkait. Adapter SMTP saat ini khusus lingkungan lokal tanpa autentikasi/TLS.
 
-`models/` sudah memuat satu file CamelCase untuk masing-masing dari 25 tabel di `scheme/database-naruto.sql`. Setiap file mempunyai struct, constructor `New<Model>`, getter/setter tiap kolom, dan interface `<Model>Repo`. Interface ini adalah kontrak; implementasi query di `repo/` akan ditambahkan bersama use case yang memerlukannya.
+Voice memerlukan server LiveKit serta `LIVEKIT_API_KEY` dan `LIVEKIT_API_SECRET`. Tanpa kredensial, endpoint token voice mengembalikan 503. Pengujian otomatis memeriksa JWT audio-only dan revocation/outbox database; aliran audio mikrofon dan pemutusan peserta pada SFU nyata masih perlu pengujian dengan LiveKit. Pada deployment sendiri, JWT yang sudah terbit tetap harus diperhitungkan sampai kedaluwarsa; penghapusan peserta aktif bukan pencabutan kriptografis JWT.
 
-Nama kolom tercatat dalam tag `db`. Semua field memakai `json:"-"` karena model persistence dapat berisi password hash, token hash, RNG, tangan kartu, dan state AI privat; controller perlu membentuk DTO API yang aman. UUID memakai `github.com/google/uuid`, `numeric(4,3)` memakai `github.com/shopspring/decimal`, JSONB memakai `json.RawMessage`, timestamp memakai `time.Time`, dan angka SQL memakai lebar yang sesuai. Kolom nullable memakai pointer atau `nil` untuk `[]byte`/`json.RawMessage`. Getter/setter untuk byte dan JSONB menyalin slice agar perubahan di luar model tidak mengubah data secara diam-diam.
+Gunakan hostname yang konsisten antara web dan API agar cookie SameSite bekerja, serta `credentials: "include"` pada fetch. Mutasi menyertakan Origin yang diizinkan dan `X-CSRF-Token` dari login/me/refresh. Create room, join dan report juga memerlukan `Idempotency-Key` UUID.
 
-Constructor mengembalikan nilai kosong untuk dipakai saat scan/penyusunan row. Default SQL, rentang nilai, enum, dan hubungan antartabel tetap divalidasi PostgreSQL dan logika bisnis; memanggil constructor saja tidak menghasilkan row siap `INSERT`.
+`/healthz` memeriksa proses. `/readyz` memeriksa versi skema dan data arena; status ready menyatakan layanan API siap, bukan bahwa engine gameplay sudah tersedia.
+
+## Arsitektur dan batas operasional
+
+Alur: `routes → middleware → controller → usecase → models/repo → view`. Semua SQL bisnis berada di `repo/`; constructor use case menerima context dan repository dibentuk per operasi. Model mencakup 25 tabel dengan tag `db` dan `json:"-"`. Bentuk respons dan status HTTP mengikuti OpenAPI, termasuk 201/202/204; tidak ditambah envelope generik yang mengubah kontrak.
+
+HTTP receipt tersimpan minimal 24 jam. Hasil dengan kode privat dienkripsi. Cursor terenkripsi dan terikat user, resource serta filter. JSON ambigu, field asing/duplikat, UUID tidak sah, Origin dan CSRF yang salah ditolak.
+
+Jalankan **satu proses API/worker** untuk MVP lokal. Hub WebSocket dan rate limiter berada dalam memori. Beberapa proses membutuhkan fan-out event dan rate limiter bersama; worker outbox pada proses lain tidak dapat menjangkau socket di proses ini. Event outbox dikirim minimal sekali; client tetap perlu deduplikasi berdasarkan ID/versi. Retensi jangka panjang email token, sesi, chat dan event belum dijadwalkan.
+
+OpenTelemetry memasang instrumentasi HTTP dan span controller; exporter belum dikonfigurasi. URL upgrade bertiket dikecualikan dari instrumentasi HTTP agar tiket tidak menjadi atribut URL trace. Shutdown menutup socket, menunggu handler dan worker, lalu menutup koneksi database.
+
+## Pengujian
+
+```sh
+go test ./...
+go vet ./...
+```
+
+Tes use case dan integrasi dilewati bila database pengujian tidak diberikan. Buat database PostgreSQL terpisah, terapkan skema yang sama, lalu jalankan:
+
+```sh
+export NARUTO_TEST_DATABASE_URL='postgres://USER:PASSWORD@127.0.0.1:55433/TEST_DB?sslmode=disable'
+go test -p 1 -race ./... -count=1
+```
+
+Gunakan `-p 1` ketika suite berbagi database: tiap proses tes mempunyai SMTP dan hub socket sendiri, sehingga worker antarproses tidak boleh saling mengambil event. Tes memakai akun sintetis, SMTP sementara dan server HTTP/WebSocket nyata; tidak menyentuh database aplikasi jika URL test mengarah ke database terpisah. Data tes tetap berada di database test setelah suite selesai.
+
+Cakupan meliputi register/login/verifikasi/reset, rotasi sesi, CSRF, Origin, kapasitas room pada join serentak, retry/conflict idempotensi, privasi room, tiket sekali pakai, chat/block/report, voice JWT, migrasi host, penutupan room, dan proyeksi kartu/RNG/AI.

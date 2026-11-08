@@ -23,6 +23,10 @@ type SessionRepo interface {
 	GetByID(id uuid.UUID) (*Session, error)
 	Create(value *Session) error
 	Update(value *Session) error
+	Authenticate(hash []byte) (*Session, error)
+	CreateForPassword(userID uuid.UUID, passwordHash string, s *Session) error
+	Revoke(id, userID uuid.UUID) error
+	Rotate(oldID, userID uuid.UUID, s *Session) error
 }
 
 // NewSession constructs a row value for scanning or persistence.

@@ -17,6 +17,7 @@ type OutboxEvent struct {
 	AvailableAt      time.Time       `db:"available_at" json:"-"`
 	Attempts         int32           `db:"attempts" json:"-"`
 	DeliveredAt      *time.Time      `db:"delivered_at" json:"-"`
+	LastError        *string         `db:"last_error" json:"-"`
 }
 
 // OutboxEventRepo is the data-access contract for naruto.outbox_events.
@@ -24,6 +25,7 @@ type OutboxEventRepo interface {
 	GetByID(id int64) (*OutboxEvent, error)
 	Create(value *OutboxEvent) error
 	Update(value *OutboxEvent) error
+	Deliver(id int64, send func(*OutboxEvent) error) (bool, error)
 }
 
 // NewOutboxEvent constructs a row value for scanning or persistence.
@@ -120,4 +122,14 @@ func (m *OutboxEvent) GetDeliveredAt() *time.Time {
 func (m *OutboxEvent) SetDeliveredAt(value *time.Time) {
 
 	m.DeliveredAt = value
+}
+
+func (m *OutboxEvent) GetLastError() *string {
+
+	return m.LastError
+}
+
+func (m *OutboxEvent) SetLastError(value *string) {
+
+	m.LastError = value
 }

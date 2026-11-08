@@ -22,6 +22,11 @@ type RealtimeConnectionRepo interface {
 	GetByID(id uuid.UUID) (*RealtimeConnection, error)
 	Create(value *RealtimeConnection) error
 	Update(value *RealtimeConnection) error
+	Connect(sessionID uuid.UUID) (*RealtimeConnection, error)
+	Alive(id uuid.UUID) (bool, error)
+	Heartbeat(id uuid.UUID) error
+	Disconnect(id uuid.UUID) error
+	RecoverStale() error
 }
 
 // NewRealtimeConnection constructs a row value for scanning or persistence.

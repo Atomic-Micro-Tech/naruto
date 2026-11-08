@@ -17,6 +17,9 @@ type UserBlockRepo interface {
 	GetByKey(userID uuid.UUID, targetUserID uuid.UUID) (*UserBlock, error)
 	Create(value *UserBlock) error
 	DeleteByKey(userID uuid.UUID, targetUserID uuid.UUID) error
+	Put(userID, targetID uuid.UUID) (*UserBlock, error)
+	Page(userID uuid.UUID, limit int, at *time.Time, id *uuid.UUID) ([]*UserBlock, error)
+	Exists(userID, target uuid.UUID) (bool, error)
 }
 
 // NewUserBlock constructs a row value for scanning or persistence.

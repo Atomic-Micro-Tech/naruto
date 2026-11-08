@@ -33,6 +33,14 @@ type RoomRepo interface {
 	GetByID(id uuid.UUID) (*Room, error)
 	Create(value *Room) error
 	Update(value *Room) error
+	Search(query, status string, open bool, limit int, at *time.Time, id *uuid.UUID) ([]*Room, error)
+	Lock(id uuid.UUID) (*Room, error)
+	FindByInvite(hash []byte) (*Room, error)
+	MemberExists(roomID, userID uuid.UUID) (bool, error)
+	IncrementVersion(id uuid.UUID) error
+	EnqueueChanged(roomID uuid.UUID, version int64) error
+	RemoveMember(id, userID uuid.UUID) error
+	ExpireWaiting() error
 }
 
 // NewRoom constructs a row value for scanning or persistence.

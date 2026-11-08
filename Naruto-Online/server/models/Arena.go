@@ -29,6 +29,7 @@ type ArenaRepo interface {
 	GetByID(id string) (*Arena, error)
 	Create(value *Arena) error
 	Update(value *Arena) error
+	ListEnabled() ([]*Arena, error)
 }
 
 // NewArena constructs a row value for scanning or persistence.

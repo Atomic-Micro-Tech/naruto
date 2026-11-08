@@ -6,13 +6,18 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"net/url"
 	"os"
+	"strings"
 	"sync"
 )
 
 type Config struct {
 	HTTP       HTTPConfig       `json:"http"`
 	PostgreSQL PostgreSQLConfig `json:"postgresql"`
+	Auth       AuthConfig       `json:"auth"`
+	Mail       MailConfig       `json:"mail"`
+	Voice      VoiceConfig      `json:"voice"`
 }
 
 var (
@@ -53,9 +58,19 @@ func LoadConfig(path string) (Config, error) {
 	if cfg.HTTP.ListenAddress == "" || cfg.HTTP.ReadHeaderTimeoutSeconds <= 0 ||
 		cfg.HTTP.ReadTimeoutSeconds <= 0 || cfg.HTTP.WriteTimeoutSeconds <= 0 ||
 		cfg.HTTP.IdleTimeoutSeconds <= 0 || cfg.PostgreSQL.URLEnvironmentVariable == "" ||
-		cfg.PostgreSQL.ConnectTimeoutSeconds <= 0 {
+		cfg.PostgreSQL.ConnectTimeoutSeconds <= 0 || cfg.Auth.KeyEnvironmentVariable == "" || cfg.Auth.SessionHours < 1 || cfg.Auth.SessionHours > 720 || len(cfg.Auth.AllowedOrigins) == 0 || cfg.Mail.Address == "" || cfg.Mail.From == "" || strings.ContainsAny(cfg.Mail.From, "\r\n") {
 
 		return Config{}, errors.New("configuration contains missing or invalid values")
+	}
+
+	for _, origin := range cfg.Auth.AllowedOrigins {
+
+		u, err := url.Parse(origin)
+
+		if err != nil || u.Host == "" || (u.Scheme != "http" && u.Scheme != "https") || u.Path != "" || u.RawQuery != "" || u.Fragment != "" || u.User != nil {
+
+			return Config{}, errors.New("invalid allowed origin")
+		}
 	}
 
 	configMu.Lock()
@@ -67,7 +82,10 @@ func LoadConfig(path string) (Config, error) {
 		return Config{}, errors.New("configuration already loaded")
 	}
 
-	loadedConfig = &cfg
+	stored := cfg
+	stored.Auth.AllowedOrigins = append([]string(nil), cfg.Auth.AllowedOrigins...)
+
+	loadedConfig = &stored
 
 	return cfg, nil
 }
@@ -84,5 +102,8 @@ func GetConfig() (Config, error) {
 		return Config{}, ErrConfigNotLoaded
 	}
 
-	return *loadedConfig, nil
+	copy := *loadedConfig
+	copy.Auth.AllowedOrigins = append([]string(nil), loadedConfig.Auth.AllowedOrigins...)
+
+	return copy, nil
 }

@@ -1,9 +1,52 @@
 package controller
 
-import "net/http"
+import (
+	"narutoserver/internal"
+	"narutoserver/telemetry"
+	"narutoserver/usecase"
+	"narutoserver/view"
+	"net/http"
+)
 
-// HandleListArenas reserves the GET /v1/arenas route until its use case is implemented.
 func HandleListArenas(writer http.ResponseWriter, request *http.Request) {
 
-	unavailable(writer, request, "controller/Arena.HandleListArenas")
+	ctx, span := telemetry.Tracer.Start(request.Context(), "controller/Arena.ListArenas")
+
+	defer span.End()
+
+	request = request.WithContext(ctx)
+
+	var req internal.RequestListArenas
+	var param internal.ParamListArenas
+	var err error
+	valid := false
+	valid = noBody(request)
+
+	if !valid {
+
+		view.Error(writer, 400, "INVALID_INPUT", "invalid input")
+
+		return
+	}
+
+	_ = req
+	service, err := usecase.NewArenaUseCase(request.Context())
+
+	if err != nil {
+
+		view.Error(writer, 400, "INVALID_INPUT", "invalid context")
+
+		return
+	}
+
+	data, err := service.ListArenas(param)
+
+	if err != nil {
+
+		view.BusinessError(writer, err)
+
+		return
+	}
+
+	view.Json(writer, 200, data)
 }

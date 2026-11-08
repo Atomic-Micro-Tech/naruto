@@ -48,9 +48,11 @@ type Match struct {
 
 // MatchRepo is the data-access contract for naruto.matches.
 type MatchRepo interface {
+	ReadProjection(matchID, userID uuid.UUID) (*Match, []*MatchPlayer, error)
 	GetByID(id uuid.UUID) (*Match, error)
 	Create(value *Match) error
 	Update(value *Match) error
+	ForParticipant(matchID, userID uuid.UUID) (*Match, error)
 }
 
 // NewMatch constructs a row value for scanning or persistence.

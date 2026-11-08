@@ -22,6 +22,12 @@ type UserRepo interface {
 	GetByID(id uuid.UUID) (*User, error)
 	Create(value *User) error
 	Update(value *User) error
+	Lock(id uuid.UUID) error
+	FindCredentials(email string) (*User, *UserCredential, error)
+	Register(user *User, passwordHash string, token *EmailToken, mailCipher []byte) (int64, error)
+	QueueEmail(userID uuid.UUID, purpose string, tokenID uuid.UUID, hash []byte, expires time.Time, mailCipher string) (int64, error)
+	ConsumeEmailToken(hash []byte, purpose, passwordHash string) error
+	LoginFailure(id uuid.UUID) error
 }
 
 // NewUser constructs a row value for scanning or persistence.
