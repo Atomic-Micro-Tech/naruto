@@ -20,9 +20,19 @@ export async function api(
     .json()
     .catch(() => ({ message: "Server tidak memberikan JSON." }));
   if (!response.ok) {
-    const error = new Error(result.message ?? "Layanan belum tersedia.");
+    // OpenAPI errors are { error: { code, message, requestId } }.
+    const detail = result?.error ?? result;
+    const messages = {
+      INVALID_CREDENTIALS: "Email atau kata sandi salah. Periksa kembali data login.",
+      UNAUTHENTICATED: "Sesi berakhir. Silakan masuk kembali.",
+      RATE_LIMITED: "Terlalu banyak percobaan. Tunggu sebentar lalu coba lagi.",
+      CSRF_INVALID: "Sesi tidak cocok. Muat ulang halaman lalu coba lagi.",
+      UNAVAILABLE: "Layanan sementara tidak tersedia. Coba lagi sebentar.",
+    };
+    const error = new Error(messages[detail?.code] ?? detail?.message ?? "Permintaan gagal. Silakan coba lagi.");
     error.status = response.status;
-    error.code = result.code;
+    error.code = detail?.code;
+    error.requestId = detail?.requestId;
     throw error;
   }
   return result.data ?? result;

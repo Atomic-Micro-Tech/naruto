@@ -43,12 +43,15 @@ export function directionLabel(snapshot, option) {
   return directionIndicator(snapshot, option).label;
 }
 
+// One shared angle keeps numbers attached to their sectors, at 90% speed.
+const ROULETTE_ANGLE_PER_TICK = 180 * 0.9;
+
 export function wheelAngle(snapshot, elapsedMS) {
   const wheel = snapshot.roulette;
   const ticks =
     Math.max(0, snapshot.serverTick - wheel.startedAtTick) +
     (Math.max(0, elapsedMS) * 60) / 1000;
-  return (wheel.angle + ticks * 180) % 4096;
+  return (wheel.angle + ticks * ROULETTE_ANGLE_PER_TICK) % 4096;
 }
 
 // Presentation interpolation only: the server supplies the result. Match the
@@ -57,7 +60,7 @@ export function wheelAngle(snapshot, elapsedMS) {
 // BOARD 8010b4a8: 4096 -> 128 in steps of 128, 60 updates hold, 8 exit.
 // UI_DRAW 8001fd0c keeps only the selected sector at full intensity.
 export function rouletteStopPlan(angle, faces, result) {
-  const speed = (180 * 60) / 1000,
+  const speed = (ROULETTE_ANGLE_PER_TICK * 60) / 1000,
     preferredDistance = (speed * 280) / 2;
   const candidates = [];
   faces.forEach((face, index) => {

@@ -10,8 +10,8 @@ import { RouletteAudio } from "../src/roulette-audio.js";
 const faces = [1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6];
 test("rotation interpolates between logical ticks on high refresh screens", () => {
   const s = { serverTick: 0, roulette: { angle: 0, startedAtTick: 0 } };
-  assert.ok(Math.abs(wheelAngle(s, 1000 / 120) - 90) < 1e-9);
-  assert.ok(Math.abs(wheelAngle(s, 1000 / 240) - 45) < 1e-9);
+  assert.ok(Math.abs(wheelAngle(s, 1000 / 120) - 81) < 1e-9);
+  assert.ok(Math.abs(wheelAngle(s, 1000 / 240) - 40.5) < 1e-9);
 });
 test("braking preserves velocity and decelerates without overshoot for every result and starting sector", () => {
   for (let angle = 0; angle < 4096; angle += 47)
@@ -20,9 +20,9 @@ test("braking preserves velocity and decelerates without overshoot for every res
       let previous = angle,
         velocity = Infinity;
       assert.equal(faces[p.index], result);
-      assert.ok(p.duration >= 90 && p.duration < 850);
+      assert.ok(p.duration >= 90 && p.duration < 950);
       const first = rouletteStopFrame(p, 0.001).angle;
-      assert.ok(Math.abs((first - angle) / 0.001 - 10.8) < 0.001);
+      assert.ok(Math.abs((first - angle) / 0.001 - 9.72) < 0.001);
       for (let i = 1; i <= 100; i++) {
         const a = rouletteStopFrame(p, (p.duration * i) / 100).angle,
           v = a - previous;
