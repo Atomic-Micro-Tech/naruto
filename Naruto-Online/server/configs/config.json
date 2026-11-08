@@ -1,0 +1,13 @@
+{
+  "http": {
+    "listen_address": "127.0.0.1:8080",
+    "read_header_timeout_seconds": 5,
+    "read_timeout_seconds": 15,
+    "write_timeout_seconds": 15,
+    "idle_timeout_seconds": 60
+  },
+  "postgresql": {
+    "url_environment_variable": "NARUTO_DATABASE_URL",
+    "connect_timeout_seconds": 5
+  }
+}

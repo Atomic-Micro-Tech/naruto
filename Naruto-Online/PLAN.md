@@ -84,7 +84,7 @@ Setelah hasil, pemain kembali ke room dan dapat rematch dengan state baru. Tidak
 
 ## 5. UI memakai aset yang sudah ada
 
-Inventaris sekarang: **958 PNG dan 583 WAV**, sekitar 82,9 MB keseluruhan; WAV sekitar 77,0 MB. Folder `client/`, `server/`, `scheme/` dan `PLAN.md` telah disiapkan; implementasi aplikasinya belum ada.
+Inventaris sekarang: **958 PNG dan 583 WAV**, sekitar 82,9 MB keseluruhan; WAV sekitar 77,0 MB. Folder `client/`, `server/`, `scheme/` dan `PLAN.md` telah disiapkan. Server HTTP dan route OpenAPI sudah dibuat; autentikasi, room, gameplay dan WebSocket bisnis belum diimplementasikan.
 
 | Tampilan | Sumber |
 | --- | --- |
@@ -261,7 +261,7 @@ Naruto-Online/
   deploy/                      # Compose lokal, LAN HTTPS, mail inbox, staging/prod
 ```
 
-Struktur folder `server/` sudah disiapkan mengikuti skill `api-creator`; implementasi endpoint dan runtime belum ada. Rincian peran folder ada di `server/README.md`. Path lainnya tetap rencana. Pertahankan `GAME_RULE.md` dan `AI_RULE.md` di root repositori sebagai sumber aturan permainan/CPU dan referensikan dari proyek.
+Struktur folder `server/` sudah disiapkan mengikuti skill `api-creator`, beserta server HTTP dan route untuk seluruh operasi OpenAPI. Endpoint bisnis dan WebSocket game masih menunggu use case/repository. Rincian peran folder dan cara menjalankan server ada di `server/README.md`. Path lainnya tetap rencana. Pertahankan `GAME_RULE.md` dan `AI_RULE.md` di root repositori sebagai sumber aturan permainan/CPU dan referensikan dari proyek.
 
 ## 13. Urutan pengerjaan dan acceptance
 
