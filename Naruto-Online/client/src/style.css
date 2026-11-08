@@ -1154,6 +1154,7 @@ body:not(.in-game) .board-frame > .controls {
   display: none;
 }
 .in-game [data-phase="move"].presenting .controls,
+.in-game [data-phase="chance"].board-animating .controls,
 .in-game [data-phase="end"].presenting .controls {
   opacity: 0;
   pointer-events: none;
@@ -1229,6 +1230,17 @@ body:not(.in-game) .board-frame > .controls {
   height: 100%;
   object-fit: contain;
   image-rendering: pixelated;
+}
+.in-game .chance-cards button:disabled {
+  opacity: 1;
+  cursor: default;
+}
+.chance-cards .card-revealed img {
+  animation: reveal-chance-card 250ms ease-out;
+}
+@keyframes reveal-chance-card {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }
 .in-game .controls .card-description {
   width: 100%;

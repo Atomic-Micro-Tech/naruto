@@ -1,5 +1,6 @@
 import "./style.css";
 import { automaticAction, directionLabel } from "./presentation";
+import { MatchPresentation, chanceAnimation } from "./match-presentation";
 import { api, setSession, Connection } from "./api";
 import { joinVoice, leaveVoice, muteVoice } from "./voice";
 import {
@@ -47,6 +48,8 @@ let roomsTimer,
   chanceKey = null,
   automaticKey = null,
   visualBusy = false;
+const presentation = new MatchPresentation();
+let chanceAnimationKey = "";
 
 $("app").innerHTML = `
  <header class="topbar"><a class="brand" href="/">NARUTO<span>ONLINE</span></a><span class="edition">PARTY · ARENA 01</span><div class="account"><span id="connection" class="connection">LOKAL</span><span id="username"></span><button id="logout" class="quiet" hidden>Keluar</button></div></header>
@@ -79,6 +82,7 @@ async function attempt(fn) {
 }
 function view(id) {
   if (id !== "play") {
+    presentation.clear();
     board?.setState(null);
     stopGameAudio();
   }
@@ -302,6 +306,7 @@ function setRoom(value, code) {
   if (room?.id === value.id && room.roomVersion > value.roomVersion) return;
   const changedRoom = room?.id !== value.id;
   if (changedRoom) {
+    presentation.clear();
     match = null;
     inviteCode = null;
     lastMatchID = null;
@@ -449,14 +454,22 @@ $("sync").onclick = () =>
 
 function setMatch(value) {
   if (!session || (room && value.roomId !== room.id)) return;
-  if (match?.id === value.id && value.stateVersion < match.stateVersion) return;
-  if (
-    match?.id === value.id &&
-    value.stateVersion === match.stateVersion &&
-    value.serverTick < match.serverTick
-  )
-    return;
   if (lastMatchID === value.id && !match) return;
+  // A background tab resumes from its current authoritative state, not a long
+  // backlog of old CPU turns. Normal foreground snapshots retain their order.
+  if (document.hidden) presentation.clear();
+  if (!presentation.push(value)) return;
+  advanceMatchPresentation();
+}
+function advanceMatchPresentation() {
+  const value = presentation.next(performance.now(), !!board?.isAnimating());
+  if (value) presentMatch(value);
+}
+function presentMatch(value) {
+  const sameChoice = match?.id === value.id &&
+    match.presentation?.phase === value.presentation?.phase &&
+    match.allowedActions[0]?.choiceId &&
+    match.allowedActions[0].choiceId === value.allowedActions[0]?.choiceId;
   if (
     match?.id === value.id &&
     match.players.some((p, i) => p.position !== value.players[i]?.position)
@@ -464,11 +477,11 @@ function setMatch(value) {
     sound("step");
   if (!match) notice("");
   match = value;
-  matchReceivedAt = performance.now();
+  if (!sameChoice) matchReceivedAt = performance.now();
   updateAudio(value);
   localStorage.setItem(`naruto:lastMatch:${session.user.id}`, value.id);
   board?.setState(value);
-  visualBusy = !!board?.isAnimating();
+  visualBusy = !!board?.isAnimating() || presentation.busy;
   renderRoom();
 }
 const phaseLabels = {
@@ -498,6 +511,7 @@ function renderMatch() {
     ? "roulette"
     : match.presentation?.phase;
   $("play").classList.toggle("presenting", visualBusy);
+  $("play").classList.toggle("board-animating", !!board?.isAnimating());
   const self = match.players.find((p) => p.seat === match.self.seat),
     actor = match.players.find((p) => p.seat === match.presentation?.actorSeat),
     myTurn =
@@ -519,6 +533,7 @@ function renderMatch() {
     $("return-room").onclick = () => {
       lastMatchID = match.id;
       match = null;
+      presentation.clear();
       board?.setState(null);
       stopGameAudio();
       renderRoom();
@@ -554,20 +569,30 @@ function renderMatch() {
     if (extras.length)
       actions += `<details class="turn-menu"><summary>Kartu · Ninjutsu · Gulungan</summary><div>${extras.map(button).join("")}</div></details>`;
   }
-  if (phase === "chance" && options.length) {
-    const key = match.allowedActions[0]?.choiceId;
+  const chanceOffer = match.presentation?.chance ?? (phase === "chance" && options.length ? {
+    choiceId: match.allowedActions[0]?.choiceId, faceUp: match.presentation.remaining === 0,
+    cards: options.map((o, slot) => ({ slot, cardId: o.cardId })),
+  } : null);
+  if (phase === "chance" && chanceOffer?.cards.length) {
+    const key = chanceOffer.choiceId;
     if (key !== chanceKey) {
       chanceKey = key;
       selectedChance = 0;
     }
-    selectedChance = Math.min(selectedChance, options.length - 1);
-    const concealed = match.presentation.remaining > 0 || options.some(o => o.cardId == null);
-    cards = `<div class="chance-cards" data-concealed="${concealed}">${options.map((o, i) => {
-      const label = concealed ? `Kartu tertutup ${i + 1}` : o.label;
-      const src = concealed ? board?.chanceCardBack : `/assets/image/cards/card_${String(o.cardId).padStart(2, "0")}.png`;
-      return `<button data-card-choice="${i}" aria-label="Pilih ${esc(label)}" aria-pressed="${i === selectedChance}" ${busy || visualBusy ? "disabled" : ""}>${src ? `<img src="${src}" alt="${esc(label)}">` : '<span class="small">Kartu tertutup</span>'}</button>`;
-    }).join("")}</div><p class="card-description">${concealed ? 'Pilih satu kartu tertutup. Isinya diketahui setelah dikonfirmasi.' : esc(options[selectedChance].label)}</p>`;
-    actions = button({ ...options[selectedChance], label: "Ambil kartu ini" });
+    selectedChance = Math.min(selectedChance, chanceOffer.cards.length - 1);
+    const reveal = presentation.reveal;
+    const interactive = myTurn && options.length > 0 && !reveal;
+    const elapsed = performance.now() - (reveal?.startedAt ?? presentation.enteredAt);
+    const animation = chanceAnimation(chanceOffer, reveal, elapsed, selectedChance, interactive);
+    const concealed = !chanceOffer.faceUp;
+    cards = `<div class="chance-cards" data-concealed="${concealed}" data-stage="${reveal ? animation.revealed ? 'revealed' : 'selected' : interactive ? 'choice' : 'choosing'}">${animation.cards.map((card, i) => {
+      const label = card.cardId == null ? `Kartu tertutup ${i + 1}` :
+        reveal && i === animation.selected && animation.revealed ? `Kartu ${card.cardId + 1}` : options[i]?.label ?? `Kartu ${card.cardId + 1}`;
+      const src = card.cardId == null ? board?.chanceCardBack : `/assets/image/cards/card_${String(card.cardId).padStart(2, "0")}.png`;
+      const flipping = !!reveal && animation.revealed && i === animation.selected;
+      return `<button data-card-choice="${i}" class="${flipping ? 'card-revealed' : ''}" aria-label="Pilih ${esc(label)}" aria-pressed="${i === animation.selected}" ${!interactive || busy || visualBusy ? "disabled" : ""}>${src ? `<img src="${src}" alt="${esc(label)}">` : '<span class="small">Kartu tertutup</span>'}</button>`;
+    }).join("")}</div><p class="card-description">${reveal ? animation.revealed ? `Kartu ${reveal.cardId + 1} dipilih.` : 'Kartu dipilih…' : !interactive ? `${esc(actor?.displayName ?? 'Pemain')} memilih kartu…` : concealed ? 'Pilih satu kartu tertutup. Isinya diketahui setelah dikonfirmasi.' : esc(options[selectedChance]?.label)}</p>`;
+    actions = interactive ? button({ ...options[selectedChance], label: "Ambil kartu ini" }) : "";
   }
   const message =
     phase === "roll" && !match.roulette
@@ -593,7 +618,7 @@ function renderMatch() {
     attempt(() =>
       socket.send("match.reclaim", {
         matchId: match.id,
-        expectedControlEpoch: self.controller.controlEpoch,
+        expectedControlEpoch: (presentation.latest ?? match).players.find(p => p.seat === self.seat).controller.controlEpoch,
       }),
     ),
   );
@@ -602,7 +627,7 @@ function renderMatch() {
     .forEach((b) => (b.onclick = () => choose(b.dataset.option)));
 }
 async function choose(optionID) {
-  if (busy || !match || board?.isAnimating()) return;
+  if (busy || !match || board?.isAnimating() || presentation.busy) return;
   const allowed = match.allowedActions.find((a) =>
     a.options.some((o) => o.id === optionID && o.enabled),
   );
@@ -750,8 +775,19 @@ boot();
 
 // Presentation does not choose routes, cards, targets or roulette results.
 function updatePresentation() {
-  const presenting = !!board?.isAnimating();
-  if (presenting !== visualBusy) {
+  if (!match && !presentation.pending.length) presentation.clear();
+  advanceMatchPresentation();
+  const presenting = !!board?.isAnimating() || presentation.busy;
+  const offer = match?.presentation?.chance;
+  const observedChance = offer && (offer.actorSeat !== match.self.seat ||
+    match.players.find(p => p.seat === offer.actorSeat)?.controller.controllerKind !== "human");
+  const key = presentation.reveal
+    ? `${presentation.reveal.startedAt}:${performance.now() - presentation.reveal.startedAt >= 350}`
+    : observedChance ? `${offer.choiceId}:${Math.floor((performance.now() - presentation.enteredAt) / 180) % offer.cards.length}` : "";
+  const chanceChanged = key !== chanceAnimationKey;
+  chanceAnimationKey = key;
+  if (presenting !== visualBusy || chanceChanged ||
+      $("play").classList.contains("board-animating") !== !!board?.isAnimating()) {
     visualBusy = presenting;
     if (match) renderMatch();
   }

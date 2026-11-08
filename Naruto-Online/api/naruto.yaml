@@ -2492,6 +2492,35 @@ components:
         - "entries"
         - "endedAt"
         - "description"
+    ChanceOffer:
+      type: object
+      additionalProperties: false
+      description: "Tampilan pilihan kartu untuk semua pemain. Kartu terbuka hanya ketika berhenti tepat; kartu tertutup hanya mengirim slot, tanpa cardId. Bukan menu aksi bagi pengamat."
+      properties:
+        choiceId: {type: string}
+        actorSeat: {type: integer, minimum: 0, maximum: 3}
+        faceUp: {type: boolean}
+        cards:
+          type: array
+          minItems: 3
+          maxItems: 3
+          items:
+            type: object
+            additionalProperties: false
+            properties:
+              slot: {type: integer, minimum: 0, maximum: 2}
+              cardId: {type: integer, minimum: 0, maximum: 51}
+            required: [slot]
+      required: [choiceId, actorSeat, faceUp, cards]
+    ChanceResult:
+      type: object
+      additionalProperties: false
+      description: "Kartu yang sudah sah dipilih server, untuk animasi konfirmasi/reveal. Tidak berisi kartu tertutup lain."
+      properties:
+        actorSeat: {type: integer, minimum: 0, maximum: 3}
+        slot: {type: integer, minimum: 0, maximum: 2}
+        cardId: {type: integer, minimum: 0, maximum: 51}
+      required: [actorSeat, slot, cardId]
     MatchSnapshot:
       type: "object"
       additionalProperties: false
@@ -2499,7 +2528,7 @@ components:
         presentation:
           type: "object"
           additionalProperties: false
-          description: "Informasi tampilan publik dari engine arena 1. Tidak memuat RNG, deck atau kartu lawan."
+          description: "Informasi tampilan publik dari engine arena 1. Tidak memuat RNG, deck, inventori lawan, atau identitas pilihan chance tertutup yang belum dipilih."
           properties:
             phase: {type: "string"}
             actorSeat: {type: "integer", minimum: 0, maximum: 3}
@@ -2507,6 +2536,8 @@ components:
             lastRoll: {type: "integer", minimum: 0, maximum: 12}
             message: {type: "string"}
             log: {type: "array", maxItems: 8, items: {type: "string"}}
+            chance: {$ref: "#/components/schemas/ChanceOffer"}
+            chanceResult: {$ref: "#/components/schemas/ChanceResult"}
           required: ["phase", "actorSeat", "remaining", "lastRoll", "message", "log"]
         id:
           type: "string"

@@ -2970,6 +2970,8 @@ var NarutoEngine = (() => {
   function apply(s, id, tick) {
     const [kind, a, b] = id.split(":");
     let ok;
+    delete s.chanceResult;
+    const chanceResult = kind === "chance" ? { actorSeat: actor(s), slot: +a, cardId: s.decks[0][+a] } : null;
     switch (kind) {
       case "roll":
         ok = startRoll(s);
@@ -3037,6 +3039,7 @@ var NarutoEngine = (() => {
         break;
     }
     if (ok === false) throw new Error("Rule rejected offered action " + id);
+    if (chanceResult) s.chanceResult = chanceResult;
   }
   function cpu(s, tick) {
     var _a;
@@ -3148,7 +3151,21 @@ var NarutoEngine = (() => {
       }),
       roulette: w ? { id: choiceId, actorSeat: acting, kind: s.phase === "roll" ? "movement" : s.phase === "scrollRoll" ? "scroll" : s.phase === "attackRoll" ? "attack" : "defense", phase: "spinning", faces: w.faces, angle: w.angle, startedAtTick: (_j = s.wheelTick) != null ? _j : p.tick, stopRequestedAtTick: null, result: null } : null,
       result,
-      presentation: { phase: s.phase, actorSeat: acting, remaining: s.remaining, lastRoll: s.lastRoll, message: s.lastEvent ? `${s.lastEvent.title}: ${(_k = s.lastEvent.text) != null ? _k : ""}` : (_l = s.log[0]) != null ? _l : "", log: s.log.slice(0, 8) }
+      presentation: {
+        phase: s.phase,
+        actorSeat: acting,
+        remaining: s.remaining,
+        lastRoll: s.lastRoll,
+        message: s.lastEvent ? `${s.lastEvent.title}: ${(_k = s.lastEvent.text) != null ? _k : ""}` : (_l = s.log[0]) != null ? _l : "",
+        log: s.log.slice(0, 8),
+        ...s.phase === "chance" ? { chance: {
+          choiceId,
+          actorSeat: acting,
+          faceUp: s.remaining === 0,
+          cards: chanceChoices(s, game_data_default).map((c, slot) => s.remaining > 0 ? { slot } : { slot, cardId: c.id })
+        } } : {},
+        ...s.chanceResult ? { chanceResult: s.chanceResult } : {}
+      }
     } };
   }
   function run(input) {

@@ -274,7 +274,8 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         }
       }
       if (redraw) draw();
-      cameraClock += Math.min(delta, 100);
+      const wheel = state?.roulette ?? (now < wheelUntil ? heldWheel : null);
+      cameraClock += wheel ? 0 : Math.min(delta, 100);
       while (cameraClock >= 1000 / 60) {
         camera = stepCameraPan(camera);
         cameraClock -= 1000 / 60;
@@ -283,7 +284,6 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         const p = cameraPixels(camera);
         this.cameras.main.setScroll(p.x, p.y);
       }
-      const wheel = state?.roulette ?? (now < wheelUntil ? heldWheel : null);
       for (const mark of marks)
         mark.setVisible(!wheel && now >= animatingUntil);
       shade.setVisible(!!wheel);
@@ -341,8 +341,8 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
             : uiCamera.id;
 
       for (const actor of actors) {
-        const walking = actor.motion.segments.length > 0;
-        const walkPose = stepActorMotion(actor.motion, delta);
+        const walking = !wheel && actor.motion.segments.length > 0;
+        const walkPose = stepActorMotion(actor.motion, wheel ? 0 : delta);
         actor.x = actor.motion.x;
         actor.y = actor.motion.y;
         const player = state?.players.find(p => p.seat === actor.seat);
@@ -692,7 +692,6 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
       if (state?.roulette && !value?.roulette && value?.id === state.id) {
         const result =
           state.roulette.kind === "movement" &&
-          value.presentation?.phase === "move" &&
           state.roulette.faces.includes(value.presentation.lastRoll)
             ? value.presentation.lastRoll
             : null;

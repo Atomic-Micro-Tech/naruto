@@ -29,6 +29,13 @@ Integration corrections to the vendored code:
   Passing a chance tile offers three concealed slot labels without `cardId` or
   descriptions, including on reconnect; the server resolves the confirmed slot
   from its private deck and resumes any remaining movement.
+- Public `presentation.chance` lets observers animate the same three slots,
+  including CPU turns. Open offers expose their three card IDs; concealed offers
+  expose only slot indices. `presentation.chanceResult` exposes the actor, slot
+  and card ID only after a successful selection, before deck mutation changes
+  that slot. The next accepted action clears this presentation result. No
+  unselected concealed identities, private inventories or RNG state are added
+  to the public projection. Client animation queues do not alter CPU decisions.
 
 ## CPU policy and fidelity
 

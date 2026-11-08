@@ -73,6 +73,8 @@ export function options(s){
 }
 function apply(s,id,tick){
   const [kind,a,b]=id.split(':');let ok;
+  delete s.chanceResult;
+  const chanceResult = kind==='chance' ? {actorSeat:actor(s),slot:+a,cardId:s.decks[0][+a]} : null;
   switch(kind){
     case 'roll':ok=E.startRoll(s);break;
     case 'stop':ok=stop(s,tick);break;
@@ -99,6 +101,7 @@ function apply(s,id,tick){
       ok=true;break;
   }
   if(ok===false)throw new Error('Rule rejected offered action '+id);
+  if(chanceResult)s.chanceResult=chanceResult;
 }
 function cpu(s,tick){
   // Original decision functions where context is available. Unrecovered Party relationship
@@ -162,7 +165,10 @@ export function execute(p){
     players:s.players.map((p,i)=>({seat:i,characterId:p.id,position:p.pos,direction:p.direction>=0&&p.direction<4?p.direction:null,chakra:p.chakra,skillPoints:p.skill,eliminated:!!(p.actorStatus&1),possessed:!!(p.playerStatus&32),skipNextTurn:!!p.skipTurns,hasScroll:!!(p.flags&512),crystalTileIds:p.crystals,inventoryCount:p.inventory.filter(i=>i!==255).length})),
     tiles:data.maps[0].tiles.map((t,i)=>({id:t.id,typeCode:s.tileTypes[i],ownerSeat:s.estates[i]?.owner??null,level:s.estates[i]?.level??0,hp:s.estates[i]?.hp??0,effectId:s.tileEffects[i]?.effect??0,repairCounter:s.estates[i]?.repairCounter??0,x:t.x,y:t.y,neighbors:(t.neighborSlots??t.neighbors).map(n=>n===255?null:n),purchasePrice:t.buyCost,upgradeBase:t.upgradeCost,rents:t.rents})),
     roulette:w?{id:choiceId,actorSeat:acting,kind:s.phase==='roll'?'movement':s.phase==='scrollRoll'?'scroll':s.phase==='attackRoll'?'attack':'defense',phase:'spinning',faces:w.faces,angle:w.angle,startedAtTick:s.wheelTick??p.tick,stopRequestedAtTick:null,result:null}:null,
-    result,presentation:{phase:s.phase,actorSeat:acting,remaining:s.remaining,lastRoll:s.lastRoll,message:s.lastEvent?`${s.lastEvent.title}: ${s.lastEvent.text??''}`:s.log[0]??'',log:s.log.slice(0,8)}
+    result,presentation:{phase:s.phase,actorSeat:acting,remaining:s.remaining,lastRoll:s.lastRoll,message:s.lastEvent?`${s.lastEvent.title}: ${s.lastEvent.text??''}`:s.log[0]??'',log:s.log.slice(0,8),
+      ...(s.phase==='chance'?{chance:{choiceId,actorSeat:acting,faceUp:s.remaining===0,
+        cards:E.chanceChoices(s,data).map((c,slot)=>s.remaining>0?{slot}:{slot,cardId:c.id})}}:{}),
+      ...(s.chanceResult?{chanceResult:s.chanceResult}:{})}
   }};
 }
 export function run(input){return JSON.stringify(execute(JSON.parse(input)));}

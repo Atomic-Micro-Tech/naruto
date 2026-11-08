@@ -136,10 +136,30 @@ type PublicMatchSnapshot struct {
 }
 
 type PublicMatchPresentation struct {
-	Phase     string   `json:"phase"`
-	ActorSeat int16    `json:"actorSeat"`
-	Remaining int16    `json:"remaining"`
-	LastRoll  int16    `json:"lastRoll"`
-	Message   string   `json:"message"`
-	Log       []string `json:"log"`
+	Phase        string              `json:"phase"`
+	ActorSeat    int16               `json:"actorSeat"`
+	Remaining    int16               `json:"remaining"`
+	LastRoll     int16               `json:"lastRoll"`
+	Message      string              `json:"message"`
+	Log          []string            `json:"log"`
+	Chance       *PublicChanceOffer  `json:"chance,omitempty"`
+	ChanceResult *PublicChanceResult `json:"chanceResult,omitempty"`
+}
+
+type PublicChanceCard struct {
+	Slot   int16  `json:"slot"`
+	CardID *int64 `json:"cardId,omitempty"`
+}
+
+type PublicChanceOffer struct {
+	ChoiceID  string             `json:"choiceId"`
+	ActorSeat int16              `json:"actorSeat"`
+	FaceUp    bool               `json:"faceUp"`
+	Cards     []PublicChanceCard `json:"cards"`
+}
+
+type PublicChanceResult struct {
+	ActorSeat int16 `json:"actorSeat"`
+	Slot      int16 `json:"slot"`
+	CardID    int64 `json:"cardId"`
 }

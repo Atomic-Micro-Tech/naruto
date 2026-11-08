@@ -5,7 +5,7 @@ import { execute, options } from "../../server/internal/game/source/online.js";
 const choiceId = "00000000-0000-4000-8000-000000000001";
 const now = "2026-11-09T00:00:00Z";
 
-test("chance artwork IDs are offered only to the deciding player", () => {
+test("open chance artwork is public, but only the deciding player receives actions", () => {
   const state = initial().engine;
   state.phase = "chance";
   const result = execute({ state, tick: 0, choiceId, now });
@@ -14,7 +14,7 @@ test("chance artwork IDs are offered only to the deciding player", () => {
     state.decks[0].slice(0, 3),
   );
   assert.deepEqual(result.allowedBySeat[1], []);
-  assert.equal(JSON.stringify(result.public).includes('"cardId"'), false);
+  assert.deepEqual(result.public.presentation.chance.cards.map(c => c.cardId), state.decks[0].slice(0, 3));
 });
 
 test("passing chance exposes only three slot choices, including after reconnect", () => {
@@ -30,13 +30,29 @@ test("passing chance exposes only three slot choices, including after reconnect"
     })));
     assert.deepEqual(result.allowedBySeat[1], []);
     assert.equal(JSON.stringify(result.public).includes('"cardId"'), false);
+    assert.deepEqual(result.public.presentation.chance.cards, [{slot:0},{slot:1},{slot:2}]);
   }
   const chakra = state.players[0].chakra;
   const result = execute({ mode: "command", state, seat: 0, option: "chance:1", tick: 1, choiceId, now });
   assert.equal(result.engine.lastEvent.cardId, 1);
+  assert.deepEqual(result.public.presentation.chanceResult, {actorSeat:0,slot:1,cardId:1});
   assert.equal(result.public.players[0].chakra, chakra + 150);
   assert.equal(result.public.presentation.remaining, 2);
   assert.equal(result.public.presentation.phase, "move");
+});
+
+test("CPU selection publishes its committed slot/card only, never unselected concealed cards", () => {
+  const state = initial().engine;
+  state.phase = "chance";
+  state.players[0].pos = 5;
+  state.remaining = 2;
+  state.decks[0].splice(0, 3, 0, 1, 2);
+  const cards = state.decks[0].slice(0, 3);
+  const result = execute({ mode: "cpu", state, tick: 1, choiceId, now });
+  const chosen = result.public.presentation.chanceResult;
+  assert.equal(chosen.cardId, cards[chosen.slot]);
+  assert.equal(result.engine.lastEvent.cardId, chosen.cardId);
+  assert.equal(result.public.presentation.chance, undefined);
 });
 
 test("invalid hidden-card slot cannot consume a card or advance movement", () => {
