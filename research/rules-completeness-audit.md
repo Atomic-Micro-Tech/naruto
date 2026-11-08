@@ -4,6 +4,8 @@ Tanggal: 8 November 2026. Game: **Naruto: Shinobi no Sato no Jintori Gassen**, P
 
 ## Kesimpulan
 
+**Pembaruan audit Party:** [audit lanjutan](party-casual-audit.md) kini menutup kekosongan nama empat varian, syarat flag 98–101, sasaran kartu simpanan/pembatalan, serta label peringkat biasa saat seri. Aset hasil membuktikan label `ドベ` berarti paling akhir, dan cabang batas putaran dapat menampilkan beberapa `1位`. Temuan ini memperbarui ketidakpastian terkait pada catatan di bawah; dampak terhadap seluruh progres dan pembandingan runtime masih terbuka.
+
 **Belum lengkap untuk seluruh game, dan belum cukup untuk menyatakan replika 1:1.** [GAME_RULE.md](../GAME_RULE.md) sebelumnya merupakan dokumentasi Party Mode dengan beberapa batas eksplisit. Audit ini menambah aturan yang dapat ditelusuri, tetapi tidak menghapus ketidakpastian hanya karena suatu aset tersedia atau suatu tes JavaScript lulus.
 
 Ada tiga hal yang harus dinilai terpisah:
@@ -73,7 +75,7 @@ Rujukan: [full-rules.json](full-rules.json), `BOARD 800ec574/800f2a9c/800db29c`,
 
 `800e1958` sudah cukup untuk membuktikan **urutan array hasil**: skor chakra 32 bit dengan penalti 10000 untuk peserta tidak aktif, prioritas maksimum untuk pemenang yang sudah ditetapkan, lalu pertukaran pasangan dengan perbandingan `<`. Pengurutan stabil generik tidak setara; skor `[100,100,200]` menghasilkan `[2,1,0]`.
 
-Namun urutan array tidak dengan sendirinya membuktikan kebijakan seri yang ditampilkan dan semua akibat progres. Masih perlu pemeriksaan kasus semua saldo nol/negatif, kemenangan belum ditetapkan, dan team mode dengan indeks pemenang sentinel 255. Pada cabang eliminasi tertentu, pencarian pemenang dimulai dari pembanding nol dan hanya mengganti kandidat untuk saldo yang lebih besar; jangan menganggap kasus nol telah tertangani tanpa melihat state masuknya.
+Urutan array tidak dengan sendirinya membuktikan kebijakan seri yang ditampilkan dan semua akibat progres. [Audit Party lanjutan](party-casual-audit.md) kini menelusuri pembuat badge `80110d68` dan gambar labelnya: pada batas putaran biasa, nilai seri berbagi peringkat, kelompok paling rendah diberi `ドベ`, dan semua saldo sama dapat menampilkan semua `1位`. Akibat progres dan cabang eliminasi semua saldo nol/negatif tetap memerlukan pemeriksaan state masuk. Pada cabang eliminasi tertentu, pencarian pemenang dimulai dari pembanding nol dan hanya mengganti kandidat untuk saldo yang lebih besar; label seri tidak membuktikan bahwa seluruh transisi itu sudah tertangani.
 
 ## Matriks cakupan seluruh game
 

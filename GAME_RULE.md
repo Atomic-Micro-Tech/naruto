@@ -6,7 +6,7 @@ Game: **Naruto: Shinobi no Sato no Jintori Gassen**, executable `SLPS_035.53`.
 
 Dokumen ini mendeskripsikan aturan asli yang sudah dapat dibuktikan, bukan menjadikan perilaku rekonstruksi browser sebagai sumber kebenaran. Nama efek dalam bahasa Indonesia merupakan penjelasan fungsi; bukan klaim terjemahan resmi.
 
-**Status audit 8 November 2026: belum merupakan seluruh aturan game yang lengkap.** Bagian 1–9 membahas Party Mode; mode cerita, tim, balap kartu, dan progres mempunyai aturan tambahan. Audit ini melengkapi preset Party, pembukaan ninjutsu, rincian kartu, pertarungan, dan eliminasi. Bukti baru serta daftar pekerjaan yang masih terbuka ada di [audit kelengkapan](research/rules-completeness-audit.md). Kelengkapan folder aset `arena1` tidak membuktikan kelengkapan aturan atau kesetaraan permainan 1:1.
+**Status audit 8 November 2026: belum merupakan seluruh aturan game yang lengkap.** Bagian 1–9 membahas Party Mode; mode cerita, tim, balap kartu, dan progres mempunyai aturan tambahan. Audit lanjutan menambahkan nama asli dan syarat pembukaan empat varian, sasaran kartu, pembatalan, serta label peringkat saat seri. Bukti terperinci ada di [audit Party lanjutan](research/party-casual-audit.md) dan [audit kelengkapan](research/rules-completeness-audit.md). Kelengkapan folder aset `arena1` tidak membuktikan kelengkapan aturan atau kesetaraan permainan 1:1.
 
 ## 1. Persiapan pertandingan
 
@@ -64,6 +64,23 @@ Party memakai tabel daftar teknik di `0x800648e4`, bukan daftar teknik skenario 
 | 12 | Naruto berkacamata | 10, 1, —, — |
 
 Lima pembukaan terpisah berlaku: **Naruto ID 0 / teknik 8 → flag 87; Sakura / teknik 7 → 88; Kakashi / teknik 5 → 89; Naruto ID 0 / teknik 5 → 90; Sasuke / teknik 3 → 91**. Jika flag belum diperoleh, `80012c70` mengganti slot teknik itu dengan ID 14. Pembukaan karakter dan pembukaan teknik adalah dua syarat berbeda. Label karakter mengikuti [pemetaan aset asli](extracted/original-ui/characters.json).
+
+### Kondisi progres untuk papan dan teknik Party
+
+Kondisi berikut dibaca ketika pemrosesan progres hasil pertandingan dijalankan. `campaign` dan `stage` adalah **indeks internal berbasis nol**, bukan nomor bab yang langsung ditampilkan kepada pemain.
+
+| Yang dibuka | Flag | Kondisi dalam tabel progres |
+| --- | --- | --- |
+| Papan 1 / 2 / 3 | 79 / 80 / 81 | Campaign 0, stage 1 / 2 / 4, masing-masing |
+| Papan 4 / 5 / 6 | 82 / 83 / 84 | Campaign 0, stage 5 / 7 / 8, masing-masing |
+| Papan 7 | 85 | Seluruh 56 harta, flag 0–55, sudah diperoleh |
+| Papan 8 | 86 | Campaign 1, stage 2 |
+| Naruto teknik 8 dan Sakura teknik 7 | 87 dan 88 | Campaign 0, stage 1 |
+| Kakashi teknik 5 | 89 | Campaign 0, stage 2 |
+| Naruto teknik 5 | 90 | Campaign 0, stage 4 |
+| Sasuke teknik 3 | 91 | Campaign 0, stage 5 |
+
+Sumber: record 79–91 pada [progression-data.json](research/progression-data.json), `MENU 800c2f44/800c33a8`. Predicate tahap hanya memeriksa campaign/stage; angka `500` yang juga terdapat pada beberapa record tipe 10 **tidak dibaca sebagai syarat chakra**. Tabel ini tidak menyatakan bahwa membuka menu tahap saja memberi hadiah, atau bahwa semua cabang kalah menjalankan progres yang sama. Flag diperiksa dan diberikan dalam alur hasil (`800c1d9c/800c25ac`), bukan saat menu Party dibuka.
 
 ## 2. Tujuan dan kemenangan aturan normal
 
@@ -266,6 +283,23 @@ Teleportasi membatalkan sisa langkah dan mereset arah pada cabang yang bersangku
 
 **Dek arena pertama:** dek 0 mula-mula memuat **51 entri, 29 ID berbeda**, bukan seluruh 52 kartu. Dua pool awalnya identik. Pengulangan ID memberi bobot, tetapi peluang pilihan berikutnya juga dipengaruhi pengocokan, kartu di tangan, pengembalian, dan pilihan tiga kartu; bukan undian seragam dari 52 ID.
 
+#### Sasaran kartu, penimpaan efek, dan pembatalan
+
+Pada pemilih sasaran standar kartu papan, daftar berisi pemain yang masih aktif; diri sendiri disertakan dan menjadi pilihan awal, kecuali untuk kartu teleportasi ID 36.
+
+| Kartu | Sasaran dan perilaku saat dikonfirmasi |
+| --- | --- |
+| 13–18, langkah tetap | Diri sendiri atau pemain aktif lain. Nilai langkah berikutnya **diganti**, bukan ditambah dengan efek langkah tetap sebelumnya. |
+| 19, melewatkan giliran | Pemain aktif lain mendapat status melewatkan giliran. Diri sendiri tetap dapat dipilih, tetapi cabang itu tidak memasang status baru; **kartu tetap habis dan jatah penggunaan kartu giliran itu tetap terpakai**. |
+| 27–30, pengubah roulette | Diri sendiri atau pemain aktif lain. Status roulette baru **menimpa** status pengubah sebelumnya; durasi tidak ditumpuk. |
+| 36, teleportasi ke pemain | Harus memilih pemain aktif lain. Pembatalan pada pemilih sasaran kejadian ini dinonaktifkan. |
+
+Membatalkan pemilih sasaran kartu simpanan sebelum konfirmasi mengembalikan pemain ke pemilihan kartu, tanpa mengonsumsi kartu atau jatah penggunaannya. Setelah konfirmasi, kartu dihapus melalui fungsi pengembalian inventori dan menu kartu dinonaktifkan untuk sisa giliran, termasuk kasus ID 19 diarahkan ke diri sendiri.
+
+Kartu pasif gulungan ID 20/21 tidak dipilih melalui menu kartu papan. Menu serangan menawarkan tipe kartu 8/9, sedangkan menu pertahanan menawarkan tipe 10/11; **tidak ada definisi kartu tipe 11** dalam tabel disc. Jangan menyamakan nomor tipe efek dengan ID kartu.
+
+Sumber: `BOARD 800d15a8`, `80103e6c/80103e8c`, `8010f3e0`. Kesimpulan sasaran di atas berlaku untuk pemilih standar yang ditelusuri; jalur kursor peta lama dan keputusan CPU dibahas terpisah dalam [audit lanjutan](research/party-casual-audit.md#sasaran-dan-konsumsi-kartu).
+
 ### Ninjutsu papan
 
 Ninjutsu papan memakai **poin ninjutsu**, sedangkan teknik pertarungan memakai **chakra**. Karakter hanya dapat memilih ninjutsu yang terdapat pada daftar kemampuannya dan mempunyai sasaran sah.
@@ -332,7 +366,7 @@ Sumber: `BOARD FUN_800ba43c`, `800e70c8`, `800edd68`, `800ea18c`, `800d8930`, `8
 
 ## 9. Empat aturan tambahan Party Mode
 
-Menu memilih **normal atau satu varian**. Empat varian memerlukan flag pembukaan 98–101. Pilihan dengan parameter numerik mempunyai editor dua digit dan menolak konfirmasi nilai nol. Nama di kolom pertama menjelaskan perilakunya; label Jepang menu belum ditranskripsikan di sini.
+Menu memilih **normal atau satu varian**. Empat varian memerlukan flag pembukaan 98–101. Pilihan dengan parameter numerik mempunyai editor dua digit dan menolak konfirmasi nilai nol. Nama asli berikut dibaca dari pesan pembukaan; menu pengaturan menampilkan kalimat penjelasannya. [Gambar teks asli](research/party-casual/rule-text.png) dan [ID pesan](research/party-casual/evidence.json) disertakan untuk pemeriksaan.
 
 | Pilihan | Flag runtime | Perubahan aturan yang terverifikasi |
 | --- | --- | --- |
@@ -342,7 +376,20 @@ Menu memilih **normal atau satu varian**. Empat varian memerlukan flag pembukaan
 | Syarat bonus pemegang gulungan | `0x0004` | Pada sumber, dapat menang bila masih membawa gulungan dan penghitung bonus selama memegangnya mencapai batas; mencapai target chakra juga tetap merupakan jalur kemenangan. Penghitung ini bukan jumlah kristal atau jumlah kali merebut gulungan. |
 | Target chakra dengan gulungan | `0x0008` | Pada sumber, harus sekaligus mencapai target chakra **dan** sedang membawa gulungan. |
 
-Sumber pemilihan: `MENU FUN_800b9d44`, `800ba0a8`, `800ba2d0`. Sumber penyelesaian: `BOARD FUN_800edd68`, `800dc2e0`, `800e0b3c`, `800e1958`, serta pemeriksaan akhir giliran. Rincian urutan seri pada layar hasil dan seluruh transisi eliminasi masih memerlukan pembandingan runtime; dokumen ini tidak menambahkan aturan tie-break buatan.
+### Nama asli dan syarat membuka varian
+
+| Flag | Nama dalam pesan asli | Syarat saat progres hasil diperiksa |
+| --- | --- | --- |
+| 98 | **マイナスチャクラで脱落** — eliminasi chakra negatif | Pemain pertama, slot 0, pernah mengalami perubahan saldo dari nol/positif menjadi negatif dalam pertandingan tersebut. Tidak harus masih negatif pada layar hasil. |
+| 99 | **決められたターンで終了** — berakhir pada batas putaran | Penghitung putaran mencapai **40 atau lebih**; map balap kartu 16/17 dikecualikan. Ini bukan 40 kali mencapai sumber atau 40 giliran individu yang dijumlahkan antarpartisipan. |
+| 100 | **封印の書をもったままマップを周回で勝ち** — menang melalui bonus putaran sambil membawa gulungan | Pemain pertama telah memakai kekuatan gulungan **究極チャクラ大吸収の術**, penghitung kategori 3 bukan nol. |
+| 101 | **封印の書をもったままクリア** — menyelesaikan target sambil membawa gulungan | Pemain pertama telah memakai **keempat jenis kekuatan gulungan dalam satu pertandingan**, penghitung kategori 0–3 masing-masing bukan nol. |
+
+Pencatatan penggunaan kekuatan dilakukan ketika masuk cabang pemakaiannya. Untuk **天変地異の術** dan **結界ブン取りの術**, penghitung naik sebelum hasil roulette/tantangan diketahui; tidak disyaratkan selalu berhasil. Empat penggunaan oleh empat pemain berbeda tidak memenuhi kondisi slot 0. Pemakaian yang tersebar pada beberapa pertandingan juga tidak dijumlahkan untuk flag 101: penghitung lima kategori disalin dengan **penimpaan** saat hasil diproses. Flag pembukaan yang sudah diperoleh tetap tersimpan.
+
+Predikat flag 98–101 tidak menambahkan syarat harus menang atau harus memakai karakter tertentu. Pemberiannya tetap menunggu alur progres hasil, bukan langsung ketika kejadian berlangsung. Sumber: `MENU 800c1d9c/800c2748/800c25ac`, predicate `800c3e34/800c355c/800c3328/800c32c8`, `BOARD 800d8930`, dan setter `80016bb8` pada [PROGRESSION_HELPERS.c](decompiled/PROGRESSION_HELPERS.c).
+
+Sumber pemilihan: `MENU FUN_800b9d44`, `800ba0a8`, `800ba2d0`, `800bcad4`. Sumber penyelesaian: `BOARD FUN_800edd68`, `800dc2e0`, `800e0b3c`, `800e1958`, serta pemeriksaan akhir giliran. Teks asli varian bonus menyebut bahwa jumlah bonus yang ditentukan **juga** dapat memberi kemenangan; ini mendukung cabang alternatif terhadap target chakra, bukan kewajiban memenuhi keduanya.
 
 ### Eliminasi dan urutan hasil yang sudah dapat dibuktikan
 
@@ -350,7 +397,29 @@ Pada `800e0b3c`, penyelesaian eliminasi menunggu antrean perubahan chakra selesa
 
 Pertandingan individu dapat masuk hasil ketika hanya satu peserta aktif tersisa **atau tidak ada pemain manusia aktif lagi**. Jadi permainan tidak wajib meneruskan duel antar-CPU setelah semua manusia tereliminasi. Jika beberapa CPU masih aktif dalam kondisi terakhir tersebut, kode memakai penanda hasil khusus; jangan mengarang pemenang manusia atau menjalankan simulasi otomatis tambahan.
 
-Urutan hasil pada `800e1958` memakai chakra 32 bit dikurangi 10000 bagi peserta tidak aktif; pemenang yang sudah ditetapkan diberi prioritas maksimum. Pengurutan menukar pasangan hanya jika nilai kiri lebih kecil, tetapi pertukaran dengan peserta ketiga dapat membalik urutan dua nilai yang sama. Contoh skor slot `[100, 100, 200]` menghasilkan urutan slot `[2, 1, 0]`. Ini membuktikan algoritme urutan, **belum merupakan aturan universal untuk menentukan pemenang saat seri**. Penyajian hasil seri dan kasus semua saldo nol/negatif tetap memerlukan jejak runtime.
+Urutan hasil pada `800e1958` memakai chakra 32 bit dikurangi 10000 bagi peserta tidak aktif; pemenang yang sudah ditetapkan diberi prioritas maksimum. Pengurutan menukar pasangan hanya jika nilai kiri lebih kecil, tetapi pertukaran dengan peserta ketiga dapat membalik urutan dua nilai yang sama. Contoh skor slot `[100, 100, 200]` menghasilkan urutan slot `[2, 1, 0]`. **Urutan tampilan dan label peringkat dihitung terpisah**; posisi dalam array bukan aturan pemutus seri.
+
+### Label peringkat dan hasil seri
+
+Aset hasil asli mempunyai label **1位, 2位, 3位, ドベ**: peringkat 1, 2, 3, dan **paling akhir**. Label terakhir bukan selalu “peringkat 4”; pertandingan dua pemain juga menggunakannya. Dua label tambahan, **勝ち / まけ**, dipakai cabang tim. Lihat [gambar hasil ekstraksi](research/party-casual/result-labels.png).
+
+Untuk Party individu yang berakhir karena **batas putaran sudah tercapai**, dengan semua peserta masih aktif, tanpa pemenang sumber yang diprioritaskan, dan penanda hasil khusus `8001a1f0() == 0`:
+
+- Chakra yang sama mendapat label peringkat yang sama. Setiap nilai chakra yang lebih rendah menaikkan nomor peringkat satu tingkat.
+- Kelompok dengan nilai terendah mendapat **ドベ**, jika ada kelompok bernilai lebih tinggi.
+- Jika seluruh chakra sama, seluruh peserta mendapat label **1位**. Kode label ini tidak mengadakan roulette tambahan atau memilih pemenang berdasarkan nomor slot.
+
+| Chakra, dalam urutan hasil | Label yang ditampilkan |
+| --- | --- |
+| 200, 100 | 1位, ドベ |
+| 200, 100, 100 | 1位, ドベ, ドベ |
+| 300, 200, 200, 100 | 1位, 2位, 2位, ドベ |
+| 300, 300, 200, 100 | 1位, 1位, 2位, ドベ |
+| 100, 100, 100, 100 | 1位, 1位, 1位, 1位 |
+
+Pada kemenangan sumber normal, pemain yang sudah ditetapkan menang tetap mendapat **1位**, sedangkan perhitungan pemain lainnya dimulai dari peringkat 2. Jadi saldo yang sama dengan pemenang sumber tidak otomatis menghasilkan juara bersama. Pemain tidak aktif pada posisi hasil kedua dan seterusnya ditandai **ドベ**. Cabang penanda hasil khusus mempunyai perlakuan lain dan tidak disamakan dengan contoh di atas.
+
+Sumber: `BOARD 80110d68/8011186c/80111aac`, tabel sprite `0x8013a6b0/0x8013a6c8`, resource 41, serta [PARTY_CASUAL_HELPERS.c](decompiled/PARTY_CASUAL_HELPERS.c). Ini membuktikan **label layar hasil dari kode dan aset**, bukan seluruh efek seri terhadap progres atau seluruh transisi eliminasi melalui eksekusi PS1. Nilai getter pemenang `8001a274` adalah **ID karakter**, berbeda dari slot peserta pada getter urutan `8001a1bc`.
 
 ## 10. Batas mode dan batas verifikasi
 
@@ -366,8 +435,8 @@ Untuk menjawab apakah dokumen ini mencakup **seluruh game**, perbedaan berikut h
 Hal yang belum ditetapkan sebagai fakta lengkap di dokumen ini:
 
 - Seluruh perilaku ujung rentang pengaturan, termasuk permainan dengan target nol, belum dibandingkan dengan runtime asli. Preset sembilan papan dan nilai defaultnya sudah diekstrak pada audit ini.
-- Nama resmi setiap kartu/teknik dan label Jepang keempat varian aturan.
-- Semua kondisi seri dan transisi hasil/eliminasi pada setiap kombinasi pertandingan, terutama tim dan kondisi semua peserta kehabisan chakra; beberapa cabang dan algoritme pengurutan sudah dijelaskan pada bagian 9.
+- Nama resmi setiap kartu/teknik yang belum ditranskripsikan. Nama dan penjelasan keempat varian Party kini sudah dibaca dari pesan asli.
+- Dampak hasil seri pada seluruh progres dan transisi hasil/eliminasi, terutama cabang penanda hasil khusus, tim, dan kondisi semua peserta kehabisan chakra. Label seri biasa pada batas putaran sudah dijelaskan pada bagian 9.
 - Kesetaraan setiap keputusan CPU, urutan RNG antaranimasi, timing, suara, dan tampilan dengan perangkat PS1.
 
 Rekonstruksi browser saat ini membuka semua karakter untuk pengujian dan menawarkan 10 papan. Itu adalah fasilitas versi rekonstruksi, **bukan aturan pembukaan Party Mode asli**. Dokumen ini tidak menyatakan bahwa seluruh aturan yang tercatat sudah diimplementasikan di browser.
@@ -379,6 +448,7 @@ Rekonstruksi browser saat ini membuka semua karakter untuk pengujian dan menawar
 | [SLPS_035.53.c](decompiled/SLPS_035.53.c) | Data pemain, inventori, chakra, konfigurasi, teknik, dan akses tabel utama. |
 | [MENU.c](decompiled/MENU.c) | Party Mode, jumlah peserta/CPU, pemilihan karakter/papan, target, dan aturan tambahan. |
 | [PARTY_RULE_HELPERS.c](decompiled/PARTY_RULE_HELPERS.c), [party-rules.json](research/party-rules.json) | Preset Party yang terpisah dari cerita, daftar ninjutsu per karakter, dan lima pembukaan teknik. |
+| [Audit Party lanjutan](research/party-casual-audit.md), [bukti teks/aset](research/party-casual/evidence.json) | Nama varian, syarat pembukaan, sasaran kartu, dan label hasil seri; ekstraksi dapat diulang dengan [extract_party_audit.py](scripts/extract_party_audit.py). |
 | [BOARD.c](decompiled/BOARD.c) | Giliran, pergerakan, petak, bonus, kepemilikan, gulungan, penjualan, dan hasil pertandingan. |
 | [COMBAT_SETUP.c](decompiled/COMBAT_SETUP.c) | Pilihan teknik, roulette pertarungan, biaya, penangkal, dan kerusakan. |
 | [full-rules.json](research/full-rules.json), [maps.json](research/maps.json), [techniques.json](research/techniques.json) | Konstanta yang diekstrak dari disc. ID pada data ini berbasis nol. |
