@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { purchasedTiles, sealFrame } from '../src/seal.js';
+import { barrierSealTiles, sealFrame } from '../src/seal.js';
 
 const data = JSON.parse(readFileSync(new URL('../../assets/sprite/effects/seal.json', import.meta.url)));
 const before = { id: 'match', status: 'playing', stateVersion: 1,
@@ -11,15 +11,27 @@ const after = { ...before, stateVersion: 2,
   tiles: [{ ...before.tiles[0], typeCode: 5, ownerSeat: 0, level: 1 }] };
 
 test('seal only follows a new authoritative purchase, never initial/repeated snapshots', () => {
-  assert.deepEqual(purchasedTiles(before, after), after.tiles);
-  assert.deepEqual(purchasedTiles(null, after), []);
-  assert.deepEqual(purchasedTiles(after, after), []);
-  assert.deepEqual(purchasedTiles(before, { ...after, stateVersion: 1 }), []);
-  assert.deepEqual(purchasedTiles(before, { ...after, id: 'other' }), []);
-  assert.deepEqual(purchasedTiles(before, { ...before, stateVersion: 2 }), []);
-  assert.deepEqual(purchasedTiles(after, { ...after, stateVersion: 3 }), []);
-  assert.deepEqual(purchasedTiles(after, { ...after, stateVersion: 3,
-    tiles: [{ ...after.tiles[0], level: 2 }] }), []);
+  assert.deepEqual(barrierSealTiles(before, after), after.tiles);
+  assert.deepEqual(barrierSealTiles(null, after), []);
+  assert.deepEqual(barrierSealTiles(after, after), []);
+  assert.deepEqual(barrierSealTiles(before, { ...after, stateVersion: 1 }), []);
+  assert.deepEqual(barrierSealTiles(before, { ...after, id: 'other' }), []);
+  assert.deepEqual(barrierSealTiles(before, { ...before, stateVersion: 2 }), []);
+  assert.deepEqual(barrierSealTiles(after, { ...after, stateVersion: 3 }), []);
+});
+
+test('seal follows confirmed upgrades, including remote tiles and multiple levels', () => {
+  for (const level of [2, 3, 4, 5]) {
+    const upgraded = { ...after, stateVersion: 3, players: [{ seat: 0, position: 0 }],
+      tiles: [{ ...after.tiles[0], level }] };
+    assert.deepEqual(barrierSealTiles(after, upgraded), upgraded.tiles);
+    assert.deepEqual(barrierSealTiles(null, upgraded), []);
+    assert.deepEqual(barrierSealTiles(upgraded, { ...upgraded, stateVersion: 4 }), []);
+  }
+  for (const change of [{ hp: 2 }, { level: 0 }, { level: 6 }, { ownerSeat: 1, level: 2 }]) {
+    assert.deepEqual(barrierSealTiles(after, { ...after, stateVersion: 3,
+      tiles: [{ ...after.tiles[0], ...change }] }), []);
+  }
 });
 
 test('native sequence reveals at cursor 39, ends once, and tolerates a suspended tab', () => {

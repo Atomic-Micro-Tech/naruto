@@ -1,13 +1,17 @@
 // BOARD effect 1: resource 649. FUN_800227f0 sprite transforms; purchase
 // commits its barrier at sequence step 39 (80022464 reads cursor +0x2e).
-export function purchasedTiles(previous, next) {
+export function barrierSealTiles(previous, next) {
   if (!previous || !next || previous.id !== next.id ||
       next.status !== "playing" || next.stateVersion <= previous.stateVersion) return [];
   return next.tiles.filter(tile => {
     const before = previous.tiles.find(t => t.id === tile.id);
-    return before?.ownerSeat === null && before.typeCode === 4 &&
+    const purchased = before?.ownerSeat === null && before.typeCode === 4 &&
       tile.ownerSeat !== null && tile.level === 1 &&
       next.players.some(p => p.seat === tile.ownerSeat && p.position === tile.id);
+    // Upgrades can target another owned tile from the upgrade menu.
+    const upgraded = before?.ownerSeat != null && before.ownerSeat === tile.ownerSeat &&
+      before.level >= 1 && tile.level > before.level && tile.level <= 5;
+    return purchased || upgraded;
   });
 }
 

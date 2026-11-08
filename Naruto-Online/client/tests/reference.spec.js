@@ -398,6 +398,26 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
   await page.locator(".board-frame").screenshot({ path: "test-results/reference-seal-reveal.png" });
   await expect.poll(() => commands.length, { timeout: 1800 }).toBeGreaterThan(beforeSeal);
   expect(commands.at(-1).payload.action.payload.optionId).toBe("end");
+  const upgrade = structuredClone(claimed);
+  upgrade.public.presentation.phase = "upgrade";
+  upgrade.allowedBySeat[0] = [{ type: "choice.select", choiceId: "upgrade",
+    options: [{ id: "upgrade:20:2", label: "Penghalang Lv.2", tileId: 20, enabled: true }] }];
+  await send(upgrade);
+  await page.locator('[data-option="upgrade:20:2"]').click();
+  expect(commands.at(-1).payload.action.payload.optionId).toBe("upgrade:20:2");
+  const upgraded = structuredClone(claimed);
+  Object.assign(upgraded.public.tiles[20], { level: 2, hp: 3 });
+  const beforeUpgradeSeal = commands.length;
+  await send(upgraded);
+  await expect(page.locator("#play")).toHaveClass(/presenting/);
+  await page.waitForTimeout(700);
+  await page.locator(".board-frame").screenshot({ path: "test-results/reference-upgrade-seal.png" });
+  expect(commands).toHaveLength(beforeUpgradeSeal);
+  await send(upgraded);
+  await expect(page.locator("#play")).not.toHaveClass(/presenting/);
+  await page.locator(".board-frame").screenshot({ path: "test-results/reference-upgraded-barrier.png" });
+  await expect.poll(() => commands.length).toBeGreaterThan(beforeUpgradeSeal);
+  expect(commands.at(-1).payload.action.payload.optionId).toBe("end");
   // Focus near the blue checkpoint, keeping the character off the orb.
   const checkpoint = structuredClone(land);
   checkpoint.public.players[0].position = 18;

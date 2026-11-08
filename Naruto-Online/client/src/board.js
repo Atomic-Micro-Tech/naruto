@@ -10,7 +10,7 @@ import {
 } from "./native-camera";
 import { createRouletteRenderer } from "./roulette";
 import { updateRouletteAudio, sound } from "./audio";
-import { purchasedTiles, sealFrame } from "./seal";
+import { barrierSealTiles, sealFrame } from "./seal";
 import { createActorMotion, setActorDestination, remainingWalkMS,
   stepActorMotion, advanceSpriteSequence } from "./actor-motion";
 import { SHURIKEN_ATLAS, shurikenFrames } from "./roulette-shuriken";
@@ -433,9 +433,11 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
       }
     const routes = movementPreview(state);
     const destinations = new Set(routes.flatMap(r => r.destinations));
-    for (const tile of tiles) {
-      const pendingSeal = seals.has(tile.id) && !seals.get(tile.id).revealed;
-      if (pendingSeal) continue;
+    for (const nextTile of tiles) {
+      const seal = seals.get(nextTile.id);
+      const pendingSeal = seal && !seal.revealed;
+      const tile = pendingSeal ? seal.previousTile : nextTile;
+      if (pendingSeal && tile.ownerSeat === null) continue;
       if (tile.ownerSeat !== null)
         art(
           `barrier-${tile.ownerSeat}-${tile.level}`,
@@ -460,7 +462,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         art("vacant", tile.x, tile.y, 16, 16, tile.y);
       if (tile.ownerSeat !== null && tile.hp < tile.level + 1)
         art("damaged", tile.x, tile.y, 16, 16, tile.y + 1);
-      if ((tile.typeCode === 4 || tile.ownerSeat !== null) && !pendingSeal) {
+      if (tile.typeCode === 4 || tile.ownerSeat !== null) {
         overlays.push(
           scene.add
             .text(
@@ -726,13 +728,15 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         onCameraMode("follow");
         updateRouletteAudio(null);
       }
-      for (const tile of purchasedTiles(state, value)) {
+      for (const tile of barrierSealTiles(state, value)) {
         if (seals.has(tile.id)) continue;
         const images = Array.from({ length: Math.max(...sealData.frames.map(f => f.length)) },
           (_, i) => scene.add.image(0, 0, "seal-atlas").setVisible(false).setDepth(tile.y + 40 + i / 100));
         seals.set(tile.id, { images, x: tile.x - 1, y: tile.y + 2, tile: tile.id, seat: tile.ownerSeat,
+          previousTile: { ...state.tiles.find(t => t.id === tile.id) },
           startedAt: now, revealed: false });
         animatingUntil = Math.max(animatingUntil, now + sealData.sequence.length * 1000 / sealData.fps);
+        if (!manualCamera && !overview) camera = beginCameraPan(camera, tile);
         sound("seal");
       }
       if (!value?.roulette) wheelSpin = null;
