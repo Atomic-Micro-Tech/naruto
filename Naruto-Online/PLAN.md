@@ -1,6 +1,8 @@
 # Rencana MVP Naruto Online — Web Lokal, lalu Facebook Instant Games
 
-Tanggal: 8 November 2026. Status: rencana implementasi, belum merupakan aplikasi yang berjalan.
+Pembaruan: 9 November 2026. Status: integrasi arena 1 sudah dapat dimainkan lokal; porting Facebook dan sertifikasi PS1 1:1 masih tahap berikutnya.
+
+Implementasi berjalan tersedia di [README](README.md): Phaser 3/Vite JavaScript, Go + Goja untuk menjalankan source aturan hasil rekonstruksi, PostgreSQL, WebSocket, Mailpit dan LiveKit. Login → room → pertandingan → hasil/rematch, chat/voice, disconnect CPU dan reclaim sudah terhubung. CPU berjalan dengan kebijakan lokal bernama `local-party-v1`; detail adaptasi dan ketidakpastian dipisahkan dari klaim CPU original dalam [dokumentasi engine](server/internal/game/README.md). Bagian rencana di bawah tetap menjadi acuan hardening/fidelity dan tahap Facebook, bukan pernyataan bahwa seluruh acceptance 1:1 telah terpenuhi.
 
 Pengembangan dan pengujian dimulai sebagai **website lokal**. Pemain wajib register/login dengan email sebelum mengakses room. Setelah gameplay, multiplayer, CPU pengganti, chat, voice dan mobile stabil, aplikasi baru diporting ke **Facebook Instant Games**. Game ditulis ulang tanpa emulator, menggunakan Phaser 3, backend Go, PostgreSQL dan WebSocket. Aset bersumber dari `assets/`; aturan permainan mengikuti [GAME_RULE.md](../GAME_RULE.md) dan keputusan CPU mengikuti [AI_RULE.md](../AI_RULE.md).
 

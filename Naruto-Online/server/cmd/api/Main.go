@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"narutoserver/internal/auth"
+	"narutoserver/internal/game"
 	"narutoserver/realtime"
 	"narutoserver/usecase"
 	"narutoserver/worker"
@@ -28,19 +29,37 @@ func main() {
 		fmt.Fprintln(os.Stderr, err)
 
 		os.Exit(1)
+
 	}
+
 }
 
 func run() error {
 
-	cfg, err := internal.LoadConfig(internal.DefaultConfigPath)
+	configPath := os.Getenv(internal.ConfigEnvironmentVariable)
+
+	if configPath == "" {
+
+		configPath = internal.DefaultConfigPath
+	}
+
+	cfg, err := internal.LoadConfig(configPath)
 
 	if err != nil {
 
 		return err
+
 	}
 
 	_, err = auth.Key()
+
+	if err != nil {
+
+		return err
+
+	}
+
+	err = game.Prepare()
 
 	if err != nil {
 
@@ -56,6 +75,7 @@ func run() error {
 	if err != nil {
 
 		return err
+
 	}
 
 	defer internal.CloseConnections()
@@ -65,6 +85,7 @@ func run() error {
 	if err != nil {
 
 		return err
+
 	}
 
 	_, err = health.GetReadiness(internal.ParamGetReadiness{})
@@ -72,6 +93,7 @@ func run() error {
 	if err != nil {
 
 		return err
+
 	}
 
 	stopTelemetry := telemetry.Setup()
@@ -85,6 +107,7 @@ func run() error {
 	if err != nil {
 
 		return err
+
 	}
 
 	signalCtx, stopSignal := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
@@ -94,13 +117,22 @@ func run() error {
 	workerCtx, stopWorkers := context.WithCancel(signalCtx)
 
 	var wg sync.WaitGroup
-	wg.Add(2)
+	wg.Add(3)
+
+	go func() {
+
+		defer wg.Done()
+
+		worker.RunMatches(workerCtx, advanceMatches)
+
+	}()
 
 	go func() {
 
 		defer wg.Done()
 
 		worker.Run(workerCtx, realtime.Dispatch)
+
 	}()
 
 	go func() {
@@ -108,6 +140,7 @@ func run() error {
 		defer wg.Done()
 
 		realtime.Maintain(workerCtx)
+
 	}()
 
 	defer func() {
@@ -117,6 +150,7 @@ func run() error {
 		realtime.Close()
 
 		wg.Wait()
+
 	}()
 
 	shutdownDone := make(chan error, 1)
@@ -139,9 +173,11 @@ func run() error {
 
 			shutdownDone <- shutdownErr
 			return
+
 		}
 
 		shutdownDone <- wsErr
+
 	}()
 
 	err = httpServer.Start()
@@ -149,7 +185,24 @@ func run() error {
 	if err != nil {
 
 		return err
+
 	}
 
 	return <-shutdownDone
+
+}
+
+func advanceMatches(ctx context.Context) error {
+
+	service, err := usecase.NewMatchUseCase(ctx)
+
+	if err != nil {
+
+		return err
+	}
+
+	_, err = service.AdvanceMatches(internal.ParamAdvanceMatches{})
+
+	return err
+
 }

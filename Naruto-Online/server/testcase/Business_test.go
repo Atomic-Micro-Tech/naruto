@@ -24,10 +24,13 @@ func fail(t *testing.T, err error) {
 		if errors.As(err, &f) {
 
 			t.Fatalf("business failure: %v", f.Cause)
+
 		}
 
 		t.Fatal(err)
+
 	}
+
 }
 
 func expect(t *testing.T, err error, code string) {
@@ -38,7 +41,9 @@ func expect(t *testing.T, err error, code string) {
 	if !errors.As(err, &input) || input.Code != code {
 
 		t.Fatalf("expected %s, got %v", code, err)
+
 	}
+
 }
 
 func account(t *testing.T, n int) (context.Context, string, string) {
@@ -61,6 +66,7 @@ func account(t *testing.T, n int) (context.Context, string, string) {
 	if !registered.VerificationEmailSent {
 
 		t.Fatal("SMTP not delivered")
+
 	}
 
 	logged, err := service.LoginEmail(internal.ParamLoginEmail{Email: email, Password: fixture.Password})
@@ -77,11 +83,14 @@ func account(t *testing.T, n int) (context.Context, string, string) {
 
 	p := internal.Principal{UserID: row.UserID, SessionID: row.ID, ExpiresAt: row.ExpiresAt, CSRFToken: logged.CSRFToken, TokenHash: row.TokenHash}
 	return internal.WithPrincipal(context.Background(), p), email, logged.CookieToken
+
 }
 
 func TestBusinessTransactions(t *testing.T) {
 
 	inbox := testsupport.Start(t)
+
+	t.Run("match lifecycle", matchLifecycle)
 
 	contexts := make([]context.Context, 4)
 
@@ -92,6 +101,7 @@ func TestBusinessTransactions(t *testing.T) {
 	for i := range contexts {
 
 		contexts[i], emails[i], tokens[i] = account(t, i)
+
 	}
 
 	authCase, err := usecase.NewAuthUseCase(contexts[0])
@@ -127,6 +137,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if duplicate.Room.ID != created.Room.ID || *duplicate.InviteCode != *created.InviteCode {
 
 		t.Fatal("idempotency changed result")
+
 	}
 
 	changed := request
@@ -162,6 +173,7 @@ func TestBusinessTransactions(t *testing.T) {
 
 				results <- e
 				return
+
 			}
 
 			joined, e := rooms.JoinRoomByCode(internal.ParamJoinRoomByCode{InviteCode: *created.InviteCode, IdempotencyKey: uuid.New()})
@@ -171,14 +183,19 @@ func TestBusinessTransactions(t *testing.T) {
 				if joined.InviteCode != nil {
 
 					e = errors.New("private code leaked to guest")
+
 				} else {
 
 					winners <- i
+
 				}
+
 			}
 
 			results <- e
+
 		}(i)
+
 	}
 
 	wg.Wait()
@@ -191,15 +208,19 @@ func TestBusinessTransactions(t *testing.T) {
 		if e == nil {
 
 			success++
+
 		} else {
 
 			expect(t, e, "ROOM_FULL")
+
 		}
+
 	}
 
 	if success != 1 {
 
 		t.Fatalf("joined=%d, want exactly one free seat", success)
+
 	}
 
 	winner := <-winners
@@ -210,6 +231,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if len(rooms.Members) != 2 {
 
 		t.Fatal("capacity violation")
+
 	}
 
 	realtimeCase, err := usecase.NewRealtimeUseCase(contexts[winner])
@@ -236,6 +258,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if ack.Duplicate {
 
 		t.Fatal("new message marked duplicate")
+
 	}
 
 	ack, err = realtimeCase.ExecuteLobby(command)
@@ -245,6 +268,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if !ack.Duplicate {
 
 		t.Fatal("retry not deduplicated")
+
 	}
 
 	command.RequestID = uuid.New()
@@ -265,6 +289,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if len(page.Items) != 1 {
 
 		t.Fatalf("chat count %d", len(page.Items))
+
 	}
 
 	p, _ := internal.CurrentPrincipal(contexts[winner])
@@ -288,6 +313,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if len(page.Items) != 0 {
 
 		t.Fatal("blocked chat visible")
+
 	}
 
 	_, err = moderation.UnblockUser(internal.ParamUnblockUser{UserID: p.UserID})
@@ -298,6 +324,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if outsider == winner {
 
 		outsider = 2
+
 	}
 
 	projectionPrivacy(t, created.Room.ID, contexts[0], contexts[winner], contexts[outsider])
@@ -330,6 +357,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if rotated.InviteCode == nil || replayed.InviteCode == nil || *rotated.InviteCode != *replayed.InviteCode || !replayed.Duplicate {
 
 		t.Fatal("invite rotation replay changed private result")
+
 	}
 
 	_, err = visitor.JoinRoomByCode(internal.ParamJoinRoomByCode{InviteCode: *created.InviteCode, IdempotencyKey: uuid.New()})
@@ -355,6 +383,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if current.HostUserID != p.UserID {
 
 		t.Fatal("host did not migrate to remaining member")
+
 	}
 
 	_, err = realtimeCase.ExecuteLobby(internal.ParamLobbyCommand{ConnectionID: connected.ConnectionID, RequestID: uuid.New(), Type: "room.leave", RoomID: created.Room.ID, ExpectedRoomVersion: current.RoomVersion})
@@ -406,5 +435,7 @@ func TestBusinessTransactions(t *testing.T) {
 	if data != nil || !errors.Is(err, context.Canceled) {
 
 		t.Fatalf("cancellation not propagated: %v", err)
+
 	}
+
 }

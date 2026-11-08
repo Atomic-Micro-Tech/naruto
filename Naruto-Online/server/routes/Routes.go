@@ -14,6 +14,11 @@ func NewRoutes() http.Handler {
 
 	mux := http.NewServeMux()
 
+	// Local game client and the canonical gameplay asset library.
+	mux.HandleFunc("GET /assets/", controller.HandleGameAssets)
+
+	mux.HandleFunc("GET /", controller.HandleGameClient)
+
 	// System
 	mux.HandleFunc("GET /healthz", controller.HandleGetHealth)
 
@@ -76,4 +81,5 @@ func NewRoutes() http.Handler {
 	mux.HandleFunc("GET /v1/ws", middleware.RequireWSTicket(controller.HandleUpgradeWebSocket))
 
 	return otelhttp.NewHandler(middleware.CORS(mux), "/", otelhttp.WithFilter(middleware.TraceHTTP))
+
 }

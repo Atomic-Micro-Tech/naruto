@@ -13,14 +13,14 @@ Backend lokal Go dengan PostgreSQL, mengikuti [OpenAPI](../api/naruto.yaml), [sk
 - Proyeksi snapshot pertandingan untuk peserta yang berhak; kartu sendiri dipisahkan dari kartu lawan, RNG dan state AI.
 - Worker outbox untuk email/event/voice serta pembersihan anggota lobby yang melewati tenggat reconnect.
 
-**Mesin gameplay dan CPU belum diimplementasikan.** `room.start` memeriksa host/roster/ready, lalu menolak dengan `CPU_CONTEXT_UNRESOLVED`. `match.command` dan `match.reclaim` juga belum mengeksekusi permainan. Disconnect saat pertandingan belum menjalankan CPU, dan leave saat playing belum didukung. Tidak ada match contoh yang dipakai sebagai data produksi. Ini belum merupakan MVP game yang selesai atau replika 1:1.
+**Arena 1 sudah terintegrasi dan playable.** `room.start` membuat checkpoint/roster secara atomik. `match.command` menjalankan pilihan legal di engine Goja, menyimpan command/state/RNG/event/result dan outbox dalam satu transaksi. Worker mengambil alih pemain disconnect/AFK dengan CPU; `match.reclaim` memagari kontrol lama melalui epoch. Leave saat playing mempertahankan karakter sebagai CPU. Hasil mengembalikan room ke waiting untuk rematch. Kebijakan `local-party-v1` merupakan adaptasi lokal, bukan sertifikasi CPU PS1 1:1; lihat [engine](internal/game/README.md). Frontend dan satu perintah setup ada di [README aplikasi](../README.md).
 
 `GET /v1/matches/{matchId}` dan `match.resume` membaca checkpoint tersimpan dengan format proyeksi:
-`public`, `privateBySeat`, dan `allowedBySeat`. Field DTO yang diizinkan didefinisikan di `internal/MatchProjection.go`. Checkpoint yang belum cocok ditolak; endpoint tidak mengirim JSON state database mentah. Integrasi engine perlu menulis format ini secara atomik bersama roster, versi dan event.
+`public`, `privateBySeat`, dan `allowedBySeat`. Field DTO yang diizinkan didefinisikan di `internal/MatchProjection.go`. Checkpoint yang belum cocok ditolak; endpoint tidak mengirim JSON state database mentah. Engine menulis format ini secara atomik bersama roster, versi dan event; field `engine` dan `trace` tetap privat di database. `status` internal running/completed dipetakan menjadi playing/finished sesuai OpenAPI.
 
 ## Dev menggunakan Compose
 
-Jalankan perintah berikut dari folder `Naruto-Online/server`. Gunakan Go 1.25+, Python 3.9+ dan Docker Compose. [compose.yaml](../compose.yaml) menyediakan PostgreSQL 15 dengan database `mydb`, user `myuser`, password dev `mypassword`, dan port host `5432`. API Go tetap dijalankan di host; Compose saat ini belum menjalankan API, SMTP atau LiveKit.
+Jalankan perintah berikut dari folder `Naruto-Online/server`. Gunakan Go 1.26+, Python 3.9+ dan Docker Compose. [compose.yaml](../compose.yaml) menyediakan PostgreSQL 15 dengan database `mydb`, user `myuser`, password dev `mypassword`, dan port host `5432`. API Go tetap dijalankan di host; Compose juga menyediakan Mailpit dan LiveKit lokal. `python3 ../dev.py --setup` mengatur seluruh alur dev, atau gunakan langkah manual di bawah.
 
 ```sh
 docker compose -f ../compose.yaml up -d postgres
@@ -65,24 +65,24 @@ export NARUTO_APP_KEY='KUNCI_BASE64_32_BYTE_YANG_DISIMPAN_LOKAL'
 go run ./cmd/api
 ```
 
-Server membaca `configs/config.json` dan environment proses; file `.env` tidak dimuat otomatis. Kunci dipakai untuk CSRF, kode undangan, cursor, email outbox dan receipt terenkripsi. Menggantinya sembarangan membuat data terenkripsi lama tidak dapat dibaca.
+Server membaca `configs/config.json` (atau path `NARUTO_CONFIG`) dan environment proses; file `.env` tidak dimuat otomatis. Kunci dipakai untuk CSRF, kode undangan, cursor, email outbox dan receipt terenkripsi. Menggantinya sembarangan membuat data terenkripsi lama tidak dapat dibaca.
 
 Konfigurasi bawaan:
 
 | Komponen | Alamat |
 |---|---|
 | HTTP | `127.0.0.1:8080` |
-| Origin web | `http://localhost:5173`, `http://127.0.0.1:5173` |
+| Origin web | `http://localhost:5173`, `http://127.0.0.1:5173`, serta kedua hostname pada port `8080` |
 | SMTP lokal | `127.0.0.1:1025` |
 | LiveKit | `ws://localhost:7880` |
 
 Jalankan penerima SMTP lokal, misalnya Mailpit, pada alamat tersebut. Pengiriman gagal disimpan untuk retry; register mengembalikan `verificationEmailSent=false` bila email belum terkirim. Token verifikasi/reset dapat diambil dari inbox lokal dan dikirim ke endpoint terkait. Adapter SMTP saat ini khusus lingkungan lokal tanpa autentikasi/TLS.
 
-Voice memerlukan server LiveKit serta `LIVEKIT_API_KEY` dan `LIVEKIT_API_SECRET`. Tanpa kredensial, endpoint token voice mengembalikan 503. Pengujian otomatis memeriksa JWT audio-only dan revocation/outbox database; aliran audio mikrofon dan pemutusan peserta pada SFU nyata masih perlu pengujian dengan LiveKit. Pada deployment sendiri, JWT yang sudah terbit tetap harus diperhitungkan sampai kedaluwarsa; penghapusan peserta aktif bukan pencabutan kriptografis JWT.
+Voice memerlukan server LiveKit serta `LIVEKIT_API_KEY` dan `LIVEKIT_API_SECRET`. Tanpa kredensial, endpoint token voice mengembalikan 503. Pengujian Go memeriksa JWT audio-only dan revocation/outbox database. Playwright juga menghubungkan dua browser ke LiveKit lokal, menerima track audio sintetis dan menguji mute/leave; mikrofon fisik dan perangkat LAN tetap memerlukan uji perangkat. Pada deployment sendiri, JWT yang sudah terbit tetap harus diperhitungkan sampai kedaluwarsa; penghapusan peserta aktif bukan pencabutan kriptografis JWT.
 
 Gunakan hostname yang konsisten antara web dan API agar cookie SameSite bekerja, serta `credentials: "include"` pada fetch. Mutasi menyertakan Origin yang diizinkan dan `X-CSRF-Token` dari login/me/refresh. Create room, join dan report juga memerlukan `Idempotency-Key` UUID.
 
-`/healthz` memeriksa proses. `/readyz` memeriksa versi skema dan data arena; status ready menyatakan layanan API siap, bukan bahwa engine gameplay sudah tersedia.
+`/healthz` memeriksa proses. `/readyz` memeriksa versi skema dan data arena; bundle engine juga dikompilasi saat startup sebelum HTTP mulai menerima request.
 
 ## Arsitektur dan batas operasional
 
@@ -123,7 +123,7 @@ Tes ini memakai koneksi `NARUTO_TEST_DATABASE_URL` untuk membuat database sement
 
 Gunakan `-p 1` ketika suite berbagi database: tiap proses tes mempunyai SMTP dan hub socket sendiri, sehingga worker antarproses tidak boleh saling mengambil event. Tes memakai akun sintetis, SMTP sementara dan server HTTP/WebSocket nyata; tidak menyentuh database aplikasi jika URL test mengarah ke database terpisah. Data tes tetap berada di database test setelah suite selesai.
 
-Cakupan meliputi register/login/verifikasi/reset, rotasi sesi, CSRF, Origin, kapasitas room pada join serentak, retry/conflict idempotensi, privasi room, tiket sekali pakai, chat/block/report, voice JWT, migrasi host, penutupan room, dan proyeksi kartu/RNG/AI.
+Cakupan juga mencakup start/move/roulette, duplicate commandId, stale version/epoch, CPU takeover saat roulette, reclaim, hasil/rematch dan penutupan room yang sedang bermain. Cakupan lainnya meliputi register/login/verifikasi/reset, rotasi sesi, CSRF, Origin, kapasitas room pada join serentak, retry/conflict idempotensi, privasi room, tiket sekali pakai, chat/block/report, voice JWT, migrasi host, penutupan room, dan proyeksi kartu/RNG/AI.
 
 Untuk menghentikan PostgreSQL dev tanpa menghapus container/data:
 

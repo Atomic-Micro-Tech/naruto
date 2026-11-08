@@ -2355,6 +2355,11 @@ components:
           type: "string"
         enabled:
           type: "boolean"
+        cardId:
+          type: "integer"
+          minimum: 0
+          maximum: 51
+          description: "Artwork for a card currently offered to this participant."
         targetSeat:
           type: "integer"
           minimum: 0
@@ -2491,6 +2496,18 @@ components:
       type: "object"
       additionalProperties: false
       properties:
+        presentation:
+          type: "object"
+          additionalProperties: false
+          description: "Informasi tampilan publik dari engine arena 1. Tidak memuat RNG, deck atau kartu lawan."
+          properties:
+            phase: {type: "string"}
+            actorSeat: {type: "integer", minimum: 0, maximum: 3}
+            remaining: {type: "integer", minimum: 0, maximum: 12}
+            lastRoll: {type: "integer", minimum: 0, maximum: 12}
+            message: {type: "string"}
+            log: {type: "array", maxItems: 8, items: {type: "string"}}
+          required: ["phase", "actorSeat", "remaining", "lastRoll", "message", "log"]
         id:
           type: "string"
           format: "uuid"
@@ -3510,8 +3527,8 @@ x-websocket:
   ordering: "Mutasi room memakai expectedRoomVersion, hanya waiting. Nama/settings diubah host; edit membatalkan ready semua pemain. room.ready juga memilih karakter awal. room.start hanya host ketika roster sah, semua ready dan assetsReady/hash sesuai. room.kick hanya host saat waiting dan tidak dapat menendang diri sendiri; room.invite.rotate hanya host privat. room.leave saat playing melepas koneksi kontrol ke CPU dan voice, bukan surrender. Setelah hasil server mengembalikan room ke waiting dengan ready=false; room.start membuat match baru."
   idempotency: "requestId wajib di semua pesan; mutasi didedup per user/type/requestId. match.command juga commandId persisten untuk seluruh umur match. chat.send memakai clientMessageId per user+room. Payload berbeda dengan ID sama -> IDEMPOTENCY_CONFLICT. command.ack diterbitkan sesudah commit; queued reclaim berarti antrian reclaim sudah persisten, belum memberi hak mengontrol."
   matchResume: "lastEventSequence adalah cursor match, bukan stateVersion. Server memberi event yang hilang sesuai hak user; jika log gap/terlalu besar beri match.snapshot. Client mengabaikan sequence duplikat, meminta resume pada gap. controller.changed menggunakan sequence match yang sama; jangan mengirim aksi controller baru sebelum epoch baru commit."
-  takeover: "Disconnect terdeteksi -> controllerKind=cpu dan controlEpoch bertambah, job CPU mengikuti AI_RULE. participantKind=user manusia tidak berubah. Wheel/tick/RNG dan aksi commit tidak direset. match.reclaim hanya pemilik slot dengan sesi sah; reclaim pada batas keputusan, epoch bertambah dan job lama dibatalkan. Semua user offline tidak mengakhiri match hanya karena semua controller CPU. Koneksi baru akun yang sama mencabut koneksi pengendali lama melalui sessionEpoch."
-  gameCommands: "Client hanya mengirim niat dalam GameAction dan controlEpoch saat ini. Validasi turn/side/substate, optionId, inventori, biaya dan sasaran oleh server; pertahanan boleh membutuhkan keputusan slot non-turnSeat. Surrender confirm memerlukan choiceId aktif dari surrender.request. Cancel/confirm tanpa choiceId ditolak. Card targetSeat/targetTileId diterima hanya bila pilihan menu memerlukannya; keduanya tidak boleh dipakai sekaligus. No client-supplied seed, roll result, chakra, damage or actorId."
+  takeover: "Disconnect terdeteksi -> controllerKind=cpu dan controlEpoch bertambah, job CPU memakai aiPolicyVersion yang tersimpan. Implementasi lokal saat ini memakai local-party-v1 dengan adaptasi terdokumentasi; bukan sertifikasi AI original 1:1. participantKind=user manusia tidak berubah. Wheel/tick/RNG dan aksi commit tidak direset. match.reclaim hanya pemilik slot dengan sesi sah; reclaim pada batas keputusan, epoch bertambah dan job lama dibatalkan. Semua user offline tidak mengakhiri match hanya karena semua controller CPU. Koneksi baru akun yang sama mencabut koneksi pengendali lama melalui sessionEpoch."
+  gameCommands: "Client hanya mengirim niat dalam GameAction dan controlEpoch saat ini. MVP arena 1 menawarkan semua keputusan melalui choice.select; gunakan hanya action/options yang diterbitkan dalam allowedActions. Validasi turn/side/substate, optionId, inventori, biaya dan sasaran oleh server; pertahanan boleh membutuhkan keputusan slot non-turnSeat. Surrender confirm memerlukan choiceId aktif dari surrender.request. Cancel/confirm tanpa choiceId ditolak. Card targetSeat/targetTileId diterima hanya bila pilihan menu memerlukannya; keduanya tidak boleh dipakai sekaligus. No client-supplied seed, roll result, chakra, damage or actorId."
   presentation: "Tick logis 60 Hz bila diperlukan, tidak mengirim snapshot per frame. match.event MVP menyertakan snapshot proyeksi setelah event bisnis, bukan tick roulette. Client memajukan animasi dari serverTick. WS frame limit mencakup snapshot; implementasi wajib mengukur payload maksimum sebelum release."
   errorCodes:
     - "INVALID_MESSAGE"

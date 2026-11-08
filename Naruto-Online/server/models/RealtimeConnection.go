@@ -19,6 +19,7 @@ type RealtimeConnection struct {
 
 // RealtimeConnectionRepo is the data-access contract for naruto.realtime_connections.
 type RealtimeConnectionRepo interface {
+	UserConnected(userID uuid.UUID) (bool, error)
 	GetByID(id uuid.UUID) (*RealtimeConnection, error)
 	Create(value *RealtimeConnection) error
 	Update(value *RealtimeConnection) error
@@ -33,84 +34,101 @@ type RealtimeConnectionRepo interface {
 func NewRealtimeConnection() *RealtimeConnection {
 
 	return &RealtimeConnection{}
+
 }
 
 func (m *RealtimeConnection) GetID() uuid.UUID {
 
 	return m.ID
+
 }
 
 func (m *RealtimeConnection) SetID(value uuid.UUID) {
 
 	m.ID = value
+
 }
 
 func (m *RealtimeConnection) GetUserID() uuid.UUID {
 
 	return m.UserID
+
 }
 
 func (m *RealtimeConnection) SetUserID(value uuid.UUID) {
 
 	m.UserID = value
+
 }
 
 func (m *RealtimeConnection) GetSessionID() uuid.UUID {
 
 	return m.SessionID
+
 }
 
 func (m *RealtimeConnection) SetSessionID(value uuid.UUID) {
 
 	m.SessionID = value
+
 }
 
 func (m *RealtimeConnection) GetSessionEpoch() int64 {
 
 	return m.SessionEpoch
+
 }
 
 func (m *RealtimeConnection) SetSessionEpoch(value int64) {
 
 	m.SessionEpoch = value
+
 }
 
 func (m *RealtimeConnection) GetConnectedAt() time.Time {
 
 	return m.ConnectedAt
+
 }
 
 func (m *RealtimeConnection) SetConnectedAt(value time.Time) {
 
 	m.ConnectedAt = value
+
 }
 
 func (m *RealtimeConnection) GetLastHeartbeatAt() time.Time {
 
 	return m.LastHeartbeatAt
+
 }
 
 func (m *RealtimeConnection) SetLastHeartbeatAt(value time.Time) {
 
 	m.LastHeartbeatAt = value
+
 }
 
 func (m *RealtimeConnection) GetDisconnectedAt() *time.Time {
 
 	return m.DisconnectedAt
+
 }
 
 func (m *RealtimeConnection) SetDisconnectedAt(value *time.Time) {
 
 	m.DisconnectedAt = value
+
 }
 
 func (m *RealtimeConnection) GetDisconnectReason() *string {
 
 	return m.DisconnectReason
+
 }
 
 func (m *RealtimeConnection) SetDisconnectReason(value *string) {
 
 	m.DisconnectReason = value
+
 }

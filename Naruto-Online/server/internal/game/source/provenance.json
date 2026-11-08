@@ -1,0 +1,22 @@
+{
+  "description": "Vendored browser reconstruction; party-outcomes from research. No PS1 emulator. Source hashes before integration fixes.",
+  "source": "browser-game/dist",
+  "sha256": {
+    "engine.js": "4fbd85bc252720d28ef5fefe8fa9dd228c7666e230fb2cf5f4ea447c4c5bef8e",
+    "faithful-rules.mjs": "424ecd9d718aa5f4b2b4faa88dc278ebe8cd44a015102ed43d6042ffabc97823",
+    "faithful-combat.mjs": "929b3d5d626738b8a7119c1820c8cedcdf3b2f389bf45d1df9f725c65dcaed13",
+    "faithful-roulette.mjs": "83e080d772c39983ac02147152149420c6e543b3d6c2ae94b89a44e57971a0f6",
+    "board-adapter.js": "ce57c81d49f65923f21772342f0787a99debb6141eb6a874434aa2d98dfe2678",
+    "board-effects.mjs": "507a2aad4a4bde7843ce12f925c799dcbd39b4f661fd5007814e76ebbe5fd2d8",
+    "story1-scroll.mjs": "9838fb987f007e4f19bab1cbeda0b18213cafdacd73edc8ca487e69929e9ea96",
+    "board-ai.mjs": "a0622edb6e5c9c7384b100c067a5f9eaee216b7b2844471d9ce2751d9a561c3d",
+    "story1-economy.mjs": "13e96a33581a96215656ce6e1f46aa737d87ae78edacfcc8f2b3f2c07d632e3e",
+    "story1-cpu.mjs": "cd34bc441b94ff1df6f35f4881baad769c2763bc0230076aac3051499f492464",
+    "story1-route.mjs": "efe1f4b80f7627eb3d68f7434eebb764e1c63e17477d20edb45946479c37f7a9",
+    "story1-cpu-preroll.mjs": "75f2c8b77f4f392d919df0764f1413cfd72b7517417956f8edcbb12e3258072f",
+    "story1-cpu-roulette.mjs": "4f93982ae7068ee91fb66e6f569f89f3cd584665d2da6f221a3ae6dd6ff948a7",
+    "story1-cpu-combatcard.mjs": "e06e68ad453403321422e6243e635684828092ec58836093089ad862152f045f",
+    "party-outcomes.mjs": "31e011fd175876a24f4c7bd4e22bed5d20f369893d5b55bea5fea6530f585b7d",
+    "game-data.json": "a2bb724cc409b3202ceedd7655aa8e88215eeaf6f2711086bdeb5269d4304994"
+  }
+}

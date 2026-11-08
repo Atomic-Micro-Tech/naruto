@@ -37,11 +37,13 @@ func Track() (func(), bool) {
 	if closing {
 
 		return nil, false
+
 	}
 
 	active.Add(1)
 
 	return active.Done, true
+
 }
 
 func Wait(ctx context.Context) error {
@@ -53,6 +55,7 @@ func Wait(ctx context.Context) error {
 		active.Wait()
 
 		close(done)
+
 	}()
 
 	select {
@@ -61,7 +64,9 @@ func Wait(ctx context.Context) error {
 		return nil
 	case <-ctx.Done():
 		return ctx.Err()
+
 	}
+
 }
 
 func Register(c *Client) {
@@ -75,7 +80,9 @@ func Register(c *Client) {
 	if old != nil {
 
 		go old.Socket.Close(websocket.StatusPolicyViolation, "connection replaced")
+
 	}
+
 }
 
 func Remove(c *Client) {
@@ -85,9 +92,11 @@ func Remove(c *Client) {
 	if clients[c.Principal.UserID] == c {
 
 		delete(clients, c.Principal.UserID)
+
 	}
 
 	mu.Unlock()
+
 }
 
 func Close() {
@@ -100,6 +109,7 @@ func Close() {
 	for _, c := range clients {
 
 		all = append(all, c)
+
 	}
 
 	mu.Unlock()
@@ -107,7 +117,9 @@ func Close() {
 	for _, c := range all {
 
 		c.Socket.CloseNow()
+
 	}
+
 }
 
 func (c *Client) Send(kind string, payload any) error {
@@ -122,6 +134,7 @@ func (c *Client) Send(kind string, payload any) error {
 	if err != nil {
 
 		return err
+
 	}
 
 	if len(encoded) > internal.MaxMessageBytes {
@@ -129,6 +142,7 @@ func (c *Client) Send(kind string, payload any) error {
 		c.Socket.CloseNow()
 
 		return errors.New("outgoing frame exceeds protocol limit")
+
 	}
 
 	ctx, cancel := context.WithTimeout(c.Context, 3*time.Second)
@@ -140,9 +154,11 @@ func (c *Client) Send(kind string, payload any) error {
 	if err != nil {
 
 		c.Socket.CloseNow()
+
 	}
 
 	return err
+
 }
 
 func (c *Client) Snapshot(ctx context.Context) error {
@@ -152,6 +168,7 @@ func (c *Client) Snapshot(ctx context.Context) error {
 	if err != nil {
 
 		return err
+
 	}
 
 	member, err := members.Current(c.Principal.UserID)
@@ -159,6 +176,7 @@ func (c *Client) Snapshot(ctx context.Context) error {
 	if err != nil || member == nil {
 
 		return err
+
 	}
 
 	service, err := usecase.NewRoomUseCase(internal.WithPrincipal(ctx, c.Principal))
@@ -166,6 +184,7 @@ func (c *Client) Snapshot(ctx context.Context) error {
 	if err != nil {
 
 		return err
+
 	}
 
 	data, err := service.GetRoom(internal.ParamGetRoom{RoomID: member.RoomID})
@@ -173,6 +192,7 @@ func (c *Client) Snapshot(ctx context.Context) error {
 	if err != nil {
 
 		return err
+
 	}
 
 	var code *string
@@ -183,6 +203,7 @@ func (c *Client) Snapshot(ctx context.Context) error {
 		if err != nil {
 
 			return err
+
 		}
 
 		room, err := rooms.GetByID(member.RoomID)
@@ -190,6 +211,7 @@ func (c *Client) Snapshot(ctx context.Context) error {
 		if err != nil {
 
 			return err
+
 		}
 
 		clear, err := auth.Open(room.InviteCodeCiphertext)
@@ -197,20 +219,29 @@ func (c *Client) Snapshot(ctx context.Context) error {
 		if err != nil {
 
 			return err
+
 		}
 
 		s := string(clear)
 
 		code = &s
+
 	}
 
 	return c.Send("room.snapshot", struct {
 		Room       internal.RoomData `json:"room"`
 		InviteCode *string           `json:"inviteCode"`
 	}{data.RoomData, code})
+
 }
 
 func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
+
+	if event.Topic == "match.changed" {
+
+		return dispatchMatch(ctx, event)
+
+	}
 
 	if event.Topic == "voice.remove" {
 
@@ -224,14 +255,17 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 		if err != nil {
 
 			return err
+
 		}
 
 		return voice.Remove(ctx, p.RoomID, p.Identity)
+
 	}
 
 	if event.Topic != "room.changed" && event.Topic != "chat.message" && event.Topic != "room.member_removed" {
 
 		return errors.New("unsupported outbox topic")
+
 	}
 
 	mu.Lock()
@@ -241,6 +275,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 	for _, c := range clients {
 
 		all = append(all, c)
+
 	}
 
 	mu.Unlock()
@@ -250,6 +285,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 	if err != nil {
 
 		return err
+
 	}
 
 	room, err := rooms.GetByID(event.AggregateID)
@@ -257,6 +293,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 	if err != nil {
 
 		return err
+
 	}
 
 	if event.Topic == "room.member_removed" {
@@ -270,6 +307,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 		if err != nil {
 
 			return err
+
 		}
 
 		for _, c := range all {
@@ -279,15 +317,19 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 			if err != nil {
 
 				return err
+
 			}
 
 			if found || c.Principal.UserID == payload.UserID {
 
 				c.Send("member.updated", map[string]any{"roomId": room.ID, "roomVersion": room.RoomVersion, "userId": payload.UserID, "member": nil})
+
 			}
+
 		}
 
 		return nil
+
 	}
 
 	var message *models.ChatMessage
@@ -302,6 +344,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 		if err != nil {
 
 			return err
+
 		}
 
 		messages, err := repo.NewChatMessageRepo(ctx)
@@ -309,6 +352,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 		if err != nil {
 
 			return err
+
 		}
 
 		message, err = messages.GetByID(payload.MessageID)
@@ -316,7 +360,9 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 		if err != nil {
 
 			return err
+
 		}
+
 	}
 
 	for _, c := range all {
@@ -326,6 +372,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 		if err != nil {
 
 			return err
+
 		}
 
 		if message != nil {
@@ -333,6 +380,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 			if !found || message.HiddenAt != nil {
 
 				continue
+
 			}
 
 			blocks, err := repo.NewUserBlockRepo(ctx)
@@ -340,6 +388,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 			if err != nil {
 
 				return err
+
 			}
 
 			blocked, err := blocks.Exists(c.Principal.UserID, *message.SenderUserID)
@@ -347,22 +396,26 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 			if err != nil {
 
 				return err
+
 			}
 
 			if blocked {
 
 				continue
+
 			}
 
 			data := internal.ChatMessageData{ID: message.ID, RoomID: message.RoomID, Sender: &internal.PlayerIdentity{UserID: *message.SenderUserID, DisplayName: *message.SenderDisplayName}, Kind: message.Kind, Text: message.Body, CreatedAt: message.CreatedAt, ClientMessageID: message.ClientMessageID}
 			c.Send("chat.message", data)
 
 			continue
+
 		}
 
 		if found {
 
 			c.Snapshot(ctx)
+
 		}
 
 		if room.Visibility == "public" {
@@ -376,6 +429,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 				if err != nil {
 
 					return err
+
 				}
 
 				host, err := users.GetByID(*room.HostUserID)
@@ -383,6 +437,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 				if err != nil {
 
 					return err
+
 				}
 
 				members, err := repo.NewRoomMemberRepo(ctx)
@@ -390,6 +445,7 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 				if err != nil {
 
 					return err
+
 				}
 
 				roster, err := members.List(room.ID)
@@ -397,17 +453,72 @@ func Dispatch(ctx context.Context, event *models.OutboxEvent) error {
 				if err != nil {
 
 					return err
+
 				}
 
 				summary = &internal.RoomSummaryData{ID: room.ID, Name: room.Name, Host: internal.PlayerIdentity{UserID: host.ID, DisplayName: host.DisplayName}, Visibility: room.Visibility, Status: room.Status, Settings: internal.RoomSettings{ArenaID: room.ArenaID, Capacity: room.Capacity, TargetChakra: room.TargetChakra, Rule: room.Rule, VoiceEnabled: room.VoiceEnabled}, MemberCount: len(roster), RoomVersion: room.RoomVersion, CanJoin: room.Status == "waiting" && len(roster) < int(room.Capacity), CreatedAt: room.CreatedAt}
 				reason = "updated"
+
 			}
 
 			c.Send("rooms.updated", map[string]any{"reason": reason, "roomId": room.ID, "summary": summary})
+
 		}
+
 	}
 
 	return nil
+
+}
+
+func dispatchMatch(ctx context.Context, event *models.OutboxEvent) error {
+
+	players, err := repo.NewMatchPlayerRepo(ctx)
+
+	if err != nil {
+
+		return err
+	}
+
+	roster, err := players.List(event.AggregateID)
+
+	if err != nil {
+
+		return err
+	}
+
+	for _, p := range roster {
+
+		mu.Lock()
+
+		client := clients[p.UserID]
+		mu.Unlock()
+
+		if client == nil {
+
+			continue
+		}
+
+		service, err := usecase.NewMatchUseCase(internal.WithPrincipal(ctx, client.Principal))
+
+		if err != nil {
+
+			return err
+		}
+
+		snapshot, err := service.GetMatch(internal.ParamGetMatch{MatchID: event.AggregateID})
+
+		if err != nil {
+
+			return err
+		}
+
+		client.Send("match.snapshot", snapshot)
+
+	}
+
+	return nil
+
 }
 
 func Maintain(ctx context.Context) {
@@ -428,6 +539,7 @@ func Maintain(ctx context.Context) {
 			if err == nil {
 
 				connections.RecoverStale()
+
 			}
 
 			rooms, err := repo.NewRoomRepo(ctx)
@@ -435,7 +547,11 @@ func Maintain(ctx context.Context) {
 			if err == nil {
 
 				rooms.ExpireWaiting()
+
 			}
+
 		}
+
 	}
+
 }

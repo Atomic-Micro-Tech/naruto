@@ -34,6 +34,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 		view.Error(writer, 503, "UNAVAILABLE", "server shutting down")
 
 		return
+
 	}
 
 	defer done()
@@ -51,6 +52,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 		view.Error(writer, 400, "INVALID_INPUT", "invalid WebSocket upgrade")
 
 		return
+
 	}
 
 	service, err := usecase.NewRealtimeUseCase(request.Context())
@@ -60,6 +62,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 		view.Error(writer, 400, "INVALID_INPUT", "invalid context")
 
 		return
+
 	}
 
 	data, err := service.UpgradeWebSocket(param)
@@ -69,6 +72,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 		view.BusinessError(writer, err)
 
 		return
+
 	}
 
 	defer func() {
@@ -82,7 +86,9 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 		if err == nil {
 
 			r.Disconnect(data.ConnectionID)
+
 		}
+
 	}()
 
 	// Exact Origin allowlist was checked above; coder/websocket's host-only matcher is bypassed.
@@ -91,6 +97,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 	if err != nil {
 
 		return
+
 	}
 
 	defer conn.CloseNow()
@@ -111,6 +118,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 	if err != nil {
 
 		return
+
 	}
 
 	client.Snapshot(ctx)
@@ -124,6 +132,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 		if err != nil {
 
 			return
+
 		}
 
 		if kind != websocket.MessageText {
@@ -131,6 +140,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 			conn.Close(websocket.StatusUnsupportedData, "JSON text required")
 
 			return
+
 		}
 
 		var msg internal.WSMessage
@@ -141,6 +151,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 			conn.Close(websocket.StatusPolicyViolation, "invalid message envelope")
 
 			return
+
 		}
 
 		if !middleware.Allow("ws:"+data.Principal.UserID.String(), 120, time.Minute) {
@@ -148,6 +159,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 			rejectSocket(client, msg.RequestID, internal.Reject("RATE_LIMITED", "too many messages"))
 
 			continue
+
 		}
 
 		if msg.ProtocolVersion != 1 {
@@ -155,6 +167,7 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 			rejectSocket(client, msg.RequestID, internal.Reject("UNSUPPORTED_PROTOCOL", "protocol 1 required"))
 
 			continue
+
 		}
 
 		err = dispatchSocket(ctx, client, msg)
@@ -162,8 +175,11 @@ func HandleUpgradeWebSocket(writer http.ResponseWriter, request *http.Request) {
 		if err != nil {
 
 			rejectSocket(client, msg.RequestID, err)
+
 		}
+
 	}
+
 }
 
 func monitorSocket(ctx context.Context, c *realtime.Client) {
@@ -187,6 +203,7 @@ func monitorSocket(ctx context.Context, c *realtime.Client) {
 				c.Socket.CloseNow()
 
 				return
+
 			}
 
 			alive, err := r.Alive(c.ID)
@@ -196,6 +213,7 @@ func monitorSocket(ctx context.Context, c *realtime.Client) {
 				c.Socket.Close(websocket.StatusPolicyViolation, "session expired or connection replaced")
 
 				return
+
 			}
 
 			ticks++
@@ -212,6 +230,7 @@ func monitorSocket(ctx context.Context, c *realtime.Client) {
 					c.Socket.CloseNow()
 
 					return
+
 				}
 
 				err = r.Heartbeat(c.ID)
@@ -221,10 +240,15 @@ func monitorSocket(ctx context.Context, c *realtime.Client) {
 					c.Socket.CloseNow()
 
 					return
+
 				}
+
 			}
+
 		}
+
 	}
+
 }
 
 func strictMessage(raw []byte, dst any, keys []string) error {
@@ -234,6 +258,7 @@ func strictMessage(raw []byte, dst any, keys []string) error {
 	if err != nil {
 
 		return err
+
 	}
 
 	var fields map[string]json.RawMessage
@@ -242,11 +267,13 @@ func strictMessage(raw []byte, dst any, keys []string) error {
 	if err != nil || fields == nil {
 
 		return errors.New("JSON object required")
+
 	}
 
 	if len(fields) != len(keys) {
 
 		return errors.New("invalid fields")
+
 	}
 
 	for _, key := range keys {
@@ -255,7 +282,9 @@ func strictMessage(raw []byte, dst any, keys []string) error {
 		if !ok || bytes.Equal(bytes.TrimSpace(value), []byte("null")) {
 
 			return errors.New("required field missing")
+
 		}
+
 	}
 
 	d := json.NewDecoder(bytes.NewReader(raw))
@@ -263,6 +292,7 @@ func strictMessage(raw []byte, dst any, keys []string) error {
 	d.DisallowUnknownFields()
 
 	return d.Decode(dst)
+
 }
 
 func rejectSocket(c *realtime.Client, id uuid.UUID, err error) {
@@ -274,9 +304,11 @@ func rejectSocket(c *realtime.Client, id uuid.UUID, err error) {
 
 		code = input.Code
 		message = input.Message
+
 	}
 
 	c.Send("command.rejected", map[string]any{"requestId": id, "code": code, "message": message})
+
 }
 
 func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMessage) error {
@@ -292,9 +324,11 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 		if err != nil {
 
 			return internal.Reject("INVALID_MESSAGE", "invalid ping")
+
 		}
 
 		return c.Send("pong", map[string]any{"clientTime": p.ClientTime, "serverTick": 0})
+
 	}
 
 	if msg.Type == "match.resume" {
@@ -309,6 +343,68 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 		if err != nil || p.MatchID == uuid.Nil || p.LastEventSequence == nil || *p.LastEventSequence < 0 {
 
 			return internal.Reject("INVALID_MESSAGE", "invalid resume")
+
+		}
+
+		service, err := usecase.NewMatchUseCase(ctx)
+
+		if err != nil {
+
+			return err
+
+		}
+
+		data, err := service.GetMatch(internal.ParamGetMatch{MatchID: p.MatchID})
+
+		if err != nil {
+
+			return err
+
+		}
+
+		return c.Send("match.snapshot", data)
+
+	}
+
+	if msg.Type == "match.command" {
+
+		var p internal.RequestExecuteMatch
+		err := strictMessage(msg.Payload, &p, []string{"commandId", "matchId", "expectedStateVersion", "controlEpoch", "action"})
+
+		if err != nil || p.CommandID == uuid.Nil || p.MatchID == uuid.Nil || p.ExpectedStateVersion < 0 || p.ControlEpoch < 0 {
+
+			return internal.Reject("INVALID_MESSAGE", "invalid match command")
+
+		}
+
+		var action struct {
+			Type    string          `json:"type"`
+			Payload json.RawMessage `json:"payload"`
+		}
+		var outer map[string]json.RawMessage
+		err = json.Unmarshal(msg.Payload, &outer)
+
+		if err != nil {
+
+			return internal.Reject("INVALID_MESSAGE", "invalid match command")
+		}
+
+		err = strictMessage(outer["action"], &action, []string{"type", "payload"})
+
+		if err != nil || action.Type != "choice.select" {
+
+			return internal.Reject("INVALID_ACTION", "select an offered server action")
+		}
+
+		var choice struct {
+			ChoiceID uuid.UUID `json:"choiceId"`
+			OptionID string    `json:"optionId"`
+		}
+		err = strictMessage(action.Payload, &choice, []string{"choiceId", "optionId"})
+
+		if err != nil || choice.ChoiceID == uuid.Nil || !length(choice.OptionID, 1, 128) {
+
+			return internal.Reject("INVALID_MESSAGE", "invalid choice")
 		}
 
 		service, err := usecase.NewMatchUseCase(ctx)
@@ -318,19 +414,43 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 			return err
 		}
 
-		data, err := service.GetMatch(internal.ParamGetMatch{MatchID: p.MatchID})
+		data, err := service.ExecuteMatch(internal.ParamExecuteMatch{RequestExecuteMatch: p, RequestID: msg.RequestID, ConnectionID: c.ID})
 
 		if err != nil {
 
 			return err
 		}
 
-		return c.Send("match.snapshot", data)
+		return c.Send("command.ack", data)
+
 	}
 
-	if msg.Type == "match.command" || msg.Type == "match.reclaim" {
+	if msg.Type == "match.reclaim" {
 
-		return internal.Reject("CPU_CONTEXT_UNRESOLVED", "authoritative match engine is not available")
+		var p internal.RequestReclaimMatch
+		err := strictMessage(msg.Payload, &p, []string{"matchId", "expectedControlEpoch"})
+
+		if err != nil || p.MatchID == uuid.Nil || p.ExpectedControlEpoch < 0 {
+
+			return internal.Reject("INVALID_MESSAGE", "invalid reclaim")
+		}
+
+		service, err := usecase.NewMatchUseCase(ctx)
+
+		if err != nil {
+
+			return err
+		}
+
+		data, err := service.ReclaimMatch(internal.ParamReclaimMatch{RequestReclaimMatch: p, RequestID: msg.RequestID, ConnectionID: c.ID})
+
+		if err != nil {
+
+			return err
+		}
+
+		return c.Send("command.ack", data)
+
 	}
 
 	var p struct {
@@ -364,6 +484,7 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 	case "room.leave", "room.invite.rotate", "room.start":
 	default:
 		return internal.Reject("INVALID_MESSAGE", "unknown message type")
+
 	}
 
 	err := strictMessage(msg.Payload, &p, keys)
@@ -371,11 +492,13 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 	if err != nil || p.RoomID == uuid.Nil || p.ExpectedRoomVersion < 0 {
 
 		return internal.Reject("INVALID_MESSAGE", "invalid command payload")
+
 	}
 
 	if msg.Type == "room.settings" && (!length(strings.TrimSpace(p.Name), 1, 60) || !validSettings(p.Settings)) {
 
 		return internal.Reject("INVALID_MESSAGE", "invalid room settings")
+
 	}
 
 	if msg.Type == "room.ready" {
@@ -383,6 +506,7 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 		if p.CharacterID < 0 || p.CharacterID > 3 || len(p.AssetManifestHash) != 64 {
 
 			return internal.Reject("INVALID_MESSAGE", "invalid ready state")
+
 		}
 
 		for _, ch := range p.AssetManifestHash {
@@ -390,18 +514,23 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 			if !(ch >= '0' && ch <= '9' || ch >= 'a' && ch <= 'f') {
 
 				return internal.Reject("INVALID_MESSAGE", "invalid asset hash")
+
 			}
+
 		}
+
 	}
 
 	if msg.Type == "room.kick" && p.TargetUserID == uuid.Nil {
 
 		return internal.Reject("INVALID_MESSAGE", "invalid target")
+
 	}
 
 	if msg.Type == "chat.send" && (p.ClientMessageID == uuid.Nil || !length(strings.TrimSpace(p.Text), 1, 300)) {
 
 		return internal.Reject("INVALID_MESSAGE", "invalid chat message")
+
 	}
 
 	service, err := usecase.NewRealtimeUseCase(ctx)
@@ -409,6 +538,7 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 	if err != nil {
 
 		return err
+
 	}
 
 	data, err := service.ExecuteLobby(internal.ParamLobbyCommand{ConnectionID: c.ID, RequestID: msg.RequestID, Type: msg.Type, RoomID: p.RoomID, ExpectedRoomVersion: p.ExpectedRoomVersion, Name: p.Name, Settings: p.Settings, Ready: p.Ready, CharacterID: p.CharacterID, AssetsReady: p.AssetsReady, AssetManifestHash: p.AssetManifestHash, TargetUserID: p.TargetUserID, ClientMessageID: p.ClientMessageID, Text: p.Text})
@@ -416,6 +546,7 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 	if err != nil {
 
 		return err
+
 	}
 
 	err = c.Send("command.ack", data)
@@ -423,12 +554,15 @@ func dispatchSocket(ctx context.Context, c *realtime.Client, msg internal.WSMess
 	if err != nil {
 
 		return err
+
 	}
 
 	if msg.Type == "room.invite.rotate" {
 
 		return c.Send("room.invite.rotated", map[string]any{"roomId": p.RoomID, "roomVersion": data.RoomVersion, "inviteCode": data.InviteCode})
+
 	}
 
 	return nil
+
 }

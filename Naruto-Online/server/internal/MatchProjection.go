@@ -80,6 +80,7 @@ type PublicAllowedOption struct {
 	TargetSeat     *int64 `json:"targetSeat,omitempty"`
 	TileID         *int64 `json:"tileId,omitempty"`
 	CardSlot       *int64 `json:"cardSlot,omitempty"`
+	CardID         *int64 `json:"cardId,omitempty"`
 	TechniqueIndex *int64 `json:"techniqueIndex,omitempty"`
 	ChakraCost     *int64 `json:"chakraCost,omitempty"`
 	SkillPointCost *int64 `json:"skillPointCost,omitempty"`
@@ -110,25 +111,35 @@ type PublicMatchResult struct {
 type PublicSha256 string
 
 type PublicMatchSnapshot struct {
-	Id                string                `json:"id"`
-	RoomID            string                `json:"roomId"`
-	ArenaID           string                `json:"arenaId"`
-	Status            string                `json:"status"`
-	Phase             PublicMatchPhase      `json:"phase"`
-	StateVersion      int64                 `json:"stateVersion"`
-	EventSequence     int64                 `json:"eventSequence"`
-	ServerTick        int64                 `json:"serverTick"`
-	TurnSeat          int64                 `json:"turnSeat"`
-	Round             int64                 `json:"round"`
-	TargetChakra      int64                 `json:"targetChakra"`
-	Players           []PublicPlayerState   `json:"players"`
-	Tiles             []PublicTileState     `json:"tiles"`
-	Self              PublicSelfState       `json:"self"`
-	Roulette          *PublicRouletteState  `json:"roulette"`
-	AllowedActions    []PublicAllowedAction `json:"allowedActions"`
-	Result            *PublicMatchResult    `json:"result"`
-	RulesHash         PublicSha256          `json:"rulesHash"`
-	AiRulesHash       PublicSha256          `json:"aiRulesHash"`
-	AiPolicyVersion   string                `json:"aiPolicyVersion"`
-	AssetManifestHash PublicSha256          `json:"assetManifestHash"`
+	Presentation      *PublicMatchPresentation `json:"presentation,omitempty"`
+	Id                string                   `json:"id"`
+	RoomID            string                   `json:"roomId"`
+	ArenaID           string                   `json:"arenaId"`
+	Status            string                   `json:"status"`
+	Phase             PublicMatchPhase         `json:"phase"`
+	StateVersion      int64                    `json:"stateVersion"`
+	EventSequence     int64                    `json:"eventSequence"`
+	ServerTick        int64                    `json:"serverTick"`
+	TurnSeat          int64                    `json:"turnSeat"`
+	Round             int64                    `json:"round"`
+	TargetChakra      int64                    `json:"targetChakra"`
+	Players           []PublicPlayerState      `json:"players"`
+	Tiles             []PublicTileState        `json:"tiles"`
+	Self              PublicSelfState          `json:"self"`
+	Roulette          *PublicRouletteState     `json:"roulette"`
+	AllowedActions    []PublicAllowedAction    `json:"allowedActions"`
+	Result            *PublicMatchResult       `json:"result"`
+	RulesHash         PublicSha256             `json:"rulesHash"`
+	AiRulesHash       PublicSha256             `json:"aiRulesHash"`
+	AiPolicyVersion   string                   `json:"aiPolicyVersion"`
+	AssetManifestHash PublicSha256             `json:"assetManifestHash"`
+}
+
+type PublicMatchPresentation struct {
+	Phase     string   `json:"phase"`
+	ActorSeat int16    `json:"actorSeat"`
+	Remaining int16    `json:"remaining"`
+	LastRoll  int16    `json:"lastRoll"`
+	Message   string   `json:"message"`
+	Log       []string `json:"log"`
 }
