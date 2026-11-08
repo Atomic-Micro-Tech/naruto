@@ -1,0 +1,4 @@
+interface:
+  display_name: "API Creator"
+  short_description: "Build Go backend features from OpenAPI tags"
+  default_prompt: "Use $api-creator to implement a backend feature from its OpenAPI tag."

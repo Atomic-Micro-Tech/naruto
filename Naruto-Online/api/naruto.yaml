@@ -1,0 +1,3568 @@
+# OpenAPI 3.1.0 — Naruto Online MVP lokal
+# HTTP paths + x-websocket application protocol. Belum merupakan implementasi server.
+openapi: "3.1.0"
+info:
+  title: "Naruto Online API"
+  version: "0.1.0"
+  summary: "Kontrak MVP lokal: email auth, room arena 1, gameplay, CPU takeover, chat dan voice."
+  description: "Spesifikasi rencana, belum menyatakan server telah diimplementasikan. Sumber perilaku: ../PLAN.md, ../../GAME_RULE.md dan ../../AI_RULE.md relatif dari api/. Match dimulai dengan 2–4 manusia; CPU menggantikan controller saat disconnect, mempertahankan userId, participantKind, karakter dan state. Snapshot/event tidak memuat seed RNG atau state privat AI. Hanya PNG/WAV pada aset game; transport live voice memakai WebRTC. Facebook Instant Games ditambahkan sesudah MVP lokal matang; endpoint Facebook tidak termasuk kontrak aktif versi ini."
+servers:
+  -
+    url: "http://localhost:8080"
+    description: "Go lokal langsung; Origin localhost client harus diizinkan eksplisit."
+  -
+    url: "http://localhost:5173/api"
+    description: "Vite proxy development; path /api dibuang sebelum diteruskan ke Go."
+  -
+    url: "https://{host}/api"
+    description: "HTTPS LAN/staging melalui reverse proxy; ganti host dengan hostname bersertifikat tepercaya."
+    variables:
+      host:
+        default: "naruto.local"
+security:
+  -
+    sessionCookie:
+      []
+tags:
+  -
+    name: "System"
+    description: "Health dan readiness."
+  -
+    name: "Auth"
+    description: "Email/password dan sesi server."
+  -
+    name: "Arenas"
+    description: "Arena yang diaktifkan."
+  -
+    name: "Rooms"
+    description: "Daftar/create/join; perubahan anggota melalui WebSocket."
+  -
+    name: "Matches"
+    description: "Proyeksi state dan hasil match."
+  -
+    name: "Chat"
+    description: "Riwayat pesan; pengiriman melalui WebSocket."
+  -
+    name: "Voice"
+    description: "Otorisasi WebRTC; audio tidak melewati WebSocket game."
+  -
+    name: "Moderation"
+    description: "Block dan laporan."
+  -
+    name: "Realtime"
+    description: "Upgrade dan kontrak pesan game."
+paths:
+  "/healthz":
+    get:
+      operationId: "getHealth"
+      tags:
+        - "System"
+      summary: "Liveness proses Go"
+      security:
+        []
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                additionalProperties: false
+                properties:
+                  status:
+                    type: "string"
+                    const: "ok"
+                required:
+                  - "status"
+  "/readyz":
+    get:
+      operationId: "getReadiness"
+      tags:
+        - "System"
+      summary: "Readiness API dan PostgreSQL"
+      security:
+        []
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                additionalProperties: false
+                properties:
+                  status:
+                    type: "string"
+                    const: "ready"
+                required:
+                  - "status"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/auth/register":
+    post:
+      operationId: "registerEmail"
+      tags:
+        - "Auth"
+      summary: "Daftar menggunakan email, password dan nama"
+      security:
+        []
+      description: "Tidak otomatis login. Email verifikasi dikirim melalui inbox lokal saat development. Validasi Origin pada request pra-login; jangan menampilkan password/token di log."
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                additionalProperties: false
+                properties:
+                  user:
+                    $ref: "#/components/schemas/User"
+                  verificationEmailSent:
+                    type: "boolean"
+                required:
+                  - "user"
+                  - "verificationEmailSent"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/auth/login":
+    post:
+      operationId: "loginEmail"
+      tags:
+        - "Auth"
+      summary: "Login email dan buat cookie sesi"
+      security:
+        []
+      description: "Kredensial salah selalu INVALID_CREDENTIALS. Rotasi session ID; validasi Origin untuk mencegah login CSRF."
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Session"
+          headers:
+            Set-Cookie:
+              $ref: "#/components/headers/SessionCookie"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/auth/me":
+    get:
+      operationId: "getCurrentSession"
+      tags:
+        - "Auth"
+      summary: "Identitas sesi dan token CSRF"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Session"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/auth/logout":
+    post:
+      operationId: "logout"
+      tags:
+        - "Auth"
+      summary: "Cabut sesi, putus koneksi aktif dan cookie"
+      description: "Jika pemilik berada dalam match, kehilangan koneksi memicu takeover CPU. Logout bukan aksi menyerah."
+      parameters:
+        -
+          $ref: "#/components/parameters/Csrf"
+      responses:
+        "204":
+          description: "Sesi dicabut; cookie dihapus."
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/auth/verify-email":
+    post:
+      operationId: "verifyEmail"
+      tags:
+        - "Auth"
+      summary: "Konfirmasi token verifikasi sekali pakai"
+      security:
+        []
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/TokenRequest"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Message"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/auth/resend-verification":
+    post:
+      operationId: "resendVerification"
+      tags:
+        - "Auth"
+      summary: "Kirim ulang email verifikasi untuk akun aktif"
+      parameters:
+        -
+          $ref: "#/components/parameters/Csrf"
+      responses:
+        "202":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Message"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/auth/forgot-password":
+    post:
+      operationId: "forgotPassword"
+      tags:
+        - "Auth"
+      summary: "Minta email reset password"
+      security:
+        []
+      description: "Response generik tetap sama baik email ada maupun tidak."
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/EmailRequest"
+      responses:
+        "202":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Message"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/auth/reset-password":
+    post:
+      operationId: "resetPassword"
+      tags:
+        - "Auth"
+      summary: "Ganti password menggunakan token reset"
+      security:
+        []
+      description: "Token sekali pakai; seluruh sesi lama dicabut setelah reset berhasil."
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/ResetPasswordRequest"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Message"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/session/refresh":
+    post:
+      operationId: "refreshSession"
+      tags:
+        - "Auth"
+      summary: "Perpanjang sesi aktif dan rotasi token CSRF"
+      parameters:
+        -
+          $ref: "#/components/parameters/Csrf"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Session"
+          headers:
+            Set-Cookie:
+              $ref: "#/components/headers/SessionCookie"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/ws-ticket":
+    post:
+      operationId: "createWebSocketTicket"
+      tags:
+        - "Realtime"
+      summary: "Terbitkan tiket sekali pakai untuk upgrade WebSocket"
+      parameters:
+        -
+          $ref: "#/components/parameters/Csrf"
+      description: "Tiket terikat user, sesi dan Origin; berlaku 30 detik, sekali pakai. URL /v1/ws?ticket=... harus diredaksi dari log. Tiket baru diperlukan setiap reconnect."
+      responses:
+        "201":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/WsTicket"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/arenas":
+    get:
+      operationId: "listArenas"
+      tags:
+        - "Arenas"
+      summary: "Daftar arena yang dapat dipilih"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                additionalProperties: false
+                properties:
+                  items:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/Arena"
+                    minItems: 1
+                    maxItems: 1
+                required:
+                  - "items"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/rooms":
+    get:
+      operationId: "listRooms"
+      tags:
+        - "Rooms"
+      summary: "Daftar room publik setelah login"
+      parameters:
+        -
+          $ref: "#/components/parameters/Cursor"
+        -
+          $ref: "#/components/parameters/Limit"
+        -
+          name: "q"
+          in: "query"
+          schema:
+            type: "string"
+            maxLength: 60
+        -
+          name: "hasOpenSeat"
+          in: "query"
+          schema:
+            type: "boolean"
+            default: true
+        -
+          name: "status"
+          in: "query"
+          schema:
+            type: "string"
+            enum:
+              - "waiting"
+              - "playing"
+              - "results"
+            default: "waiting"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/RoomPage"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+    post:
+      operationId: "createRoom"
+      tags:
+        - "Rooms"
+      summary: "Buat room dan otomatis isi slot host"
+      description: "Hanya arena-1, normal, 2–4 kursi; tidak ada kursi CPU manual. Pembuatan atomik. User hanya boleh menjadi anggota satu room aktif."
+      parameters:
+        -
+          $ref: "#/components/parameters/Csrf"
+        -
+          $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/CreateRoomRequest"
+      responses:
+        "201":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/RoomMembership"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "422":
+          $ref: "#/components/responses/Unprocessable"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/rooms/join-by-code":
+    post:
+      operationId: "joinRoomByCode"
+      tags:
+        - "Rooms"
+      summary: "Gabung room privat menggunakan kode"
+      description: "Kode salah/kedaluwarsa memberi 404. Transaksi mengunci kapasitas; kode tidak membuat peminta melewati autentikasi."
+      parameters:
+        -
+          $ref: "#/components/parameters/Csrf"
+        -
+          $ref: "#/components/parameters/IdempotencyKey"
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/JoinByCodeRequest"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/RoomMembership"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/rooms/{roomId}":
+    get:
+      operationId: "getRoom"
+      tags:
+        - "Rooms"
+      summary: "Detail room publik atau room yang diikuti"
+      parameters:
+        -
+          $ref: "#/components/parameters/RoomId"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Room"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/rooms/{roomId}/join":
+    post:
+      operationId: "joinRoom"
+      tags:
+        - "Rooms"
+      summary: "Gabung kursi kosong pada room waiting"
+      parameters:
+        -
+          $ref: "#/components/parameters/RoomId"
+        -
+          $ref: "#/components/parameters/Csrf"
+        -
+          $ref: "#/components/parameters/IdempotencyKey"
+      description: "Body {} untuk room publik. Room privat memerlukan inviteCode. Request berulang untuk keanggotaan yang sama mengembalikan membership tanpa slot tambahan. Match berjalan hanya menerima resume peserta lama, bukan join pemain baru."
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/JoinRoomRequest"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/RoomMembership"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/rooms/{roomId}/messages":
+    get:
+      operationId: "listRoomMessages"
+      tags:
+        - "Chat"
+      summary: "Ambil maksimum 50 pesan terakhir room"
+      description: "Hanya anggota; urutan items naik menurut (createdAt,id). Cursor opaque mengambil halaman lebih lama. Batas cursor dikaitkan ke room."
+      parameters:
+        -
+          $ref: "#/components/parameters/RoomId"
+        -
+          $ref: "#/components/parameters/Cursor"
+        -
+          name: "limit"
+          in: "query"
+          schema:
+            type: "integer"
+            minimum: 1
+            maximum: 50
+            default: 50
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/ChatPage"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/rooms/{roomId}/voice-token":
+    post:
+      operationId: "createVoiceToken"
+      tags:
+        - "Voice"
+      summary: "Token voice audio-only untuk anggota manusia"
+      description: "Hanya jika voiceEnabled dan anggota masih sah. Token maksimal 5 menit; refresh harus memeriksa ulang keanggotaan. Leave/kick mencabut akses SFU aktif. CPU tidak masuk voice. Tidak mengangkut audio lewat API HTTP atau WS game."
+      parameters:
+        -
+          $ref: "#/components/parameters/RoomId"
+        -
+          $ref: "#/components/parameters/Csrf"
+      responses:
+        "201":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/VoiceToken"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/matches/{matchId}":
+    get:
+      operationId: "getMatch"
+      tags:
+        - "Matches"
+      summary: "Snapshot match untuk peserta yang sedang login"
+      description: "Dapat dipakai bootstrap/recovery dan hasil yang sudah selesai. Hanya pemilik slot; snapshot diproyeksikan sesuai haknya. Tidak otomatis mengembalikan kontrol CPU ke manusia; gunakan match.reclaim."
+      parameters:
+        -
+          $ref: "#/components/parameters/MatchId"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/MatchSnapshot"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/reports":
+    post:
+      operationId: "createReport"
+      tags:
+        - "Moderation"
+      summary: "Laporkan anggota room"
+      parameters:
+        -
+          $ref: "#/components/parameters/Csrf"
+        -
+          $ref: "#/components/parameters/IdempotencyKey"
+      description: "Pelapor harus memiliki konteks membership room/match. Tidak ada upload atau rekaman audio; laporan voice hanya menyimpan konteks dan keterangan."
+      requestBody:
+        required: true
+        content:
+          "application/json":
+            schema:
+              $ref: "#/components/schemas/ReportRequest"
+      responses:
+        "201":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/ReportReceipt"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "409":
+          $ref: "#/components/responses/Conflict"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/blocks/{userId}":
+    put:
+      operationId: "blockUser"
+      tags:
+        - "Moderation"
+      summary: "Blokir pesan dan suara pengguna pada sisi pemilik"
+      parameters:
+        -
+          $ref: "#/components/parameters/UserId"
+        -
+          $ref: "#/components/parameters/Csrf"
+      description: "Idempotent. Block tidak mengubah kartu/target/hasil match dan bukan kick; client menegakkan mute peer voice sesuai daftar block."
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/UserBlock"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+    delete:
+      operationId: "unblockUser"
+      tags:
+        - "Moderation"
+      summary: "Hapus block pengguna"
+      parameters:
+        -
+          $ref: "#/components/parameters/UserId"
+        -
+          $ref: "#/components/parameters/Csrf"
+      responses:
+        "204":
+          description: "Block dihapus atau memang tidak ada."
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/blocks":
+    get:
+      operationId: "listBlocks"
+      tags:
+        - "Moderation"
+      summary: "Daftar pengguna yang diblokir"
+      parameters:
+        -
+          $ref: "#/components/parameters/Cursor"
+        -
+          $ref: "#/components/parameters/Limit"
+      responses:
+        "200":
+          description: "Berhasil."
+          content:
+            "application/json":
+              schema:
+                type: "object"
+                additionalProperties: false
+                properties:
+                  items:
+                    type: "array"
+                    items:
+                      $ref: "#/components/schemas/UserBlock"
+                  nextCursor:
+                    anyOf:
+                      -
+                        type: "string"
+                      -
+                        type: "null"
+                required:
+                  - "items"
+                  - "nextCursor"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+  "/v1/ws":
+    get:
+      operationId: "upgradeWebSocket"
+      tags:
+        - "Realtime"
+      summary: "Upgrade koneksi ke protokol naruto.v1"
+      security:
+        -
+          wsTicket:
+            []
+      parameters:
+        -
+          name: "Sec-WebSocket-Protocol"
+          in: "header"
+          required: true
+          schema:
+            type: "string"
+            const: "naruto.v1"
+      description: "Upgrade RFC 6455 dengan tiket sekali pakai dan Origin yang diizinkan. Setelah HTTP 101, kontrak frame JSON terdapat di x-websocket dan components.schemas.WsClientMessage/WsServerMessage. OpenAPI HTTP tidak mendeskripsikan transport frame secara native; generator biasa hanya memahami handshake. Frame ditolak jika >16 KiB. Semua event/action bisnis setelah upgrade memakai versi protokol 1."
+      responses:
+        "101":
+          description: "Switching Protocols; pesan pertama connection.ready. Server memilih subprotocol naruto.v1."
+          headers:
+            Sec-WebSocket-Protocol:
+              schema:
+                type: "string"
+                const: "naruto.v1"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "429":
+          $ref: "#/components/responses/RateLimited"
+        "503":
+          $ref: "#/components/responses/Unavailable"
+components:
+  securitySchemes:
+    sessionCookie:
+      type: "apiKey"
+      in: "cookie"
+      name: "naruto_session"
+      description: "Cookie HttpOnly/SameSite, Secure pada HTTPS; pengecualian Secure hanya localhost development. Nilai sesi tidak disalin ke JSON/localStorage. CSRF token wajib pada mutasi HTTP dengan cookie."
+    wsTicket:
+      type: "apiKey"
+      in: "query"
+      name: "ticket"
+      description: "Tiket opaque dari POST /v1/ws-ticket, terikat sesi/Origin, sekali pakai dan 30 detik; bukan userId atau session cookie."
+  parameters:
+    Csrf:
+      name: "X-CSRF-Token"
+      in: "header"
+      required: true
+      schema:
+        type: "string"
+        minLength: 20
+      description: "Token dari login/me/refresh, terikat sesi."
+    IdempotencyKey:
+      name: "Idempotency-Key"
+      in: "header"
+      required: true
+      schema:
+        type: "string"
+        format: "uuid"
+      description: "Scope user+operation, simpan hasil 24 jam. Key sama dan body sama mengembalikan hasil semula; body berbeda -> 409 IDEMPOTENCY_CONFLICT."
+    Cursor:
+      name: "cursor"
+      in: "query"
+      schema:
+        type: "string"
+        maxLength: 1024
+      description: "Cursor opaque, terikat filter dan hak akses."
+    Limit:
+      name: "limit"
+      in: "query"
+      schema:
+        type: "integer"
+        minimum: 1
+        maximum: 50
+        default: 20
+    RoomId:
+      name: "roomId"
+      in: "path"
+      required: true
+      schema:
+        type: "string"
+        format: "uuid"
+    MatchId:
+      name: "matchId"
+      in: "path"
+      required: true
+      schema:
+        type: "string"
+        format: "uuid"
+    UserId:
+      name: "userId"
+      in: "path"
+      required: true
+      schema:
+        type: "string"
+        format: "uuid"
+  headers:
+    SessionCookie:
+      description: "Cookie naruto_session; HttpOnly; SameSite=Lax; Path=/; Secure pada HTTPS. Backend menetapkan expiry; tidak mengembalikan session ID lewat body."
+      schema:
+        type: "string"
+  responses:
+    BadRequest:
+      description: "Request tidak valid."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unauthorized:
+      description: "Sesi tidak ada, kedaluwarsa atau tiket tidak sah."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+    Forbidden:
+      description: "Akses, Origin, CSRF atau membership ditolak."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+    NotFound:
+      description: "Resource tidak ditemukan atau tidak boleh terlihat oleh peminta."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+    Conflict:
+      description: "ROOM_FULL, ALREADY_IN_ROOM, ROOM_NOT_WAITING, VERSION_CONFLICT, EMAIL_IN_USE atau kondisi bisnis lain."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unprocessable:
+      description: "ARENA_UNAVAILABLE atau konfigurasi semantik tidak sah."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+    RateLimited:
+      description: "Batas request terlampaui."
+      headers:
+        Retry-After:
+          description: "Detik sampai retry diperbolehkan."
+          schema:
+            type: "integer"
+            minimum: 0
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+    Unavailable:
+      description: "Layanan sedang tidak tersedia."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+  schemas:
+    Id:
+      type: "string"
+      format: "uuid"
+    Version:
+      type: "integer"
+      minimum: 0
+    Tick:
+      type: "integer"
+      minimum: 0
+    Sha256:
+      type: "string"
+      pattern: "^[a-f0-9]{64}$"
+    Error:
+      type: "object"
+      additionalProperties: false
+      properties:
+        error:
+          type: "object"
+          additionalProperties: false
+          properties:
+            code:
+              type: "string"
+            message:
+              type: "string"
+            requestId:
+              type: "string"
+              format: "uuid"
+            fieldErrors:
+              type: "array"
+              items:
+                type: "object"
+                additionalProperties: false
+                properties:
+                  field:
+                    type: "string"
+                  message:
+                    type: "string"
+                required:
+                  - "field"
+                  - "message"
+            retryAfterSeconds:
+              type: "integer"
+              minimum: 0
+          required:
+            - "code"
+            - "message"
+            - "requestId"
+      required:
+        - "error"
+    Message:
+      type: "object"
+      additionalProperties: false
+      properties:
+        message:
+          type: "string"
+      required:
+        - "message"
+    User:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        email:
+          type: "string"
+          format: "email"
+        displayName:
+          type: "string"
+          minLength: 1
+          maxLength: 32
+        emailVerified:
+          type: "boolean"
+        createdAt:
+          type: "string"
+          format: "date-time"
+      required:
+        - "id"
+        - "email"
+        - "displayName"
+        - "emailVerified"
+        - "createdAt"
+    PlayerIdentity:
+      type: "object"
+      additionalProperties: false
+      properties:
+        userId:
+          type: "string"
+          format: "uuid"
+        displayName:
+          type: "string"
+          minLength: 1
+          maxLength: 32
+      required:
+        - "userId"
+        - "displayName"
+    RegisterRequest:
+      type: "object"
+      additionalProperties: false
+      properties:
+        email:
+          type: "string"
+          format: "email"
+          maxLength: 254
+        password:
+          type: "string"
+          minLength: 12
+          maxLength: 128
+          writeOnly: true
+        displayName:
+          type: "string"
+          minLength: 1
+          maxLength: 32
+      required:
+        - "email"
+        - "password"
+        - "displayName"
+    LoginRequest:
+      type: "object"
+      additionalProperties: false
+      properties:
+        email:
+          type: "string"
+          format: "email"
+          maxLength: 254
+        password:
+          type: "string"
+          minLength: 1
+          maxLength: 128
+          writeOnly: true
+      required:
+        - "email"
+        - "password"
+    EmailRequest:
+      type: "object"
+      additionalProperties: false
+      properties:
+        email:
+          type: "string"
+          format: "email"
+          maxLength: 254
+      required:
+        - "email"
+    TokenRequest:
+      type: "object"
+      additionalProperties: false
+      properties:
+        token:
+          type: "string"
+          minLength: 20
+          maxLength: 1024
+          writeOnly: true
+      required:
+        - "token"
+    ResetPasswordRequest:
+      type: "object"
+      additionalProperties: false
+      properties:
+        token:
+          type: "string"
+          minLength: 20
+          maxLength: 1024
+          writeOnly: true
+        newPassword:
+          type: "string"
+          minLength: 12
+          maxLength: 128
+          writeOnly: true
+      required:
+        - "token"
+        - "newPassword"
+    Session:
+      type: "object"
+      additionalProperties: false
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+        expiresAt:
+          type: "string"
+          format: "date-time"
+        csrfToken:
+          type: "string"
+          minLength: 20
+          description: "Kirim sebagai X-CSRF-Token pada mutasi HTTP dengan cookie sesi."
+      required:
+        - "user"
+        - "expiresAt"
+        - "csrfToken"
+    WsTicket:
+      type: "object"
+      additionalProperties: false
+      properties:
+        ticket:
+          type: "string"
+          minLength: 20
+        expiresAt:
+          type: "string"
+          format: "date-time"
+        path:
+          type: "string"
+          const: "/v1/ws"
+        protocol:
+          type: "string"
+          const: "naruto.v1"
+      required:
+        - "ticket"
+        - "expiresAt"
+        - "path"
+        - "protocol"
+    Arena:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+          const: "arena-1"
+        mapId:
+          type: "integer"
+          const: 0
+        name:
+          type: "string"
+          const: "Arena 1"
+        enabled:
+          type: "boolean"
+          const: true
+        tileCount:
+          type: "integer"
+          const: 22
+        worldWidth:
+          type: "integer"
+          const: 640
+        worldHeight:
+          type: "integer"
+          const: 480
+        thumbnailPath:
+          type: "string"
+          const: "image/arena1/map_00.png"
+        rulesHash:
+          $ref: "#/components/schemas/Sha256"
+        assetManifestHash:
+          $ref: "#/components/schemas/Sha256"
+      required:
+        - "id"
+        - "mapId"
+        - "name"
+        - "enabled"
+        - "tileCount"
+        - "worldWidth"
+        - "worldHeight"
+        - "thumbnailPath"
+        - "rulesHash"
+        - "assetManifestHash"
+    RoomSettings:
+      type: "object"
+      additionalProperties: false
+      properties:
+        arenaId:
+          type: "string"
+          const: "arena-1"
+          default: "arena-1"
+        capacity:
+          type: "integer"
+          enum:
+            - 2
+            - 3
+            - 4
+          default: 4
+        targetChakra:
+          type: "integer"
+          minimum: 0
+          maximum: 99999
+        rule:
+          type: "string"
+          enum:
+            - "normal"
+        voiceEnabled:
+          type: "boolean"
+      required:
+        - "arenaId"
+        - "capacity"
+        - "targetChakra"
+        - "rule"
+        - "voiceEnabled"
+    CreateRoomRequest:
+      type: "object"
+      additionalProperties: false
+      properties:
+        name:
+          type: "string"
+          minLength: 1
+          maxLength: 60
+        visibility:
+          type: "string"
+          enum:
+            - "public"
+            - "private"
+        settings:
+          $ref: "#/components/schemas/RoomSettings"
+      required:
+        - "name"
+        - "visibility"
+        - "settings"
+    JoinRoomRequest:
+      type: "object"
+      additionalProperties: false
+      properties:
+        inviteCode:
+          type: "string"
+          minLength: 6
+          maxLength: 32
+          pattern: "^[A-Z0-9-]+$"
+      required:
+        []
+    JoinByCodeRequest:
+      type: "object"
+      additionalProperties: false
+      properties:
+        inviteCode:
+          type: "string"
+          minLength: 6
+          maxLength: 32
+          pattern: "^[A-Z0-9-]+$"
+      required:
+        - "inviteCode"
+    RoomSummary:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        name:
+          type: "string"
+        host:
+          $ref: "#/components/schemas/PlayerIdentity"
+        visibility:
+          type: "string"
+          enum:
+            - "public"
+            - "private"
+        status:
+          type: "string"
+          enum:
+            - "waiting"
+            - "playing"
+            - "results"
+        settings:
+          $ref: "#/components/schemas/RoomSettings"
+        memberCount:
+          type: "integer"
+          minimum: 0
+          maximum: 4
+        roomVersion:
+          type: "integer"
+          minimum: 0
+        canJoin:
+          type: "boolean"
+        createdAt:
+          type: "string"
+          format: "date-time"
+      required:
+        - "id"
+        - "name"
+        - "host"
+        - "visibility"
+        - "status"
+        - "settings"
+        - "memberCount"
+        - "roomVersion"
+        - "canJoin"
+        - "createdAt"
+    RoomMember:
+      type: "object"
+      additionalProperties: false
+      properties:
+        userId:
+          type: "string"
+          format: "uuid"
+        displayName:
+          type: "string"
+        seat:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        characterId:
+          type: "integer"
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+        ready:
+          type: "boolean"
+        assetsReady:
+          type: "boolean"
+        connectionStatus:
+          type: "string"
+          enum:
+            - "connected"
+            - "reconnecting"
+            - "disconnected"
+        joinedAt:
+          type: "string"
+          format: "date-time"
+      required:
+        - "userId"
+        - "displayName"
+        - "seat"
+        - "characterId"
+        - "ready"
+        - "assetsReady"
+        - "connectionStatus"
+        - "joinedAt"
+    Room:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        name:
+          type: "string"
+        hostUserId:
+          type: "string"
+          format: "uuid"
+        visibility:
+          type: "string"
+          enum:
+            - "public"
+            - "private"
+        status:
+          type: "string"
+          enum:
+            - "waiting"
+            - "playing"
+            - "results"
+        settings:
+          $ref: "#/components/schemas/RoomSettings"
+        roomVersion:
+          type: "integer"
+          minimum: 0
+        members:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RoomMember"
+          maxItems: 4
+        activeMatchId:
+          anyOf:
+            -
+              type: "string"
+              format: "uuid"
+            -
+              type: "null"
+        createdAt:
+          type: "string"
+          format: "date-time"
+      required:
+        - "id"
+        - "name"
+        - "hostUserId"
+        - "visibility"
+        - "status"
+        - "settings"
+        - "roomVersion"
+        - "members"
+        - "activeMatchId"
+        - "createdAt"
+    RoomMembership:
+      type: "object"
+      additionalProperties: false
+      properties:
+        room:
+          $ref: "#/components/schemas/Room"
+        selfSeat:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        inviteCode:
+          anyOf:
+            -
+              type: "string"
+              description: "Hanya host room privat yang menerima kode; tidak muncul dalam daftar room."
+            -
+              type: "null"
+      required:
+        - "room"
+        - "selfSeat"
+        - "inviteCode"
+    RoomPage:
+      type: "object"
+      additionalProperties: false
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/RoomSummary"
+        nextCursor:
+          anyOf:
+            -
+              type: "string"
+            -
+              type: "null"
+      required:
+        - "items"
+        - "nextCursor"
+    VoiceToken:
+      type: "object"
+      additionalProperties: false
+      properties:
+        url:
+          type: "string"
+          format: "uri"
+          description: "URL signaling WSS SFU yang dapat dijangkau client."
+        token:
+          type: "string"
+          description: "Token singkat, identity/session dan room terikat, publish audio saja. Jangan log."
+        expiresAt:
+          type: "string"
+          format: "date-time"
+        roomId:
+          type: "string"
+          format: "uuid"
+        identity:
+          type: "string"
+          format: "uuid"
+        canPublishAudio:
+          type: "boolean"
+          const: true
+        canPublishVideo:
+          type: "boolean"
+          const: false
+        canSubscribe:
+          type: "boolean"
+          const: true
+      required:
+        - "url"
+        - "token"
+        - "expiresAt"
+        - "roomId"
+        - "identity"
+        - "canPublishAudio"
+        - "canPublishVideo"
+        - "canSubscribe"
+    ChatMessage:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        roomId:
+          type: "string"
+          format: "uuid"
+        sender:
+          anyOf:
+            -
+              $ref: "#/components/schemas/PlayerIdentity"
+            -
+              type: "null"
+        kind:
+          type: "string"
+          enum:
+            - "user"
+            - "system"
+        text:
+          type: "string"
+          minLength: 1
+          maxLength: 300
+        createdAt:
+          type: "string"
+          format: "date-time"
+        clientMessageId:
+          anyOf:
+            -
+              type: "string"
+              format: "uuid"
+            -
+              type: "null"
+      required:
+        - "id"
+        - "roomId"
+        - "sender"
+        - "kind"
+        - "text"
+        - "createdAt"
+        - "clientMessageId"
+    ChatPage:
+      type: "object"
+      additionalProperties: false
+      properties:
+        items:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ChatMessage"
+          maxItems: 50
+        nextCursor:
+          anyOf:
+            -
+              type: "string"
+            -
+              type: "null"
+      required:
+        - "items"
+        - "nextCursor"
+    ReportRequest:
+      type: "object"
+      additionalProperties: false
+      properties:
+        roomId:
+          type: "string"
+          format: "uuid"
+        matchId:
+          type: "string"
+          format: "uuid"
+        targetUserId:
+          type: "string"
+          format: "uuid"
+        messageId:
+          type: "string"
+          format: "uuid"
+        category:
+          type: "string"
+          enum:
+            - "chat_abuse"
+            - "voice_abuse"
+            - "cheating"
+            - "other"
+        description:
+          type: "string"
+          minLength: 1
+          maxLength: 1000
+      required:
+        - "roomId"
+        - "targetUserId"
+        - "category"
+        - "description"
+    ReportReceipt:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        createdAt:
+          type: "string"
+          format: "date-time"
+      required:
+        - "id"
+        - "createdAt"
+    UserBlock:
+      type: "object"
+      additionalProperties: false
+      properties:
+        targetUserId:
+          type: "string"
+          format: "uuid"
+        createdAt:
+          type: "string"
+          format: "date-time"
+      required:
+        - "targetUserId"
+        - "createdAt"
+    MatchPhase:
+      type: "string"
+      enum:
+        - "turn_start"
+        - "pre_move"
+        - "roulette"
+        - "movement"
+        - "tile_resolution"
+        - "combat"
+        - "source_bonus"
+        - "turn_end"
+        - "results"
+        - "paused_error"
+    ControllerKind:
+      type: "string"
+      enum:
+        - "human"
+        - "cpu"
+    ControllerState:
+      type: "object"
+      additionalProperties: false
+      properties:
+        seat:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        userId:
+          type: "string"
+          format: "uuid"
+        participantKind:
+          type: "string"
+          const: "human"
+        controllerKind:
+          $ref: "#/components/schemas/ControllerKind"
+        controlEpoch:
+          type: "integer"
+          minimum: 0
+        connectionStatus:
+          type: "string"
+          enum:
+            - "connected"
+            - "reconnecting"
+            - "disconnected"
+        reason:
+          anyOf:
+            -
+              type: "string"
+              enum:
+                - "disconnect"
+                - "inactivity"
+                - "reconnect"
+                - "logout"
+            -
+              type: "null"
+        reclaimPending:
+          type: "boolean"
+      required:
+        - "seat"
+        - "userId"
+        - "participantKind"
+        - "controllerKind"
+        - "controlEpoch"
+        - "connectionStatus"
+        - "reason"
+        - "reclaimPending"
+    TileState:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "integer"
+          minimum: 0
+          maximum: 21
+        typeCode:
+          type: "integer"
+          enum:
+            - 0
+            - 1
+            - 2
+            - 4
+            - 5
+        ownerSeat:
+          anyOf:
+            -
+              type: "integer"
+              minimum: 0
+              maximum: 3
+            -
+              type: "null"
+        level:
+          type: "integer"
+          minimum: 0
+          maximum: 5
+        hp:
+          type: "integer"
+          minimum: 0
+          maximum: 6
+        effectId:
+          type: "integer"
+          minimum: 0
+          maximum: 255
+        repairCounter:
+          type: "integer"
+          minimum: 0
+        x:
+          type: "integer"
+          minimum: 0
+        y:
+          type: "integer"
+          minimum: 0
+        neighbors:
+          type: "array"
+          items:
+            anyOf:
+              -
+                type: "integer"
+                minimum: 0
+                maximum: 21
+              -
+                type: "null"
+          minItems: 4
+          maxItems: 4
+          description: "Urutan slot native dipertahankan; sentinel 255 diproyeksikan null."
+        purchasePrice:
+          type: "integer"
+          minimum: 0
+        upgradeBase:
+          type: "integer"
+          minimum: 0
+        rents:
+          type: "array"
+          items:
+            type: "integer"
+            minimum: 0
+          minItems: 5
+          maxItems: 5
+      required:
+        - "id"
+        - "typeCode"
+        - "ownerSeat"
+        - "level"
+        - "hp"
+        - "effectId"
+        - "repairCounter"
+        - "x"
+        - "y"
+        - "neighbors"
+        - "purchasePrice"
+        - "upgradeBase"
+        - "rents"
+    PlayerState:
+      type: "object"
+      additionalProperties: false
+      properties:
+        userId:
+          type: "string"
+          format: "uuid"
+        seat:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        displayName:
+          type: "string"
+        characterId:
+          type: "integer"
+          enum:
+            - 0
+            - 1
+            - 2
+            - 3
+        position:
+          type: "integer"
+          minimum: 0
+          maximum: 21
+        direction:
+          anyOf:
+            -
+              type: "integer"
+              minimum: 0
+              maximum: 3
+            -
+              type: "null"
+        chakra:
+          type: "integer"
+          minimum: -9999
+          maximum: 99999
+        skillPoints:
+          type: "integer"
+          minimum: 0
+          maximum: 8
+        eliminated:
+          type: "boolean"
+        possessed:
+          type: "boolean"
+        skipNextTurn:
+          type: "boolean"
+        hasScroll:
+          type: "boolean"
+        crystalTileIds:
+          type: "array"
+          items:
+            type: "integer"
+            minimum: 0
+            maximum: 21
+          uniqueItems: true
+        inventoryCount:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        controller:
+          $ref: "#/components/schemas/ControllerState"
+      required:
+        - "userId"
+        - "seat"
+        - "displayName"
+        - "characterId"
+        - "position"
+        - "direction"
+        - "chakra"
+        - "skillPoints"
+        - "eliminated"
+        - "possessed"
+        - "skipNextTurn"
+        - "hasScroll"
+        - "crystalTileIds"
+        - "inventoryCount"
+        - "controller"
+    HeldCard:
+      type: "object"
+      additionalProperties: false
+      properties:
+        slot:
+          type: "integer"
+          minimum: 0
+          maximum: 2
+        cardId:
+          type: "integer"
+          minimum: 0
+          maximum: 51
+      required:
+        - "slot"
+        - "cardId"
+    SelfState:
+      type: "object"
+      additionalProperties: false
+      properties:
+        seat:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        cards:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/HeldCard"
+          maxItems: 3
+        cardUsed:
+          type: "boolean"
+        jutsuUsed:
+          type: "boolean"
+      required:
+        - "seat"
+        - "cards"
+        - "cardUsed"
+        - "jutsuUsed"
+    RouletteState:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        actorSeat:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        kind:
+          type: "string"
+          enum:
+            - "movement"
+            - "attack"
+            - "defense"
+            - "scroll"
+            - "recovery"
+        phase:
+          type: "string"
+          enum:
+            - "opening"
+            - "spinning"
+            - "hammers"
+            - "result"
+            - "exit"
+        faces:
+          type: "array"
+          items:
+            type: "integer"
+            minimum: 0
+          minItems: 12
+          maxItems: 12
+        angle:
+          type: "integer"
+          minimum: 0
+          maximum: 4095
+        startedAtTick:
+          type: "integer"
+          minimum: 0
+        stopRequestedAtTick:
+          anyOf:
+            -
+              type: "integer"
+              minimum: 0
+            -
+              type: "null"
+        result:
+          anyOf:
+            -
+              type: "integer"
+              minimum: 0
+            -
+              type: "null"
+      required:
+        - "id"
+        - "actorSeat"
+        - "kind"
+        - "phase"
+        - "faces"
+        - "angle"
+        - "startedAtTick"
+        - "stopRequestedAtTick"
+        - "result"
+    RollStartAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "roll.start"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            {}
+          required:
+            []
+      required:
+        - "type"
+        - "payload"
+    RollStopAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "roll.stop"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            rouletteId:
+              type: "string"
+              format: "uuid"
+          required:
+            - "rouletteId"
+      required:
+        - "type"
+        - "payload"
+    CardUseAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "card.use"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            slot:
+              type: "integer"
+              minimum: 0
+              maximum: 2
+            targetSeat:
+              type: "integer"
+              minimum: 0
+              maximum: 3
+            targetTileId:
+              type: "integer"
+              minimum: 0
+              maximum: 21
+          required:
+            - "slot"
+      required:
+        - "type"
+        - "payload"
+    JutsuUseAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "jutsu.use"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            techniqueSlot:
+              type: "integer"
+              minimum: 0
+              maximum: 3
+            targetSeat:
+              type: "integer"
+              minimum: 0
+              maximum: 3
+            targetTileId:
+              type: "integer"
+              minimum: 0
+              maximum: 21
+          required:
+            - "techniqueSlot"
+      required:
+        - "type"
+        - "payload"
+    ScrollUseAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "scroll.use"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            powerId:
+              type: "integer"
+              minimum: 0
+              maximum: 3
+            targetTileId:
+              type: "integer"
+              minimum: 0
+              maximum: 21
+          required:
+            - "powerId"
+      required:
+        - "type"
+        - "payload"
+    ChoiceSelectAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "choice.select"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            choiceId:
+              type: "string"
+              format: "uuid"
+            optionId:
+              type: "string"
+              minLength: 1
+              maxLength: 128
+          required:
+            - "choiceId"
+            - "optionId"
+      required:
+        - "type"
+        - "payload"
+    MoveChooseAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "move.choose"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            choiceId:
+              type: "string"
+              format: "uuid"
+            direction:
+              type: "integer"
+              minimum: 0
+              maximum: 3
+          required:
+            - "choiceId"
+            - "direction"
+      required:
+        - "type"
+        - "payload"
+    TileBuyAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "tile.buy"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            choiceId:
+              type: "string"
+              format: "uuid"
+            tileId:
+              type: "integer"
+              minimum: 0
+              maximum: 21
+            accept:
+              type: "boolean"
+          required:
+            - "choiceId"
+            - "tileId"
+            - "accept"
+      required:
+        - "type"
+        - "payload"
+    TileUpgradeAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "tile.upgrade"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            choiceId:
+              type: "string"
+              format: "uuid"
+            tileId:
+              type: "integer"
+              minimum: 0
+              maximum: 21
+            targetLevel:
+              type: "integer"
+              minimum: 2
+              maximum: 5
+          required:
+            - "choiceId"
+            - "tileId"
+            - "targetLevel"
+      required:
+        - "type"
+        - "payload"
+    TileSellAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "tile.sell"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            choiceId:
+              type: "string"
+              format: "uuid"
+            tileId:
+              type: "integer"
+              minimum: 0
+              maximum: 21
+          required:
+            - "choiceId"
+            - "tileId"
+      required:
+        - "type"
+        - "payload"
+    TechniqueSelectAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "technique.select"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            choiceId:
+              type: "string"
+              format: "uuid"
+            techniqueIndex:
+              type: "integer"
+              minimum: 0
+              maximum: 3
+          required:
+            - "choiceId"
+            - "techniqueIndex"
+      required:
+        - "type"
+        - "payload"
+    BattleConfirmAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          const: "battle.confirm"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            choiceId:
+              type: "string"
+              format: "uuid"
+          required:
+            - "choiceId"
+      required:
+        - "type"
+        - "payload"
+    SurrenderAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          enum:
+            - "surrender.request"
+            - "surrender.cancel"
+            - "surrender.confirm"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            choiceId:
+              type: "string"
+              format: "uuid"
+          required:
+            []
+      required:
+        - "type"
+        - "payload"
+    GameAction:
+      oneOf:
+        -
+          $ref: "#/components/schemas/RollStartAction"
+        -
+          $ref: "#/components/schemas/RollStopAction"
+        -
+          $ref: "#/components/schemas/CardUseAction"
+        -
+          $ref: "#/components/schemas/JutsuUseAction"
+        -
+          $ref: "#/components/schemas/ScrollUseAction"
+        -
+          $ref: "#/components/schemas/ChoiceSelectAction"
+        -
+          $ref: "#/components/schemas/MoveChooseAction"
+        -
+          $ref: "#/components/schemas/TileBuyAction"
+        -
+          $ref: "#/components/schemas/TileUpgradeAction"
+        -
+          $ref: "#/components/schemas/TileSellAction"
+        -
+          $ref: "#/components/schemas/TechniqueSelectAction"
+        -
+          $ref: "#/components/schemas/BattleConfirmAction"
+        -
+          $ref: "#/components/schemas/SurrenderAction"
+      description: "Client mengirim niat aksi. Menu legal/server choiceId menentukan kapan aksi dan target diterima. Tidak menerima nilai hasil/RNG dari client."
+    AllowedOption:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+        label:
+          type: "string"
+        enabled:
+          type: "boolean"
+        targetSeat:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        tileId:
+          type: "integer"
+          minimum: 0
+          maximum: 21
+        cardSlot:
+          type: "integer"
+          minimum: 0
+          maximum: 2
+        techniqueIndex:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        chakraCost:
+          type: "integer"
+          minimum: 0
+        skillPointCost:
+          type: "integer"
+          minimum: 0
+          maximum: 8
+      required:
+        - "id"
+        - "label"
+        - "enabled"
+    AllowedAction:
+      type: "object"
+      additionalProperties: false
+      properties:
+        type:
+          type: "string"
+          enum:
+            - "roll.start"
+            - "roll.stop"
+            - "card.use"
+            - "jutsu.use"
+            - "scroll.use"
+            - "choice.select"
+            - "move.choose"
+            - "tile.buy"
+            - "tile.upgrade"
+            - "tile.sell"
+            - "technique.select"
+            - "battle.confirm"
+            - "surrender.request"
+            - "surrender.cancel"
+            - "surrender.confirm"
+        choiceId:
+          anyOf:
+            -
+              type: "string"
+              format: "uuid"
+            -
+              type: "null"
+        options:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AllowedOption"
+        expiresAt:
+          anyOf:
+            -
+              type: "string"
+              format: "date-time"
+            -
+              type: "null"
+      required:
+        - "type"
+        - "choiceId"
+        - "options"
+        - "expiresAt"
+    ResultEntry:
+      type: "object"
+      additionalProperties: false
+      properties:
+        seat:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        characterId:
+          type: "integer"
+          minimum: 0
+          maximum: 12
+        chakra:
+          type: "integer"
+          minimum: -9999
+          maximum: 99999
+        badgeId:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+      required:
+        - "seat"
+        - "characterId"
+        - "chakra"
+        - "badgeId"
+    MatchResult:
+      type: "object"
+      additionalProperties: false
+      properties:
+        reason:
+          type: "string"
+          enum:
+            - "source_victory"
+            - "surrender"
+        winnerSeat:
+          anyOf:
+            -
+              type: "integer"
+              minimum: 0
+              maximum: 3
+            -
+              type: "null"
+        entries:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/ResultEntry"
+          minItems: 2
+          maxItems: 4
+        endedAt:
+          type: "string"
+          format: "date-time"
+        description:
+          type: "string"
+          description: "Urutan entries adalah urutan tampilan asli; badgeId tidak diturunkan dari indeks array."
+      required:
+        - "reason"
+        - "winnerSeat"
+        - "entries"
+        - "endedAt"
+        - "description"
+    MatchSnapshot:
+      type: "object"
+      additionalProperties: false
+      properties:
+        id:
+          type: "string"
+          format: "uuid"
+        roomId:
+          type: "string"
+          format: "uuid"
+        arenaId:
+          type: "string"
+          const: "arena-1"
+        status:
+          type: "string"
+          enum:
+            - "playing"
+            - "finished"
+            - "paused_error"
+        phase:
+          $ref: "#/components/schemas/MatchPhase"
+        stateVersion:
+          type: "integer"
+          minimum: 0
+        eventSequence:
+          type: "integer"
+          minimum: 0
+        serverTick:
+          type: "integer"
+          minimum: 0
+        turnSeat:
+          type: "integer"
+          minimum: 0
+          maximum: 3
+        round:
+          type: "integer"
+          minimum: 0
+          maximum: 65535
+        targetChakra:
+          type: "integer"
+          minimum: 0
+          maximum: 99999
+        players:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PlayerState"
+          minItems: 2
+          maxItems: 4
+        tiles:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/TileState"
+          minItems: 22
+          maxItems: 22
+        self:
+          $ref: "#/components/schemas/SelfState"
+        roulette:
+          anyOf:
+            -
+              $ref: "#/components/schemas/RouletteState"
+            -
+              type: "null"
+        allowedActions:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/AllowedAction"
+        result:
+          anyOf:
+            -
+              $ref: "#/components/schemas/MatchResult"
+            -
+              type: "null"
+        rulesHash:
+          $ref: "#/components/schemas/Sha256"
+        aiRulesHash:
+          $ref: "#/components/schemas/Sha256"
+        aiPolicyVersion:
+          type: "string"
+        assetManifestHash:
+          $ref: "#/components/schemas/Sha256"
+      required:
+        - "id"
+        - "roomId"
+        - "arenaId"
+        - "status"
+        - "phase"
+        - "stateVersion"
+        - "eventSequence"
+        - "serverTick"
+        - "turnSeat"
+        - "round"
+        - "targetChakra"
+        - "players"
+        - "tiles"
+        - "self"
+        - "roulette"
+        - "allowedActions"
+        - "result"
+        - "rulesHash"
+        - "aiRulesHash"
+        - "aiPolicyVersion"
+        - "assetManifestHash"
+      description: "Proyeksi per pemilik sesi. Tidak berisi seed RNG, AI policyState, relationship tersembunyi atau data privat akun lawan. Inventori sendiri penuh pada self; data lain hanya bila diizinkan kebijakan visibilitas game."
+    WsRoomSettings:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "room.settings"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            roomId:
+              type: "string"
+              format: "uuid"
+            expectedRoomVersion:
+              type: "integer"
+              minimum: 0
+            name:
+              type: "string"
+              minLength: 1
+              maxLength: 60
+            settings:
+              $ref: "#/components/schemas/RoomSettings"
+          required:
+            - "roomId"
+            - "expectedRoomVersion"
+            - "name"
+            - "settings"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsRoomReady:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "room.ready"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            roomId:
+              type: "string"
+              format: "uuid"
+            expectedRoomVersion:
+              type: "integer"
+              minimum: 0
+            ready:
+              type: "boolean"
+            characterId:
+              type: "integer"
+              enum:
+                - 0
+                - 1
+                - 2
+                - 3
+            assetsReady:
+              type: "boolean"
+            assetManifestHash:
+              $ref: "#/components/schemas/Sha256"
+          required:
+            - "roomId"
+            - "expectedRoomVersion"
+            - "ready"
+            - "characterId"
+            - "assetsReady"
+            - "assetManifestHash"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsRoomLeave:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "room.leave"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            roomId:
+              type: "string"
+              format: "uuid"
+            expectedRoomVersion:
+              type: "integer"
+              minimum: 0
+          required:
+            - "roomId"
+            - "expectedRoomVersion"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsRoomStart:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "room.start"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            roomId:
+              type: "string"
+              format: "uuid"
+            expectedRoomVersion:
+              type: "integer"
+              minimum: 0
+          required:
+            - "roomId"
+            - "expectedRoomVersion"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsRoomKick:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "room.kick"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            roomId:
+              type: "string"
+              format: "uuid"
+            expectedRoomVersion:
+              type: "integer"
+              minimum: 0
+            targetUserId:
+              type: "string"
+              format: "uuid"
+          required:
+            - "roomId"
+            - "expectedRoomVersion"
+            - "targetUserId"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsRoomInviteRotate:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "room.invite.rotate"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            roomId:
+              type: "string"
+              format: "uuid"
+            expectedRoomVersion:
+              type: "integer"
+              minimum: 0
+          required:
+            - "roomId"
+            - "expectedRoomVersion"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsChatSend:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "chat.send"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            roomId:
+              type: "string"
+              format: "uuid"
+            clientMessageId:
+              type: "string"
+              format: "uuid"
+            text:
+              type: "string"
+              minLength: 1
+              maxLength: 300
+          required:
+            - "roomId"
+            - "clientMessageId"
+            - "text"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsMatchCommand:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "match.command"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            commandId:
+              type: "string"
+              format: "uuid"
+            matchId:
+              type: "string"
+              format: "uuid"
+            expectedStateVersion:
+              type: "integer"
+              minimum: 0
+            controlEpoch:
+              type: "integer"
+              minimum: 0
+            action:
+              $ref: "#/components/schemas/GameAction"
+          required:
+            - "commandId"
+            - "matchId"
+            - "expectedStateVersion"
+            - "controlEpoch"
+            - "action"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsMatchResume:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "match.resume"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            matchId:
+              type: "string"
+              format: "uuid"
+            lastEventSequence:
+              type: "integer"
+              minimum: 0
+          required:
+            - "matchId"
+            - "lastEventSequence"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsMatchReclaim:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "match.reclaim"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            matchId:
+              type: "string"
+              format: "uuid"
+            expectedControlEpoch:
+              type: "integer"
+              minimum: 0
+          required:
+            - "matchId"
+            - "expectedControlEpoch"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsPing:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        requestId:
+          type: "string"
+          format: "uuid"
+        type:
+          type: "string"
+          const: "ping"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            clientTime:
+              type: "string"
+              format: "date-time"
+          required:
+            - "clientTime"
+      required:
+        - "protocolVersion"
+        - "requestId"
+        - "type"
+        - "payload"
+    WsClientMessage:
+      oneOf:
+        -
+          $ref: "#/components/schemas/WsRoomSettings"
+        -
+          $ref: "#/components/schemas/WsRoomReady"
+        -
+          $ref: "#/components/schemas/WsRoomLeave"
+        -
+          $ref: "#/components/schemas/WsRoomStart"
+        -
+          $ref: "#/components/schemas/WsRoomKick"
+        -
+          $ref: "#/components/schemas/WsRoomInviteRotate"
+        -
+          $ref: "#/components/schemas/WsChatSend"
+        -
+          $ref: "#/components/schemas/WsMatchCommand"
+        -
+          $ref: "#/components/schemas/WsMatchResume"
+        -
+          $ref: "#/components/schemas/WsMatchReclaim"
+        -
+          $ref: "#/components/schemas/WsPing"
+    WsHello:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "connection.ready"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            connectionId:
+              type: "string"
+              format: "uuid"
+            sessionEpoch:
+              type: "integer"
+              minimum: 0
+            heartbeatIntervalSeconds:
+              type: "integer"
+              const: 5
+            heartbeatTimeoutSeconds:
+              type: "integer"
+              const: 15
+            maxMessageBytes:
+              type: "integer"
+              const: 16384
+            protocolVersion:
+              type: "integer"
+              const: 1
+          required:
+            - "connectionId"
+            - "sessionEpoch"
+            - "heartbeatIntervalSeconds"
+            - "heartbeatTimeoutSeconds"
+            - "maxMessageBytes"
+            - "protocolVersion"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsRoomsUpdated:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "rooms.updated"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            reason:
+              type: "string"
+              enum:
+                - "created"
+                - "updated"
+                - "removed"
+            roomId:
+              type: "string"
+              format: "uuid"
+            summary:
+              anyOf:
+                -
+                  $ref: "#/components/schemas/RoomSummary"
+                -
+                  type: "null"
+          required:
+            - "reason"
+            - "roomId"
+            - "summary"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsRoomSnapshot:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "room.snapshot"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            room:
+              $ref: "#/components/schemas/Room"
+            inviteCode:
+              anyOf:
+                -
+                  type: "string"
+                -
+                  type: "null"
+          required:
+            - "room"
+            - "inviteCode"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsMemberUpdated:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "member.updated"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            roomId:
+              type: "string"
+              format: "uuid"
+            roomVersion:
+              type: "integer"
+              minimum: 0
+            userId:
+              type: "string"
+              format: "uuid"
+            member:
+              anyOf:
+                -
+                  $ref: "#/components/schemas/RoomMember"
+                -
+                  type: "null"
+          required:
+            - "roomId"
+            - "roomVersion"
+            - "userId"
+            - "member"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsControllerChanged:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "controller.changed"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            matchId:
+              type: "string"
+              format: "uuid"
+            stateVersion:
+              type: "integer"
+              minimum: 0
+            eventSequence:
+              type: "integer"
+              minimum: 0
+            serverTick:
+              type: "integer"
+              minimum: 0
+            controller:
+              $ref: "#/components/schemas/ControllerState"
+          required:
+            - "matchId"
+            - "stateVersion"
+            - "eventSequence"
+            - "serverTick"
+            - "controller"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsChatMessage:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "chat.message"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          $ref: "#/components/schemas/ChatMessage"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsMatchSnapshot:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "match.snapshot"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          $ref: "#/components/schemas/MatchSnapshot"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsMatchEvent:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "match.event"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            matchId:
+              type: "string"
+              format: "uuid"
+            sequence:
+              type: "integer"
+              minimum: 1
+            stateVersion:
+              type: "integer"
+              minimum: 0
+            serverTick:
+              type: "integer"
+              minimum: 0
+            eventType:
+              type: "string"
+              enum:
+                - "match.started"
+                - "action.applied"
+                - "roulette.started"
+                - "roulette.stopped"
+                - "movement.applied"
+                - "card.applied"
+                - "jutsu.applied"
+                - "scroll.applied"
+                - "combat.resolved"
+                - "turn.changed"
+                - "match.finished"
+                - "match.paused"
+            snapshot:
+              $ref: "#/components/schemas/MatchSnapshot"
+          required:
+            - "matchId"
+            - "sequence"
+            - "stateVersion"
+            - "serverTick"
+            - "eventType"
+            - "snapshot"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsAck:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "command.ack"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            requestId:
+              type: "string"
+              format: "uuid"
+            commandId:
+              type: "string"
+              format: "uuid"
+            stateVersion:
+              type: "integer"
+              minimum: 0
+            roomVersion:
+              type: "integer"
+              minimum: 0
+            eventSequence:
+              type: "integer"
+              minimum: 0
+            duplicate:
+              type: "boolean"
+            outcome:
+              type: "string"
+              enum:
+                - "applied"
+                - "queued"
+                - "noop"
+          required:
+            - "requestId"
+            - "duplicate"
+            - "outcome"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsRejected:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "command.rejected"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            requestId:
+              type: "string"
+              format: "uuid"
+            commandId:
+              type: "string"
+              format: "uuid"
+            code:
+              type: "string"
+            message:
+              type: "string"
+            currentStateVersion:
+              type: "integer"
+              minimum: 0
+            currentRoomVersion:
+              type: "integer"
+              minimum: 0
+            currentControlEpoch:
+              type: "integer"
+              minimum: 0
+            retryAfterSeconds:
+              type: "integer"
+              minimum: 0
+          required:
+            - "requestId"
+            - "code"
+            - "message"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsPong:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "pong"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            clientTime:
+              type: "string"
+              format: "date-time"
+            serverTick:
+              type: "integer"
+              minimum: 0
+          required:
+            - "clientTime"
+            - "serverTick"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsInviteRotated:
+      type: "object"
+      additionalProperties: false
+      properties:
+        protocolVersion:
+          type: "integer"
+          const: 1
+        type:
+          type: "string"
+          const: "room.invite.rotated"
+        serverTime:
+          type: "string"
+          format: "date-time"
+        payload:
+          type: "object"
+          additionalProperties: false
+          properties:
+            roomId:
+              type: "string"
+              format: "uuid"
+            roomVersion:
+              type: "integer"
+              minimum: 0
+            inviteCode:
+              type: "string"
+          required:
+            - "roomId"
+            - "roomVersion"
+            - "inviteCode"
+      required:
+        - "protocolVersion"
+        - "type"
+        - "serverTime"
+        - "payload"
+    WsServerMessage:
+      oneOf:
+        -
+          $ref: "#/components/schemas/WsHello"
+        -
+          $ref: "#/components/schemas/WsRoomsUpdated"
+        -
+          $ref: "#/components/schemas/WsRoomSnapshot"
+        -
+          $ref: "#/components/schemas/WsMemberUpdated"
+        -
+          $ref: "#/components/schemas/WsControllerChanged"
+        -
+          $ref: "#/components/schemas/WsChatMessage"
+        -
+          $ref: "#/components/schemas/WsMatchSnapshot"
+        -
+          $ref: "#/components/schemas/WsMatchEvent"
+        -
+          $ref: "#/components/schemas/WsAck"
+        -
+          $ref: "#/components/schemas/WsRejected"
+        -
+          $ref: "#/components/schemas/WsPong"
+        -
+          $ref: "#/components/schemas/WsInviteRotated"
+x-websocket:
+  status: "Kontrak aplikasi tambahan; bukan operasi HTTP yang bisa dieksekusi sebagai REST."
+  endpoint: "/v1/ws"
+  subprotocol: "naruto.v1"
+  encoding: "UTF-8 JSON, satu message per frame aplikasi."
+  clientMessageSchema:
+    $ref: "#/components/schemas/WsClientMessage"
+  serverMessageSchema:
+    $ref: "#/components/schemas/WsServerMessage"
+  limits:
+    maxFrameBytes: 16384
+    heartbeatIntervalSeconds: 5
+    heartbeatTimeoutSeconds: 15
+    chatMaxCharacters: 300
+    chatBurstMessages: 5
+    chatWindowSeconds: 10
+    waitingRoomReconnectSeconds: 30
+    decisionInactivitySeconds: 120
+  authentication: "Login email dahulu, minta tiket HTTP dengan CSRF, lalu upgrade. Cookie saja tidak menggantikan tiket. Origin diverifikasi. Sesi dicabut memutus socket; jangan log tiket."
+  subscriptions: "Setelah hello, otomatis subscribe perubahan daftar room publik; current room dan active match hanya milik user. Reconnect mengirim room.snapshot dan resume harus mengirim match.resume. Kode privat hanya dikirim host; tidak dibroadcast publik."
+  ordering: "Mutasi room memakai expectedRoomVersion, hanya waiting. Nama/settings diubah host; edit membatalkan ready semua pemain. room.ready juga memilih karakter awal. room.start hanya host ketika roster sah, semua ready dan assetsReady/hash sesuai. room.kick hanya host saat waiting dan tidak dapat menendang diri sendiri; room.invite.rotate hanya host privat. room.leave saat playing melepas koneksi kontrol ke CPU dan voice, bukan surrender. Setelah hasil server mengembalikan room ke waiting dengan ready=false; room.start membuat match baru."
+  idempotency: "requestId wajib di semua pesan; mutasi didedup per user/type/requestId. match.command juga commandId persisten untuk seluruh umur match. chat.send memakai clientMessageId per user+room. Payload berbeda dengan ID sama -> IDEMPOTENCY_CONFLICT. command.ack diterbitkan sesudah commit; queued reclaim berarti antrian reclaim sudah persisten, belum memberi hak mengontrol."
+  matchResume: "lastEventSequence adalah cursor match, bukan stateVersion. Server memberi event yang hilang sesuai hak user; jika log gap/terlalu besar beri match.snapshot. Client mengabaikan sequence duplikat, meminta resume pada gap. controller.changed menggunakan sequence match yang sama; jangan mengirim aksi controller baru sebelum epoch baru commit."
+  takeover: "Disconnect terdeteksi -> controllerKind=cpu dan controlEpoch bertambah, job CPU mengikuti AI_RULE. participantKind=user manusia tidak berubah. Wheel/tick/RNG dan aksi commit tidak direset. match.reclaim hanya pemilik slot dengan sesi sah; reclaim pada batas keputusan, epoch bertambah dan job lama dibatalkan. Semua user offline tidak mengakhiri match hanya karena semua controller CPU. Koneksi baru akun yang sama mencabut koneksi pengendali lama melalui sessionEpoch."
+  gameCommands: "Client hanya mengirim niat dalam GameAction dan controlEpoch saat ini. Validasi turn/side/substate, optionId, inventori, biaya dan sasaran oleh server; pertahanan boleh membutuhkan keputusan slot non-turnSeat. Surrender confirm memerlukan choiceId aktif dari surrender.request. Cancel/confirm tanpa choiceId ditolak. Card targetSeat/targetTileId diterima hanya bila pilihan menu memerlukannya; keduanya tidak boleh dipakai sekaligus. No client-supplied seed, roll result, chakra, damage or actorId."
+  presentation: "Tick logis 60 Hz bila diperlukan, tidak mengirim snapshot per frame. match.event MVP menyertakan snapshot proyeksi setelah event bisnis, bukan tick roulette. Client memajukan animasi dari serverTick. WS frame limit mencakup snapshot; implementasi wajib mengukur payload maksimum sebelum release."
+  errorCodes:
+    - "INVALID_MESSAGE"
+    - "UNSUPPORTED_PROTOCOL"
+    - "UNAUTHENTICATED"
+    - "FORBIDDEN"
+    - "ROOM_NOT_WAITING"
+    - "ROOM_FULL"
+    - "HOST_REQUIRED"
+    - "NOT_READY"
+    - "ASSET_VERSION_MISMATCH"
+    - "VERSION_CONFLICT"
+    - "STALE_CONTROL_EPOCH"
+    - "NOT_CONTROLLER"
+    - "INVALID_ACTION"
+    - "INVALID_TARGET"
+    - "CHOICE_EXPIRED"
+    - "INSUFFICIENT_CHAKRA"
+    - "INSUFFICIENT_SKILL_POINTS"
+    - "ALREADY_USED"
+    - "IDEMPOTENCY_CONFLICT"
+    - "RATE_LIMITED"
+    - "MATCH_FINISHED"
+    - "CPU_CONTEXT_UNRESOLVED"
+  closeCodes:
+    "1000": "Normal / logout."
+    "1008": "Policy violation / sesi dicabut / koneksi lama digantikan."
+    "1009": "Frame terlalu besar."
+    "1011": "Kesalahan server; reconnect menggunakan tiket baru."
+  examples:
+    client:
+      protocolVersion: 1
+      requestId: "11111111-1111-4111-8111-111111111111"
+      type: "match.command"
+      payload:
+        commandId: "22222222-2222-4222-8222-222222222222"
+        matchId: "33333333-3333-4333-8333-333333333333"
+        expectedStateVersion: 7
+        controlEpoch: 2
+        action:
+          type: "roll.stop"
+          payload:
+            rouletteId: "44444444-4444-4444-8444-444444444444"
+    server:
+      protocolVersion: 1
+      type: "command.ack"
+      serverTime: "2026-11-08T14:00:00Z"
+      payload:
+        requestId: "11111111-1111-4111-8111-111111111111"
+        commandId: "22222222-2222-4222-8222-222222222222"
+        stateVersion: 8
+        eventSequence: 12
+        duplicate: false
+        outcome: "applied"
