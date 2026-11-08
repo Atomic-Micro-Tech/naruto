@@ -4,6 +4,8 @@ Tanggal: 8 November 2026. Acuan: disc lokal `SLPS_035.53`, **Naruto: Shinobi no 
 
 Audit ini menutup beberapa kekosongan yang masih disebut pada [audit sebelumnya](rules-completeness-audit.md): nama empat varian, kondisi pembukaannya, sasaran kartu simpanan, serta perbedaan urutan peserta dan label peringkat. Temuan bersifat **verifikasi statis kode dan aset asli**, bukan hasil perbandingan rekaman PS1. Runtime browser tidak diubah oleh audit ini.
 
+**Pembaruan alur lengkap:** [spesifikasi Party 1:1](party-1to1-contract.md) menelusuri callback yang sebelumnya hilang. Hasil Party menuju menu tanpa evaluasi unlock; flag hasil nonzero berasal dari menyerah; jalur kursor kartu lama tidak dicapai oleh konteks kartu standar. Kondisi unlock di bawah tetap benar sebagai predikat, tetapi tidak berarti dapat diberikan lewat hasil Party.
+
 ## Bukti yang dapat direproduksi
 
 ```sh
@@ -88,7 +90,7 @@ Pembatalan konteks 7 masuk `LAB_800d2f28`, lalu kembali ke UI kartu `8010cd00/80
 
 `8010f3e0` memisahkan pilihan berdasarkan konteks: papan memakai useFlag 2; penyerang memakai useFlag 0 dengan tipe 8/9; pembela memakai useFlag 0 dengan tipe 10/11. Tidak ada definisi tipe 11 pada 52 kartu asli. ID 20/21 adalah efek gulungan bersyarat dan bukan aksi kartu papan biasa.
 
-**Batas sasaran yang belum disamakan:** fungsi besar ini juga menyimpan jalur kursor peta `800bbaf4` yang memilih slot berdasarkan posisi layar tanpa pemeriksaan status inaktif di fungsi itu sendiri. Jalur pemilih daftar menyetelnya melalui `DAT_80139ec8` dan melompati jalur kursor. Audit ini belum membuktikan keterjangkauan seluruh jalur kursor lama setelah eliminasi; karena itu tidak menyatakan bahwa setiap jalur input menolak sasaran yang sama. Pilihan CPU juga mempunyai filter strategis tersendiri; lihat [story1-cpu-preroll.md](story1-cpu-preroll.md).
+**Pembaruan keterjangkauan:** fungsi besar ini juga menyimpan jalur kursor peta `800bbaf4`, tetapi penelusuran lanjutan membuktikan konteks kartu 7/0x54 selalu masuk/menunggu pemilih daftar lalu langsung menuju konfirmasi atau pembatalan. Jalur kursor tersebut tidak menambah sasaran sah untuk pemakaian kartu biasa. Pilihan CPU mempunyai filter strategis tersendiri; lihat [story1-cpu-preroll.md](story1-cpu-preroll.md).
 
 ## Urutan hasil berbeda dari label peringkat
 
@@ -160,10 +162,9 @@ Pemeriksaan model dan perhitungan tersebut menguji konsistensi dokumentasi terha
 
 ## Yang masih perlu dibuktikan
 
-- Dampak hasil seri terhadap setiap pemberian progres dan scene penutup; jangan menggunakan getter ID karakter pemenang sebagai slot peserta atau menganggap badge sebagai satu-satunya state kemenangan.
-- Semua sumber penulisan dan transisi byte specialResult, terutama akhir pertandingan setelah seluruh manusia keluar. Nama “mengundurkan diri” belum diberikan tanpa bukti pemanggilnya.
-- Keterjangkauan jalur kursor peta alternatif untuk sasaran kartu setelah eliminasi, dibandingkan pemilih daftar standar.
-- Pengaturan target nol/ekstrem sepanjang permainan dan pembandingan seluruh transisi eliminasi dengan eksekusi referensi.
+- Pembandingan state memori pada eliminasi tanpa penyintas bersaldo positif. Algoritme mempertahankan kandidat lama sudah ditetapkan pada audit berikutnya, tetapi byte konkret belum ditangkap dari eksekusi asli.
+- Dampak hasil tim/cerita yang tidak boleh disamakan dengan Party individu. Tujuan scene Party dan ketiadaan evaluasi unlock setelah hasilnya sudah ditetapkan pada audit berikutnya.
+- Pembandingan input/animasi pada target nol/ekstrem sepanjang sesi. Predikat angka target serta pemilihan sasaran standar sudah ditetapkan.
 - Nama setiap kartu/teknik yang belum dibaca, keputusan CPU lengkap, RNG, animasi dan timing input.
 
 Audit ini memperluas aturan yang diketahui. Banyaknya temuan, gambar, atau fungsi yang diekspor tidak menjadi ukuran persentase kelengkapan atau bukti replika 1:1.

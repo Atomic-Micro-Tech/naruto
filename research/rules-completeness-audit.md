@@ -6,6 +6,8 @@ Tanggal: 8 November 2026. Game: **Naruto: Shinobi no Sato no Jintori Gassen**, P
 
 **Pembaruan audit Party:** [audit lanjutan](party-casual-audit.md) kini menutup kekosongan nama empat varian, syarat flag 98–101, sasaran kartu simpanan/pembatalan, serta label peringkat biasa saat seri. Aset hasil membuktikan label `ドベ` berarti paling akhir, dan cabang batas putaran dapat menampilkan beberapa `1位`. Temuan ini memperbarui ketidakpastian terkait pada catatan di bawah; dampak terhadap seluruh progres dan pembandingan runtime masih terbuka.
 
+**Pembaruan alur Party untuk 1:1:** [kontrak implementasi](party-1to1-contract.md) menambahkan callback menyerah, pemilihan kandidat eliminasi, target nol dan batas putaran tepat. Hasil Party kembali ke menu tanpa memanggil evaluator progres; syarat flag 98–101 bukan hadiah otomatis dari pertandingan Party. Model hasil terpisah mempunyai 11 pengujian yang lulus. Ketergantungan RAM pada beberapa kasus dan pembandingan eksekusi asli tetap belum ditutup.
+
 **Belum lengkap untuk seluruh game, dan belum cukup untuk menyatakan replika 1:1.** [GAME_RULE.md](../GAME_RULE.md) sebelumnya merupakan dokumentasi Party Mode dengan beberapa batas eksplisit. Audit ini menambah aturan yang dapat ditelusuri, tetapi tidak menghapus ketidakpastian hanya karena suatu aset tersedia atau suatu tes JavaScript lulus.
 
 Ada tiga hal yang harus dinilai terpisah:

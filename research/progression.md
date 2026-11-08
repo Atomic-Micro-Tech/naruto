@@ -4,9 +4,11 @@
 
 ## Integration and initialization
 
+**Party caller correction (8 November 2026):** evaluate these predicates only when the original flow enters CONCNOTI (scene 16). Ordinary Party results, including turn-limit ties and surrender, return directly to MENU (scene 2) through `BOARD 801111f4`; they do not call the result-counter/unlock evaluator. Predicate eligibility by itself does not establish that a mode awards it. See [the Party flow audit](party-1to1-contract.md#6-hasil-party-tidak-memberikan-progres-cerita). The module below remains a pure predicate evaluator; its caller must enforce the scene boundary.
+
 ```js
 let progress = newProgression();
-// Call after an actual match result, not when opening a menu:
+// Call when the native result flow enters CONCNOTI, not for every Party result:
 progress = applyResultCounters(progress, {
   mapId, characterIds, pairCounts, achievementCounters,
 });
