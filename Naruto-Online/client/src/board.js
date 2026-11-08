@@ -19,6 +19,7 @@ import {
   wheelAngle,
   rouletteStopPlan,
   rouletteStopFrame,
+  ROULETTE_ENTRY_MS,
 } from "./presentation";
 
 export async function createBoard(parent, onTile, onCameraMode = () => {}) {
@@ -40,8 +41,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
   let scene, readyResolve, readyReject;
   let camera = createBoardCamera({ width: 640, height: 480 }),
     cameraClock = 0;
-  let receivedAt = 0,
-    animatingUntil = 0,
+  let animatingUntil = 0,
     previousTurn = null,
     overview = false,
     manualCamera = false,
@@ -56,8 +56,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
     wheelEnteredAt = 0,
     uiCamera,
     renderWheel,
-    displayedAngle = 0,
-    angleCorrection = 0;
+    wheelSpin = null;
   const ready = new Promise((resolve, reject) => {
     readyResolve = resolve;
     readyReject = reject;
@@ -234,7 +233,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
           a.options.some(o => o.id === tap.action && o.enabled));
         if (!enabled) return;
         if (tap.action === "stop" &&
-            (!state.roulette || performance.now() - wheelEnteredAt < 240)) return;
+            (!state.roulette || performance.now() - wheelEnteredAt < ROULETTE_ENTRY_MS)) return;
         onTile(tap.action);
       });
       this.input.on("pointerupoutside", cancelGesture);
@@ -292,7 +291,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
       wheelImage.input.enabled =
         !!state?.roulette &&
         state.status === "playing" &&
-        now - wheelEnteredAt >= 240 &&
+        now - wheelEnteredAt >= ROULETTE_ENTRY_MS &&
         state.allowedActions.some((a) =>
           a.options.some((o) => o.id === "stop" && o.enabled),
         );
@@ -306,10 +305,8 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
           : null;
         const angle = settling
           ? frame.angle
-          : wheelAngle(state, now - receivedAt) +
-            angleCorrection * Math.exp(-(now - receivedAt) / 120);
-        displayedAngle = ((angle % 4096) + 4096) % 4096;
-        const entry = Math.min(1, (now - wheelEnteredAt) / 240);
+          : wheelAngle(wheelSpin, now - wheelEnteredAt);
+        const entry = Math.min(1, (now - wheelEnteredAt) / ROULETTE_ENTRY_MS);
         wheelImage.setX(-180 * ((1 - entry) ** 3 + (frame?.exit ?? 0) ** 2));
         renderWheel(wheelTexture.context, angle, wheel.faces, {
           result: frame?.frozen ? heldWheel.result : null,
@@ -683,12 +680,10 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
     setState(value) {
       const now = performance.now();
       if (value?.roulette) {
-        if (value.roulette.id !== state?.roulette?.id) {
+        if (value.id !== state?.id || value.roulette.id !== state?.roulette?.id) {
           wheelEnteredAt = now;
-          angleCorrection = 0;
-        } else {
-          const next = wheelAngle(value, 0);
-          angleCorrection = ((displayedAngle - next + 6144) % 4096) - 2048;
+          // Keep one monotonic visual clock across repeated/delayed snapshots.
+          wheelSpin = { serverTick: value.serverTick, roulette: { ...value.roulette } };
         }
       }
       if (state?.roulette && !value?.roulette && value?.id === state.id) {
@@ -699,7 +694,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
             ? value.presentation.lastRoll
             : null;
         const plan = rouletteStopPlan(
-          displayedAngle,
+          wheelAngle(wheelSpin, now - wheelEnteredAt),
           state.roulette.faces,
           result,
         );
@@ -740,7 +735,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         animatingUntil = Math.max(animatingUntil, now + sealData.sequence.length * 1000 / sealData.fps);
         sound("seal");
       }
-      receivedAt = performance.now();
+      if (!value?.roulette) wheelSpin = null;
       state = value;
       draw();
       game.scale.refresh();

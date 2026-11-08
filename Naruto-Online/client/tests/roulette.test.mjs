@@ -10,23 +10,27 @@ import { RouletteAudio } from "../src/roulette-audio.js";
 const faces = [1, 2, 2, 3, 3, 3, 4, 4, 4, 5, 5, 6];
 test("rotation interpolates between logical ticks on high refresh screens", () => {
   const s = { serverTick: 0, roulette: { angle: 0, startedAtTick: 0 } };
-  assert.ok(Math.abs(wheelAngle(s, 1000 / 120) - 81) < 1e-9);
-  assert.ok(Math.abs(wheelAngle(s, 1000 / 240) - 40.5) < 1e-9);
+  assert.ok(Math.abs(wheelAngle(s, 1000 / 120) - 45) < 1e-9);
+  assert.ok(Math.abs(wheelAngle(s, 1000 / 240) - 22.5) < 1e-9);
+  assert.ok(Math.abs(wheelAngle(s, 1000 / 30) - 180) < 1e-9);
+  assert.equal(wheelAngle({ ...s, serverTick: 60 }, 0), wheelAngle(s, 1000));
 });
-test("braking preserves velocity and decelerates without overshoot for every result and starting sector", () => {
+test("wheel keeps video speed until the second impact, then stops on the server result", () => {
   for (let angle = 0; angle < 4096; angle += 47)
     for (let result = 1; result <= 6; result++) {
       const p = rouletteStopPlan(angle, faces, result);
       let previous = angle,
         velocity = Infinity;
       assert.equal(faces[p.index], result);
-      assert.ok(p.duration >= 90 && p.duration < 950);
+      assert.ok(p.duration >= 5000 / 30 && p.duration < 950);
+      assert.ok(p.impacts[0] >= p.flight - 1e-8);
       const first = rouletteStopFrame(p, 0.001).angle;
-      assert.ok(Math.abs((first - angle) / 0.001 - 9.72) < 0.001);
+      assert.ok(Math.abs((first - angle) / 0.001 - 5.4) < 0.001);
       for (let i = 1; i <= 100; i++) {
         const a = rouletteStopFrame(p, (p.duration * i) / 100).angle,
           v = a - previous;
         assert.ok(v >= -1e-8 && v <= velocity + 1e-8);
+        assert.ok(Math.abs(v / (p.duration / 100) - 5.4) < 1e-8);
         velocity = v;
         previous = a;
       }
@@ -83,7 +87,7 @@ test("WAV loop and three impacts are scheduled once, with cancellation on mute/e
   const state = {
     key: "match:wheel",
     stoppingAt: 1100,
-    impacts: [200, 200 + 1000 / 30, 200 + 2000 / 30],
+    impacts: [200, 200 + 2000 / 30, 200 + 4000 / 30],
   };
   audio.sync(state, 1100);
   audio.sync(state, 1110);
@@ -91,7 +95,7 @@ test("WAV loop and three impacts are scheduled once, with cancellation on mute/e
     (e) => e.kind === "start" && e.id === "menu_seq_005",
   );
   assert.equal(hits.length, 3);
-  assert.ok(Math.abs(hits[1].at - hits[0].at - 1 / 30) < 1e-10);
+  assert.ok(Math.abs(hits[1].at - hits[0].at - 2 / 30) < 1e-10);
   audio.stop();
   assert.equal(audio.key, null);
   assert.ok(events.filter((e) => e.kind === "stop").length >= 5);
@@ -107,9 +111,9 @@ test("WAV loop and three impacts are scheduled once, with cancellation on mute/e
 
 test("three shuriken fly in sequence and land at the three audio impact times", () => {
   const plan = rouletteStopPlan(1100, faces, 2);
-  assert.deepEqual(shurikenFrames(plan, plan.impacts[0] - 51), []);
+  assert.deepEqual(shurikenFrames(plan, plan.impacts[0] - 101), []);
   for (let i = 0; i < 3; i++) {
-    const mid = shurikenFrames(plan, plan.impacts[i] - 25).find(s => s.index === i);
+    const mid = shurikenFrames(plan, plan.impacts[i] - 50).find(s => s.index === i);
     assert.ok(mid.flying && mid.x > 150 && mid.x < 220);
     const hit = shurikenFrames(plan, plan.impacts[i]).find(s => s.index === i);
     assert.equal(hit.flying, false);

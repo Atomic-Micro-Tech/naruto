@@ -263,8 +263,8 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
     (e) => e.kind === "start" && Math.abs(e.duration - 0.27743764) < 0.001,
   );
   expect(hits).toHaveLength(3);
-  expect(hits[1].when - hits[0].when).toBeCloseTo(1 / 30, 4);
-  expect(hits[2].when - hits[1].when).toBeCloseTo(1 / 30, 4);
+  expect(hits[1].when - hits[0].when).toBeCloseTo(2 / 30, 4);
+  expect(hits[2].when - hits[1].when).toBeCloseTo(2 / 30, 4);
   expect(
     audioEvents.filter((e) => e.kind === "start").every((e) => e.peak > 0.01),
   ).toBe(true);

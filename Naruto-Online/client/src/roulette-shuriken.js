@@ -69,7 +69,7 @@ export function createShurikenSprites(image) {
 // Native launches have 3-tick flights and 2-tick stagger. Stable X offsets
 // replace unexposed native cosmetic jitter; no gameplay RNG is consumed.
 export function shurikenFrames(plan, elapsed) {
-  const flight = 3000 / 60,
+  const flight = plan.flight,
     offsets = [0, -8, -4],
     ys = [124, 112, 136];
   function position(index, time) {
@@ -86,7 +86,7 @@ export function shurikenFrames(plan, elapsed) {
     if (!current) return [];
     const trails = [];
     for (let n = 3; n >= 1; n--) {
-      const past = position(index, elapsed - (n * 1000) / 60);
+      const past = position(index, elapsed - n * flight / 3);
       if (past?.flying) trails.push({ ...past, alpha: (4 - n) * 0.12 });
     }
     return [{ ...current, index, impactAge: elapsed - impact, trails }];
