@@ -2,7 +2,7 @@
 
 Ini adalah struktur awal modul Go untuk backend lokal. Kontrak HTTP dan WebSocket ada di [`../api/naruto.yaml`](../api/naruto.yaml), skema PostgreSQL di [`../scheme/database-naruto.sql`](../scheme/database-naruto.sql), dan alur MVP di [`../PLAN.md`](../PLAN.md). Aturan game dan CPU ada di `../../GAME_RULE.md` serta `../../AI_RULE.md`.
 
-Struktur mengikuti `.agents/skills/api-creator/SKILL.md`. Folder `backendexample/` yang disebut skill belum tersedia di repositori ini, sehingga pembagian tanggung jawab di bawah mengikuti instruksi tertulis skill. Direktori kosong dilacak dengan `.gitkeep`; belum ada endpoint atau game server yang berjalan.
+Struktur mengikuti `.agents/skills/api-creator/SKILL.md`. Folder `backendexample/` yang disebut skill belum tersedia di repositori ini, sehingga pembagian tanggung jawab di bawah mengikuti instruksi tertulis skill. Direktori yang masih kosong dilacak dengan `.gitkeep`; belum ada endpoint atau game server yang berjalan.
 
 ```text
 server/
@@ -33,3 +33,11 @@ Alur HTTP: `routes → middleware → controller → usecase → models/repo`; h
 Kode Go baru memakai nama file CamelCase seperti `routes/Routes.go`, `server/HttpServer.go`, `middleware/Middleware.go`, `internal/Connection.go`, dan `view/Json.go`. Model SQL berada di `models/`, dan semua query berada di `repo/`. Proses startup kelak memuat konfigurasi, membuka koneksi database, menginisialisasi telemetry, memasang routes, lalu menyalakan server. Worker dan koneksi ditutup dengan urutan aman ketika proses berhenti.
 
 Belum ada `configs/config.json` karena konfigurasi runtime belum diimplementasikan. Kredensial database, kunci sesi, kunci enkripsi, dan secret layanan suara diberikan dari lingkungan lokal saat implementasi, tanpa menyimpannya di Git.
+
+## Model PostgreSQL
+
+`models/` sudah memuat satu file CamelCase untuk masing-masing dari 25 tabel di `scheme/database-naruto.sql`. Setiap file mempunyai struct, constructor `New<Model>`, getter/setter tiap kolom, dan interface `<Model>Repo`. Interface ini adalah kontrak; implementasi query di `repo/` akan ditambahkan bersama use case yang memerlukannya.
+
+Nama kolom tercatat dalam tag `db`. Semua field memakai `json:"-"` karena model persistence dapat berisi password hash, token hash, RNG, tangan kartu, dan state AI privat; controller perlu membentuk DTO API yang aman. UUID memakai `github.com/google/uuid`, `numeric(4,3)` memakai `github.com/shopspring/decimal`, JSONB memakai `json.RawMessage`, timestamp memakai `time.Time`, dan angka SQL memakai lebar yang sesuai. Kolom nullable memakai pointer atau `nil` untuk `[]byte`/`json.RawMessage`. Getter/setter untuk byte dan JSONB menyalin slice agar perubahan di luar model tidak mengubah data secara diam-diam.
+
+Constructor mengembalikan nilai kosong untuk dipakai saat scan/penyusunan row. Default SQL, rentang nilai, enum, dan hubungan antartabel tetap divalidasi PostgreSQL dan logika bisnis; memanggil constructor saja tidak menghasilkan row siap `INSERT`.
