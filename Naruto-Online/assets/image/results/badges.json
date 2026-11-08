@@ -1,0 +1,98 @@
+[
+  {
+    "id": 0,
+    "transcription": "1位",
+    "uv": [
+      0,
+      72,
+      64,
+      32
+    ],
+    "clut": [
+      48,
+      255
+    ],
+    "tpage": 13,
+    "file": "badge_0.png"
+  },
+  {
+    "id": 1,
+    "transcription": "2位",
+    "uv": [
+      64,
+      72,
+      64,
+      32
+    ],
+    "clut": [
+      64,
+      255
+    ],
+    "tpage": 13,
+    "file": "badge_1.png"
+  },
+  {
+    "id": 2,
+    "transcription": "3位",
+    "uv": [
+      0,
+      104,
+      64,
+      32
+    ],
+    "clut": [
+      80,
+      255
+    ],
+    "tpage": 13,
+    "file": "badge_2.png"
+  },
+  {
+    "id": 3,
+    "transcription": "ドベ",
+    "uv": [
+      64,
+      104,
+      64,
+      32
+    ],
+    "clut": [
+      96,
+      255
+    ],
+    "tpage": 13,
+    "file": "badge_3.png"
+  },
+  {
+    "id": 4,
+    "transcription": "勝ち",
+    "uv": [
+      0,
+      136,
+      64,
+      32
+    ],
+    "clut": [
+      176,
+      255
+    ],
+    "tpage": 13,
+    "file": "badge_4.png"
+  },
+  {
+    "id": 5,
+    "transcription": "まけ",
+    "uv": [
+      64,
+      136,
+      64,
+      32
+    ],
+    "clut": [
+      192,
+      255
+    ],
+    "tpage": 13,
+    "file": "badge_5.png"
+  }
+]

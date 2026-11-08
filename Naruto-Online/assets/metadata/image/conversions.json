@@ -1,0 +1,1907 @@
+{
+  "format": "png",
+  "pathBase": "Naruto-Online/",
+  "conversions": [
+    {
+      "oldPath": "texture/tim/tim_01c6e000.tim",
+      "path": "texture/textures/tim_01c6e000.png",
+      "resourceIds": [
+        438
+      ],
+      "sourceSha256": "57a652ac36361666be039d9ddf14ccb0527c3edc5d9dc316e443a1b054f944a5",
+      "sha256": "ad6bc2c06a5165dfeef86b10c2e81f59035dfdd9b1c0a516ba1b5886b8f3a32f",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4902c.tim",
+      "path": "texture/textures/tim_01a4902c.png",
+      "resourceIds": [
+        759
+      ],
+      "sourceSha256": "7a59315d7c0457f9c5cf642e1ca82abf86c990a4d010cc6ca52ed17da168dd32",
+      "sha256": "aec51adc534c9ed75b7f53169d78b7df839fa24e8c805854567aa67b8b0ea71d",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018a5fd0.tim",
+      "path": "texture/textures/tim_018a5fd0.png",
+      "resourceIds": [
+        697
+      ],
+      "sourceSha256": "787bd0d51829038b922d06250e4708265fa425d90375133b03e2bd7fb3aa0926",
+      "sha256": "82827e2161fc89667b27620b0413c8012ed777f5e5d163234d4ca4261c131c7d",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4c64c.tim",
+      "path": "texture/textures/tim_01a4c64c.png",
+      "resourceIds": [
+        762
+      ],
+      "sourceSha256": "dccba883a5dc5035e205c6d7ddf3d20ce538d09725a1ea9737a7f8c4e98fb7a5",
+      "sha256": "e1e9b4bf4764579a13c327b7c39c402a3c7853fd463fa00df03595ead033f62a",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c86000.tim",
+      "path": "texture/textures/tim_01c86000.png",
+      "resourceIds": [
+        450
+      ],
+      "sourceSha256": "7677e97618bdc8728dadddbbf84401295295e5be4fad5791bc52ea63e0731a53",
+      "sha256": "3df8ff5e66ee37a263d78dc8f4863130643f3a16973a4a228f90a1709f4e1ff0",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01897850.tim",
+      "path": "texture/textures/tim_01897850.png",
+      "resourceIds": [
+        694
+      ],
+      "sourceSha256": "eef2034b51a3f6f421615887970ee6ea1b0d297fa34cf072274175471c1272cc",
+      "sha256": "01de63ed77c5deab1700edd8078961defe4d12068ae1d0c74d5601c08bb4f10d",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018ad020.tim",
+      "path": "texture/textures/tim_018ad020.png",
+      "resourceIds": [
+        698
+      ],
+      "sourceSha256": "1a540695ac21f6e91e24ec67f7f39b534102e4a23faec63d0cb755623cd26c0e",
+      "sha256": "a5fa27364529d4dc3905d8e7ef2b91ad9d55a79998cdd95265e191379af78ccb",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018bc840.tim",
+      "path": "texture/textures/tim_018bc840.png",
+      "resourceIds": [
+        701
+      ],
+      "sourceSha256": "4b7078078171fe5869909955c39e4063927b02118cc51b2c2d114408b673acaa",
+      "sha256": "f8e17c72f26951f8a03db86ec1d089358084000545df0d6c324348804b63f080",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c98000.tim",
+      "path": "texture/textures/tim_01c98000.png",
+      "resourceIds": [
+        459
+      ],
+      "sourceSha256": "6e4dc60a7bfc201bc51e15015a0f59beda7166248f619b75af3fec1494e64de1",
+      "sha256": "8c407130b004cacb79f266811e9beeda3789d09465c54bca592f825ac00e6254",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c94000.tim",
+      "path": "texture/textures/tim_01c94000.png",
+      "resourceIds": [
+        457
+      ],
+      "sourceSha256": "c4a11f5b6fd27027813fc1ab7013b1dd8843c1ddfad7f78a9d981deb471843eb",
+      "sha256": "d0d4cf4c9d838434afd298cb9ef0331b46fcaca62be721546659fff0b79bedca",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c5c000.tim",
+      "path": "texture/textures/tim_01c5c000.png",
+      "resourceIds": [
+        429
+      ],
+      "sourceSha256": "0790acd9b3bf575c721df4637e222d0c552ec36fb55192e840b5c473b89f8b00",
+      "sha256": "a97fffba832a18ce72858c57b12c50ec5d6cfb0fc9fb9a6a1c7adf072939c316",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4f84c.tim",
+      "path": "texture/textures/tim_01a4f84c.png",
+      "resourceIds": [
+        765
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a509cc.tim",
+      "path": "texture/textures/tim_01a509cc.png",
+      "resourceIds": [
+        766
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01ca6000.tim",
+      "path": "texture/textures/tim_01ca6000.png",
+      "resourceIds": [
+        466
+      ],
+      "sourceSha256": "9b3f685cbc268477c72486fa1b47d17317a7cbd4e80bd9057a287b3257734b5b",
+      "sha256": "2ccb4c5aebce847714f07cf0ae38d4c0d311ebb6df573cd4abb83148ccf3c88a",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0182081c.tim",
+      "path": "texture/textures/tim_0182081c.png",
+      "resourceIds": [
+        687
+      ],
+      "sourceSha256": "850664ed787dcbbd0f664a21ceca7f864a9476376810d1ee8007fbe7aa39a4a6",
+      "sha256": "67174fd1e076f6d3ab50d978053d95d1e797d5474cf25707ecc8ac1a85ba0980",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018b7410.tim",
+      "path": "texture/textures/tim_018b7410.png",
+      "resourceIds": [
+        700
+      ],
+      "sourceSha256": "00b2f1d93858eb7c9c28b4ee2ad27d48505826469ecd4937a18b7d5fa3530605",
+      "sha256": "aeca1f6e57648915bc7ff2c99cde72f0d1a6d8fd2ac374cf4a50229020d987ba",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5364c.tim",
+      "path": "texture/textures/tim_01a5364c.png",
+      "resourceIds": [
+        769
+      ],
+      "sourceSha256": "aca1ecbfed4d2514c47f18d7702cd4f71a7e082256d2776b5197e021f9c35667",
+      "sha256": "09927f5dd1947a11a124a52815d291b1ff9cbf3fcf09962bd9facd30c8fb6449",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018ca710.tim",
+      "path": "texture/textures/tim_018ca710.png",
+      "resourceIds": [
+        704
+      ],
+      "sourceSha256": "808cbd962a8fc0644c7751ea810ab3f8bb077b875181d8f8ff806184bbe92663",
+      "sha256": "9e4f748d5d2cde21545d45a4859520b543c9de21c7a6872548c1d0fb1c86610f",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018a6c10.tim",
+      "path": "texture/textures/tim_018a6c10.png",
+      "resourceIds": [
+        697
+      ],
+      "sourceSha256": "39db5c7d4e1c2d3f1bd8d7362503677e1a0ffb513e2d4ff5f4ec9825b7d6cfee",
+      "sha256": "08041c420b37555a16e9771d8fb03089a9cfb97df64fd0440455c41f598a580f",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01cb0000.tim",
+      "path": "texture/textures/tim_01cb0000.png",
+      "resourceIds": [
+        471
+      ],
+      "sourceSha256": "4eb2951e126e6213cefc1fc7526aff2309b8090a642c32b074c125297acc5994",
+      "sha256": "18648055e69c562b85f4610809ec45f33879ca7c807791892e7b1d6eb31a04bd",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0184181c.tim",
+      "path": "texture/textures/tim_0184181c.png",
+      "resourceIds": [
+        689
+      ],
+      "sourceSha256": "a548470cc0c161f5abb50ad946f45e4f547e80eea3f2e4ccf1f000af142090e0",
+      "sha256": "0f6d60521f641f6dc04ff3540ed58eb59dc2ca06563c5778a1a3f68d005488ab",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01ca8000.tim",
+      "path": "texture/textures/tim_01ca8000.png",
+      "resourceIds": [
+        467
+      ],
+      "sourceSha256": "0350c1ef03c348d89f38c21baa1c6daf593ba3dbd2ea495bf091a2cc7fa43edc",
+      "sha256": "05f9a8bf38aaf44c19d6cc33b92fbff0e0a14930be8f1f6bfd2bd74cd64b85f8",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a529cc.tim",
+      "path": "texture/textures/tim_01a529cc.png",
+      "resourceIds": [
+        768
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01ca4000.tim",
+      "path": "texture/textures/tim_01ca4000.png",
+      "resourceIds": [
+        465
+      ],
+      "sourceSha256": "4353843cb6cd2fc2cc35ed6b1390a70a5cefe2aa4d147743a48056241cc291a9",
+      "sha256": "c10dfb49a958ef12c69b7323ed09a3da939c5533d2ead22b8f6c47accd3c15d0",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4d84c.tim",
+      "path": "texture/textures/tim_01a4d84c.png",
+      "resourceIds": [
+        763
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018d1790.tim",
+      "path": "texture/textures/tim_018d1790.png",
+      "resourceIds": [
+        706
+      ],
+      "sourceSha256": "17f04e57d508cfaedf2dec6be0fc2e4e316707b766d88dcf309d4c4e97dd0cab",
+      "sha256": "99e5befd9ca38175c0d19d305cb833fa690b3075e5b6ae27ee50292c00fd72ee",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0189b040.tim",
+      "path": "texture/textures/tim_0189b040.png",
+      "resourceIds": [
+        695
+      ],
+      "sourceSha256": "1eb974b6cd6fb91b21529d569463c34c701ea5b78efc49cf16aec0cc060cd89e",
+      "sha256": "dc17a765263a321e3d5388f855a77347b0b09ae392f0e90396ff5c7e72542e61",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01cb2000.tim",
+      "path": "texture/textures/tim_01cb2000.png",
+      "resourceIds": [
+        472
+      ],
+      "sourceSha256": "8a0b0e4f040748bf142c3c32d895676d9f2268444201ebab2c878afe1921199c",
+      "sha256": "3c6a6f7a368f493b660ccf56b28950fdbb3fcdee1a3aa1e97e0558968fe6496a",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0189d380.tim",
+      "path": "texture/textures/tim_0189d380.png",
+      "resourceIds": [
+        695
+      ],
+      "sourceSha256": "100a131ed9b6393a58654c8ae2d415ba69b121645bf00a131ac4ced775d5ba8b",
+      "sha256": "a21dd27ff1a37def4fff94f0230029f00b8cc3eb8c6d154ce64d25c269143a94",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4e02c.tim",
+      "path": "texture/textures/tim_01a4e02c.png",
+      "resourceIds": [
+        764
+      ],
+      "sourceSha256": "a9c5c1d4b1c1a2e3b7b3062531fa2e043243634570a67d3fd7085c023a08844f",
+      "sha256": "ab14f524e7c29dbfc9129dabb341c0ed78f41360bf9c0c1094efd5adb224c172",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018b1c40.tim",
+      "path": "texture/textures/tim_018b1c40.png",
+      "resourceIds": [
+        699
+      ],
+      "sourceSha256": "a280f3bd16354eb59895fef8a8e79dd8a020d469dae1e726531c82f1fa16eb47",
+      "sha256": "2146c2037e23a26ce743d2d7164d4326c73c81fd2e1fd70f1e559dd9742a93bc",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018b0780.tim",
+      "path": "texture/textures/tim_018b0780.png",
+      "resourceIds": [
+        699
+      ],
+      "sourceSha256": "c2d938cd59c8b49fb4fff872d635424060513c4c3c23cf2584f59294a26e93bd",
+      "sha256": "cef08758ee575b6b70a87d715c5686b7f7156daad340afa23cba0e244832960c",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5164c.tim",
+      "path": "texture/textures/tim_01a5164c.png",
+      "resourceIds": [
+        767
+      ],
+      "sourceSha256": "387722110b313053df441e55674cc7f0d037bb305e00c1962f3c4c24ecd304cb",
+      "sha256": "d3b4b90b07e86a789f9211f3474220575edbaada61583f5a3ed1441705f4ec6c",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0180785c.tim",
+      "path": "texture/textures/tim_0180785c.png",
+      "resourceIds": [
+        685
+      ],
+      "sourceSha256": "22b4207bb57aa91f7a45d65de5806ffbac5836d378de5f8cd857f5ddd325f9c8",
+      "sha256": "e4c3bb42ba7ae7361c211d8a7d90fdc135d0826d6b2be3f7e70d31ec6bfed590",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4a64c.tim",
+      "path": "texture/textures/tim_01a4a64c.png",
+      "resourceIds": [
+        760
+      ],
+      "sourceSha256": "05a95b24b5f385607529d4e2e4cece36915ada8c98a8d8b04dab193b4fc850ee",
+      "sha256": "f33e2f2a5dfdf81a06617cd8bb4b74a966dc9da38037dae4b6659957039011b9",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c7e000.tim",
+      "path": "texture/textures/tim_01c7e000.png",
+      "resourceIds": [
+        446
+      ],
+      "sourceSha256": "66ab3b162d0e23c83c904cb540890e488060ac39a051e66bb46514012b89fc50",
+      "sha256": "b5d7869917c16fda358ae3a348ae1a06097784998d337f48ce221bb3999e12f4",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5502c.tim",
+      "path": "texture/textures/tim_01a5502c.png",
+      "resourceIds": [
+        771
+      ],
+      "sourceSha256": "843851027d1da15135ca38ea55a1d6f0a168b67f034ffe6fd5bb7784d803c29c",
+      "sha256": "8d030b89d4dc880504cffa3234a63090d877db804822f15da57502f49a267c0e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5484c.tim",
+      "path": "texture/textures/tim_01a5484c.png",
+      "resourceIds": [
+        770
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c88000.tim",
+      "path": "texture/textures/tim_01c88000.png",
+      "resourceIds": [
+        451
+      ],
+      "sourceSha256": "d100f55409f9ca49f610a6b394292f206406c803cf8b9778f0d1c821220cf739",
+      "sha256": "c781d339da12c2b1c9a191685753be49ace247d6e151a4f40697b9d77755908c",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c5a000.tim",
+      "path": "texture/textures/tim_01c5a000.png",
+      "resourceIds": [
+        428
+      ],
+      "sourceSha256": "d88cdfbd9802e3de0ff3e72459c75ad2975594e0cd34a8009df0b057d4055688",
+      "sha256": "725c2a9925da185342b8652b25c7ddf52f81e80081464ebc4bac8fe1bf334207",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c96000.tim",
+      "path": "texture/textures/tim_01c96000.png",
+      "resourceIds": [
+        458
+      ],
+      "sourceSha256": "640c42e26b16dfc538939054a6d625a3a39a818f5811b6a2a9b8b8f592c21de2",
+      "sha256": "5cc9835e452a3afb2c11496c9064403a57b60d71cc4e731903de840b40150d06",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4b9cc.tim",
+      "path": "texture/textures/tim_01a4b9cc.png",
+      "resourceIds": [
+        761
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018ced80.tim",
+      "path": "texture/textures/tim_018ced80.png",
+      "resourceIds": [
+        705
+      ],
+      "sourceSha256": "8594fea36042a549b3cac75a2b975c51ce59147fbb16b4c7a5c37475013e9b5c",
+      "sha256": "0046e8cd7ad771aa36467cee673ffd06554d049d73d3f4cbb0d26165d927c762",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c84000.tim",
+      "path": "texture/textures/tim_01c84000.png",
+      "resourceIds": [
+        449
+      ],
+      "sourceSha256": "7d66e23d65c9392aa85f14014d248d441635ce55746c2146406ec0eac6422163",
+      "sha256": "94346b112d053c471e46a6dcde57e353c93eda376c3b3fb79c88609cef0f77d7",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018b3ed0.tim",
+      "path": "texture/textures/tim_018b3ed0.png",
+      "resourceIds": [
+        700
+      ],
+      "sourceSha256": "b09b4a986819fa65738569a7dd65764e45777d3f06a2c9d06b0df720b1fc8f03",
+      "sha256": "0134ad838ad0c2d319696010a9d98d694938657dc19df8f3fd2c2d59f3745cf1",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5564c.tim",
+      "path": "texture/textures/tim_01a5564c.png",
+      "resourceIds": [
+        771
+      ],
+      "sourceSha256": "08020da9bffb9c5e7e103452dc018f9a0a91426b69820ec85bf7bed601f8269d",
+      "sha256": "df3ef1c1dc99d36f8f3313d6287c42fdfcf536951e07a5d7b4dbd83c5f334d7b",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01cb6000.tim",
+      "path": "texture/textures/tim_01cb6000.png",
+      "resourceIds": [
+        474
+      ],
+      "sourceSha256": "4efa8a765ecff1acae4e55c99b2a306cf2f7e2e424feed345a3ab25ef050ffb3",
+      "sha256": "285a4805ef0ef306248dda42cc9a1691e83ad1e56f24b65f24ec2850560fdc03",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4a02c.tim",
+      "path": "texture/textures/tim_01a4a02c.png",
+      "resourceIds": [
+        760
+      ],
+      "sourceSha256": "630eeebf14453ccc63968a3a0541bb94b2ef9d3bcfaec5c3160b7f48153b47a9",
+      "sha256": "f9db9fabde0ea77855c7257088edc9b38dd1fb9148f8ec813ea2a956e0016d70",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01895b90.tim",
+      "path": "texture/textures/tim_01895b90.png",
+      "resourceIds": [
+        694
+      ],
+      "sourceSha256": "203dee3ddabb09794f86a44720b86d11c88b6b320c44fc8f08f4ee87703cf8d8",
+      "sha256": "096405fe608720552b033fcba1780b3181e25a809502e3a09402b68b3e8a7553",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01ca0000.tim",
+      "path": "texture/textures/tim_01ca0000.png",
+      "resourceIds": [
+        463
+      ],
+      "sourceSha256": "4eada196404b23cb22af12794d0a4c85e4fa656890b8507bfc94411f4a3dcab5",
+      "sha256": "0c2196e2cb8d5ff4a486bcac07d7513d7b83b2d874645a45221e3c619b5dce58",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018ac9e0.tim",
+      "path": "texture/textures/tim_018ac9e0.png",
+      "resourceIds": [
+        698
+      ],
+      "sourceSha256": "cd2e52a389faf6a851ae63c8fdb6b466917f6849d9fb70e1a90f01625afc4b3e",
+      "sha256": "329a1fdeff95bb2e5f20eed9732ba38f80e24d3570f3e096fbeb70dd8305a219",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018be840.tim",
+      "path": "texture/textures/tim_018be840.png",
+      "resourceIds": [
+        702
+      ],
+      "sourceSha256": "49546116f8c3463ce11e4b18a5f13d4e631c62dc159f0b376987289d759ccaef",
+      "sha256": "3c3ff9153a6c9e5c364f8a86c3c0bc1fdadd7aaaac57e3046644fbea5378ffca",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c80000.tim",
+      "path": "texture/textures/tim_01c80000.png",
+      "resourceIds": [
+        447
+      ],
+      "sourceSha256": "edf7d22ae3dc4d813f360a2fb0386872520d454d33f87eb9b1097d47e4d501b8",
+      "sha256": "0e49e313ed6b70c23058810134e086baa996b8c645c71904853dc95fbdc46417",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018cf3c0.tim",
+      "path": "texture/textures/tim_018cf3c0.png",
+      "resourceIds": [
+        705
+      ],
+      "sourceSha256": "d66b5702b2df2409510edea38281bfb99d054f7242ed1247fe7e34edaf8547df",
+      "sha256": "2a52c9af012aeac83688a08704107842b9672b51f1d7d3496d8512cc1aab9ef6",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5084c.tim",
+      "path": "texture/textures/tim_01a5084c.png",
+      "resourceIds": [
+        766
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c5e000.tim",
+      "path": "texture/textures/tim_01c5e000.png",
+      "resourceIds": [
+        430
+      ],
+      "sourceSha256": "cb83cac160009bc792b2f833b06889825a225a250381db81976dc163d5f813af",
+      "sha256": "1c7687974bd1b6a3e6c414dcf08e47f61f92a0c9f0e6b0b5ed700d491d8818b7",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c92000.tim",
+      "path": "texture/textures/tim_01c92000.png",
+      "resourceIds": [
+        456
+      ],
+      "sourceSha256": "bc9d38c9f70744c12e97adfa9957bfd6cff6ecad70fa32495900ec434d5013aa",
+      "sha256": "9af149dcce5a000669aa1bfc560b00a47161f184fe1dab0293311bdce7734b1d",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4f9cc.tim",
+      "path": "texture/textures/tim_01a4f9cc.png",
+      "resourceIds": [
+        765
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5102c.tim",
+      "path": "texture/textures/tim_01a5102c.png",
+      "resourceIds": [
+        767
+      ],
+      "sourceSha256": "e9be192269920fa118aa2a8228b379263ed59948eeb1b34e83d05e519251c664",
+      "sha256": "6ee07ffa872d3a9be8e3c7955c2e08c8b92d803aa78e87e5b0218f7a36a8a85c",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c6c000.tim",
+      "path": "texture/textures/tim_01c6c000.png",
+      "resourceIds": [
+        437
+      ],
+      "sourceSha256": "86d7ec75750822cae2348896daa21b89754b193003d567d7e20c590ea806b11f",
+      "sha256": "b236ae5278fc71f82f4dff370823758e32094d802f5de659b9bfcb60e55d0ea3",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018d3490.tim",
+      "path": "texture/textures/tim_018d3490.png",
+      "resourceIds": [
+        706
+      ],
+      "sourceSha256": "ed2e3526e9ff3f19d5a6effd5372cdb36495a9f9a40c7da769e0ff69c54d32b1",
+      "sha256": "61c9e7c131ed22ffb507a5aeefd7f2ad49467fffb48b1576e0a3d5eaacc38c3d",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4e64c.tim",
+      "path": "texture/textures/tim_01a4e64c.png",
+      "resourceIds": [
+        764
+      ],
+      "sourceSha256": "98d4185abcd5891219ce7521ce5a1133d5e69a49a7017cda97f2e1870dfbb990",
+      "sha256": "a7a3346f13719f3500e2607e5e5feb3c43617a3a00db9340db9e1b416cc522b9",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c7a000.tim",
+      "path": "texture/textures/tim_01c7a000.png",
+      "resourceIds": [
+        444
+      ],
+      "sourceSha256": "049d291742b1c1bbe79313906a78ed427b9f41e9a8efb95c4eb46b6442d6aa2b",
+      "sha256": "c0074cede813de4e5b800e5bbced52d59179dc5801a25a614740a7dfab19a08d",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018a2230.tim",
+      "path": "texture/textures/tim_018a2230.png",
+      "resourceIds": [
+        696
+      ],
+      "sourceSha256": "420414a19008127d4762bcda7abdb1d1c06a2bf6ead3970eda6001bc51ebedb4",
+      "sha256": "d7446f286c177fc09c68808cd473e2f5c602ac21bf9d9cf56c79c0d8c0ab850b",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c90000.tim",
+      "path": "texture/textures/tim_01c90000.png",
+      "resourceIds": [
+        455
+      ],
+      "sourceSha256": "0ec0c537a4f1f59c1b6bdf1982d028a9edf16d0870cb86119d611b054a3d039b",
+      "sha256": "9de07f60f0e840c263a5ca22ab30a18afba8ba06f08873f94fc92f93bad0bc7b",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4d9cc.tim",
+      "path": "texture/textures/tim_01a4d9cc.png",
+      "resourceIds": [
+        763
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018fc838.tim",
+      "path": "texture/textures/tim_018fc838.png",
+      "resourceIds": [
+        38
+      ],
+      "sourceSha256": "977f70e8e9cc9bd87ab71b51bd2b89d78c180192cbef21e68b24059f85d5bd51",
+      "sha256": "1fab1e8b2b84db09ad7c430a9c12b3a5e00be660998d5e4640756eadc7084593",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_017ff81c.tim",
+      "path": "texture/textures/tim_017ff81c.png",
+      "resourceIds": [
+        685
+      ],
+      "sourceSha256": "6f160e480e0050129b84629304a4fcadffea5ba4e579029adf47d64a35eb2b39",
+      "sha256": "c85776c7c3c498016445822bcfb65afc80b61be14366f75de04614fcb9f9ca54",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5284c.tim",
+      "path": "texture/textures/tim_01a5284c.png",
+      "resourceIds": [
+        768
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c82000.tim",
+      "path": "texture/textures/tim_01c82000.png",
+      "resourceIds": [
+        448
+      ],
+      "sourceSha256": "3714e74aaafc2c7ba096e059f37bb30d336f8a236fe837e902f47f19e3fbe02a",
+      "sha256": "1a5f48a86cdba6600c846577ad292b6532ae89d097aa15561b5faf101ffae462",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018a11f0.tim",
+      "path": "texture/textures/tim_018a11f0.png",
+      "resourceIds": [
+        696
+      ],
+      "sourceSha256": "55fa909097717895c72deb1060ebdc9c999a2b9fbdeafa8bf7b8498e1933dccd",
+      "sha256": "c1fee7dbdca3455d8d98b79d26510e94186cb5b88a30a6dc674b5b8882d53bc3",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0185a05c.tim",
+      "path": "texture/textures/tim_0185a05c.png",
+      "resourceIds": [
+        690
+      ],
+      "sourceSha256": "027119c93a50d40557cb9f0cfb0730a4552d0320754a2d46eb258e32456a876d",
+      "sha256": "f812fa6a5b5329c8ea51cba224dc34fbbb91a5aeb48aa03d69a13696b365f1cd",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c7c000.tim",
+      "path": "texture/textures/tim_01c7c000.png",
+      "resourceIds": [
+        445
+      ],
+      "sourceSha256": "ffa149e32733b09b8722e0fd523e37ff67233b9acf4f5e4f30577a6e2c084839",
+      "sha256": "ca9e3c4bb6768eec3ad94e0d126bf421978e12bad6f02519b72ca612ec7d993f",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c6a000.tim",
+      "path": "texture/textures/tim_01c6a000.png",
+      "resourceIds": [
+        436
+      ],
+      "sourceSha256": "95d965c0af5bb3db722b64642a8f853419c948c9b016e58fcdf05eb175913414",
+      "sha256": "acef7fa61406bf85ea42cd062c48596be0276fff390d69afecd1cb42e463560a",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5302c.tim",
+      "path": "texture/textures/tim_01a5302c.png",
+      "resourceIds": [
+        769
+      ],
+      "sourceSha256": "c2ee2243a148268a6487e942ff65564d9bf925d1bff1cb8a655d5995c2ea4152",
+      "sha256": "a197b06f916fe5158d94580638dfcee367bc1145910e3afe4ae508854389e677",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018af240.tim",
+      "path": "texture/textures/tim_018af240.png",
+      "resourceIds": [
+        699
+      ],
+      "sourceSha256": "de2cfdbc661bb803c1dae8cb93ab16e8b0e78a1baec150bf57552552d738e02b",
+      "sha256": "c07c91b36c5ab6814d09b3607334a6f4183fec76cc529f119977356a8e65d2b3",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0190081c.tim",
+      "path": "texture/textures/tim_0190081c.png",
+      "resourceIds": [
+        41
+      ],
+      "sourceSha256": "7b7d73673db431e8f962a7945e1b4e034f6728c5f91c9d7cb02d355221d30859",
+      "sha256": "2f90d2d2819384036cfd11afdc4f3d3b303fe35d788a589e728b62f1609352b5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0181805c.tim",
+      "path": "texture/textures/tim_0181805c.png",
+      "resourceIds": [
+        686
+      ],
+      "sourceSha256": "979f48e7027c5d62db84ef9937609d089ced487dd7aa61a52c9148cdca9ffe09",
+      "sha256": "9f67d4a23b8134f04709ea7e4769658db3a5286d0515c4f6139085e558719e72",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4c02c.tim",
+      "path": "texture/textures/tim_01a4c02c.png",
+      "resourceIds": [
+        762
+      ],
+      "sourceSha256": "a20a4e769d5a50b684ed61f4dda58673cac9bab5ab6d6835c5e85b7feaf17995",
+      "sha256": "7f8dfd282bcea50f711def7d4166a3f61bc4fa0b18db02e9193b8a34a58395b6",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01cb4000.tim",
+      "path": "texture/textures/tim_01cb4000.png",
+      "resourceIds": [
+        473
+      ],
+      "sourceSha256": "4747886cf0fe656146472316a97f280797a7420b1bba4f34a4c5a1b968006433",
+      "sha256": "0a8833969e5e1a29004431c6f51428a30a25de386e38652994f3d87316d1ebfc",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_017d605c.tim",
+      "path": "texture/textures/tim_017d605c.png",
+      "resourceIds": [
+        682
+      ],
+      "sourceSha256": "6dc624239afe7889292ad2a41cedd9533b99ddbcc81f0c84e40e0259ef059715",
+      "sha256": "ad0329c3561c10ae407fbc500d556348332abf45cfb5b16800bbcd5ed0a8e581",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01cb8000.tim",
+      "path": "texture/textures/tim_01cb8000.png",
+      "resourceIds": [
+        475
+      ],
+      "sourceSha256": "0b2620c0c3571f8fdd3911f05fe43ab1a931bfde5b5a8770e1763b6b67a9fae9",
+      "sha256": "97f89520ae60616505c26b6f930358453aaeb382257df540d50fa62b462d4cd2",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4964c.tim",
+      "path": "texture/textures/tim_01a4964c.png",
+      "resourceIds": [
+        759
+      ],
+      "sourceSha256": "08020da9bffb9c5e7e103452dc018f9a0a91426b69820ec85bf7bed601f8269d",
+      "sha256": "df3ef1c1dc99d36f8f3313d6287c42fdfcf536951e07a5d7b4dbd83c5f334d7b",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0185201c.tim",
+      "path": "texture/textures/tim_0185201c.png",
+      "resourceIds": [
+        690
+      ],
+      "sourceSha256": "add6233fc578622402453aa7a083c10abe879269bd76163d20a6dfbf8e4e6847",
+      "sha256": "6a324465bb24bccffd247256b122f3263caa95def7e2b3fc3db93e4739b5958d",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018c5eb0.tim",
+      "path": "texture/textures/tim_018c5eb0.png",
+      "resourceIds": [
+        703
+      ],
+      "sourceSha256": "426722062e8a179001d5fbc1c9250cf048ca29af077e6a6d451c6e8fb5c28a78",
+      "sha256": "29ebcf108d973fccf2dabfcad372b08d412e388b640864ab078f9c0599c2b91d",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018ba9c0.tim",
+      "path": "texture/textures/tim_018ba9c0.png",
+      "resourceIds": [
+        701
+      ],
+      "sourceSha256": "b2feb6c5de23af157e6385a39d8e01a1f2af8d371f8f494920f0c3fc5fa3aa17",
+      "sha256": "c714ec59341afa598a01a76bead97b2de7dce2f1f4873a6c93f5311775ce8380",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0183101c.tim",
+      "path": "texture/textures/tim_0183101c.png",
+      "resourceIds": [
+        688
+      ],
+      "sourceSha256": "054aef169269eedbe9899e00ebed81eacdff975fc069008052c6205a89995de7",
+      "sha256": "140bb5bce3caecd7c4f07c2d21318287e08cf8d9cdffdd4b7c20fe02086ffa22",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018c9dd0.tim",
+      "path": "texture/textures/tim_018c9dd0.png",
+      "resourceIds": [
+        704
+      ],
+      "sourceSha256": "4d1fe26fdf271696418205bc22a427fed3c8b4c9df00019db52a0d46c49400f4",
+      "sha256": "480eb9e1704c374d137c7fe6f8fd901cdbe80ca31c7f75fc6e63df7fe8e49073",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4b84c.tim",
+      "path": "texture/textures/tim_01a4b84c.png",
+      "resourceIds": [
+        761
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01ca2000.tim",
+      "path": "texture/textures/tim_01ca2000.png",
+      "resourceIds": [
+        464
+      ],
+      "sourceSha256": "12533535fbaf33973d325409904e4df99d2c525ce7021182ef6262b747cd2792",
+      "sha256": "6c34f1cc631ff071ced41194d0572be334ab6bd088ba5396b55e5cb8664acbec",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0189cec0.tim",
+      "path": "texture/textures/tim_0189cec0.png",
+      "resourceIds": [
+        695
+      ],
+      "sourceSha256": "0852a4b574022252eff51f136c416a8120149080b9369b4ecc7a445401a18540",
+      "sha256": "0dab6f97a141cef36348acd91ae5947a174eeab8cec30663ccb419d39abef3a5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a549cc.tim",
+      "path": "texture/textures/tim_01a549cc.png",
+      "resourceIds": [
+        770
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c66000.tim",
+      "path": "texture/textures/tim_01c66000.png",
+      "resourceIds": [
+        434
+      ],
+      "sourceSha256": "9071119cbb27619ef1188de9796274a4cf0756fa0a7ab054d228244ae910f81c",
+      "sha256": "552c14f4b70d4f6758171305de25debbe8f7e8dc1b4f3e0d9f81f25862943bb0",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c78000.tim",
+      "path": "texture/textures/tim_01c78000.png",
+      "resourceIds": [
+        443
+      ],
+      "sourceSha256": "68b97cfc8410e6bd4da2f1ee2ac4fb503e6fad6db46f6389dc8b69c9b2e3a125",
+      "sha256": "ca53219b6e64b0fa7a39249d8221529f0c1ded0564bf2fb7b8f97ac3482964b7",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5264c.tim",
+      "path": "texture/textures/tim_01a5264c.png",
+      "resourceIds": [
+        768
+      ],
+      "sourceSha256": "9e011c44c4c87bf67b44cbe9f147d8b0c4c4edc3214478d0b23ce25fc1c59480",
+      "sha256": "6e283dad1d11ab6de0533bd348987cc3766fae8e43c98ff3b6f720d8eb45dd4b",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_017c585c.tim",
+      "path": "texture/textures/tim_017c585c.png",
+      "resourceIds": [
+        681
+      ],
+      "sourceSha256": "3d7e7918f2bc945d88985d98ae4dc51c14c7c7503b03c70cef11dcb035aed7a1",
+      "sha256": "38ebc982cc7da4c60bbe27ce0b87279eb61828c3006301666cecf8d2f05b5dcf",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0181001c.tim",
+      "path": "texture/textures/tim_0181001c.png",
+      "resourceIds": [
+        686
+      ],
+      "sourceSha256": "0f7f41b4a5c71863b46260ba5091e51487548a730d6e29473e1d71b39f2f801a",
+      "sha256": "8c980b5ac3ed5c32d0c7b6f257c1652a34aec6cb3701187bd5f4a1e13c68dc74",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018b5050.tim",
+      "path": "texture/textures/tim_018b5050.png",
+      "resourceIds": [
+        700
+      ],
+      "sourceSha256": "8f66a74a0337f8b756492f90fb4bc51c8325c30da2ecb40ce1944683f0d0621e",
+      "sha256": "32b50ebdcbb57fe636fbab64d3f6a05e41775736c9bb6f504a68ca50a23de77e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c74000.tim",
+      "path": "texture/textures/tim_01c74000.png",
+      "resourceIds": [
+        441
+      ],
+      "sourceSha256": "32ed3913d04e2c41146666fb33b75ad08b5cfa37f0c5745eb96c72af2b7e829c",
+      "sha256": "c3570e7a4e9f4de8544fbed7006712ef8689fce3291c8f352940dfe6b088f8d8",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0187301c.tim",
+      "path": "texture/textures/tim_0187301c.png",
+      "resourceIds": [
+        692
+      ],
+      "sourceSha256": "2e478377c7edf670f348b380e19e786bd30ec122dcd95d5e2b6e3bfbcff09d85",
+      "sha256": "53e121003c531d47d98b7abab06d186f317351c52fcf816b1c0dffcf3526087d",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_017e685c.tim",
+      "path": "texture/textures/tim_017e685c.png",
+      "resourceIds": [
+        683
+      ],
+      "sourceSha256": "aca978aa9180f63bd5561e50c0a5ac5e50cb7908eacb93db4f2c88128de69ada",
+      "sha256": "0fc431c6306ec87700b292b030c5e8504f89e249102479b08118c21d86856f5c",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4f02c.tim",
+      "path": "texture/textures/tim_01a4f02c.png",
+      "resourceIds": [
+        765
+      ],
+      "sourceSha256": "46fe19c82a4e8878d0f7f1ae162551a6f8215a0412987796d52fbcca58da7ef5",
+      "sha256": "cb582d9738c794b09d6f2ea9eee14632003cfb44b20c2ea59c6701cf082811a6",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01907030.tim",
+      "path": "texture/textures/tim_01907030.png",
+      "resourceIds": [
+        41
+      ],
+      "sourceSha256": "e513679f0e491194a45f9069b234717f42149f701042fc47946684374ef84194",
+      "sha256": "b4f835c32c01666162315f479a29fd829fb1031f7a82d8632345a74fd915ae66",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a519cc.tim",
+      "path": "texture/textures/tim_01a519cc.png",
+      "resourceIds": [
+        767
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c8e000.tim",
+      "path": "texture/textures/tim_01c8e000.png",
+      "resourceIds": [
+        454
+      ],
+      "sourceSha256": "a54b10782b3c69c44a2ae9575a7104dc3fdb9ac8377a587dcce5208b667c9c91",
+      "sha256": "6a7f87f84230465cedaca00adbae9ba7b0ba37544c778aeba817d459cc62c6e0",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_017f705c.tim",
+      "path": "texture/textures/tim_017f705c.png",
+      "resourceIds": [
+        684
+      ],
+      "sourceSha256": "b0e08f0b10aa8b9087b1ac91eba5cf9c3622e6c556d481bb32f9b93c377a0c32",
+      "sha256": "afcbbc3e84074c26d3c149465773140269767402ba6ea1188390f882951a906f",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018d26d0.tim",
+      "path": "texture/textures/tim_018d26d0.png",
+      "resourceIds": [
+        706
+      ],
+      "sourceSha256": "c8f7077307a3d490c329e0434f8166f8c2bc9a7fbbd843c92c73bc285da496cf",
+      "sha256": "6ba1be03a4f07d458570d3f65e83f0203df5b06e10cf823bbf8cd120fc44a3cb",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0183905c.tim",
+      "path": "texture/textures/tim_0183905c.png",
+      "resourceIds": [
+        688
+      ],
+      "sourceSha256": "28ec68b33266d3183429423309a4de16d1f7fe02560798ef69e7302c1ca4da70",
+      "sha256": "140f0d98add7e35e116506596e0c21c54db6f407832bea8256abd8161a32efee",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01cae000.tim",
+      "path": "texture/textures/tim_01cae000.png",
+      "resourceIds": [
+        470
+      ],
+      "sourceSha256": "eb0bb19f9d08df4a737c96d40815f2c4a524c2bb730ef4667645f5f69b385b14",
+      "sha256": "d54731f1bc5fc53757c8314120c26e4913a0fd9de1a1c32c5a9b7b72b99c39f7",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4a9cc.tim",
+      "path": "texture/textures/tim_01a4a9cc.png",
+      "resourceIds": [
+        760
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4984c.tim",
+      "path": "texture/textures/tim_01a4984c.png",
+      "resourceIds": [
+        759
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018a49d0.tim",
+      "path": "texture/textures/tim_018a49d0.png",
+      "resourceIds": [
+        697
+      ],
+      "sourceSha256": "46bba5e433e22b86dd379a5dc96f33c515cded821f540cb4c3e5d5490f103ea9",
+      "sha256": "2614e24fd00eae89693c555aec545747dd197dcbae757eb3fa41f18a00c759cf",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4b64c.tim",
+      "path": "texture/textures/tim_01a4b64c.png",
+      "resourceIds": [
+        761
+      ],
+      "sourceSha256": "bcfcccfc15366705ae39888672de2e9800bc158b90f80c1061c070d563e54c01",
+      "sha256": "dc2a14a6fad98d35ae79e26f62796433e973b4b0d13804b27af1d7d6c63e880f",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018a1bf0.tim",
+      "path": "texture/textures/tim_018a1bf0.png",
+      "resourceIds": [
+        696
+      ],
+      "sourceSha256": "a10b7ba179e364d58860f8c158782512d6b59a1913a2c7356d01532873b5c6d9",
+      "sha256": "f684bd934ec5acaa942f5de6e88fe9502ba1a61f29aab6f89dd7d52f47dad09c",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01898c50.tim",
+      "path": "texture/textures/tim_01898c50.png",
+      "resourceIds": [
+        694
+      ],
+      "sourceSha256": "8e517bd1cdeb746be2f64f5fb169a1a48726956a687005e5d06fe447e32c3e4c",
+      "sha256": "ece713a54005fb6bedad04108eefe9fc0df12230232c0b535b8904278c64dffd",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_017bd81c.tim",
+      "path": "texture/textures/tim_017bd81c.png",
+      "resourceIds": [
+        681
+      ],
+      "sourceSha256": "bc1856ed066948c3ad786d6843320cd53e198e09ce5a1edbcffbb66cbf3047e7",
+      "sha256": "66e168eee4aadb96780b7581ee25416c13f53e2584d39cc698469d1fc83a8c57",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4c9cc.tim",
+      "path": "texture/textures/tim_01a4c9cc.png",
+      "resourceIds": [
+        762
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5584c.tim",
+      "path": "texture/textures/tim_01a5584c.png",
+      "resourceIds": [
+        771
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01cba000.tim",
+      "path": "texture/textures/tim_01cba000.png",
+      "resourceIds": [
+        476
+      ],
+      "sourceSha256": "5c63e120515f64bd46a02aa1cb69db35161e2fb58864cb430be6ca2cc56eec74",
+      "sha256": "9de6b595505e7b547fc50cbda92719e21da0c27d59ab2adeff9b20d0ac4834e7",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018c59f0.tim",
+      "path": "texture/textures/tim_018c59f0.png",
+      "resourceIds": [
+        703
+      ],
+      "sourceSha256": "6f837c6ffbf8edc064531de731c91aa60af6647bb53749a7b5df9f3b3948c313",
+      "sha256": "f45b84a9dc29ccdbe4dec8e3b5b949b282cbd8ecb6e12f41c4b4becef2057de4",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_017de81c.tim",
+      "path": "texture/textures/tim_017de81c.png",
+      "resourceIds": [
+        683
+      ],
+      "sourceSha256": "5ccf38257f98d5f4d6b1b8069ab3d64d76cb0a4b3c9b2134dc869e472feb44af",
+      "sha256": "9f28e58ba3d793b6122f485b310b187a1ebf55a99d4d53a0e83739b3f9b22f63",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5402c.tim",
+      "path": "texture/textures/tim_01a5402c.png",
+      "resourceIds": [
+        770
+      ],
+      "sourceSha256": "3a276e65b20dcd8d39b3173a778cd138a41e3d73d5f80e2f7f8aefac1d089d70",
+      "sha256": "5a0c95d3da7bc21ad3c25a19b36e364aa784cbeb148ebd8d6c03a78afbb5a561",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0187b05c.tim",
+      "path": "texture/textures/tim_0187b05c.png",
+      "resourceIds": [
+        692
+      ],
+      "sourceSha256": "8d0de5d7aad729626a05c13bfd3645f05ac4dda27e42958fd3bc5699bd355d39",
+      "sha256": "9c279a5407b339174d56d48dd388e1d2f7fb4ec16c43ca4990755566cdb5564c",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4d02c.tim",
+      "path": "texture/textures/tim_01a4d02c.png",
+      "resourceIds": [
+        763
+      ],
+      "sourceSha256": "8d9d7adfd6cee7c85212bd9fafa0196faec715ef6633c359705cdb9f6a111e0f",
+      "sha256": "98a0a79440d92b7a6ce69158103a81d2606696decfe641e308a9b0a3da0e21f7",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c68000.tim",
+      "path": "texture/textures/tim_01c68000.png",
+      "resourceIds": [
+        435
+      ],
+      "sourceSha256": "dcee1adeef14133e0c0fd78146ef9c6fcbbc0869bb0e3a2693708bcde937c9fa",
+      "sha256": "0bd58b14ce3f1956f2516c2114242f8a28d3c6ea83f2fd3ccf0e3730b474dfa9",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c76000.tim",
+      "path": "texture/textures/tim_01c76000.png",
+      "resourceIds": [
+        442
+      ],
+      "sourceSha256": "19c901bd3ae1eb4acf31a05f22829b8af7d9046c764958e857de01584c4606e5",
+      "sha256": "4f235fa5c6a32258d1d36c36ca707b56e08320318139658a5ed8d735f1dcd2e3",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5064c.tim",
+      "path": "texture/textures/tim_01a5064c.png",
+      "resourceIds": [
+        766
+      ],
+      "sourceSha256": "f66c3fbff5eee24b79ad5cb2466d2d530dca8e19edb0aa680520f2ef74cb312c",
+      "sha256": "5072671da0643b1b5916123a3d7b5b71f267229622aa045ce75b184295786fe7",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018aa8a0.tim",
+      "path": "texture/textures/tim_018aa8a0.png",
+      "resourceIds": [
+        698
+      ],
+      "sourceSha256": "59624218486e8beb1dda09f4fde1d0c04bd917a6ce9f963caff9c913eb9b47ef",
+      "sha256": "cb0eb9f57a6b275c04606dc900ac5f4a908275963aa0e4d9ed1eb84c97cdb1ee",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018a9960.tim",
+      "path": "texture/textures/tim_018a9960.png",
+      "resourceIds": [
+        698
+      ],
+      "sourceSha256": "e65b8276015d1a4a5486823a8ee65cd01b1c62e326c1aace485770d2b65b2540",
+      "sha256": "14a88927ea756e25b55540ee59b001bfad5f7e80abf1a6b8559ab01f05ca1c5f",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018c8010.tim",
+      "path": "texture/textures/tim_018c8010.png",
+      "resourceIds": [
+        704
+      ],
+      "sourceSha256": "9fa44a6e524a41932022776cb4e4aa13c393042c97dd20b6abcb4c256efad635",
+      "sha256": "d44490e4418cca84c49c6ccafc945f604121c2b0b3089c39c9fa008afb79ad9a",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018c4db0.tim",
+      "path": "texture/textures/tim_018c4db0.png",
+      "resourceIds": [
+        703
+      ],
+      "sourceSha256": "ad8210f36ebd32dddd92c4c7d066e75989ef9cf0747bced893e078a0e6e7876d",
+      "sha256": "d7698dbc62b2b2ed802bdbc3977830da6c1288a0d3acca12dc3819b7b5d56579",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018b1780.tim",
+      "path": "texture/textures/tim_018b1780.png",
+      "resourceIds": [
+        699
+      ],
+      "sourceSha256": "982b117f1ad4d4b868c479fb6e18da7b085de0d50ad35033f0b3debd1ab3a6d2",
+      "sha256": "fb26ad7b4a0bb63733a4996328abb0ebc73b33e34ec595c36e208c43d9aa5108",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c64000.tim",
+      "path": "texture/textures/tim_01c64000.png",
+      "resourceIds": [
+        433
+      ],
+      "sourceSha256": "5252d381c4f53405da89bb863e87f9c4aba4e9f05d9d806bb2c511fcedf3d0b8",
+      "sha256": "244472fdc485e7f3aacc8c6f1fea9486aa7e69c06e63b2c5263469360c7045d6",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c9e000.tim",
+      "path": "texture/textures/tim_01c9e000.png",
+      "resourceIds": [
+        462
+      ],
+      "sourceSha256": "fcc2eeab9b663f705fe2c9a1cea2ec4211b960696247a9a32542ed2b6a6f0f28",
+      "sha256": "ad91661e86bea85042027f3f6d6be522bc4c1924b7a218f2d6e054d14be09aff",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4e84c.tim",
+      "path": "texture/textures/tim_01a4e84c.png",
+      "resourceIds": [
+        764
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a539cc.tim",
+      "path": "texture/textures/tim_01a539cc.png",
+      "resourceIds": [
+        769
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5002c.tim",
+      "path": "texture/textures/tim_01a5002c.png",
+      "resourceIds": [
+        766
+      ],
+      "sourceSha256": "ea30ceaa5b7c7780247bbd03a1f65c0fbf9981fa5a96c36b24d0f87ae8710e9a",
+      "sha256": "3d55fa7eddb80f1109b570f350e99a43d664becf39da8d996efaf383dbd57149",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4d64c.tim",
+      "path": "texture/textures/tim_01a4d64c.png",
+      "resourceIds": [
+        763
+      ],
+      "sourceSha256": "385a9436798a2a94b48deabe22ba8c5b3a4d8bcdd48505597a2a449e628bdd66",
+      "sha256": "eae350d24674361b4a510b25d096499567e90870b06c926c562c247afa8aeb52",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01cac000.tim",
+      "path": "texture/textures/tim_01cac000.png",
+      "resourceIds": [
+        469
+      ],
+      "sourceSha256": "c2900454f2580c004308b6d4cc37e434cd758ac529290c55942214baf2653715",
+      "sha256": "e031fd7b6897622b3ddd98a971a7670c6adb923981a265358682f0d2d508e578",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_00022800.tim",
+      "path": "texture/textures/tim_00022800.png",
+      "resourceIds": [
+        477
+      ],
+      "sourceSha256": "c4957d70614f8054c56aaa2048a589b86ab2a13b09a26ca87a0291ff08c99cc4",
+      "sha256": "6e452c7d1105d47b2ad54c620e9fa7086bac5b568a9a16232c659495f672fd96",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5184c.tim",
+      "path": "texture/textures/tim_01a5184c.png",
+      "resourceIds": [
+        767
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0189c580.tim",
+      "path": "texture/textures/tim_0189c580.png",
+      "resourceIds": [
+        695
+      ],
+      "sourceSha256": "8a54a390e2ee229bff6f9606ac944835fc89df2ea688d9babc84e8beec072b43",
+      "sha256": "2fc031b217d3bb8ee981e331552dac9c4d613952a86fb6108f674ef1e1a206b4",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a499cc.tim",
+      "path": "texture/textures/tim_01a499cc.png",
+      "resourceIds": [
+        759
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018bfcc0.tim",
+      "path": "texture/textures/tim_018bfcc0.png",
+      "resourceIds": [
+        702
+      ],
+      "sourceSha256": "0a9810a5dbc8c4ff710defb50102fd60c2ad42e5f1269556b3333a7b9c605615",
+      "sha256": "43bfa71fca750bd16e8468333d351b2e1856141bacde371fba5215b7ae9476e5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4a84c.tim",
+      "path": "texture/textures/tim_01a4a84c.png",
+      "resourceIds": [
+        760
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0001a01c.tim",
+      "path": "texture/textures/tim_0001a01c.png",
+      "resourceIds": [
+        57
+      ],
+      "sourceSha256": "19d6a8581934e63390a162db9ac19f28851143a0c41fd6f5ce03150095e096e3",
+      "sha256": "b41e34a429e7466ce923ff0a0cc779105ef4e18ede146733fdda42d128ee0145",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c8c000.tim",
+      "path": "texture/textures/tim_01c8c000.png",
+      "resourceIds": [
+        453
+      ],
+      "sourceSha256": "0ec0c537a4f1f59c1b6bdf1982d028a9edf16d0870cb86119d611b054a3d039b",
+      "sha256": "9de07f60f0e840c263a5ca22ab30a18afba8ba06f08873f94fc92f93bad0bc7b",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0188b85c.tim",
+      "path": "texture/textures/tim_0188b85c.png",
+      "resourceIds": [
+        693
+      ],
+      "sourceSha256": "0abd9acef11502dc7da6743eff38fc90f322b8d7e6ff5dd09226a03ddee2ff37",
+      "sha256": "1d653b1c152d10b2326aca0f8a284b05e50b35806327f97965d856c0d5f1ed00",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0184985c.tim",
+      "path": "texture/textures/tim_0184985c.png",
+      "resourceIds": [
+        689
+      ],
+      "sourceSha256": "613c8219b75f3be557675078d55dd218f164c09f3e4241af65e9783d1f626f81",
+      "sha256": "fbd338224fb7f906b6c5672f6d24ad193a7d04a09028e18dcb810f3d6c88835b",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c9a000.tim",
+      "path": "texture/textures/tim_01c9a000.png",
+      "resourceIds": [
+        460
+      ],
+      "sourceSha256": "4535edc6fb6bb5b6f361afad919baeb7b03676be203e1ceba88fe51166a78110",
+      "sha256": "c681328c745cd9e194f3b7c49b8cc3946b97e7b32fc0f482358c01baaea34345",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c56000.tim",
+      "path": "texture/textures/tim_01c56000.png",
+      "resourceIds": [
+        426
+      ],
+      "sourceSha256": "31dde1ad39497c5ba1ec5879898f429cc39dae144e32e5dc46004d30b614d6c7",
+      "sha256": "5adf3ab5340c0289d4366939681c9cd29de051a09b296248587ce22e35fe2eab",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018d3ad0.tim",
+      "path": "texture/textures/tim_018d3ad0.png",
+      "resourceIds": [
+        706
+      ],
+      "sourceSha256": "de3ef3681fbd5591c4ba6fb58978fbefd795d6fc93d8866a3e47db0d6ae7627c",
+      "sha256": "4bf688ef9270cc1d7f6eb19ccbba970ecdf1da88263b079877946191b447a0f6",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5464c.tim",
+      "path": "texture/textures/tim_01a5464c.png",
+      "resourceIds": [
+        770
+      ],
+      "sourceSha256": "8267af8e8e746e60f9fb39800524ab126767ed038e91b9bb0fd6fcfe7f671bac",
+      "sha256": "66a2ad1168f146cf78ae0bca77da2a3b95f8df6c2fc87b8b1da494e0d5c8a831",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c60000.tim",
+      "path": "texture/textures/tim_01c60000.png",
+      "resourceIds": [
+        431
+      ],
+      "sourceSha256": "80bf45665cdaa6b9aed066a261e45e202b05fae409e5165b1dc6d6ff37f2e315",
+      "sha256": "0e2ee721640c24d06d4315877111c6e95c596b0f64b64338753c1bdf211fe885",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018b9780.tim",
+      "path": "texture/textures/tim_018b9780.png",
+      "resourceIds": [
+        701
+      ],
+      "sourceSha256": "5ff9eba59c51ffbd66f78c5aa93826843dd3283834583f67817d0c83f0e44f42",
+      "sha256": "357935063bec7e6f9a49fa5b48642c9e9632fd30a4c093412303f76c5d45fc8b",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018bc080.tim",
+      "path": "texture/textures/tim_018bc080.png",
+      "resourceIds": [
+        701
+      ],
+      "sourceSha256": "3894bb4a860bdd1c0985df1b67ffc6bbc46c65bd2252c850174c2e85f9d934da",
+      "sha256": "4a82b9438b5db00d0f9b68f4a43c23c9c1314a90ea123b1b59d8e7d475c2ff04",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c72000.tim",
+      "path": "texture/textures/tim_01c72000.png",
+      "resourceIds": [
+        440
+      ],
+      "sourceSha256": "f79833b0c72f153e1ee4e35361386c3f6a4903060f431639ac5fb1543375a425",
+      "sha256": "01eb01bfaffe3b894faa4237a589c0988f9d76a4cde3235f92ec85627f1a6159",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01898610.tim",
+      "path": "texture/textures/tim_01898610.png",
+      "resourceIds": [
+        694
+      ],
+      "sourceSha256": "06c2ce735f9d432717624e70027bb843ab25f81b1f5099cb78793703d0c5b5f5",
+      "sha256": "db2aba84bd6b5b27d20ed1ecd67ddb4185cd7e16ccbf781cf1dee2b728f5e843",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c54000.tim",
+      "path": "texture/textures/tim_01c54000.png",
+      "resourceIds": [
+        425
+      ],
+      "sourceSha256": "d0db028b89610ce22bddbc5a0b2952c5443c8faa0539a0e30fdeefbe855faa55",
+      "sha256": "b95068984537982347f371ff8ddc1cceedd7d4600b70a963440bb3f721328957",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c9c000.tim",
+      "path": "texture/textures/tim_01c9c000.png",
+      "resourceIds": [
+        461
+      ],
+      "sourceSha256": "880022a06423c41d41be0f9848b34ad61eee2dde9e48cf448a79a7442e583a0b",
+      "sha256": "cddc9b814171738002e38334e5ae0f1a0d858a2fc32d5fcfc84612bc52528f32",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0182885c.tim",
+      "path": "texture/textures/tim_0182885c.png",
+      "resourceIds": [
+        687
+      ],
+      "sourceSha256": "09ab4827ff4de8cd8f0fb4ce2ed511949b3886e91cb0b8d30404af774e95ce5b",
+      "sha256": "0d307db6e05ba3e9e70a21b1179eb26e1d2aadb1bb4851c70436fbbd54d362f2",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018cde40.tim",
+      "path": "texture/textures/tim_018cde40.png",
+      "resourceIds": [
+        705
+      ],
+      "sourceSha256": "0947e86a96fe1d1d872f6806b488fc52509fe9b2a81641ccc1c6387d4d00957a",
+      "sha256": "1abc8183d693fbc12cd91f5d0dc817c3e46195d52d75e6497d0906f841cdec64",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018c3870.tim",
+      "path": "texture/textures/tim_018c3870.png",
+      "resourceIds": [
+        703
+      ],
+      "sourceSha256": "e90c3109d921d52d2d4ab873eb2578fdfb90d9a3f956c3fa8908230c4ae93dd4",
+      "sha256": "a9e5ce54b35de590ac97951a03ec2a0c98f93dd807df42a125e3770781b47ca4",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a559cc.tim",
+      "path": "texture/textures/tim_01a559cc.png",
+      "resourceIds": [
+        771
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c8a000.tim",
+      "path": "texture/textures/tim_01c8a000.png",
+      "resourceIds": [
+        452
+      ],
+      "sourceSha256": "6b5418a8b8a9f9c02d7c84ba4228992da620713f3e23db6b348b032eb37b4f95",
+      "sha256": "9b6062be97e35a018844a4a0684a882c47e4cde1ff85893caf8fcc0a07c76469",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4c84c.tim",
+      "path": "texture/textures/tim_01a4c84c.png",
+      "resourceIds": [
+        762
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c58000.tim",
+      "path": "texture/textures/tim_01c58000.png",
+      "resourceIds": [
+        427
+      ],
+      "sourceSha256": "391a3e462b383af142e9a2e2b79fc5da612164620a6e7cea701567e7e09398a9",
+      "sha256": "851c79346c30ed564a9da0d94b16e0e82e0ceb3886dd71306d599b65724c7680",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018c8e90.tim",
+      "path": "texture/textures/tim_018c8e90.png",
+      "resourceIds": [
+        704
+      ],
+      "sourceSha256": "24853fae3724d59ad0351f7fe1b222b6dd48b40dc02dbea6523e3dd5907fe008",
+      "sha256": "b3abff08d6804ab1aa75d0e056d46bd1fdec2fcc6fea2410ca86a77b01a3f9eb",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c70000.tim",
+      "path": "texture/textures/tim_01c70000.png",
+      "resourceIds": [
+        439
+      ],
+      "sourceSha256": "d8d9838f7909e8365863ab6bb2ef942c5797d0cc1c2a3c020d7af3319d7ccfce",
+      "sha256": "8c3b7598dab742cbbb9eeaea91f7e13452ca105fd4a7ec3e5fc5c9d7306bdd37",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0186281c.tim",
+      "path": "texture/textures/tim_0186281c.png",
+      "resourceIds": [
+        691
+      ],
+      "sourceSha256": "a26eb394330766c847240271ab886df17d59f8dbf5b8ca01d3576661ecb5ac2e",
+      "sha256": "353f5761ec6fb72457d7336327e96862cfbda457da79f5dc497c15d92ff76df8",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018fd24c.tim",
+      "path": "texture/textures/tim_018fd24c.png",
+      "resourceIds": [
+        38
+      ],
+      "sourceSha256": "1dba144dcca56193b271ec590c8b35bc58388f605f694fcbab53995ed4e6e8c5",
+      "sha256": "94f37156fd9b70d1dbcd281d17729564a27294e2f0b3b73f78aba23f1bd95d90",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4b02c.tim",
+      "path": "texture/textures/tim_01a4b02c.png",
+      "resourceIds": [
+        761
+      ],
+      "sourceSha256": "3252c6b9561d44409495e70353606b104b89d3e930da2d20f3b82bd5483bea32",
+      "sha256": "e53ed66083a2b2bc81270d1bacba689a4ab093a64edcc5211b130a555a2da35f",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01c62000.tim",
+      "path": "texture/textures/tim_01c62000.png",
+      "resourceIds": [
+        432
+      ],
+      "sourceSha256": "2bd71c2d505250fdb914db1de36b494ba64c4a7b31a5f85fd384fb4a66f6f1eb",
+      "sha256": "0bad785c8fe00b73a3fd6aa3a6adec65e3d06a1da595544ecff3d23a5c4c9ff6",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018cc900.tim",
+      "path": "texture/textures/tim_018cc900.png",
+      "resourceIds": [
+        705
+      ],
+      "sourceSha256": "97b615e2f37dff19f39e7bdd1f529ca0368200b663106f5a6ad2ee12d24c996d",
+      "sha256": "bb7a042467868f3b93ee7a90162da4b586b7113740896360d8ad70205d819498",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_017ce01c.tim",
+      "path": "texture/textures/tim_017ce01c.png",
+      "resourceIds": [
+        682
+      ],
+      "sourceSha256": "3aaf029b4c9d68eacb0badbf72141fe756ecfae2442391468a39cba0eacaae6e",
+      "sha256": "0a61119f52fe8972766731bb0ff696a3ee2d93a2f17f940afdb7001ac6f2488e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4f64c.tim",
+      "path": "texture/textures/tim_01a4f64c.png",
+      "resourceIds": [
+        765
+      ],
+      "sourceSha256": "1d048d0c062e461e35f28c54a2b7ecd211b5d748012587ae07f8276f5fd7eb65",
+      "sha256": "51599c878ed916a95ad8c539acfa36bdb86b2023fb99476188e70989d23d4729",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_017ef01c.tim",
+      "path": "texture/textures/tim_017ef01c.png",
+      "resourceIds": [
+        684
+      ],
+      "sourceSha256": "1635c1ba76abb13b454e7b6cc86fb6c426805768aba94ac4a1c48e02acde5ca9",
+      "sha256": "63fc0cfb2a0e9e68734169ad5833d71fa5a7df1eb9f363c8f8539faac0928a71",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018c10c0.tim",
+      "path": "texture/textures/tim_018c10c0.png",
+      "resourceIds": [
+        702
+      ],
+      "sourceSha256": "68f69369d9080ab001cdbae4dd05f43f8f35bc92ed8d4f1015e7c2338773ea18",
+      "sha256": "4d979ca874adc00b0c673a799dbb2e3665ae8cc912d0e991707ad5bd8da06a44",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5202c.tim",
+      "path": "texture/textures/tim_01a5202c.png",
+      "resourceIds": [
+        768
+      ],
+      "sourceSha256": "f7b73a9f0906df098f3eb734ca2bb36e971bcbef25ef289bfa16ffab9bd2e484",
+      "sha256": "5ead103bd49eedb77eb8817309b614c55f8e62b55ff94321b65c0b35d260a863",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0186a85c.tim",
+      "path": "texture/textures/tim_0186a85c.png",
+      "resourceIds": [
+        691
+      ],
+      "sourceSha256": "a0dc838bbac63d3189bbb775ee86444ed5b07ae1121ce9582c7f9b929bec9ae1",
+      "sha256": "c271f0ef825a1b6e40064794886b79041f17df5e87388f1121a68e9b8fad3272",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018ec824.tim",
+      "path": "texture/textures/tim_018ec824.png",
+      "resourceIds": [
+        38
+      ],
+      "sourceSha256": "f3c6694f8e27784825c13a3a90d15e9771ea01f79eec3456f0a46a69ef04e129",
+      "sha256": "f884df15bf173e7a2d41db7110d97bae4cf82c5a68ab5fca6878730f51d75de0",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018a7250.tim",
+      "path": "texture/textures/tim_018a7250.png",
+      "resourceIds": [
+        697
+      ],
+      "sourceSha256": "d17c0040b7ccf9d8d68450700713570f12600ec0b19e3589877aeee9b5c2390d",
+      "sha256": "ddbe124be0cf2ec93f5e1a4af0d03a91e7dbf332684c40826e8cf59e686d8f5f",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_00022030.tim",
+      "path": "texture/textures/tim_00022030.png",
+      "resourceIds": [
+        57
+      ],
+      "sourceSha256": "957a0d7a9671c8970ceefb5028877054a3f19be43e6a69bab2827fe66bb9edeb",
+      "sha256": "f05dc5a4ca67f13d1a2f6da60bfc15fe4bb1179ae466d4950055084686fdce00",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a5384c.tim",
+      "path": "texture/textures/tim_01a5384c.png",
+      "resourceIds": [
+        769
+      ],
+      "sourceSha256": "f7c34f293d448b0d201a567aad6a44d3e26fb0445eeceee1384fea7a99df580f",
+      "sha256": "4ebd4e3c7a8031d7db6a7230e899933c84bf2dedc2d9e05d7c69502e1d17464e",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0188381c.tim",
+      "path": "texture/textures/tim_0188381c.png",
+      "resourceIds": [
+        693
+      ],
+      "sourceSha256": "45f2b20100f90f8ea0caaad33b4da4f160b09759d10a422d86d68af364a6bbe8",
+      "sha256": "50d97864ea913b0b056d8f8651aba1e9168f391bcfe5c5ea6d735accd6806b73",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01a4e9cc.tim",
+      "path": "texture/textures/tim_01a4e9cc.png",
+      "resourceIds": [
+        764
+      ],
+      "sourceSha256": "e9fedd44a2a5d7b22eafce2995a5e28881450dfce674bdcdd26d15b286508568",
+      "sha256": "aff524bb292b32d2eda634be13b6ae187858afdb883e85792b2c741c7ca8e8f5",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_0189f9b0.tim",
+      "path": "texture/textures/tim_0189f9b0.png",
+      "resourceIds": [
+        696
+      ],
+      "sourceSha256": "1c299b3f15c9e3dc94aac3aadfe72f23100006c99fa16bd37af0916c57b4130b",
+      "sha256": "55ab851e747c842cc83906a20b27d8f425f2fa2d9eeb35abdf7fe67028daaa70",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_01caa000.tim",
+      "path": "texture/textures/tim_01caa000.png",
+      "resourceIds": [
+        468
+      ],
+      "sourceSha256": "82e8f5df79fbfbe8c723115b9f912d13614a89ab81dd711203813662b37b00ce",
+      "sha256": "dc945e8a3a5e7a480f96dd6c94a63b9d84092385ccec30ad65dc404007fe8d22",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018b6890.tim",
+      "path": "texture/textures/tim_018b6890.png",
+      "resourceIds": [
+        700
+      ],
+      "sourceSha256": "231fd1a8f44b8f8be4661712728d0abe5bfc2dc7cadc5db6b412383251b72e8a",
+      "sha256": "c25817266b90322015126858c4d17376f14d192f768f08ea9d082ad441b98997",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    },
+    {
+      "oldPath": "texture/tim/tim_018c09c0.tim",
+      "path": "texture/textures/tim_018c09c0.png",
+      "resourceIds": [
+        702
+      ],
+      "sourceSha256": "e0834e887d301cecd00a55738cbb7fc6ea7d499cd3526988d4b70e196046b65d",
+      "sha256": "1e4731215a50243b35903b2bcfcfc24bcaf4d9ba9da2a516db7192bac91d2720",
+      "verification": "RGBA pixels exactly match original TIM decoder output"
+    }
+  ],
+  "note": "oldPath is historical, not a live asset reference. PNGs retain the existing decoder output; GPU STP/blending behavior is not baked into these images."
+}

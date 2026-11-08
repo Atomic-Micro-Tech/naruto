@@ -1,0 +1,74 @@
+{
+  "fontResource": 477,
+  "sourceFunctions": [
+    "FUN_8001bc04",
+    "FUN_8001bce8",
+    "FUN_8001a9cc"
+  ],
+  "atlases": [
+    {
+      "file": "glyphs_12_color0.png",
+      "size": 12,
+      "colorMode": 0,
+      "columns": 21,
+      "count": 1764,
+      "advance": 13
+    },
+    {
+      "file": "glyphs_12_color1.png",
+      "size": 12,
+      "colorMode": 1,
+      "columns": 21,
+      "count": 1764,
+      "advance": 13
+    },
+    {
+      "file": "glyphs_12_color2.png",
+      "size": 12,
+      "colorMode": 2,
+      "columns": 21,
+      "count": 1764,
+      "advance": 13
+    },
+    {
+      "file": "glyphs_12_color3.png",
+      "size": 12,
+      "colorMode": 3,
+      "columns": 21,
+      "count": 1764,
+      "advance": 13
+    },
+    {
+      "file": "glyphs_16_color0.png",
+      "size": 16,
+      "colorMode": 0,
+      "columns": 16,
+      "count": 1024,
+      "advance": 14
+    },
+    {
+      "file": "glyphs_16_color1.png",
+      "size": 16,
+      "colorMode": 1,
+      "columns": 16,
+      "count": 1024,
+      "advance": 14
+    },
+    {
+      "file": "glyphs_16_color2.png",
+      "size": 16,
+      "colorMode": 2,
+      "columns": 16,
+      "count": 1024,
+      "advance": 14
+    },
+    {
+      "file": "glyphs_16_color3.png",
+      "size": 16,
+      "colorMode": 3,
+      "columns": 16,
+      "count": 1024,
+      "advance": 14
+    }
+  ]
+}

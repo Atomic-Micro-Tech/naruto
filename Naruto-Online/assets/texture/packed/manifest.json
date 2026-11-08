@@ -1,0 +1,482 @@
+[
+  {
+    "id": "packed_0001a000_8bpp_pal00",
+    "width": 128,
+    "height": 256,
+    "offset": 106496,
+    "bits": 8,
+    "palette": 0
+  },
+  {
+    "id": "packed_0001a000_8bpp_pal01",
+    "width": 128,
+    "height": 256,
+    "offset": 106496,
+    "bits": 8,
+    "palette": 1
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal00",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 0
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal01",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 1
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal02",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 2
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal03",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 3
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal04",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 4
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal05",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 5
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal06",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 6
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal07",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 7
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal08",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 8
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal09",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 9
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal10",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 10
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal11",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 11
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal12",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 12
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal13",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 13
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal14",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 14
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal15",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 15
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal16",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 16
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal17",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 17
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal18",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 18
+  },
+  {
+    "id": "packed_0001a000_4bpp_pal19",
+    "width": 256,
+    "height": 256,
+    "offset": 106496,
+    "bits": 4,
+    "palette": 19
+  },
+  {
+    "id": "packed_018ec800_8bpp_pal00",
+    "width": 256,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 8,
+    "palette": 0
+  },
+  {
+    "id": "packed_018ec800_8bpp_pal01",
+    "width": 256,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 8,
+    "palette": 1
+  },
+  {
+    "id": "packed_018ec800_8bpp_pal02",
+    "width": 256,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 8,
+    "palette": 2
+  },
+  {
+    "id": "packed_018ec800_8bpp_pal03",
+    "width": 256,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 8,
+    "palette": 3
+  },
+  {
+    "id": "packed_018ec800_8bpp_pal04",
+    "width": 256,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 8,
+    "palette": 4
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal00",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 0
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal01",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 1
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal02",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 2
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal03",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 3
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal04",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 4
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal05",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 5
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal06",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 6
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal07",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 7
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal08",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 8
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal09",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 9
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal10",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 10
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal11",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 11
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal12",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 12
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal13",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 13
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal14",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 14
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal15",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 15
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal16",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 16
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal17",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 17
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal18",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 18
+  },
+  {
+    "id": "packed_018ec800_4bpp_pal19",
+    "width": 512,
+    "height": 256,
+    "offset": 26134528,
+    "bits": 4,
+    "palette": 19
+  },
+  {
+    "id": "packed_01900800_4bpp_pal00",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 0
+  },
+  {
+    "id": "packed_01900800_4bpp_pal01",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 1
+  },
+  {
+    "id": "packed_01900800_4bpp_pal02",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 2
+  },
+  {
+    "id": "packed_01900800_4bpp_pal03",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 3
+  },
+  {
+    "id": "packed_01900800_4bpp_pal04",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 4
+  },
+  {
+    "id": "packed_01900800_4bpp_pal05",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 5
+  },
+  {
+    "id": "packed_01900800_4bpp_pal06",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 6
+  },
+  {
+    "id": "packed_01900800_4bpp_pal07",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 7
+  },
+  {
+    "id": "packed_01900800_4bpp_pal08",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 8
+  },
+  {
+    "id": "packed_01900800_4bpp_pal09",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 9
+  },
+  {
+    "id": "packed_01900800_4bpp_pal10",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 10
+  },
+  {
+    "id": "packed_01900800_4bpp_pal11",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 11
+  },
+  {
+    "id": "packed_01900800_4bpp_pal12",
+    "width": 256,
+    "height": 208,
+    "offset": 26216448,
+    "bits": 4,
+    "palette": 12
+  }
+]

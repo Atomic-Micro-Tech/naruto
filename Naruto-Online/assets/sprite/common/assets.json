@@ -1,0 +1,3981 @@
+{
+  "resource": 57,
+  "atlasRect": [
+    320,
+    256
+  ],
+  "clutRect": [
+    0,
+    510
+  ],
+  "assets": [
+    {
+      "id": "roulette_number_0",
+      "file": "roulette_number_0.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        0,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 0
+    },
+    {
+      "id": "roulette_number_1",
+      "file": "roulette_number_1.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        24,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 1
+    },
+    {
+      "id": "roulette_number_2",
+      "file": "roulette_number_2.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        48,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 2
+    },
+    {
+      "id": "roulette_number_3",
+      "file": "roulette_number_3.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        72,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 3
+    },
+    {
+      "id": "roulette_number_4",
+      "file": "roulette_number_4.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        96,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 4
+    },
+    {
+      "id": "roulette_number_5",
+      "file": "roulette_number_5.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        120,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 5
+    },
+    {
+      "id": "roulette_number_6",
+      "file": "roulette_number_6.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        144,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 6
+    },
+    {
+      "id": "roulette_number_7",
+      "file": "roulette_number_7.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        168,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 7
+    },
+    {
+      "id": "roulette_number_8",
+      "file": "roulette_number_8.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        192,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 8
+    },
+    {
+      "id": "roulette_number_9",
+      "file": "roulette_number_9.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        216,
+        224,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 9
+    },
+    {
+      "id": "roulette_number_10",
+      "file": "roulette_number_10.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        0,
+        192,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 10
+    },
+    {
+      "id": "roulette_number_11",
+      "file": "roulette_number_11.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        24,
+        192,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 11
+    },
+    {
+      "id": "roulette_number_12",
+      "file": "roulette_number_12.png",
+      "width": 24,
+      "height": 32,
+      "uv": [
+        48,
+        192,
+        24,
+        32
+      ],
+      "clut": [
+        128,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c",
+      "number": 12
+    },
+    {
+      "id": "roulette_quadrant_0",
+      "file": "roulette_quadrant_0.png",
+      "width": 96,
+      "height": 96,
+      "uv": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "clut": [
+        224,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c"
+    },
+    {
+      "id": "roulette_quadrant_1",
+      "file": "roulette_quadrant_1.png",
+      "width": 96,
+      "height": 96,
+      "uv": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "clut": [
+        208,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c"
+    },
+    {
+      "id": "roulette_quadrant_2",
+      "file": "roulette_quadrant_2.png",
+      "width": 96,
+      "height": 96,
+      "uv": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "clut": [
+        224,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c"
+    },
+    {
+      "id": "roulette_quadrant_3",
+      "file": "roulette_quadrant_3.png",
+      "width": 96,
+      "height": 96,
+      "uv": [
+        0,
+        0,
+        96,
+        96
+      ],
+      "clut": [
+        208,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c"
+    },
+    {
+      "id": "roulette_pointer",
+      "file": "roulette_pointer.png",
+      "width": 56,
+      "height": 16,
+      "uv": [
+        0,
+        152,
+        56,
+        16
+      ],
+      "clut": [
+        176,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c"
+    },
+    {
+      "id": "roulette_center",
+      "file": "roulette_center.png",
+      "width": 56,
+      "height": 56,
+      "uv": [
+        0,
+        96,
+        56,
+        56
+      ],
+      "clut": [
+        144,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c"
+    },
+    {
+      "id": "roulette_center_shadow",
+      "file": "roulette_center_shadow.png",
+      "width": 56,
+      "height": 56,
+      "uv": [
+        160,
+        0,
+        56,
+        56
+      ],
+      "clut": [
+        144,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c"
+    },
+    {
+      "id": "roulette_spoke",
+      "file": "roulette_spoke.png",
+      "width": 104,
+      "height": 6,
+      "uv": [
+        152,
+        202,
+        104,
+        6
+      ],
+      "clut": [
+        256,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c"
+    },
+    {
+      "id": "roulette_rim",
+      "file": "roulette_rim.png",
+      "width": 12,
+      "height": 56,
+      "uv": [
+        56,
+        96,
+        12,
+        56
+      ],
+      "clut": [
+        192,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001fd0c"
+    },
+    {
+      "id": "digits_style0_palette0_0",
+      "file": "digits_style0_palette0_0.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        136,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 0
+    },
+    {
+      "id": "digits_style0_palette0_1",
+      "file": "digits_style0_palette0_1.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        144,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 1
+    },
+    {
+      "id": "digits_style0_palette0_2",
+      "file": "digits_style0_palette0_2.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        152,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 2
+    },
+    {
+      "id": "digits_style0_palette0_3",
+      "file": "digits_style0_palette0_3.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        160,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 3
+    },
+    {
+      "id": "digits_style0_palette0_4",
+      "file": "digits_style0_palette0_4.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        168,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 4
+    },
+    {
+      "id": "digits_style0_palette0_5",
+      "file": "digits_style0_palette0_5.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        176,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 5
+    },
+    {
+      "id": "digits_style0_palette0_6",
+      "file": "digits_style0_palette0_6.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        184,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 6
+    },
+    {
+      "id": "digits_style0_palette0_7",
+      "file": "digits_style0_palette0_7.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        192,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 7
+    },
+    {
+      "id": "digits_style0_palette0_8",
+      "file": "digits_style0_palette0_8.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        200,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 8
+    },
+    {
+      "id": "digits_style0_palette0_9",
+      "file": "digits_style0_palette0_9.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        208,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 9
+    },
+    {
+      "id": "digits_style0_palette0_10",
+      "file": "digits_style0_palette0_10.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        216,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 10
+    },
+    {
+      "id": "digits_style0_palette0_11",
+      "file": "digits_style0_palette0_11.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        224,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 0,
+      "digit": 11
+    },
+    {
+      "id": "digits_style0_palette1_0",
+      "file": "digits_style0_palette1_0.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        136,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 0
+    },
+    {
+      "id": "digits_style0_palette1_1",
+      "file": "digits_style0_palette1_1.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        144,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 1
+    },
+    {
+      "id": "digits_style0_palette1_2",
+      "file": "digits_style0_palette1_2.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        152,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 2
+    },
+    {
+      "id": "digits_style0_palette1_3",
+      "file": "digits_style0_palette1_3.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        160,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 3
+    },
+    {
+      "id": "digits_style0_palette1_4",
+      "file": "digits_style0_palette1_4.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        168,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 4
+    },
+    {
+      "id": "digits_style0_palette1_5",
+      "file": "digits_style0_palette1_5.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        176,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 5
+    },
+    {
+      "id": "digits_style0_palette1_6",
+      "file": "digits_style0_palette1_6.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        184,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 6
+    },
+    {
+      "id": "digits_style0_palette1_7",
+      "file": "digits_style0_palette1_7.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        192,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 7
+    },
+    {
+      "id": "digits_style0_palette1_8",
+      "file": "digits_style0_palette1_8.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        200,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 8
+    },
+    {
+      "id": "digits_style0_palette1_9",
+      "file": "digits_style0_palette1_9.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        208,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 9
+    },
+    {
+      "id": "digits_style0_palette1_10",
+      "file": "digits_style0_palette1_10.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        216,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 10
+    },
+    {
+      "id": "digits_style0_palette1_11",
+      "file": "digits_style0_palette1_11.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        224,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 1,
+      "digit": 11
+    },
+    {
+      "id": "digits_style0_palette2_0",
+      "file": "digits_style0_palette2_0.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        136,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 0
+    },
+    {
+      "id": "digits_style0_palette2_1",
+      "file": "digits_style0_palette2_1.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        144,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 1
+    },
+    {
+      "id": "digits_style0_palette2_2",
+      "file": "digits_style0_palette2_2.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        152,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 2
+    },
+    {
+      "id": "digits_style0_palette2_3",
+      "file": "digits_style0_palette2_3.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        160,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 3
+    },
+    {
+      "id": "digits_style0_palette2_4",
+      "file": "digits_style0_palette2_4.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        168,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 4
+    },
+    {
+      "id": "digits_style0_palette2_5",
+      "file": "digits_style0_palette2_5.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        176,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 5
+    },
+    {
+      "id": "digits_style0_palette2_6",
+      "file": "digits_style0_palette2_6.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        184,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 6
+    },
+    {
+      "id": "digits_style0_palette2_7",
+      "file": "digits_style0_palette2_7.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        192,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 7
+    },
+    {
+      "id": "digits_style0_palette2_8",
+      "file": "digits_style0_palette2_8.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        200,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 8
+    },
+    {
+      "id": "digits_style0_palette2_9",
+      "file": "digits_style0_palette2_9.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        208,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 9
+    },
+    {
+      "id": "digits_style0_palette2_10",
+      "file": "digits_style0_palette2_10.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        216,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 10
+    },
+    {
+      "id": "digits_style0_palette2_11",
+      "file": "digits_style0_palette2_11.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        224,
+        64,
+        8,
+        16
+      ],
+      "clut": [
+        160,
+        510
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 0,
+      "palette": 2,
+      "digit": 11
+    },
+    {
+      "id": "digits_style1_palette0_0",
+      "file": "digits_style1_palette0_0.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        136,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 0
+    },
+    {
+      "id": "digits_style1_palette0_1",
+      "file": "digits_style1_palette0_1.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        144,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 1
+    },
+    {
+      "id": "digits_style1_palette0_2",
+      "file": "digits_style1_palette0_2.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        152,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 2
+    },
+    {
+      "id": "digits_style1_palette0_3",
+      "file": "digits_style1_palette0_3.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        160,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 3
+    },
+    {
+      "id": "digits_style1_palette0_4",
+      "file": "digits_style1_palette0_4.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        168,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 4
+    },
+    {
+      "id": "digits_style1_palette0_5",
+      "file": "digits_style1_palette0_5.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        176,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 5
+    },
+    {
+      "id": "digits_style1_palette0_6",
+      "file": "digits_style1_palette0_6.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        184,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 6
+    },
+    {
+      "id": "digits_style1_palette0_7",
+      "file": "digits_style1_palette0_7.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        192,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 7
+    },
+    {
+      "id": "digits_style1_palette0_8",
+      "file": "digits_style1_palette0_8.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        200,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 8
+    },
+    {
+      "id": "digits_style1_palette0_9",
+      "file": "digits_style1_palette0_9.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        208,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 9
+    },
+    {
+      "id": "digits_style1_palette0_10",
+      "file": "digits_style1_palette0_10.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        216,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 10
+    },
+    {
+      "id": "digits_style1_palette0_11",
+      "file": "digits_style1_palette0_11.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        224,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        192,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 0,
+      "digit": 11
+    },
+    {
+      "id": "digits_style1_palette1_0",
+      "file": "digits_style1_palette1_0.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        136,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 0
+    },
+    {
+      "id": "digits_style1_palette1_1",
+      "file": "digits_style1_palette1_1.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        144,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 1
+    },
+    {
+      "id": "digits_style1_palette1_2",
+      "file": "digits_style1_palette1_2.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        152,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 2
+    },
+    {
+      "id": "digits_style1_palette1_3",
+      "file": "digits_style1_palette1_3.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        160,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 3
+    },
+    {
+      "id": "digits_style1_palette1_4",
+      "file": "digits_style1_palette1_4.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        168,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 4
+    },
+    {
+      "id": "digits_style1_palette1_5",
+      "file": "digits_style1_palette1_5.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        176,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 5
+    },
+    {
+      "id": "digits_style1_palette1_6",
+      "file": "digits_style1_palette1_6.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        184,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 6
+    },
+    {
+      "id": "digits_style1_palette1_7",
+      "file": "digits_style1_palette1_7.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        192,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 7
+    },
+    {
+      "id": "digits_style1_palette1_8",
+      "file": "digits_style1_palette1_8.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        200,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 8
+    },
+    {
+      "id": "digits_style1_palette1_9",
+      "file": "digits_style1_palette1_9.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        208,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 9
+    },
+    {
+      "id": "digits_style1_palette1_10",
+      "file": "digits_style1_palette1_10.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        216,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 10
+    },
+    {
+      "id": "digits_style1_palette1_11",
+      "file": "digits_style1_palette1_11.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        224,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        224,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 1,
+      "digit": 11
+    },
+    {
+      "id": "digits_style1_palette2_0",
+      "file": "digits_style1_palette2_0.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        136,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 0
+    },
+    {
+      "id": "digits_style1_palette2_1",
+      "file": "digits_style1_palette2_1.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        144,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 1
+    },
+    {
+      "id": "digits_style1_palette2_2",
+      "file": "digits_style1_palette2_2.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        152,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 2
+    },
+    {
+      "id": "digits_style1_palette2_3",
+      "file": "digits_style1_palette2_3.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        160,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 3
+    },
+    {
+      "id": "digits_style1_palette2_4",
+      "file": "digits_style1_palette2_4.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        168,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 4
+    },
+    {
+      "id": "digits_style1_palette2_5",
+      "file": "digits_style1_palette2_5.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        176,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 5
+    },
+    {
+      "id": "digits_style1_palette2_6",
+      "file": "digits_style1_palette2_6.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        184,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 6
+    },
+    {
+      "id": "digits_style1_palette2_7",
+      "file": "digits_style1_palette2_7.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        192,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 7
+    },
+    {
+      "id": "digits_style1_palette2_8",
+      "file": "digits_style1_palette2_8.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        200,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 8
+    },
+    {
+      "id": "digits_style1_palette2_9",
+      "file": "digits_style1_palette2_9.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        208,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 9
+    },
+    {
+      "id": "digits_style1_palette2_10",
+      "file": "digits_style1_palette2_10.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        216,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 10
+    },
+    {
+      "id": "digits_style1_palette2_11",
+      "file": "digits_style1_palette2_11.png",
+      "width": 8,
+      "height": 16,
+      "uv": [
+        224,
+        80,
+        8,
+        16
+      ],
+      "clut": [
+        208,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 1,
+      "palette": 2,
+      "digit": 11
+    },
+    {
+      "id": "digits_style2_palette0_0",
+      "file": "digits_style2_palette0_0.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        72,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 0
+    },
+    {
+      "id": "digits_style2_palette0_1",
+      "file": "digits_style2_palette0_1.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        80,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 1
+    },
+    {
+      "id": "digits_style2_palette0_2",
+      "file": "digits_style2_palette0_2.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        88,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 2
+    },
+    {
+      "id": "digits_style2_palette0_3",
+      "file": "digits_style2_palette0_3.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        96,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 3
+    },
+    {
+      "id": "digits_style2_palette0_4",
+      "file": "digits_style2_palette0_4.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        104,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 4
+    },
+    {
+      "id": "digits_style2_palette0_5",
+      "file": "digits_style2_palette0_5.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        112,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 5
+    },
+    {
+      "id": "digits_style2_palette0_6",
+      "file": "digits_style2_palette0_6.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        120,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 6
+    },
+    {
+      "id": "digits_style2_palette0_7",
+      "file": "digits_style2_palette0_7.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        128,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 7
+    },
+    {
+      "id": "digits_style2_palette0_8",
+      "file": "digits_style2_palette0_8.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        136,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 8
+    },
+    {
+      "id": "digits_style2_palette0_9",
+      "file": "digits_style2_palette0_9.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        144,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 9
+    },
+    {
+      "id": "digits_style2_palette0_10",
+      "file": "digits_style2_palette0_10.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        152,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 10
+    },
+    {
+      "id": "digits_style2_palette0_11",
+      "file": "digits_style2_palette0_11.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        160,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 0,
+      "digit": 11
+    },
+    {
+      "id": "digits_style2_palette1_0",
+      "file": "digits_style2_palette1_0.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        72,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 0
+    },
+    {
+      "id": "digits_style2_palette1_1",
+      "file": "digits_style2_palette1_1.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        80,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 1
+    },
+    {
+      "id": "digits_style2_palette1_2",
+      "file": "digits_style2_palette1_2.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        88,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 2
+    },
+    {
+      "id": "digits_style2_palette1_3",
+      "file": "digits_style2_palette1_3.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        96,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 3
+    },
+    {
+      "id": "digits_style2_palette1_4",
+      "file": "digits_style2_palette1_4.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        104,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 4
+    },
+    {
+      "id": "digits_style2_palette1_5",
+      "file": "digits_style2_palette1_5.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        112,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 5
+    },
+    {
+      "id": "digits_style2_palette1_6",
+      "file": "digits_style2_palette1_6.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        120,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 6
+    },
+    {
+      "id": "digits_style2_palette1_7",
+      "file": "digits_style2_palette1_7.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        128,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 7
+    },
+    {
+      "id": "digits_style2_palette1_8",
+      "file": "digits_style2_palette1_8.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        136,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 8
+    },
+    {
+      "id": "digits_style2_palette1_9",
+      "file": "digits_style2_palette1_9.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        144,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 9
+    },
+    {
+      "id": "digits_style2_palette1_10",
+      "file": "digits_style2_palette1_10.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        152,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 10
+    },
+    {
+      "id": "digits_style2_palette1_11",
+      "file": "digits_style2_palette1_11.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        160,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 1,
+      "digit": 11
+    },
+    {
+      "id": "digits_style2_palette2_0",
+      "file": "digits_style2_palette2_0.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        72,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 0
+    },
+    {
+      "id": "digits_style2_palette2_1",
+      "file": "digits_style2_palette2_1.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        80,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 1
+    },
+    {
+      "id": "digits_style2_palette2_2",
+      "file": "digits_style2_palette2_2.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        88,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 2
+    },
+    {
+      "id": "digits_style2_palette2_3",
+      "file": "digits_style2_palette2_3.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        96,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 3
+    },
+    {
+      "id": "digits_style2_palette2_4",
+      "file": "digits_style2_palette2_4.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        104,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 4
+    },
+    {
+      "id": "digits_style2_palette2_5",
+      "file": "digits_style2_palette2_5.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        112,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 5
+    },
+    {
+      "id": "digits_style2_palette2_6",
+      "file": "digits_style2_palette2_6.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        120,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 6
+    },
+    {
+      "id": "digits_style2_palette2_7",
+      "file": "digits_style2_palette2_7.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        128,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 7
+    },
+    {
+      "id": "digits_style2_palette2_8",
+      "file": "digits_style2_palette2_8.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        136,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 8
+    },
+    {
+      "id": "digits_style2_palette2_9",
+      "file": "digits_style2_palette2_9.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        144,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 9
+    },
+    {
+      "id": "digits_style2_palette2_10",
+      "file": "digits_style2_palette2_10.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        152,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 10
+    },
+    {
+      "id": "digits_style2_palette2_11",
+      "file": "digits_style2_palette2_11.png",
+      "width": 8,
+      "height": 8,
+      "uv": [
+        160,
+        216,
+        8,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 2,
+      "palette": 2,
+      "digit": 11
+    },
+    {
+      "id": "digits_style3_palette0_0",
+      "file": "digits_style3_palette0_0.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        0,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 0
+    },
+    {
+      "id": "digits_style3_palette0_1",
+      "file": "digits_style3_palette0_1.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        6,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 1
+    },
+    {
+      "id": "digits_style3_palette0_2",
+      "file": "digits_style3_palette0_2.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        12,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 2
+    },
+    {
+      "id": "digits_style3_palette0_3",
+      "file": "digits_style3_palette0_3.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        18,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 3
+    },
+    {
+      "id": "digits_style3_palette0_4",
+      "file": "digits_style3_palette0_4.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        24,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 4
+    },
+    {
+      "id": "digits_style3_palette0_5",
+      "file": "digits_style3_palette0_5.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        30,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 5
+    },
+    {
+      "id": "digits_style3_palette0_6",
+      "file": "digits_style3_palette0_6.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        36,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 6
+    },
+    {
+      "id": "digits_style3_palette0_7",
+      "file": "digits_style3_palette0_7.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        42,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 7
+    },
+    {
+      "id": "digits_style3_palette0_8",
+      "file": "digits_style3_palette0_8.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        48,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 8
+    },
+    {
+      "id": "digits_style3_palette0_9",
+      "file": "digits_style3_palette0_9.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        54,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 9
+    },
+    {
+      "id": "digits_style3_palette0_10",
+      "file": "digits_style3_palette0_10.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        60,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 10
+    },
+    {
+      "id": "digits_style3_palette0_11",
+      "file": "digits_style3_palette0_11.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        66,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        176,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 0,
+      "digit": 11
+    },
+    {
+      "id": "digits_style3_palette1_0",
+      "file": "digits_style3_palette1_0.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        0,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 0
+    },
+    {
+      "id": "digits_style3_palette1_1",
+      "file": "digits_style3_palette1_1.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        6,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 1
+    },
+    {
+      "id": "digits_style3_palette1_2",
+      "file": "digits_style3_palette1_2.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        12,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 2
+    },
+    {
+      "id": "digits_style3_palette1_3",
+      "file": "digits_style3_palette1_3.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        18,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 3
+    },
+    {
+      "id": "digits_style3_palette1_4",
+      "file": "digits_style3_palette1_4.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        24,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 4
+    },
+    {
+      "id": "digits_style3_palette1_5",
+      "file": "digits_style3_palette1_5.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        30,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 5
+    },
+    {
+      "id": "digits_style3_palette1_6",
+      "file": "digits_style3_palette1_6.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        36,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 6
+    },
+    {
+      "id": "digits_style3_palette1_7",
+      "file": "digits_style3_palette1_7.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        42,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 7
+    },
+    {
+      "id": "digits_style3_palette1_8",
+      "file": "digits_style3_palette1_8.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        48,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 8
+    },
+    {
+      "id": "digits_style3_palette1_9",
+      "file": "digits_style3_palette1_9.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        54,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 9
+    },
+    {
+      "id": "digits_style3_palette1_10",
+      "file": "digits_style3_palette1_10.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        60,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 10
+    },
+    {
+      "id": "digits_style3_palette1_11",
+      "file": "digits_style3_palette1_11.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        66,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        272,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 1,
+      "digit": 11
+    },
+    {
+      "id": "digits_style3_palette2_0",
+      "file": "digits_style3_palette2_0.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        0,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 0
+    },
+    {
+      "id": "digits_style3_palette2_1",
+      "file": "digits_style3_palette2_1.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        6,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 1
+    },
+    {
+      "id": "digits_style3_palette2_2",
+      "file": "digits_style3_palette2_2.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        12,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 2
+    },
+    {
+      "id": "digits_style3_palette2_3",
+      "file": "digits_style3_palette2_3.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        18,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 3
+    },
+    {
+      "id": "digits_style3_palette2_4",
+      "file": "digits_style3_palette2_4.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        24,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 4
+    },
+    {
+      "id": "digits_style3_palette2_5",
+      "file": "digits_style3_palette2_5.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        30,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 5
+    },
+    {
+      "id": "digits_style3_palette2_6",
+      "file": "digits_style3_palette2_6.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        36,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 6
+    },
+    {
+      "id": "digits_style3_palette2_7",
+      "file": "digits_style3_palette2_7.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        42,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 7
+    },
+    {
+      "id": "digits_style3_palette2_8",
+      "file": "digits_style3_palette2_8.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        48,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 8
+    },
+    {
+      "id": "digits_style3_palette2_9",
+      "file": "digits_style3_palette2_9.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        54,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 9
+    },
+    {
+      "id": "digits_style3_palette2_10",
+      "file": "digits_style3_palette2_10.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        60,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 10
+    },
+    {
+      "id": "digits_style3_palette2_11",
+      "file": "digits_style3_palette2_11.png",
+      "width": 6,
+      "height": 8,
+      "uv": [
+        66,
+        184,
+        6,
+        8
+      ],
+      "clut": [
+        256,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_8001b39c",
+      "style": 3,
+      "palette": 2,
+      "digit": 11
+    },
+    {
+      "id": "arrow_0",
+      "file": "arrow_0.png",
+      "width": 16,
+      "height": 16,
+      "uv": [
+        148,
+        184,
+        16,
+        16
+      ],
+      "clut": [
+        16,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_80022ed4",
+      "direction": "up"
+    },
+    {
+      "id": "arrow_1",
+      "file": "arrow_1.png",
+      "width": 16,
+      "height": 16,
+      "uv": [
+        240,
+        240,
+        16,
+        16
+      ],
+      "clut": [
+        16,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_80022ed4",
+      "direction": "down"
+    },
+    {
+      "id": "arrow_2",
+      "file": "arrow_2.png",
+      "width": 16,
+      "height": 16,
+      "uv": [
+        240,
+        224,
+        16,
+        16
+      ],
+      "clut": [
+        16,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_80022ed4",
+      "direction": "left"
+    },
+    {
+      "id": "arrow_3",
+      "file": "arrow_3.png",
+      "width": 16,
+      "height": 16,
+      "uv": [
+        164,
+        184,
+        16,
+        16
+      ],
+      "clut": [
+        16,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_80022ed4",
+      "direction": "right"
+    },
+    {
+      "id": "control_label_0",
+      "file": "control_label_0.png",
+      "width": 36,
+      "height": 16,
+      "uv": [
+        96,
+        64,
+        36,
+        16
+      ],
+      "clut": [
+        288,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_80023320",
+      "mask": 1,
+      "button": 0
+    },
+    {
+      "id": "control_label_1",
+      "file": "control_label_1.png",
+      "width": 36,
+      "height": 16,
+      "uv": [
+        96,
+        80,
+        36,
+        16
+      ],
+      "clut": [
+        288,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_80023320",
+      "mask": 2,
+      "button": 1
+    },
+    {
+      "id": "control_label_2",
+      "file": "control_label_2.png",
+      "width": 36,
+      "height": 16,
+      "uv": [
+        56,
+        152,
+        36,
+        16
+      ],
+      "clut": [
+        288,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_80023320",
+      "mask": 4,
+      "button": 0
+    },
+    {
+      "id": "control_label_3",
+      "file": "control_label_3.png",
+      "width": 36,
+      "height": 16,
+      "uv": [
+        184,
+        208,
+        36,
+        16
+      ],
+      "clut": [
+        288,
+        511
+      ],
+      "tpage": 21,
+      "resource": 57,
+      "sourceFunction": "FUN_80023320",
+      "mask": 8,
+      "button": 2
+    }
+  ],
+  "characters": [
+    {
+      "id": 0,
+      "resource": 759,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_00_face.png",
+      "name": "character_00_name.png"
+    },
+    {
+      "id": 1,
+      "resource": 760,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_01_face.png",
+      "name": "character_01_name.png"
+    },
+    {
+      "id": 2,
+      "resource": 761,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_02_face.png",
+      "name": "character_02_name.png"
+    },
+    {
+      "id": 3,
+      "resource": 762,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_03_face.png",
+      "name": "character_03_name.png"
+    },
+    {
+      "id": 4,
+      "resource": 763,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_04_face.png",
+      "name": "character_04_name.png"
+    },
+    {
+      "id": 5,
+      "resource": 764,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_05_face.png",
+      "name": "character_05_name.png"
+    },
+    {
+      "id": 6,
+      "resource": 765,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_06_face.png",
+      "name": "character_06_name.png"
+    },
+    {
+      "id": 7,
+      "resource": 766,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_07_face.png",
+      "name": "character_07_name.png"
+    },
+    {
+      "id": 8,
+      "resource": 767,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_08_face.png",
+      "name": "character_08_name.png"
+    },
+    {
+      "id": 9,
+      "resource": 768,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_09_face.png",
+      "name": "character_09_name.png"
+    },
+    {
+      "id": 10,
+      "resource": 769,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_10_face.png",
+      "name": "character_10_name.png"
+    },
+    {
+      "id": 11,
+      "resource": 770,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_11_face.png",
+      "name": "character_11_name.png"
+    },
+    {
+      "id": 12,
+      "resource": 771,
+      "sourceFunction": "FUN_800ffbc0/FUN_800ffa30",
+      "face": "character_12_face.png",
+      "name": "character_12_name.png"
+    }
+  ],
+  "rouletteGeometry": {
+    "sourceFunction": "FUN_8001fd0c",
+    "rotationUnits": 4096,
+    "xScaleNumerator": 575,
+    "xScaleDenominator": 512,
+    "numberVertices": [
+      62,
+      -16,
+      86,
+      -16,
+      62,
+      16,
+      86,
+      16,
+      86,
+      16,
+      62,
+      16,
+      86,
+      -16,
+      62,
+      -16
+    ],
+    "spokeVertices": [
+      -3,
+      -3,
+      101,
+      -3,
+      -3,
+      3,
+      101,
+      3,
+      -3,
+      -3,
+      101,
+      -3,
+      -3,
+      3,
+      101,
+      3
+    ],
+    "outerVertices": [
+      0,
+      -96,
+      96,
+      -96,
+      96,
+      0,
+      96,
+      96,
+      0,
+      96,
+      -96,
+      96,
+      -96,
+      0,
+      -96,
+      -96
+    ],
+    "outerQuads": [
+      [
+        0,
+        1,
+        8,
+        2
+      ],
+      [
+        2,
+        3,
+        8,
+        4
+      ],
+      [
+        4,
+        5,
+        8,
+        6
+      ],
+      [
+        6,
+        7,
+        8,
+        0
+      ]
+    ],
+    "centerVertices": [
+      28,
+      -28,
+      -28,
+      -28,
+      28,
+      28,
+      -28,
+      28
+    ],
+    "rimVertices": [
+      86,
+      -28,
+      98,
+      -28,
+      86,
+      28,
+      98,
+      28
+    ],
+    "numberAngleStart": "rotation+0x155",
+    "numberAngleStep": 341,
+    "outerAngle": "rotation+0x1ff",
+    "centerAngle": "(rotation+0x155)*2",
+    "numbersSubmittedReverse": true,
+    "notes": "Original textured quads, not a flat wheel bitmap. Left/right variants mirror number/spoke vertices. PS1 submits larger OT depth first, reverses submissions within a depth."
+  }
+}

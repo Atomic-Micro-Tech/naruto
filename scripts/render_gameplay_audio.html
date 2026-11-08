@@ -1,0 +1,59 @@
+<!doctype html><meta charset="utf-8"><title>Local gameplay WAV exporter</title>
+<script type="module">
+import {MusicPlayer, SequenceClock} from './music-player.mjs';
+const reports=[];
+async function post(url, body) {
+  const response=await fetch(url,{method:'POST',body});
+  if(!response.ok)throw Error(`${url}: HTTP ${response.status}`);
+}
+try {
+  const index=await fetch('/audio/index.json').then(r=>r.json());
+  const jobs=await fetch('/audio/render-jobs.json').then(r=>r.json());
+  for(let i=0;i<jobs.length;i++) {
+    const job=jobs[i], bank=index.banks.find(b=>b.id===job.bank);
+    const clock=new SequenceClock(bank.sequences[job.sequence],{loop:false});
+    while(!clock.done) {
+      clock.nextFrame();
+      if(clock.frame>60*180)throw Error('Unexpected sequence duration: '+job.bank);
+    }
+    const seconds=clock.frame/60+.025+5;
+    const ctx=new OfflineAudioContext(2,Math.ceil(seconds*44100),44100);
+    const player=new MusicPlayer(ctx,{index,baseURL:'/audio/',volume:1});
+    player.setSequenceVolume(job.volume);
+    await player.play(job.bank,{sequence:job.sequence,loop:false});
+    clearInterval(player.timer);player.timer=null;
+    while(!player.clock.done) {
+      for(const item of player.clock.nextFrame())player._event(item.event,player.startTime+item.time,item);
+      const t=player.startTime+player.clock.frame/60;
+      for(const voice of player.voices)player._envelopeUntil(voice,t);
+    }
+    for(const voice of player.voices)player._envelopeUntil(voice,seconds);
+    const buffer=await ctx.startRendering(),l=buffer.getChannelData(0),r=buffer.getChannelData(1);
+    let peak=0,last=0,sum=0;
+    for(let n=0;n<l.length;n++) {
+      if(!Number.isFinite(l[n])||!Number.isFinite(r[n]))throw Error('Nonfinite PCM');
+      const p=Math.max(Math.abs(l[n]),Math.abs(r[n]));peak=Math.max(peak,p);
+      if(p>1/32768)last=n;
+      sum+=l[n]*l[n]+r[n]*r[n];
+    }
+    const frames=Math.min(l.length,Math.max(2205,last+2206)),gain=peak>1?.999/peak:1;
+    const wav=new ArrayBuffer(44+frames*4),view=new DataView(wav);
+    function str(at,s){for(let j=0;j<s.length;j++)view.setUint8(at+j,s.charCodeAt(j));}
+    str(0,'RIFF');view.setUint32(4,wav.byteLength-8,true);str(8,'WAVE');str(12,'fmt ');
+    view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,2,true);
+    view.setUint32(24,44100,true);view.setUint32(28,176400,true);view.setUint16(32,4,true);view.setUint16(34,16,true);
+    str(36,'data');view.setUint32(40,frames*4,true);
+    for(let n=0;n<frames;n++)for(let c=0;c<2;c++) {
+      const v=(c?r[n]:l[n])*gain;
+      view.setInt16(44+n*4+c*2,Math.round(Math.max(-1,Math.min(1,v))*(v<0?32768:32767)),true);
+    }
+    await post('/wav/'+i,wav);
+    reports.push({...job,seconds:frames/44100,sequenceSeconds:clock.frame/60,peak,rms:Math.sqrt(sum/(l.length*2)),gain,
+      silent:peak===0,tailAtLimit:last>=l.length-2205,unresolved:player.unresolved});
+    player.dispose();
+  }
+  await post('/finished',JSON.stringify({reports}));
+} catch(error) {
+  await post('/finished',JSON.stringify({error:error.stack,reports}));
+}
+</script>

@@ -1,0 +1,830 @@
+[
+  {
+    "id": 239,
+    "file": "message_0239.png",
+    "width": 260,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 117,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 240,
+    "file": "message_0240.png",
+    "width": 117,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 117,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 241,
+    "file": "message_0241.png",
+    "width": 156,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 117,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 242,
+    "file": "message_0242.png",
+    "width": 182,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 104,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 243,
+    "file": "message_0243.png",
+    "width": 195,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 117,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 244,
+    "file": "message_0244.png",
+    "width": 104,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 104,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 245,
+    "file": "message_0245.png",
+    "width": 130,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 104,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 246,
+    "file": "message_0246.png",
+    "width": 182,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 182,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 247,
+    "file": "message_0247.png",
+    "width": 221,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 182,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 248,
+    "file": "message_0248.png",
+    "width": 221,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 221,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 249,
+    "file": "message_0249.png",
+    "width": 234,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 234,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 250,
+    "file": "message_0250.png",
+    "width": 234,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 234,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 251,
+    "file": "message_0251.png",
+    "width": 234,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 234,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 252,
+    "file": "message_0252.png",
+    "width": 195,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "dynamicNumber",
+        "x": 52,
+        "y": 26
+      },
+      {
+        "kind": "end",
+        "x": 195,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 253,
+    "file": "message_0253.png",
+    "width": 195,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "dynamicNumber",
+        "x": 52,
+        "y": 26
+      },
+      {
+        "kind": "end",
+        "x": 195,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 254,
+    "file": "message_0254.png",
+    "width": 195,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "dynamicNumber",
+        "x": 52,
+        "y": 26
+      },
+      {
+        "kind": "end",
+        "x": 195,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 255,
+    "file": "message_0255.png",
+    "width": 195,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "dynamicNumber",
+        "x": 52,
+        "y": 26
+      },
+      {
+        "kind": "end",
+        "x": 195,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 256,
+    "file": "message_0256.png",
+    "width": 195,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "dynamicNumber",
+        "x": 52,
+        "y": 26
+      },
+      {
+        "kind": "end",
+        "x": 195,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 257,
+    "file": "message_0257.png",
+    "width": 195,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "dynamicNumber",
+        "x": 52,
+        "y": 26
+      },
+      {
+        "kind": "end",
+        "x": 195,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 258,
+    "file": "message_0258.png",
+    "width": 221,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 221,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 259,
+    "file": "message_0259.png",
+    "width": 182,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 104,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 260,
+    "file": "message_0260.png",
+    "width": 195,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 195,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 261,
+    "file": "message_0261.png",
+    "width": 247,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 247,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 262,
+    "file": "message_0262.png",
+    "width": 234,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 234,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 263,
+    "file": "message_0263.png",
+    "width": 221,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 221,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 264,
+    "file": "message_0264.png",
+    "width": 221,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 221,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 265,
+    "file": "message_0265.png",
+    "width": 221,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 221,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 266,
+    "file": "message_0266.png",
+    "width": 247,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 247,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 267,
+    "file": "message_0267.png",
+    "width": 247,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 247,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 268,
+    "file": "message_0268.png",
+    "width": 247,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 247,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 269,
+    "file": "message_0269.png",
+    "width": 195,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 182,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 270,
+    "file": "message_0270.png",
+    "width": 156,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 91,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 271,
+    "file": "message_0271.png",
+    "width": 156,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 91,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 272,
+    "file": "message_0272.png",
+    "width": 156,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 91,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 273,
+    "file": "message_0273.png",
+    "width": 156,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 91,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 274,
+    "file": "message_0274.png",
+    "width": 273,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 39,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 275,
+    "file": "message_0275.png",
+    "width": 247,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 247,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 276,
+    "file": "message_0276.png",
+    "width": 182,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 117,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 277,
+    "file": "message_0277.png",
+    "width": 195,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 117,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 278,
+    "file": "message_0278.png",
+    "width": 182,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 117,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 279,
+    "file": "message_0279.png",
+    "width": 234,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 117,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 280,
+    "file": "message_0280.png",
+    "width": 221,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 104,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 281,
+    "file": "message_0281.png",
+    "width": 130,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 104,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 282,
+    "file": "message_0282.png",
+    "width": 156,
+    "height": 25,
+    "controls": [
+      {
+        "kind": "end",
+        "x": 117,
+        "y": 13
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 283,
+    "file": "message_0283.png",
+    "width": 169,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "end",
+        "x": 169,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 284,
+    "file": "message_0284.png",
+    "width": 169,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "end",
+        "x": 169,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 285,
+    "file": "message_0285.png",
+    "width": 169,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "end",
+        "x": 169,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 286,
+    "file": "message_0286.png",
+    "width": 169,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "end",
+        "x": 169,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 287,
+    "file": "message_0287.png",
+    "width": 169,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "end",
+        "x": 169,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 288,
+    "file": "message_0288.png",
+    "width": 169,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "end",
+        "x": 169,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 289,
+    "file": "message_0289.png",
+    "width": 169,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "end",
+        "x": 169,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  },
+  {
+    "id": 290,
+    "file": "message_0290.png",
+    "width": 169,
+    "height": 38,
+    "controls": [
+      {
+        "kind": "dynamicNumber",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "kind": "end",
+        "x": 169,
+        "y": 26
+      }
+    ],
+    "status": "Static original glyphs; dynamicNumber/dynamicMessage/controllerIcon positions left transparent for runtime substitution."
+  }
+]

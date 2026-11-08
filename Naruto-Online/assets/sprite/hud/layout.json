@@ -1,0 +1,525 @@
+{
+  "resolution": [
+    320,
+    240
+  ],
+  "sourceFunctions": [
+    "FUN_80104b94",
+    "FUN_80105170",
+    "FUN_801052e8"
+  ],
+  "origin": {
+    "x": "160 - playerCount * 36 + playerIndex * 72",
+    "y": 16
+  },
+  "entry": {
+    "initialY": -48,
+    "finalY": 16,
+    "frames": 8,
+    "delayFrames": "playerIndex * 2"
+  },
+  "drawOrder": [
+    "panel",
+    "face",
+    "name_or_team_label",
+    "scroll_if_owned",
+    "crystals",
+    "chakra",
+    "condition_glow"
+  ],
+  "elements": {
+    "panel": {
+      "offset": [
+        8,
+        0
+      ],
+      "file": "panel_player_{playerIndex}.png",
+      "attribute": 1073741824
+    },
+    "face": {
+      "offset": [
+        0,
+        0
+      ],
+      "file": "../common/character_{characterId:02}_face.png"
+    },
+    "name": {
+      "offset": [
+        0,
+        32
+      ],
+      "file": "../common/character_{characterId:02}_name.png"
+    },
+    "teamLabel": {
+      "offset": [
+        0,
+        32
+      ],
+      "periodFrames": 180,
+      "visibleFirstFrames": 90
+    },
+    "crystal": {
+      "offset": [
+        32,
+        0
+      ],
+      "spacing": 8,
+      "uncollectedAsset": "crystal_4.png",
+      "count": "scenario crystal count",
+      "normalModulation": [
+        144,
+        144,
+        144
+      ]
+    },
+    "chakra": {
+      "offset": [
+        32,
+        16
+      ],
+      "style": 0,
+      "digits": 5,
+      "digitWidth": 8,
+      "alignment": "right",
+      "zeroPadding": false,
+      "paletteNormal": 0,
+      "paletteNegativeOrLoss": 2
+    },
+    "scroll": {
+      "offset": [
+        56,
+        32
+      ],
+      "flag": 512
+    }
+  },
+  "assets": [
+    {
+      "id": "panel_player_0",
+      "file": "panel_player_0.png",
+      "width": 72,
+      "height": 48,
+      "source": {
+        "resource": 38,
+        "uv": [
+          176,
+          0,
+          72,
+          48
+        ],
+        "tpage": 24,
+        "clut": [
+          0,
+          241
+        ],
+        "function": "FUN_801052e8"
+      },
+      "attribute": 1073741824,
+      "offset": [
+        8,
+        0
+      ]
+    },
+    {
+      "id": "panel_player_1",
+      "file": "panel_player_1.png",
+      "width": 72,
+      "height": 48,
+      "source": {
+        "resource": 38,
+        "uv": [
+          176,
+          0,
+          72,
+          48
+        ],
+        "tpage": 24,
+        "clut": [
+          16,
+          241
+        ],
+        "function": "FUN_801052e8"
+      },
+      "attribute": 1073741824,
+      "offset": [
+        8,
+        0
+      ]
+    },
+    {
+      "id": "panel_player_2",
+      "file": "panel_player_2.png",
+      "width": 72,
+      "height": 48,
+      "source": {
+        "resource": 38,
+        "uv": [
+          176,
+          0,
+          72,
+          48
+        ],
+        "tpage": 24,
+        "clut": [
+          32,
+          241
+        ],
+        "function": "FUN_801052e8"
+      },
+      "attribute": 1073741824,
+      "offset": [
+        8,
+        0
+      ]
+    },
+    {
+      "id": "panel_player_3",
+      "file": "panel_player_3.png",
+      "width": 72,
+      "height": 48,
+      "source": {
+        "resource": 38,
+        "uv": [
+          176,
+          0,
+          72,
+          48
+        ],
+        "tpage": 24,
+        "clut": [
+          48,
+          241
+        ],
+        "function": "FUN_801052e8"
+      },
+      "attribute": 1073741824,
+      "offset": [
+        8,
+        0
+      ]
+    },
+    {
+      "id": "crystal_0",
+      "file": "crystal_0.png",
+      "width": 8,
+      "height": 16,
+      "source": {
+        "resource": 38,
+        "uv": [
+          72,
+          16,
+          8,
+          16
+        ],
+        "tpage": 24,
+        "clut": [
+          80,
+          241
+        ],
+        "function": "FUN_801052e8"
+      },
+      "collected": true
+    },
+    {
+      "id": "crystal_1",
+      "file": "crystal_1.png",
+      "width": 8,
+      "height": 16,
+      "source": {
+        "resource": 38,
+        "uv": [
+          72,
+          16,
+          8,
+          16
+        ],
+        "tpage": 24,
+        "clut": [
+          96,
+          241
+        ],
+        "function": "FUN_801052e8"
+      },
+      "collected": true
+    },
+    {
+      "id": "crystal_2",
+      "file": "crystal_2.png",
+      "width": 8,
+      "height": 16,
+      "source": {
+        "resource": 38,
+        "uv": [
+          72,
+          16,
+          8,
+          16
+        ],
+        "tpage": 24,
+        "clut": [
+          128,
+          241
+        ],
+        "function": "FUN_801052e8"
+      },
+      "collected": true
+    },
+    {
+      "id": "crystal_3",
+      "file": "crystal_3.png",
+      "width": 8,
+      "height": 16,
+      "source": {
+        "resource": 38,
+        "uv": [
+          72,
+          16,
+          8,
+          16
+        ],
+        "tpage": 24,
+        "clut": [
+          112,
+          241
+        ],
+        "function": "FUN_801052e8"
+      },
+      "collected": true
+    },
+    {
+      "id": "crystal_4",
+      "file": "crystal_4.png",
+      "width": 8,
+      "height": 16,
+      "source": {
+        "resource": 38,
+        "uv": [
+          80,
+          16,
+          8,
+          16
+        ],
+        "tpage": 24,
+        "clut": [
+          96,
+          243
+        ],
+        "function": "FUN_801052e8"
+      },
+      "collected": false
+    },
+    {
+      "id": "team_label_0",
+      "file": "team_label_0.png",
+      "width": 32,
+      "height": 16,
+      "source": {
+        "resource": 38,
+        "uv": [
+          56,
+          176,
+          32,
+          16
+        ],
+        "tpage": 23,
+        "clut": [
+          144,
+          241
+        ],
+        "function": "FUN_801052e8"
+      }
+    },
+    {
+      "id": "team_label_1",
+      "file": "team_label_1.png",
+      "width": 32,
+      "height": 16,
+      "source": {
+        "resource": 38,
+        "uv": [
+          88,
+          176,
+          32,
+          16
+        ],
+        "tpage": 23,
+        "clut": [
+          160,
+          241
+        ],
+        "function": "FUN_801052e8"
+      }
+    },
+    {
+      "id": "scroll",
+      "file": "scroll.png",
+      "width": 16,
+      "height": 16,
+      "source": {
+        "resource": 38,
+        "uv": [
+          80,
+          216,
+          16,
+          16
+        ],
+        "tpage": 24,
+        "clut": [
+          64,
+          241
+        ],
+        "function": "FUN_80105970"
+      },
+      "offset": [
+        56,
+        32
+      ]
+    },
+    {
+      "id": "condition_glow",
+      "file": "condition_glow.png",
+      "width": 56,
+      "height": 32,
+      "source": {
+        "resource": 38,
+        "uv": [
+          0,
+          160,
+          56,
+          32
+        ],
+        "tpage": 23,
+        "clut": [
+          192,
+          243
+        ],
+        "function": "FUN_80105bcc"
+      },
+      "offset": [
+        8,
+        8
+      ],
+      "anchor": [
+        28,
+        16
+      ]
+    },
+    {
+      "id": "chakra_change_glow_0",
+      "file": "chakra_change_glow_0.png",
+      "width": 32,
+      "height": 32,
+      "source": {
+        "resource": 38,
+        "uv": [
+          152,
+          48,
+          32,
+          32
+        ],
+        "tpage": 24,
+        "clut": [
+          224,
+          242
+        ],
+        "function": "FUN_80105c6c"
+      },
+      "offset": [
+        56,
+        16
+      ],
+      "scale": [
+        12288,
+        4096
+      ]
+    },
+    {
+      "id": "chakra_change_glow_1",
+      "file": "chakra_change_glow_1.png",
+      "width": 32,
+      "height": 32,
+      "source": {
+        "resource": 38,
+        "uv": [
+          184,
+          48,
+          32,
+          32
+        ],
+        "tpage": 24,
+        "clut": [
+          224,
+          242
+        ],
+        "function": "FUN_80105c6c"
+      },
+      "offset": [
+        56,
+        16
+      ],
+      "scale": [
+        12288,
+        4096
+      ]
+    },
+    {
+      "id": "chakra_change_glow_2",
+      "file": "chakra_change_glow_2.png",
+      "width": 32,
+      "height": 32,
+      "source": {
+        "resource": 38,
+        "uv": [
+          120,
+          48,
+          32,
+          32
+        ],
+        "tpage": 24,
+        "clut": [
+          224,
+          242
+        ],
+        "function": "FUN_80105c6c"
+      },
+      "offset": [
+        56,
+        16
+      ],
+      "scale": [
+        12288,
+        4096
+      ]
+    },
+    {
+      "id": "chakra_change_glow_3",
+      "file": "chakra_change_glow_3.png",
+      "width": 32,
+      "height": 32,
+      "source": {
+        "resource": 38,
+        "uv": [
+          184,
+          48,
+          32,
+          32
+        ],
+        "tpage": 24,
+        "clut": [
+          224,
+          242
+        ],
+        "function": "FUN_80105c6c"
+      },
+      "offset": [
+        56,
+        16
+      ],
+      "scale": [
+        12288,
+        4096
+      ]
+    }
+  ],
+  "notes": "Source position and texture rectangles exact. Preview uses normal colors and does not reproduce PS1 semi-transparent panel blending or pulsing modulation."
+}
