@@ -233,15 +233,26 @@ Naruto-Online/
     src/assets/                 # loader dan manifest runtime, bukan duplikat aset
     src/audio/                  # WAV playback dan LiveKit adapter
   server/
-    cmd/api/
-    internal/auth/              # email/password, sessions, verification/reset
-    internal/rooms/
-    internal/game/              # domain/state machine/reducer/RNG
-    internal/cpu/               # AI_RULE, takeover/reclaim, persisted policy state
-    internal/chat/
-    internal/voice/
-    internal/transport/
-    internal/storage/
+    go.mod                      # akar modul Go
+    cmd/api/                    # entry point API
+    configs/                    # konfigurasi runtime
+    controller/                 # request/response HTTP
+    internal/                   # interface use case dan infrastruktur bersama
+      auth/                     # primitive autentikasi
+      game/                     # aturan, state machine dan RNG
+      cpu/                      # AI_RULE dan takeover/reclaim
+      voice/                    # adapter layanan suara
+    middleware/                 # auth, CSRF, Origin dan otorisasi
+    models/                     # model SQL dan interface repo
+    repo/                       # semua query PostgreSQL
+    routes/                     # registrasi route per tag OpenAPI
+    server/                     # lifecycle HTTP/WS
+    telemetry/                  # OpenTelemetry
+    usecase/                    # bisnis per tag OpenAPI, termasuk rooms/chat
+    view/                       # serialisasi respons
+    worker/                     # CPU jobs, outbox dan cleanup
+    testcase/                   # test langsung use case
+    integration/                # test lintas paket
   scheme/
     migrations/                # PostgreSQL
     protocol/                  # schema command/event
@@ -250,7 +261,7 @@ Naruto-Online/
   deploy/                      # Compose lokal, LAN HTTPS, mail inbox, staging/prod
 ```
 
-Semua path ini rencana; jangan menganggap folder kosong sudah berisi modul. Pertahankan `GAME_RULE.md` dan `AI_RULE.md` di root repositori sebagai sumber aturan permainan/CPU dan referensikan dari proyek.
+Struktur folder `server/` sudah disiapkan mengikuti skill `api-creator`; implementasi endpoint dan runtime belum ada. Rincian peran folder ada di `server/README.md`. Path lainnya tetap rencana. Pertahankan `GAME_RULE.md` dan `AI_RULE.md` di root repositori sebagai sumber aturan permainan/CPU dan referensikan dari proyek.
 
 ## 13. Urutan pengerjaan dan acceptance
 
