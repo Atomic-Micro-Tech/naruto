@@ -11,6 +11,7 @@ import { createRouletteRenderer } from "./roulette";
 import { updateRouletteAudio } from "./audio";
 import { SHURIKEN_ATLAS, shurikenFrames } from "./roulette-shuriken";
 import {
+  directionIndicator,
   wheelAngle,
   rouletteStopPlan,
   rouletteStopFrame,
@@ -97,6 +98,10 @@ export async function createBoard(parent, onTile) {
         "crystal_1",
         "crystal_2",
         "crystal_3",
+        "crystal_0_overlay",
+        "crystal_1_overlay",
+        "crystal_2_overlay",
+        "crystal_3_overlay",
         "damaged",
       ])
         this.load.image(key, `/assets/sprite/board/${key}.png`);
@@ -168,6 +173,8 @@ export async function createBoard(parent, onTile) {
         this.cameras.main.setScroll(p.x, p.y);
       }
       const wheel = state?.roulette ?? (now < wheelUntil ? heldWheel : null);
+      for (const mark of marks)
+        mark.setVisible(!wheel && now >= animatingUntil);
       shade.setVisible(!!wheel);
       wheelImage.setVisible(!!wheel);
       wheelImage.input.enabled =
@@ -307,15 +314,13 @@ export async function createBoard(parent, onTile) {
         );
       else if (tile.typeCode === 0)
         art("source", tile.x, tile.y, 24, 24, tile.y);
-      else if (tile.typeCode === 1)
-        art(
-          `crystal_${crystalIDs.indexOf(tile.id) % 4}`,
-          tile.x,
-          tile.y,
-          16,
-          24,
-          tile.y,
-        );
+      else if (tile.typeCode === 1) {
+        // FUN_800f6988: pedestal and orb are separate 32x32 sprites,
+        // both anchored at (16,16) on the checkpoint's world position.
+        const key = `crystal_${crystalIDs.indexOf(tile.id) % 4}`;
+        art(key, tile.x, tile.y, 16, 16, tile.y);
+        art(`${key}_overlay`, tile.x, tile.y, 16, 16, tile.y + 1);
+      }
       else if (tile.typeCode === 2)
         art("chance", tile.x, tile.y, 16, 16, tile.y);
       else if (tile.typeCode === 4)
@@ -360,7 +365,7 @@ export async function createBoard(parent, onTile) {
           .circle(tile.x, tile.y, 19, 0xffca61, 0.12)
           .setDepth(1000);
         const arrow = scene.add
-          .image(tile.x, tile.y - 19, "arrow_2")
+          .image(tile.x, tile.y - 19, directionIndicator(state, choices[0]).texture)
           .setDepth(1001);
         scene.tweens.add({
           targets: arrow,
@@ -371,24 +376,16 @@ export async function createBoard(parent, onTile) {
         });
         marks.push(arrow);
         if (choices.length === 1) {
-          circle.setInteractive();
-          circle.on("pointerdown", () => {
+          const select = () => {
             if (performance.now() >= animatingUntil) onTile(choices[0].id);
-          });
+          };
+          circle.setInteractive({ useHandCursor: true });
+          circle.on("pointerdown", select);
+          arrow.setInteractive({ useHandCursor: true });
+          arrow.on("pointerdown", select);
         }
         marks.push(circle);
-        marks.push(
-          scene.add
-            .text(tile.x, tile.y + 17, String(tile.id + 1), {
-              fontFamily: "sans-serif",
-              fontSize: "11px",
-              color: "#fff3d1",
-              backgroundColor: "#162726",
-              padding: { x: 3, y: 1 },
-            })
-            .setOrigin(0.5, 0)
-            .setDepth(1001),
-        );
+
       }
     }
     if (!state) {

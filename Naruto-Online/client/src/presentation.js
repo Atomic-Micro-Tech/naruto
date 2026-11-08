@@ -20,8 +20,9 @@ export function automaticAction(snapshot) {
   return null;
 }
 
-export function directionLabel(snapshot, option) {
-  if (!option.id.startsWith("move:")) return option.label;
+export function directionIndicator(snapshot, option) {
+  if (!option.id.startsWith("move:"))
+    return { label: option.label, texture: "arrow_1" };
   const player = snapshot.players.find(
     (p) => p.seat === snapshot.presentation.actorSeat,
   );
@@ -31,11 +32,15 @@ export function directionLabel(snapshot, option) {
     dy = to.y - from.y;
   return Math.abs(dx) > Math.abs(dy)
     ? dx > 0
-      ? "→ Kanan"
-      : "← Kiri"
+      ? { label: "→ Kanan", texture: "arrow_3" }
+      : { label: "← Kiri", texture: "arrow_2" }
     : dy > 0
-      ? "↓ Bawah"
-      : "↑ Atas";
+      ? { label: "↓ Bawah", texture: "arrow_1" }
+      : { label: "↑ Atas", texture: "arrow_0" };
+}
+
+export function directionLabel(snapshot, option) {
+  return directionIndicator(snapshot, option).label;
 }
 
 export function wheelAngle(snapshot, elapsedMS) {

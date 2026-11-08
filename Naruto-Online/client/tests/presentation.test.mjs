@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { automaticAction, directionLabel } from "../src/presentation.js";
+import { automaticAction, directionLabel, directionIndicator } from "../src/presentation.js";
 const snapshot = {
   id: "synthetic",
   status: "playing",
@@ -84,4 +84,20 @@ test("direction labels use board coordinates, not tile ordering", () => {
     directionLabel(snapshot, { id: "move:2", tileId: 2 }),
     "↓ Bawah",
   );
+});
+
+
+test("direction markers agree with button labels for all four routes", () => {
+  const state = structuredClone(snapshot);
+  state.tiles.push({ x: -40, y: 0 }, { x: 0, y: -40 });
+  for (const [tileId, label, texture] of [
+    [1, "→ Kanan", "arrow_3"],
+    [2, "↓ Bawah", "arrow_1"],
+    [3, "← Kiri", "arrow_2"],
+    [4, "↑ Atas", "arrow_0"],
+  ]) {
+    const option = { id: `move:${tileId}`, tileId };
+    assert.deepEqual(directionIndicator(state, option), { label, texture });
+    assert.equal(directionLabel(state, option), label);
+  }
 });

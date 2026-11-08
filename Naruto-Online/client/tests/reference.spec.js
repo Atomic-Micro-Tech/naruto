@@ -246,9 +246,14 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
   await page
     .locator(".board-frame")
     .screenshot({ path: "test-results/reference-direction.png" });
+  // Touch the direction marker itself, above the destination tile.
+  await touchWheel(200, 99);
+  await expect.poll(() => commands.length).toBe(branchCount + 1);
+  expect(commands.at(-1).payload.action.payload.optionId).toBe("move:1");
+  const afterBranchTouch = commands.length;
   movement.allowedBySeat[0][0].options.pop();
   await send(movement);
-  await expect.poll(() => commands.length).toBeGreaterThan(branchCount);
+  await expect.poll(() => commands.length).toBeGreaterThan(afterBranchTouch);
   expect(commands.at(-1).payload.action.payload.optionId).toBe("move:1");
   const chance = structuredClone(movement);
   chance.public.presentation.phase = "chance";
@@ -316,6 +321,14 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
     ),
   ).toBe(false);
   await page.setViewportSize({ width: 1280, height: 900 });
+  // Focus near the blue checkpoint, keeping the character off the orb.
+  const checkpoint = structuredClone(land);
+  checkpoint.public.players[0].position = 18;
+  checkpoint.public.presentation.actorSeat = 0;
+  await send(checkpoint);
+  await expect(page.locator("#play")).not.toHaveClass(/presenting/);
+  await page.waitForTimeout(500);
+  await page.locator(".board-frame").screenshot({ path: "test-results/reference-checkpoint.png" });
   // Spectators also hear the CPU/opponent wheel; leaving must cancel its loop.
   const opponent = structuredClone(engine);
   opponent.public.roulette.actorSeat = 1;

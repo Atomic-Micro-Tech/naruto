@@ -35,6 +35,8 @@ Ini penyesuaian presentasi terhadap adegan yang terlihat, bukan klaim replika fr
 
 `src/native-camera.js` disalin dari `research/board-camera.mjs` beserta sumber fungsi di komentarnya. Geometri roulette berasal dari `assets/sprite/common/assets.json`; semua PNG/WAV tetap dimuat dari library aset yang sama. Tidak ada library aset duplikat.
 
+Checkpoint memakai dua sprite asli dari `FUN_800f6988`: `crystal_N.png` untuk alas dan `crystal_N_overlay.png` untuk bola, keduanya 32×32 dengan anchor (16,16) pada posisi petak. Arena 1 memakai checkpoint merah pada petak 11 dan biru pada petak 17 (ID internal); PNG dimuat dari library yang sudah ada tanpa salinan baru.
+
 ## Verifikasi
 
 `tests/reference.spec.js` memakai transport sintetis untuk memeriksa sentuhan roda pada viewport ponsel, penolakan input roda lawan, tiga suara benturan dan tampilan shuriken, roulette, percabangan yang harus menunggu, langkah tunggal otomatis, pilihan tiga kartu, pembelian yang tidak otomatis, serta layout portrait/landscape. `tests/gameplay.spec.js` tetap menguji browser dengan backend Go/PostgreSQL nyata. `tests/roulette-render.spec.js` memeriksa piksel atlas asli selama fade: sektor terpilih tidak berubah, angka lain memudar, dan tidak ada pop saat roda berhenti. `tests/presentation.test.mjs` mengunci batas aksi otomatis agar perubahan tampilan tidak mengambil keputusan pemain.
