@@ -530,6 +530,10 @@ function renderMatch() {
   }
   const options = match.allowedActions.flatMap((a) => a.options);
   const phase = match.presentation?.phase;
+  const wheelHint =
+    match.roulette && options.some((o) => o.id === "stop" && o.enabled)
+      ? '<p class="roulette-touch-hint">Sentuh roda untuk menghentikan rolet.</p>'
+      : "";
   const button = (o) =>
     `<button data-option="${esc(o.id)}" ${!o.enabled || busy || visualBusy || !connected ? "disabled" : ""} class="${["roll", "stop", "end", "act:claim"].includes(o.id) ? "primary" : ""}">${esc(directionLabel(match, o))}${o.chakraCost !== undefined ? `<small>${o.chakraCost} chakra</small>` : ""}${o.skillPointCost !== undefined ? `<small>${o.skillPointCost} SP</small>` : ""}</button>`;
   let actions = options.map(button).join(""),
@@ -567,7 +571,7 @@ function renderMatch() {
           : "Berjalan ke petak berikutnya…"
         : (match.presentation?.message ?? "");
   $("controls").innerHTML =
-    `<div class="turn-heading"><div><p class="eyebrow">${myTurn ? "GILIRANMU" : `MENUNGGU ${esc(actor?.displayName ?? "PEMAIN")}`}</p><h2>${phaseLabels[phase] ?? "Permainan"}</h2></div></div><p class="game-message">${esc(message)}</p>${cards}${self.controller.controllerKind === "cpu" ? '<div class="takeover"><p>CPU sedang memainkan karaktermu.</p><button id="reclaim" class="primary">Ambil alih kontrol</button></div>' : ""}<div class="action-list">${actions}</div>`;
+    `<div class="turn-heading"><div><p class="eyebrow">${myTurn ? "GILIRANMU" : `MENUNGGU ${esc(actor?.displayName ?? "PEMAIN")}`}</p><h2>${phaseLabels[phase] ?? "Permainan"}</h2></div></div>${wheelHint}<p class="game-message">${esc(message)}</p>${cards}${self.controller.controllerKind === "cpu" ? '<div class="takeover"><p>CPU sedang memainkan karaktermu.</p><button id="reclaim" class="primary">Ambil alih kontrol</button></div>' : ""}<div class="action-list">${actions}</div>`;
   $("controls")
     .querySelectorAll("[data-card-choice]")
     .forEach(

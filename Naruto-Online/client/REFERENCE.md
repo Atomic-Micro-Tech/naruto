@@ -14,6 +14,7 @@ Referensi lokal: `../../naruto_basic.mp4`, durasi 36,67 detik, 854×480/30 fps. 
 
 ## Kontrol
 
+- Sentuh/klik langsung roda roulette untuk menghentikannya saat giliranmu; tombol Stop dan keyboard tetap tersedia. Roda lawan/CPU tidak menerima input.
 - Sentuh/klik tombol di dalam layar. Pada percabangan, gunakan panah pada petak atau tombol arah.
 - Keyboard: tombol arah untuk rute; Space/Enter untuk putar/stop/lanjut. Saat memilih kartu, kiri/kanan mengganti sorotan dan Enter mengonfirmasi. Input chat tidak mengambil shortcut game.
 - **Lihat peta** membuka tampilan seluruh arena; **Ikuti karakter** mengembalikan kamera.
@@ -24,6 +25,8 @@ Referensi lokal: `../../naruto_basic.mp4`, durasi 36,67 detik, 854×480/30 fps. 
 
 Roulette memakai interpolasi waktu kontinu, cache lapisan tekstur, dan pengereman yang mempertahankan kecepatan awal lalu melambat tanpa melewati hasil server. Efek WAV asli: menu SEQ3 berulang (periode 0,1 detik dari render-report), SEQ4 untuk stop, SEQ5 untuk tiga benturan berjarak 2/60 detik. Benturan kedua selaras dengan roda berhenti; hasil ditahan satu detik setelah benturan ketiga. Durasi pengereman adalah adaptasi presentasi untuk menyelaraskan hasil server, bukan replay timing PS1 yang identik. Tidak ditambahkan jingle hasil yang tidak terbukti dari sumber. Musik dikecilkan selama roulette agar efek terdengar.
 
+Tiga shuriken terbang dari kanan dan menancap bergantian, memakai jadwal benturan audio yang sama. Sprite asli dari `BOARD.c` (`FUN_8010b084`/`FUN_8010b9b8`), resource 57: UV terbang (112,96), menancap (68,96), ukuran 44×44. Atlas PNG palette 7 yang sudah ada dipakai ulang dengan pemetaan warna ke CLUT asli (112,511), palette 27, di canvas; tidak menambah salinan aset. Durasi terbang 3/60 detik, selang peluncuran 2/60 detik. Offset X kosmetik dibuat tetap untuk menggantikan jitter RNG visual; putaran dan jejak adalah adaptasi presentasi.
+
 Suara aktif setelah interaksi pengguna pertama sesuai kebijakan browser. Tombol **Suara aktif/mati** mengatur musik dan efek sekaligus serta menyimpan preferensi lokal. Loop/efek terjadwal dibatalkan saat mute, tab tersembunyi, logout, atau keluar room. Efek roulette juga mengikuti giliran CPU/lawan; jeda/timing jaringan dan pemrosesan audio browser tetap berbeda dari perangkat PS1.
 
 Ini penyesuaian presentasi terhadap adegan yang terlihat, bukan klaim replika frame-per-frame. Dialog/portrait cerita, panel misi, efek segel pembelian, transisi kartu tertutup, audio per-frame dan semua animasi battle belum direplikasi dari cuplikan ini. Video tidak memperlihatkan battle, hasil akhir, atau seluruh aturan Party. Konfigurasi room dan aturan Go tetap menjadi sumber kebenaran; posisi atau hasil dari video tidak di-hardcode.
@@ -32,4 +35,4 @@ Ini penyesuaian presentasi terhadap adegan yang terlihat, bukan klaim replika fr
 
 ## Verifikasi
 
-`tests/reference.spec.js` memakai transport sintetis untuk memeriksa roulette, percabangan yang harus menunggu, langkah tunggal otomatis, pilihan tiga kartu, pembelian yang tidak otomatis, serta layout portrait/landscape. `tests/gameplay.spec.js` tetap menguji browser dengan backend Go/PostgreSQL nyata. `tests/presentation.test.mjs` mengunci batas aksi otomatis agar perubahan tampilan tidak mengambil keputusan pemain.
+`tests/reference.spec.js` memakai transport sintetis untuk memeriksa sentuhan roda pada viewport ponsel, penolakan input roda lawan, tiga suara benturan dan tampilan shuriken, roulette, percabangan yang harus menunggu, langkah tunggal otomatis, pilihan tiga kartu, pembelian yang tidak otomatis, serta layout portrait/landscape. `tests/gameplay.spec.js` tetap menguji browser dengan backend Go/PostgreSQL nyata. `tests/presentation.test.mjs` mengunci batas aksi otomatis agar perubahan tampilan tidak mengambil keputusan pemain.

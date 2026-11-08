@@ -1,3 +1,4 @@
+import { shurikenFrames } from "../src/roulette-shuriken.js";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
@@ -101,4 +102,22 @@ test("WAV loop and three impacts are scheduled once, with cancellation on mute/e
     count,
     "late unmute must not replay old hits",
   );
+});
+
+
+test("three shuriken fly in sequence and land at the three audio impact times", () => {
+  const plan = rouletteStopPlan(1100, faces, 2);
+  assert.deepEqual(shurikenFrames(plan, plan.impacts[0] - 51), []);
+  for (let i = 0; i < 3; i++) {
+    const mid = shurikenFrames(plan, plan.impacts[i] - 25).find(s => s.index === i);
+    assert.ok(mid.flying && mid.x > 150 && mid.x < 220);
+    const hit = shurikenFrames(plan, plan.impacts[i]).find(s => s.index === i);
+    assert.equal(hit.flying, false);
+    assert.equal(hit.impactAge, 0);
+    assert.ok(hit.x >= 48 && hit.x <= 60);
+    assert.equal(hit.y, [124, 112, 136][i]);
+  }
+  const held = shurikenFrames(plan, plan.impacts[2] + 500);
+  assert.equal(held.length, 3);
+  assert.ok(held.every(s => !s.flying && s.trails.length === 0));
 });

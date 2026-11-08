@@ -9,6 +9,7 @@ import {
 } from "./native-camera";
 import { createRouletteRenderer } from "./roulette";
 import { updateRouletteAudio } from "./audio";
+import { SHURIKEN_ATLAS, shurikenFrames } from "./roulette-shuriken";
 import {
   wheelAngle,
   rouletteStopPlan,
@@ -59,6 +60,7 @@ export async function createBoard(parent, onTile) {
         readyReject(new Error(`Aset gagal dimuat: ${file.key}`)),
       );
       this.load.image("arena", "/assets/image/arena1/map_00.png");
+      this.load.image("roulette-shuriken-atlas", SHURIKEN_ATLAS);
       for (const a of common.assets.filter(
         (a) =>
           a.id.startsWith("roulette_") ||
@@ -137,6 +139,20 @@ export async function createBoard(parent, onTile) {
         .setScrollFactor(0)
         .setDepth(2001)
         .setVisible(false);
+      wheelImage.setInteractive(
+        new Phaser.Geom.Ellipse(40, 124, 216, 192),
+        Phaser.Geom.Ellipse.Contains,
+      );
+      wheelImage.on("pointerdown", () => {
+        const canStop =
+          state?.status === "playing" &&
+          state?.roulette &&
+          state.allowedActions.some((a) =>
+            a.options.some((o) => o.id === "stop" && o.enabled),
+          );
+        if (canStop && performance.now() - wheelEnteredAt >= 240)
+          onTile("stop");
+      });
       draw();
       readyResolve();
     }
@@ -154,6 +170,16 @@ export async function createBoard(parent, onTile) {
       const wheel = state?.roulette ?? (now < wheelUntil ? heldWheel : null);
       shade.setVisible(!!wheel);
       wheelImage.setVisible(!!wheel);
+      wheelImage.input.enabled =
+        !!state?.roulette &&
+        state.status === "playing" &&
+        now - wheelEnteredAt >= 240 &&
+        state.allowedActions.some((a) =>
+          a.options.some((o) => o.id === "stop" && o.enabled),
+        );
+      wheelImage.input.cursor = wheelImage.input.enabled
+        ? "pointer"
+        : "default";
       if (wheel) {
         const settling = !state?.roulette;
         const frame = settling
@@ -171,6 +197,9 @@ export async function createBoard(parent, onTile) {
           index: heldWheel?.plan?.index ?? null,
           jolt: frame?.jolt ?? 0,
           flash: frame?.flash ?? 0,
+          shurikens: settling
+            ? shurikenFrames(heldWheel.plan, now - heldWheel.stoppedAt)
+            : [],
         });
         updateRouletteAudio(
           settling

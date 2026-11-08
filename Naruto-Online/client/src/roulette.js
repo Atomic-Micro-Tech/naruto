@@ -1,6 +1,10 @@
 // Render the extracted PS1 textured quads into a Phaser canvas texture.
 // Geometry/UV provenance: assets/sprite/common/assets.json, FUN_8001fd0c.
+import { createShurikenSprites } from "./roulette-shuriken";
 export function createRouletteRenderer(image, geometry) {
+  const shurikenSprites = createShurikenSprites(
+    image("roulette-shuriken-atlas"),
+  );
   const center = [128, 128];
   const vertices = (array) =>
     Array.from({ length: array.length / 2 }, (_, i) => [
@@ -120,7 +124,7 @@ export function createRouletteRenderer(image, geometry) {
     output,
     angle,
     faces,
-    { result = null, index = null, jolt = 0, flash = 0 } = {},
+    { result = null, index = null, jolt = 0, flash = 0, shurikens = [] } = {},
   ) => {
     output.clearRect(0, 0, 320, 240);
     output.imageSmoothingEnabled = false;
@@ -135,6 +139,39 @@ export function createRouletteRenderer(image, geometry) {
     paint(base, angle);
     paint(numberLayer(faces, result === null ? null : index), angle);
     paint(hub, angle * 2);
+    function star(item, alpha = 1) {
+      output.save();
+      output.globalAlpha = alpha;
+      output.translate(item.x + jolt, item.y);
+      if (item.flying) output.rotate((item.rotation * Math.PI) / 180);
+      output.drawImage(shurikenSprites[item.flying ? 0 : 1], -22, -22);
+      output.restore();
+    }
+    for (const shuriken of [...shurikens].reverse()) {
+      for (const trail of shuriken.trails) star(trail, trail.alpha);
+      star(shuriken);
+      if (shuriken.impactAge >= 0 && shuriken.impactAge < 100) {
+        output.save();
+        output.globalAlpha = 1 - shuriken.impactAge / 100;
+        output.strokeStyle = "#fff3a0";
+        output.lineWidth = 1.5;
+        for (let i = 0; i < 8; i++) {
+          const a = (i * Math.PI) / 4,
+            distance = 8 + shuriken.impactAge / 5;
+          output.beginPath();
+          output.moveTo(
+            shuriken.x - 22 + Math.cos(a) * 5,
+            shuriken.y + Math.sin(a) * 5,
+          );
+          output.lineTo(
+            shuriken.x - 22 + Math.cos(a) * distance,
+            shuriken.y + Math.sin(a) * distance,
+          );
+          output.stroke();
+        }
+        output.restore();
+      }
+    }
     output.drawImage(image("roulette_pointer"), 108 + jolt / 2, 116);
     if (flash > 0) {
       output.save();

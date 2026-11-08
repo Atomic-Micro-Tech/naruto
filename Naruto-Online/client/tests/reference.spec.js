@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
 import { execute } from "../../server/internal/game/source/online.js";
 
+test.use({ hasTouch: true });
+
 // Synthetic transport fixtures isolate presentation. The separate gameplay suite uses real Go/PG.
 test("reference presentation: roulette, direction, three cards, purchase and mobile landscape", async ({
   page,
@@ -191,7 +193,18 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
     )
     .toBe(2);
 
-  await page.locator('[data-option="stop"]').click();
+  const touchWheel = async (x = 90, y = 124) => {
+    const box = await page.locator("#board canvas").boundingBox();
+    await page.touchscreen.tap(box.x + box.width * x / 320, box.y + box.height * y / 240);
+  };
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.waitForTimeout(150);
+  const beforeTouch = commands.length;
+  await touchWheel(250, 90);
+  await page.waitForTimeout(100);
+  expect(commands).toHaveLength(beforeTouch);
+  await touchWheel();
+  await expect.poll(() => commands.length).toBe(beforeTouch + 1);
   expect(commands.at(-1).payload.action.payload.optionId).toBe("stop");
   // A branch must wait for the player, a single direction must advance on its own.
   const movement = structuredClone(engine);
@@ -213,7 +226,10 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
     },
   ];
   await send(movement);
+  await page.waitForTimeout(900);
+  await page.locator(".board-frame").screenshot({ path: "test-results/reference-shuriken.png" });
   await expect(page.locator("#play")).not.toHaveClass(/presenting/);
+  await page.setViewportSize({ width: 1280, height: 900 });
   const audioEvents = await page.evaluate(() => window.__rouletteAudio);
   const hits = audioEvents.filter(
     (e) => e.kind === "start" && Math.abs(e.duration - 0.27743764) < 0.001,
@@ -319,6 +335,11 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
       ),
     )
     .toBe(beforeLoop + 1);
+  await page.waitForTimeout(250);
+  const beforeOpponentTouch = commands.length;
+  await touchWheel();
+  await page.waitForTimeout(100);
+  expect(commands).toHaveLength(beforeOpponentTouch);
   const loopID = await page.evaluate(
     () =>
       window.__rouletteAudio.filter((e) => e.kind === "start" && e.loop).at(-1)
