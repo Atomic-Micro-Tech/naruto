@@ -279,7 +279,7 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
   await page.waitForTimeout(150);
   const hudBefore = await sampleCanvas(96, 24, 16, 16);
   const terrainBefore = await sampleCanvas(20, 65, 35, 40);
-  await swipe(200, 99, 120, 139);
+  await swipe(184, 120, 104, 160);
   expect(commands).toHaveLength(branchCount);
   await expect(page.locator("#map-view")).toHaveText("Ikuti karakter");
   expect((await sampleCanvas(20, 65, 35, 40)).equals(terrainBefore)).toBe(false);
@@ -301,8 +301,8 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
   await page.waitForTimeout(1000);
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.waitForTimeout(150);
-  // Touch the direction marker itself, above the destination tile.
-  await touchWheel(200, 99);
+  // Touch the cyan direction arrow beside the character.
+  await touchWheel(184, 120);
   await expect.poll(() => commands.length).toBe(branchCount + 1);
   expect(commands.at(-1).payload.action.payload.optionId).toBe("move:1");
   const afterBranchTouch = commands.length;

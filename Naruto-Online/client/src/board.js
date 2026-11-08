@@ -1,4 +1,6 @@
 import Phaser from "phaser";
+import { movementPreview } from "./movement-preview";
+import { MOVEMENT_ATLAS, createMovementSprites } from "./movement-art";
 import {
   createBoardCamera,
   beginCameraPan,
@@ -89,6 +91,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
       this.load.on("loaderror", (file) =>
         readyReject(new Error(`Aset gagal dimuat: ${file.key}`)),
       );
+      this.load.image("movement-atlas", MOVEMENT_ATLAS);
       this.load.image("arena", "/assets/image/arena1/map_00.png");
       this.load.image("roulette-shuriken-atlas", SHURIKEN_ATLAS);
       for (const a of common.assets.filter(
@@ -153,6 +156,8 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
     }
     create() {
       scene = this;
+      for (const [key, canvas] of Object.entries(createMovementSprites(this.textures.get("movement-atlas").getSourceImage())))
+        this.textures.addCanvas(key, canvas);
       this.add.image(320, 240, "arena");
       this.cameras.main.setScroll(160, 120);
       uiCamera = this.cameras.add(0, 0, 320, 240);
@@ -373,6 +378,8 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
             4,
           );
       }
+    const routes = movementPreview(state);
+    const destinations = new Set(routes.flatMap(r => r.destinations));
     for (const tile of tiles) {
       if (tile.ownerSeat !== null)
         art(
@@ -414,7 +421,9 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
                 fontSize: "8px",
                 fontStyle: "bold",
                 color:
-                  tile.ownerSeat === null
+                  destinations.has(tile.id)
+                    ? "#24d5ff"
+                    : tile.ownerSeat === null
                     ? "#ffffff"
                     : ["#ff7373", "#78aaff", "#ff9fe1", "#9bff86"][
                         tile.ownerSeat
@@ -435,22 +444,26 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
         const circle = scene.add
           .circle(tile.x, tile.y, 19, 0xffca61, 0.12)
           .setDepth(1000);
-        const arrow = scene.add
+        const moving = state.presentation?.phase === "move";
+        const arrow = moving ? null : scene.add
           .image(tile.x, tile.y - 19, directionIndicator(state, choices[0]).texture)
           .setDepth(1001);
-        scene.tweens.add({
+        if (arrow) scene.tweens.add({
           targets: arrow,
           y: tile.y - 23,
           duration: 350,
           yoyo: true,
           repeat: -1,
         });
-        marks.push(arrow);
+        if (arrow) marks.push(arrow);
+        if (moving) circle.setAlpha(0);
         if (choices.length === 1) {
           circle.setInteractive({ useHandCursor: true });
           circle.setData("boardAction", choices[0].id);
-          arrow.setInteractive({ useHandCursor: true });
-          arrow.setData("boardAction", choices[0].id);
+          if (arrow) {
+            arrow.setInteractive({ useHandCursor: true });
+            arrow.setData("boardAction", choices[0].id);
+          }
         }
         marks.push(circle);
 
@@ -482,6 +495,26 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
           animatingUntil = Math.max(animatingUntil, performance.now() + 450);
       }
       previousTurn = key;
+    }
+    if (active && routes.length) {
+      const origin = state.tiles[active.position];
+      for (const { option } of routes) {
+        const direction = Number(directionIndicator(state, option).texture.slice(-1));
+        const [dx, dy] = [[0, -24], [0, 24], [-24, 0], [24, 0]][direction];
+        const arrow = scene.add.image(origin.x + dx, origin.y + dy,
+          direction < 2 ? "move-up" : "move-left")
+          .setFlipX(direction === 3).setFlipY(direction === 1)
+          .setDepth(1001).setInteractive({ useHandCursor: true });
+        arrow.setData("boardAction", option.id);
+        marks.push(arrow);
+      }
+      for (const id of destinations) {
+        const tile = tiles.find(t => t.id === id);
+        const pin = scene.add.image(tile.x, tile.y - 4, "move-destination")
+          .setOrigin(0.5, 1).setDepth(1002);
+        scene.tweens.add({ targets: pin, y: tile.y - 6, duration: 350, yoyo: true, repeat: -1 });
+        marks.push(pin);
+      }
     }
     const screenImage = (key, x, y) => {
       const image = scene.add
