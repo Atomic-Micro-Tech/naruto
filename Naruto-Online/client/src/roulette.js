@@ -99,15 +99,18 @@ export function createRouletteRenderer(image, geometry) {
     quad("roulette_center", rotate(vertices(geometry.centerVertices), 682)),
   );
   const numbers = new Map();
-  function numberLayer(faces, selected) {
-    const key = faces.join(",") + ":" + selected;
+  function numberLayer(faces, selected, others = false) {
+    const key = faces.join(",") + ":" + selected + ":" + others;
     if (!numbers.has(key)) {
       if (numbers.size > 24) numbers.clear();
       numbers.set(
         key,
         layer(() => {
           for (let j = 11; j >= 0; j--)
-            if (selected === null || 11 - j === selected)
+            if (
+              selected === null ||
+              (others ? 11 - j !== selected : 11 - j === selected)
+            )
               quad(
                 `roulette_number_${faces[11 - j]}`,
                 rotate(
@@ -124,12 +127,20 @@ export function createRouletteRenderer(image, geometry) {
     output,
     angle,
     faces,
-    { result = null, index = null, jolt = 0, flash = 0, shurikens = [] } = {},
+    {
+      result = null,
+      index = null,
+      otherNumbersOpacity = 1,
+      jolt = 0,
+      flash = 0,
+      shurikens = [],
+    } = {},
   ) => {
     output.clearRect(0, 0, 320, 240);
     output.imageSmoothingEnabled = false;
-    function paint(texture, rotation) {
+    function paint(texture, rotation, opacity = 1) {
       output.save();
+      output.globalAlpha = opacity;
       output.translate(40 + jolt, 124);
       output.scale(575 / 512, 1);
       output.rotate((rotation * Math.PI * 2) / 4096);
@@ -137,7 +148,16 @@ export function createRouletteRenderer(image, geometry) {
       output.restore();
     }
     paint(base, angle);
-    paint(numberLayer(faces, result === null ? null : index), angle);
+    if (result !== null && Number.isInteger(index)) {
+      paint(
+        numberLayer(faces, index, true),
+        angle,
+        Math.max(0, Math.min(1, otherNumbersOpacity)),
+      );
+      paint(numberLayer(faces, index), angle);
+    } else {
+      paint(numberLayer(faces, null), angle);
+    }
     paint(hub, angle * 2);
     function star(item, alpha = 1) {
       output.save();
@@ -172,7 +192,9 @@ export function createRouletteRenderer(image, geometry) {
         output.restore();
       }
     }
-    output.drawImage(image("roulette_pointer"), 108 + jolt / 2, 116);
+    // UI_DRAW: x = center + 140, sprite anchor = (48, 8).
+    // Keep the pointer at the rim so it does not obscure the selected digit.
+    output.drawImage(image("roulette_pointer"), 40 + 140 - 48 + jolt / 2, 116);
     if (flash > 0) {
       output.save();
       output.globalAlpha = flash * 0.65;
@@ -186,14 +208,6 @@ export function createRouletteRenderer(image, geometry) {
         output.stroke();
       }
       output.restore();
-    }
-    if (result !== null) {
-      output.fillStyle = "#122922";
-      output.fillRect(111, 108, 39, 33);
-      output.strokeStyle = "#ddb447";
-      output.lineWidth = 2;
-      output.strokeRect(111, 108, 39, 33);
-      output.drawImage(image(`roulette_number_${result}`), 118, 108);
     }
   };
 }

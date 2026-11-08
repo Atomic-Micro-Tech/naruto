@@ -48,7 +48,9 @@ export function wheelAngle(snapshot, elapsedMS) {
 
 // Presentation interpolation only: the server supplies the result. Match the
 // incoming angular velocity, decelerate to zero, then preserve the native
-// three-impact spacing, one-second result hold and eight-frame exit.
+// three-impact spacing. Result fade/hold follows the 30 fps reference clip.
+// BOARD 8010b4a8: 4096 -> 128 in steps of 128, 60 updates hold, 8 exit.
+// UI_DRAW 8001fd0c keeps only the selected sector at full intensity.
 export function rouletteStopPlan(angle, faces, result) {
   const speed = (180 * 60) / 1000,
     preferredDistance = (speed * 280) / 2;
@@ -75,8 +77,10 @@ export function rouletteStopPlan(angle, faces, result) {
     ...chosen,
     duration,
     impacts: [duration - 1000 / 30, duration, duration + 1000 / 30],
-    exitAt: duration + 1000 / 30 + 1000,
-    endAt: duration + 1000 / 30 + 1000 + 8000 / 60,
+    fadeStart: duration + 1000 / 30,
+    fadeDuration: (31 * 1000) / 30,
+    exitAt: duration + 1000 / 30 + 2000,
+    endAt: duration + 1000 / 30 + 2000 + 8000 / 30,
   };
 }
 
@@ -94,6 +98,12 @@ export function rouletteStopFrame(plan, elapsed) {
   return {
     angle: plan.angle + plan.distance * (2 * t - t * t),
     frozen: t === 1,
+    // Never hide the other digits at freeze: fade them after the last impact.
+    // Preserve the native 128/4096 floor (barely visible), with smooth subframes.
+    otherNumbersOpacity:
+      1 -
+      (31 / 32) *
+        Math.max(0, Math.min(1, (elapsed - plan.fadeStart) / plan.fadeDuration)),
     jolt,
     flash: Math.max(0, flash),
     exit: Math.max(

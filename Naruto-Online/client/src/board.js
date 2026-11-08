@@ -195,6 +195,7 @@ export async function createBoard(parent, onTile) {
         renderWheel(wheelTexture.context, angle, wheel.faces, {
           result: frame?.frozen ? heldWheel.result : null,
           index: heldWheel?.plan?.index ?? null,
+          otherNumbersOpacity: frame?.otherNumbersOpacity ?? 1,
           jolt: frame?.jolt ?? 0,
           flash: frame?.flash ?? 0,
           shurikens: settling

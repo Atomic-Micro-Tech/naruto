@@ -121,3 +121,24 @@ test("three shuriken fly in sequence and land at the three audio impact times", 
   assert.equal(held.length, 3);
   assert.ok(held.every(s => !s.flying && s.trails.length === 0));
 });
+
+
+test("the stopped sector stays fixed while other numbers fade, before the wheel exits", () => {
+  for (let result = 1; result <= 6; result++) {
+    const plan = rouletteStopPlan(1920, faces, result);
+    assert.equal(rouletteStopFrame(plan, plan.duration - 1).otherNumbersOpacity, 1);
+    assert.equal(rouletteStopFrame(plan, plan.duration).otherNumbersOpacity, 1);
+    assert.equal(rouletteStopFrame(plan, plan.fadeStart).otherNumbersOpacity, 1);
+    let opacity = 1;
+    for (let elapsed = plan.fadeStart; elapsed <= plan.exitAt; elapsed += 1000 / 120) {
+      const frame = rouletteStopFrame(plan, elapsed);
+      assert.equal(frame.angle, plan.target);
+      assert.equal(frame.exit, 0);
+      assert.ok(frame.otherNumbersOpacity <= opacity);
+      opacity = frame.otherNumbersOpacity;
+    }
+    assert.ok(Math.abs(rouletteStopFrame(plan, plan.fadeStart + plan.fadeDuration / 2).otherNumbersOpacity - 33 / 64) < 1e-12);
+    assert.equal(rouletteStopFrame(plan, plan.exitAt).otherNumbersOpacity, 1 / 32);
+    assert.ok(plan.exitAt - plan.fadeStart - plan.fadeDuration > 900);
+  }
+});
