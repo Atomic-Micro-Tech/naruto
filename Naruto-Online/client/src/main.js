@@ -561,7 +561,12 @@ function renderMatch() {
       selectedChance = 0;
     }
     selectedChance = Math.min(selectedChance, options.length - 1);
-    cards = `<div class="chance-cards">${options.map((o, i) => `<button data-card-choice="${i}" aria-label="Lihat ${esc(o.label)}" aria-pressed="${i === selectedChance}" ${busy || visualBusy ? "disabled" : ""}><img src="/assets/image/cards/card_${String(o.cardId).padStart(2, "0")}.png" alt="${esc(o.label)}"></button>`).join("")}</div><p class="card-description">${esc(options[selectedChance].label)}</p>`;
+    const concealed = match.presentation.remaining > 0 || options.some(o => o.cardId == null);
+    cards = `<div class="chance-cards" data-concealed="${concealed}">${options.map((o, i) => {
+      const label = concealed ? `Kartu tertutup ${i + 1}` : o.label;
+      const src = concealed ? board?.chanceCardBack : `/assets/image/cards/card_${String(o.cardId).padStart(2, "0")}.png`;
+      return `<button data-card-choice="${i}" aria-label="Pilih ${esc(label)}" aria-pressed="${i === selectedChance}" ${busy || visualBusy ? "disabled" : ""}>${src ? `<img src="${src}" alt="${esc(label)}">` : '<span class="small">Kartu tertutup</span>'}</button>`;
+    }).join("")}</div><p class="card-description">${concealed ? 'Pilih satu kartu tertutup. Isinya diketahui setelah dikonfirmasi.' : esc(options[selectedChance].label)}</p>`;
     actions = button({ ...options[selectedChance], label: "Ambil kartu ini" });
   }
   const message =

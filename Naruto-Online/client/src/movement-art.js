@@ -3,6 +3,8 @@
 // recovered exactly and remapped to native CLUT (112,242) / (128,242).
 export const MOVEMENT_ATLAS = "/assets/texture/packed/packed_018ec800_4bpp_pal00.png";
 const palettes = [[0, 40383, 3242, 6447, 7540, 8599, 9689, 13851, 12718, 19094, 21175, 23289, 25402, 27516, 29629, 32767], [0, 65535, 62050, 62148, 61222, 61320, 61418, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 33791, 33791, 61279, 55999, 49695, 44383, 38079, 32799, 32781, 32776, 44479, 49727, 55007, 60287, 65535]];
+// FUN_8010eae4: card back, CLUT (224,243), UV (0,120), 64x96.
+palettes.push([0, 33966, 44392, 46536, 40166, 36278, 51815, 49677, 39383, 56040, 51827, 57077, 61262, 59194, 63421, 65535]);
 const rgba = value => [0, 5, 10].map(shift => Math.floor(((value >> shift) & 31) * 255 / 31)).concat(value === 0 ? 0 : 255);
 export function createMovementSprites(image) {
   const source = new Map(palettes[0].map((v, i) => [rgba(v).slice(0, 3).join(","), i]));
@@ -12,6 +14,7 @@ export function createMovementSprites(image) {
     ["move-left", 256 + 80, 176, 24, 24, 1],
     ["move-up", 256 + 104, 176, 24, 24, 1],
     ["move-destination", 256 + 88, 16, 16, 32, 2],
+    ["chance-back", 256, 120, 64, 96, 3],
   ]) {
     const canvas = document.createElement("canvas");
     canvas.width = w; canvas.height = h;

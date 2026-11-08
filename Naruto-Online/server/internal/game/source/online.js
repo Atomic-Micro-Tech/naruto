@@ -51,7 +51,12 @@ export function options(s){
       for(const t of E.owned(s))if(s.selectedTile===null||s.selectedTile===undefined||s.selectedTile===t)for(const c of E.upgradeChoices(s,data,t))add(`upgrade:${t}:${c.level}`,`Petak ${t+1} → Lv.${c.level}`,!c.disabled,{tileId:t,chakraCost:c.cost});
       add('cancelUpgrade','Selesai');break;
     case 'forcedSale':for(const c of E.saleChoices(s,data))add(`sell:${c.tile}`,`Jual petak ${c.tile+1} (+${c.saleDelta})`,true,{tileId:c.tile});break;
-    case 'chance':E.chanceChoices(s,data).forEach((c,i)=>add(`chance:${i}`,cardLabel(c.id),true,{cardId:c.id}));break;
+    // BOARD 800ec574 / 8010cd2c: landing opens faces; passing keeps backs.
+    // Conceal identities in the projection, not only in the client artwork.
+    case 'chance':E.chanceChoices(s,data).forEach((c,i)=>{
+      if(s.remaining>0)add(`chance:${i}`,`Kartu tertutup ${i+1}`);
+      else add(`chance:${i}`,cardLabel(c.id),true,{cardId:c.id});
+    });break;
     case 'discard':for(let i=0;i<4;i++)add(`discard:${i}`,i===3?'Buang kartu baru':`Buang ${cardLabel(E.current(s).inventory[i])}`);break;
     case 'cardTarget':
       for(const t of E.cardTargets(s,data))add(`target:${t.id}`,t.label,true,t.kind==='tile'?{tileId:t.id}:{targetSeat:t.id});

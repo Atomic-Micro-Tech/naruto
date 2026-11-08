@@ -679,6 +679,7 @@ export async function createBoard(parent, onTile, onCameraMode = () => {}) {
   }
   await ready;
   return {
+    chanceCardBack: scene.textures.get("chance-back").getSourceImage().toDataURL("image/png"),
     setState(value) {
       const now = performance.now();
       if (value?.roulette) {

@@ -16,6 +16,37 @@ test("chance artwork IDs are offered only to the deciding player", () => {
   assert.deepEqual(result.allowedBySeat[1], []);
   assert.equal(JSON.stringify(result.public).includes('"cardId"'), false);
 });
+
+test("passing chance exposes only three slot choices, including after reconnect", () => {
+  const state = initial().engine;
+  state.phase = "chance";
+  state.players[0].pos = 5;
+  state.remaining = 2;
+  state.decks[0].splice(0, 3, 0, 1, 2);
+  for (const checkpoint of [state, JSON.parse(JSON.stringify(state))]) {
+    const result = execute({ state: checkpoint, tick: 0, choiceId, now });
+    assert.deepEqual(result.allowedBySeat[0][0].options, [0, 1, 2].map(i => ({
+      id: `chance:${i}`, label: `Kartu tertutup ${i + 1}`, enabled: true,
+    })));
+    assert.deepEqual(result.allowedBySeat[1], []);
+    assert.equal(JSON.stringify(result.public).includes('"cardId"'), false);
+  }
+  const chakra = state.players[0].chakra;
+  const result = execute({ mode: "command", state, seat: 0, option: "chance:1", tick: 1, choiceId, now });
+  assert.equal(result.engine.lastEvent.cardId, 1);
+  assert.equal(result.public.players[0].chakra, chakra + 150);
+  assert.equal(result.public.presentation.remaining, 2);
+  assert.equal(result.public.presentation.phase, "move");
+});
+
+test("invalid hidden-card slot cannot consume a card or advance movement", () => {
+  const state = initial().engine;
+  state.phase = "chance";
+  state.remaining = 2;
+  const before = JSON.stringify(state);
+  assert.throws(() => execute({ mode: "command", state, seat: 0, option: "chance:3", tick: 1, choiceId, now }), /Illegal action/);
+  assert.equal(JSON.stringify(state), before);
+});
 function initial(seed = 42, count = 2, target = 3000) {
   return execute({
     seed,

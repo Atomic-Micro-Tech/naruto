@@ -243,6 +243,8 @@ Sumber: `BOARD 8011f2fc/8011f4d8`, [audit pertarungan](research/fidelity-combat.
 ### Kartu
 
 - Petak chance menawarkan pilihan dari **tiga kartu terdepan** dalam dek pada tahap pemilihan.
+- **Berhenti tepat di petak kesempatan (sisa langkah 0):** ketiga kartu ditampilkan terbuka; pemain boleh melihat isi sebelum memilih.
+- **Hanya melewati petak kesempatan (sisa langkah masih > 0):** ketiga kartu ditampilkan tertutup. Pemain memilih posisi kartu dan mengonfirmasi tanpa melihat ID, gambar depan, atau deskripsinya. Setelah pilihan sah diproses, hasil kartu dijelaskan dan efeknya dijalankan; perjalanan dilanjutkan jika masih ada sisa langkah dan efek tidak mengubah alurnya. Dalam versi online, server tidak mengirim ID/deskripsi ketiga pilihan tertutup kepada klien; menyembunyikan gambar saja tidak cukup.
 - Efek langsung diselesaikan saat kartu diperoleh; kartu simpanan masuk inventori.
 - Inventori mempunyai **3 slot**. Jika penuh, pemain memilih kartu yang dikembalikan dari kombinasi tiga kartu lama dan kartu baru.
 - Kartu yang dipakai/dikembalikan masuk lagi ke dek mengikuti prosedur asli; kartu bukan item sekali muncul untuk seluruh pertandingan.
@@ -253,7 +255,7 @@ Efek yang telah dipetakan meliputi perubahan chakra, pembayaran kepada seluruh l
 
 Kartu roulette tertentu mengganti 12 slot menjadi pengulangan angka **1–3**, **4–6**, atau **10–12** selama dua penyelesaian roulette gerakan. Kartu tempur dapat mengurangi biaya serangan menjadi setengah, menggratiskan pertahanan, atau menambah kekuatan serangan. Kartu pencuri/pelindung gulungan digunakan pada pertemuan yang sesuai, bukan sebagai bonus serangan umum.
 
-Sumber: tabel kartu `0x80055cec` dan dek `0x8005603c` dalam [full-rules.json](research/full-rules.json); `BOARD FUN_8010f3e0`, `800ec574`, `800d15a8`; [RULE_HELPERS.c](decompiled/RULE_HELPERS.c).
+Sumber: tabel kartu `0x80055cec` dan dek `0x8005603c` dalam [full-rules.json](research/full-rules.json); `BOARD FUN_8010f3e0`, `800ec574`, `800d15a8`; [RULE_HELPERS.c](decompiled/RULE_HELPERS.c). Cabang tampilan chance di `800ec574` memanggil `8010cd2c(1)` ketika gerakan berakhir (dan bukan cabang perpindahan khusus), selain itu `8010cd2c(0)`; `8010d3a8` menahan deskripsi pada kartu tertutup sampai konfirmasi. Gambar belakang kartu berasal dari `8010eae4`, resource 38, UV (0,120), ukuran 64×96, CLUT (224,243).
 
 #### Katalog efek seluruh 52 ID kartu
 

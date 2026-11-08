@@ -50,6 +50,8 @@ Checkpoint memakai dua sprite asli dari `FUN_800f6988`: `crystal_N.png` untuk al
 
 ## Verifikasi
 
+Kartu kesempatan mengikuti sisa langkah: berhenti tepat (0) membuka tiga kartu, melewati (>0) menampilkan tiga belakang kartu yang identik. Pilihan tertutup tidak membawa `cardId` atau deskripsi dari server. Klien juga menutup kartu bila sisa langkah >0 sekalipun menerima payload lama yang masih berisi identitas. Gambar belakang asli memakai resource 38, `FUN_8010eae4`, UV (0,120), 64×96, CLUT (224,243); atlas PNG yang sudah tersedia dipetakan ulang di canvas tanpa menambah berkas aset. Konfirmasi mengirim slot `chance:0..2`, lalu hasil kartu dijelaskan oleh server. Tes rules mencakup proyeksi tertutup saat reconnect, slot tidak sah, hasil kartu dan kelanjutan langkah; tes browser membandingkan pilihan tertutup dan terbuka.
+
 Animasi berjalan menggunakan PNG yang sudah terdaftar di `assets/sprite/board-characters/` dan `characters.json`, tanpa salinan baru. `FUN_800bee54` memetakan arah sebagai berikut (NN adalah ID karakter dua digit):
 
 | Arah tujuan | Aset asli |

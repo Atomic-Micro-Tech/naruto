@@ -322,7 +322,26 @@ test("reference presentation: roulette, direction, three cards, purchase and mob
       enabled: true,
     })),
   };
+  const closedChance = structuredClone(chance);
+  closedChance.allowedBySeat[0][0].options = [0, 1, 2].map(i => ({
+    id: `chance:${i}`, label: `Kartu tertutup ${i + 1}`, enabled: true,
+  }));
+  await send(closedChance);
+  await expect(page.locator(".chance-cards")).toHaveAttribute("data-concealed", "true");
+  await expect(page.locator(".chance-cards img")).toHaveCount(3);
+  const backs = await page.locator(".chance-cards img").evaluateAll(images => images.map(img => img.src));
+  expect(new Set(backs).size).toBe(1);
+  expect(backs[0]).toMatch(/^data:image\/png;base64,/);
+  await page.locator('[data-card-choice="2"]').click();
+  await expect(page.locator(".card-description")).toContainText("setelah dikonfirmasi");
+  await expect(page.locator("#controls")).not.toContainText("kartu uji");
+  await page.locator(".board-frame").screenshot({ path: "test-results/reference-chance-closed.png" });
+  await page.locator('[data-option="chance:2"]').click();
+  expect(commands.at(-1).payload.action.payload.optionId).toBe("chance:2");
+  chance.public.presentation.remaining = 0;
+  chance.allowedBySeat[0][0].choiceId = "cards-open";
   await send(chance);
+  await expect(page.locator(".chance-cards")).toHaveAttribute("data-concealed", "false");
   await expect(page.locator(".chance-cards img")).toHaveCount(3);
   await page.locator('[data-card-choice="1"]').click();
   await expect(page.locator('[data-card-choice="1"]')).toHaveAttribute(

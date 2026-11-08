@@ -2933,8 +2933,13 @@ var NarutoEngine = (() => {
       case "forcedSale":
         for (const c of saleChoices(s, game_data_default)) add(`sell:${c.tile}`, `Jual petak ${c.tile + 1} (+${c.saleDelta})`, true, { tileId: c.tile });
         break;
+      // BOARD 800ec574 / 8010cd2c: landing opens faces; passing keeps backs.
+      // Conceal identities in the projection, not only in the client artwork.
       case "chance":
-        chanceChoices(s, game_data_default).forEach((c, i) => add(`chance:${i}`, cardLabel(c.id), true, { cardId: c.id }));
+        chanceChoices(s, game_data_default).forEach((c, i) => {
+          if (s.remaining > 0) add(`chance:${i}`, `Kartu tertutup ${i + 1}`);
+          else add(`chance:${i}`, cardLabel(c.id), true, { cardId: c.id });
+        });
         break;
       case "discard":
         for (let i = 0; i < 4; i++) add(`discard:${i}`, i === 3 ? "Buang kartu baru" : `Buang ${cardLabel(current(s).inventory[i])}`);

@@ -2359,7 +2359,7 @@ components:
           type: "integer"
           minimum: 0
           maximum: 51
-          description: "Artwork for a card currently offered to this participant."
+          description: "Artwork kartu yang boleh dilihat peserta. Pada pilihan chance saat sisa langkah > 0 (melewati petak), cardId wajib dihilangkan dan label hanya nomor posisi kartu tertutup. Saat berhenti tepat di petak (sisa langkah 0), tiga kartu boleh ditampilkan terbuka."
         targetSeat:
           type: "integer"
           minimum: 0

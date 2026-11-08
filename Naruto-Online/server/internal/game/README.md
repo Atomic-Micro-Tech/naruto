@@ -25,6 +25,10 @@ Integration corrections to the vendored code:
   next level is legal.
 - Original individual Party ranking handles tied chakra and surrender.
 - The shared RNG state and its draw count survive checkpoint serialization.
+- Chance offers expose card identities only when remaining movement is zero.
+  Passing a chance tile offers three concealed slot labels without `cardId` or
+  descriptions, including on reconnect; the server resolves the confirmed slot
+  from its private deck and resumes any remaining movement.
 
 ## CPU policy and fidelity
 
